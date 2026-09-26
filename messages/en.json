@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "title": "Yayuhong Knitwear - Fast Fashion Sweater Factory | 20 Years Expertise",
+    "description": "Yayuhong Knitwear Factory in Chenghai, 20 years of professional sweater manufacturing experience. 30,000 pieces daily capacity, 50 pcs MOQ, 7-day delivery. ODM/OEM/CMT services for global fast fashion brands and e-commerce platforms."
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "factory": "Factory",
+    "services": "Services",
+    "contact": "Contact",
+    "getQuote": "Get Quote"
+  },
+  "hero": {
+    "badge": "20 Years · Source Factory · Small Order Fast Turnaround",
+    "title": "Fast Fashion Knitwear",
+    "titleHighlight": "Source Factory",
+    "subtitle": "30,000 pcs/day capacity · 50 pcs MOQ · 7-day delivery\nOne-stop service: Design + Sampling + Production",
+    "primaryBtn": "Get a Quote",
+    "secondaryBtn": "Virtual Tour",
+    "stats": {
+      "years": "Years Experience",
+      "dailyCapacity": "Pcs Daily Capacity",
+      "moq": "Pcs MOQ",
+      "delivery": "Day Fast Delivery"
+    }
+  },
+  "advantages": {
+    "title": "Why Choose Us",
+    "subtitle": "Four core advantages to keep your knitwear business ahead of the curve",
+    "items": [
+      {
+        "title": "Small MOQ, Fast Turnaround",
+        "desc": "Start from just 50 pieces with 7-day delivery. Keep up with fast fashion trends, reduce inventory risk, and quickly restock bestsellers."
+      },
+      {
+        "title": "Design Capabilities",
+        "desc": "Professional design team launching 100+ new styles monthly. Following international fashion trends. ODM service with design references or tech packs."
+      },
+      {
+        "title": "Cost Advantage",
+        "desc": "Source factory in Chenghai knitwear industrial belt with 30 production workshops. Cut out middlemen and save up to 30% vs trading companies."
+      },
+      {
+        "title": "Quality Assurance",
+        "desc": "20 years of craftsmanship with three quality inspection stages. Strict quality control on every piece with 99%+ pass rate for bulk orders."
+      }
+    ]
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Full range of knitwear products for every market need",
+    "viewAll": "View All Products",
+    "categories": [
+      {
+        "name": "Women's Sweaters",
+        "desc": "Pullover, cardigan, dress, knit coat and more",
+        "count": "200+ Styles"
+      },
+      {
+        "name": "Kids' Sweaters",
+        "desc": "Cute style, preppy look, matching family sets",
+        "count": "100+ Styles"
+      },
+      {
+        "name": "Men's Sweaters",
+        "desc": "Basic styles, business casual, trendy knits",
+        "count": "80+ Styles"
+      },
+      {
+        "name": "Loungewear",
+        "desc": "Comfortable & stylish knit loungewear sets",
+        "count": "50+ Styles"
+      },
+      {
+        "name": "Pet Apparel",
+        "desc": "Dog sweaters, cat knits - cute pet essentials",
+        "count": "30+ Styles"
+      },
+      {
+        "name": "Accessories",
+        "desc": "Scarves, hats, gloves, bags and more knit accessories",
+        "count": "40+ Styles"
+      }
+    ]
+  },
+  "factory": {
+    "title": "Factory Capabilities",
+    "subtitle": "20 years of craftsmanship behind every sweater we make",
+    "learnMore": "Learn More",
+    "features": [
+      {
+        "title": "Modern Production Base",
+        "desc": "Located in Chenghai, Shantou - China's famous knitwear town. 30 production workshops with advanced computerized flat knitting machines."
+      },
+      {
+        "title": "Expert Technical Team",
+        "desc": "20 core technicians with 20+ years of experience. Professional control throughout design, pattern-making, and production."
+      },
+      {
+        "title": "Strict Quality Control",
+        "desc": "Three quality inspection stages: raw material, semi-finished, and finished products. Ensuring quality in every piece."
+      },
+      {
+        "title": "Fast Response Service",
+        "desc": "Professional sales team responds to inquiries within 24 hours. 3-5 days for sampling, 7-15 days for bulk production."
+      }
+    ]
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "One-stop knitwear solutions from design to delivery",
+    "items": [
+      {
+        "title": "ODM Development",
+        "desc": "We provide original designs for you to choose from. 100+ new styles launched monthly, always on top of market trends.",
+        "features": ["Original Design", "Monthly New Drops", "Style Buyout", "Exclusive License"]
+      },
+      {
+        "title": "OEM Manufacturing",
+        "desc": "Provide us with your designs or samples, and we'll produce to your specifications. Full branding service including labels and hangtags.",
+        "features": ["Design-based", "Sample-based", "Private Label", "Custom Packaging"]
+      },
+      {
+        "title": "Small Batch Fast Turnaround",
+        "desc": "MOQ starting at 50 pieces with 7-day delivery. Perfect for e-commerce sellers, livestream clients, and emerging brands.",
+        "features": ["50 pcs MOQ", "7-Day Delivery", "Quick Reorder", "Flexible Adjustment"]
+      },
+      {
+        "title": "Large Volume Orders",
+        "desc": "30,000 pcs daily capacity. Handling brand bulk orders and export orders with installment payment and inspection support.",
+        "features": ["Ample Capacity", "Reliable Delivery", "Consistent Quality", "Factory Audit Ready"]
+      }
+    ]
+  },
+  "process": {
+    "title": "How We Work",
+    "subtitle": "6 simple steps to start our partnership",
+    "steps": [
+      { "title": "Consultation", "desc": "Contact us with your needs and budget" },
+      { "title": "Quotation", "desc": "We provide style options and detailed quote" },
+      { "title": "Sampling", "desc": "3-5 days sampling for quality confirmation" },
+      { "title": "Contract", "desc": "Confirm order details and sign agreement" },
+      { "title": "Production", "desc": "7-15 days production with quality control" },
+      { "title": "Delivery", "desc": "Quality-checked delivery with after-sales support" }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Start Your Project?",
+    "subtitle": "Contact us today for a custom quote and free style recommendations",
+    "primaryBtn": "Contact Us Now",
+    "secondaryBtn": "Browse Products"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We look forward to building a long-term partnership with you",
+    "form": {
+      "name": "Your Name",
+      "company": "Company Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "product": "Product of Interest",
+      "quantity": "Estimated Quantity",
+      "message": "Your Requirements",
+      "submit": "Send Inquiry",
+      "submitting": "Sending...",
+      "success": "Submitted successfully! We will contact you within 24 hours."
+    },
+    "info": {
+      "factoryName": "Chenghai Yayuhong Knitwear Factory",
+      "companyName": "Shenzhen Xiuyu Network Technology Co., Ltd.",
+      "address": "Chenghai District, Shantou City, Guangdong, China",
+      "phone": "+86 138-xxxx-xxxx",
+      "email": "info@yayuhong.com",
+      "wechat": "Yayuhong-Knitting",
+      "whatsapp": "+86 138-xxxx-xxxx",
+      "workTime": "Mon - Sat: 9:00 AM - 6:00 PM (GMT+8)"
+    }
+  },
+  "footer": {
+    "about": "About Us",
+    "aboutDesc": "Yayuhong Knitwear Factory - 20 years of professional sweater manufacturing, your fast fashion knitwear source factory.",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "copyright": "© 2024 Yayuhong Knitwear Factory. All rights reserved.",
+    "icp": ""
+  }
+}
