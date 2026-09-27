@@ -2,15 +2,45 @@ import Link from 'next/link';
 import { sql } from '@/lib/db';
 import { pick } from '@/lib/i18n';
 
+// 默认产品（数据库不可用时展示）
+const DEFAULT_PRODUCTS = [
+  { id: 1, slug: 'womens-sweater', name: { zh: '女装毛衫' }, cover_url: '', model: 'W001' },
+  { id: 2, slug: 'kids-sweater', name: { zh: '童装毛衣' }, cover_url: '', model: 'K001' },
+  { id: 3, slug: 'mens-sweater', name: { zh: '男装针织' }, cover_url: '', model: 'M001' },
+  { id: 4, slug: 'cardigan', name: { zh: '开衫外套' }, cover_url: '', model: 'C001' },
+  { id: 5, slug: 'dress', name: { zh: '针织连衣裙' }, cover_url: '', model: 'D001' },
+  { id: 6, slug: 'hoodie', name: { zh: '连帽卫衣' }, cover_url: '', model: 'H001' },
+  { id: 7, slug: 'vest', name: { zh: '针织马甲' }, cover_url: '', model: 'V001' },
+  { id: 8, slug: 'scarf', name: { zh: '围巾配饰' }, cover_url: '', model: 'S001' },
+];
+
 export default async function ChinaProducts() {
-  const products = await sql`
-    select p.id, p.slug, p.name, p.summary, p.cover_url, p.model
-    from content_products p
-    where p.is_active = true
-      and p.sites && array['global', 'china']::text[]
-    order by p.sort, p.created_at desc
-    limit 8
-  `;
+  let products: Array<{
+    id: number;
+    slug: string;
+    name: Record<string, string> | string;
+    cover_url: string | null;
+    model?: string;
+  }> = [];
+
+  try {
+    if (process.env.DATABASE_URL) {
+      products = await sql`
+        select p.id, p.slug, p.name, p.summary, p.cover_url, p.model
+        from content_products p
+        where p.is_active = true
+          and p.sites && array['global', 'china']::text[]
+        order by p.sort, p.created_at desc
+        limit 8
+      ` as any;
+    }
+  } catch (e) {
+    console.error('获取产品列表失败，使用默认值:', e);
+  }
+
+  if (products.length === 0) {
+    products = DEFAULT_PRODUCTS as any;
+  }
 
   return (
     <section className="py-20 bg-white">

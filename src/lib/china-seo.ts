@@ -2,17 +2,26 @@
 
 /**
  * 获取国内站SEO配置
+ * 如果数据库不可用，返回空对象（使用默认值）
  */
 export async function getChinaSeoConfig() {
-  const rows = await sql`
-    select baidu_verification, baidu_analytics, baidu_push_token,
-           haosou_verification, sogou_verification, shenma_verification,
-           doubao_verification, china_seo, china_geo
-    from site_profile
-    where id = 1
-    limit 1
-  `;
-  return rows[0] || {};
+  try {
+    if (!process.env.DATABASE_URL) {
+      return {};
+    }
+    const rows = await sql`
+      select baidu_verification, baidu_analytics, baidu_push_token,
+             haosou_verification, sogou_verification, shenma_verification,
+             doubao_verification, china_seo, china_geo
+      from site_profile
+      where id = 1
+      limit 1
+    `;
+    return rows[0] || {};
+  } catch (e) {
+    console.error('获取国内SEO配置失败，使用默认值:', e);
+    return {};
+  }
 }
 
 /**
