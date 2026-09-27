@@ -113,6 +113,46 @@
       "workTime": "Lun-Sam : 9h00-18h00 (GMT+8)"
     }
   },
+  "heritage": {
+    "badge": "Chenghai · Capitale du tricot de Chine",
+    "title": "40 Ans d'Héritage Tricot",
+    "subtitle": "D'humbles ateliers artisanaux à un pôle industriel tricot de renommée mondiale — le parcours de quatre décennies de savoir-faire et d'innovation de Chenghai",
+    "timeline": [
+      {
+        "era": "1980s",
+        "title": "Les Débuts — Ère de l'Industrie Familiale",
+        "desc": "Au début des années 1980, l'industrie du tricot de Chenghai prit racine dans des ateliers familiaux équipés de métiers à tricoter plats manuels. Des artisans locaux, s'appuyant sur des générations de tradition textile, commencèrent à produire des pulls pour le marché domestique, jetant les bases de celle qui allait devenir la ville du tricot la plus célèbre de Chine."
+      },
+      {
+        "era": "1990s",
+        "title": "Âge d'Or du Commerce Extérieur",
+        "desc": "Sur la vague de la politique d'ouverture de la Chine, le tricot de Chenghai fit son entrée sur le marché mondial dans les années 1990. Les usines se développèrent rapidement, important des métiers à tricoter plats informatisés de pointe en provenance du Japon et d'Allemagne. Les commandes d'exportation d'Europe, d'Amérique et d'Asie du Sud-Est affluèrent, forgeant la réputation de Chenghai pour sa qualité et son savoir-faire."
+      },
+      {
+        "era": "2000s",
+        "title": "Formation du Pôle Industriel",
+        "desc": "Dans les années 2000, Chenghai avait développé un écosystème industriel complet — de la teinture des fils, du tricot des tissus et du design des motifs à la finition, l'emballage et la logistique. Des milliers d'usines et d'entreprises auxiliaires se regroupèrent, créant une efficacité et des avantages de coût inégalés qui attirèrent des acheteurs du monde entier."
+      },
+      {
+        "era": "2010s",
+        "title": "Transformation & Modernisation",
+        "desc": "Les années 2010 marquèrent le passage de l'OEM à l'ODM et au développement de marques. Les usines de Chenghai investirent massivement dans la recherche et le design, formèrent des équipes de conception professionnelles et commencèrent à lancer des collections originales. L'industrie embrassa la numérisation, l'automatisation et les pratiques de fabrication durable."
+      },
+      {
+        "era": "Aujourd'hui",
+        "title": "Fabrique Intelligente Numérique",
+        "desc": "Aujourd'hui, Chenghai est à la tête de l'industrie du tricot chinoise avec des lignes de production entièrement automatisées, des systèmes de conception numériques et une gestion intelligente de la chaîne d'approvisionnement. En tant que «Ville célèbre du tricot artisanal de Chine» certifiée, elle continue de fournir les plus grandes marques de mode du monde tout en ouvrant la voie à l'avenir de la fabrication de tricot durable."
+      }
+    ],
+    "stats": [
+      { "value": "40+", "label": "Ans d'histoire" },
+      { "value": "3 000+", "label": "Entreprises" },
+      { "value": "100K+", "label": "Salariés" },
+      { "value": "Ville Célèbre", "label": "Capitale du tricot de Chine" }
+    ],
+    "quote": "Les fils de Chenghai ont tissé non seulement des pulls, mais les rêves et la subsistance de générations — chaque maille témoigne de l'esprit durable du savoir-faire artisanal.",
+    "quoteSource": "Association de l'industrie du tricot de Chenghai"
+  },
   "footer": {
     "about": "À propos",
     "aboutDesc": "Usine de tricot Yayuhong — 20 ans de fabrication, votre usine directe fast fashion.",

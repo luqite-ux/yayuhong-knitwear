@@ -125,6 +125,46 @@
       "workTime": "Lun-Sáb: 9:00-18:00 (GMT+8)"
     }
   },
+  "heritage": {
+    "badge": "Chenghai · Capital del Punto de China",
+    "title": "40 Años de Herencia Puntera",
+    "subtitle": "De humildes talleres artesanales a un clúster industrial de punto de clase mundial — el viaje de cuatro décadas de artesanía e innovación de Chenghai",
+    "timeline": [
+      {
+        "era": "1980s",
+        "title": "El Comienzo — Era de la Industria Artesanal",
+        "desc": "A principios de los años 80, la industria del punto de Chenghai echó raíces con talleres familiares y máquinas de punto planas manuales. Los artesanos locales, basándose en generaciones de tradición textil, comenzaron a producir jerséis para el mercado nacional, sentando las bases de lo que se convertiría en la ciudad del punto más famosa de China."
+      },
+      {
+        "era": "1990s",
+        "title": "Edad de Oro del Comercio Exterior",
+        "desc": "Aprovechando la ola de la política de apertura de China, el punto de Chenghai entró en el mercado global en los años 90. Las fábricas se expandieron rápidamente, importando avanzadas máquinas de punto planas computarizadas de Japón y Alemania. Los pedidos de exportación de Europa, América y el Sudeste Asiático llegaron en masa, consolidando la reputación de Chenghai por su calidad y artesanía."
+      },
+      {
+        "era": "2000s",
+        "title": "Formación del Clúster Industrial",
+        "desc": "Para los años 2000, Chenghai había desarrollado un ecosistema industrial completo — desde el teñido de hilos, el tejido de telas y el diseño de patrones hasta el acabado, empaquetado y logística. Miles de fábricas y empresas auxiliares se agruparon, creando una eficiencia y ventajas de coste inigualables que atrajeron a compradores de todo el mundo."
+      },
+      {
+        "era": "2010s",
+        "title": "Transformación y Modernización",
+        "desc": "La década de 2010 marcó un cambio de OEM a ODM y al desarrollo de marca. Las fábricas de Chenghai invirtieron fuertemente en I+D de diseño, formaron equipos profesionales y comenzaron a lanzar colecciones originales. La industria adoptó la digitalización, la automatización y las prácticas de fabricación sostenible."
+      },
+      {
+        "era": "Hoy",
+        "title": "Fabricación Inteligente Digital",
+        "desc": "Hoy en día, Chenghai lidera la industria del punto de China con líneas de producción totalmente automatizadas, sistemas de diseño digital y gestión inteligente de la cadena de suministro. Como «Ciudad Famosa del Punto Artesanal de China» certificada, sigue suministrando a las principales marcas de moda del mundo mientras escribe el futuro de la fabricación de punto sostenible."
+      }
+    ],
+    "stats": [
+      { "value": "40+", "label": "Años de Historia" },
+      { "value": "3,000+", "label": "Empresas" },
+      { "value": "100K+", "label": "Trabajadores" },
+      { "value": "Ciudad Famosa", "label": "Capital del Punto de China" }
+    ],
+    "quote": "Los hilos de Chenghai han tejido no solo jerséis, sino los sueños y el sustento de generaciones — cada puntada un testimonio del espíritu perdurable de la artesanía.",
+    "quoteSource": "Asociación de la Industria del Punto de Chenghai"
+  },
   "footer": {
     "about": "Sobre Nosotros",
     "aboutDesc": "Fábrica de punto Yayuhong - 20 años de fabricación, su fábrica directa fast fashion.",

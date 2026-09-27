@@ -184,6 +184,46 @@
     "description": "Find answers about cooperation, production, delivery and more",
     "empty": "No FAQs yet. Contact us if you have questions."
   },
+  "heritage": {
+    "badge": "Chenghai · China Knitwear Capital",
+    "title": "40 Years of Knitwear Heritage",
+    "subtitle": "From humble handcraft workshops to a world-class knitwear industrial cluster — Chenghai's four-decade journey of craftsmanship and innovation",
+    "timeline": [
+      {
+        "era": "1980s",
+        "title": "The Beginning — Cottage Industry Era",
+        "desc": "In the early 1980s, Chenghai's knitwear industry took root with family-run workshops and hand-flat knitting machines. Local artisans, drawing on generations of textile tradition, began producing sweaters for domestic markets, laying the foundation for what would become China's most famous knitwear town."
+      },
+      {
+        "era": "1990s",
+        "title": "Golden Age of Foreign Trade",
+        "desc": "Riding the wave of China's opening-up policy, Chenghai knitwear entered the global market in the 1990s. Factories expanded rapidly, importing advanced computerized flat knitting machines from Japan and Germany. Export orders from Europe, America, and Southeast Asia poured in, establishing Chenghai's reputation for quality and craftsmanship."
+      },
+      {
+        "era": "2000s",
+        "title": "Industrial Cluster Formation",
+        "desc": "By the 2000s, Chenghai had developed a complete industrial ecosystem — from yarn dyeing, fabric knitting, and pattern design to finishing, packaging, and logistics. Thousands of factories and supporting businesses clustered together, creating unmatched efficiency and cost advantages that attracted buyers worldwide."
+      },
+      {
+        "era": "2010s",
+        "title": "Transformation & Upgrading",
+        "desc": "The 2010s marked a shift from OEM to ODM and brand development. Chenghai factories invested heavily in design R&D, built professional design teams, and began launching original collections. The industry embraced digitalization, automation, and sustainable manufacturing practices."
+      },
+      {
+        "era": "Today",
+        "title": "Digital Smart Manufacturing",
+        "desc": "Today, Chenghai leads China's knitwear industry with fully automated production lines, digital design systems, and smart supply chain management. As a certified 'China Craft Knitwear Famous City', it continues to supply the world's leading fashion brands while pioneering the future of sustainable knitwear manufacturing."
+      }
+    ],
+    "stats": [
+      { "value": "40+", "label": "Years of History" },
+      { "value": "3,000+", "label": "Enterprises" },
+      { "value": "100K+", "label": "Industry Workers" },
+      { "value": "Famous City", "label": "China Knitwear Capital" }
+    ],
+    "quote": "The yarns of Chenghai have woven not just sweaters, but the dreams and livelihoods of generations — each stitch a testament to the enduring spirit of craftsmanship.",
+    "quoteSource": "Chenghai Knitwear Industry Association"
+  },
   "footer": {
     "about": "About Us",
     "aboutDesc": "Yayuhong Knitwear Factory - 20 years of professional sweater manufacturing, your fast fashion knitwear source factory.",

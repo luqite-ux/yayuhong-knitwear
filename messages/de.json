@@ -113,6 +113,46 @@
       "workTime": "Mo-Sa: 9:00-18:00 (GMT+8)"
     }
   },
+  "heritage": {
+    "badge": "Chenghai · Chinas Strickwaren-Hauptstadt",
+    "title": "40 Jahre Stricktradition",
+    "subtitle": "Von bescheidenen Handwerkswerkstätten zu einem weltweit führenden Strickindustrie-Cluster — Chenghais vier Jahrzehnte währende Reise aus Handwerkskunst und Innovation",
+    "timeline": [
+      {
+        "era": "1980er",
+        "title": "Der Anfang — Ära der Heimindustrie",
+        "desc": "In den frühen 1980er Jahren nahm die Strickwarenindustrie von Chenghai in Familienwerkstätten mit handbetriebenen Flachstrickmaschinen ihren Anfang. Lokale Kunsthandwerker, die auf Generationen textiler Tradition zurückblickten, begannen mit der Produktion von Pullovern für den Binnenmarkt und legten den Grundstein für das, was Chinas berühmteste Strickstadt werden sollte."
+      },
+      {
+        "era": "1990er",
+        "title": "Goldenes Zeitalter des Außenhandels",
+        "desc": "Auf der Welle der chinesischen Öffnungspolitik eroberte Chenghais Strickware in den 1990er Jahren den Weltmarkt. Die Fabriken expandierten rasant und importierten fortschrittliche computergesteuerte Flachstrickmaschinen aus Japan und Deutschland. Exportaufträge aus Europa, Amerika und Südostasien strömten herein und festigten Chenghais Ruf für Qualität und Handwerkskunst."
+      },
+      {
+        "era": "2000er",
+        "title": "Bildung des Industrieclusters",
+        "desc": "Bis zu den 2000er Jahren hatte Chenghai ein vollständiges Industrie-Ökosystem entwickelt — von Garnfärbung, Stoffstricken und Musterdesign bis hin zur Veredelung, Verpackung und Logistik. Tausende von Fabriken und Zulieferbetrieben siedelten sich hier an und schufen unübertroffene Effizienz und Kostenvorteile, die Käufer aus aller Welt anzogen."
+      },
+      {
+        "era": "2010er",
+        "title": "Transformation & Aufwertung",
+        "desc": "Die 2010er Jahre markierten den Wandel von OEM zu ODM und Markenentwicklung. Chenghais Fabriken investierten stark in Design-Forschung, bauten professionelle Designteams auf und begannen mit der Einführung eigener Kollektionen. Die Industrie setzte auf Digitalisierung, Automatisierung und nachhaltige Fertigungsverfahren."
+      },
+      {
+        "era": "Heute",
+        "title": "Digitale Smart-Fertigung",
+        "desc": "Heute führt Chenghai Chinas Strickwarenindustrie mit vollautomatisierten Produktionslinien, digitalen DesigndefSystemen und intelligentem Lieferkettenmanagement an. Als zertifizierte «Berühmte Stadt für kunsthandwerkliche Strickwaren Chinas» beliefert es weiterhin die weltweit führenden Modemarken und gestaltet die Zukunft nachhaltiger Strickfertigung."
+      }
+    ],
+    "stats": [
+      { "value": "40+", "label": "Jahre Geschichte" },
+      { "value": "3.000+", "label": "Unternehmen" },
+      { "value": "100Tsd.+", "label": "Beschäftigte" },
+      { "value": "Berühmte Stadt", "label": "Chinas Strickhauptstadt" }
+    ],
+    "quote": "Die Garne Chenghais haben nicht nur Pullover gestrickt, sondern die Träume und Existenzgrundlagen von Generationen — jede Masche ein Zeugnis des bleibenden Geistes der Handwerkskunst.",
+    "quoteSource": "Chenghai Strickwarenindustrieverband"
+  },
   "footer": {
     "about": "Über uns",
     "aboutDesc": "Strickwarenfabrik Yayuhong — 20 Jahre Herstellung, Ihre Fast-Fashion-Direktfabrik.",

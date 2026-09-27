@@ -6,6 +6,7 @@ import Hero from '@/components/Hero';
 import Advantages from '@/components/Advantages';
 import ProductShowcase from '@/components/ProductShowcase';
 import FactorySection from '@/components/FactorySection';
+import ChenghaiHeritage from '@/components/ChenghaiHeritage';
 import Services from '@/components/Services';
 import ProcessTimeline from '@/components/ProcessTimeline';
 import CTA from '@/components/CTA';
@@ -71,6 +72,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Advantages />
       <ProductShowcase />
       <FactorySection />
+      <ChenghaiHeritage />
       <Services />
       <ProcessTimeline />
       <CTA />

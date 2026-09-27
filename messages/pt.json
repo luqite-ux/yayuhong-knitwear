@@ -113,6 +113,46 @@
       "workTime": "Seg-Sáb: 9h00-18h00 (GMT+8)"
     }
   },
+  "heritage": {
+    "badge": "Chenghai · Capital do Malha da China",
+    "title": "40 Anos de Herança Têxtil",
+    "subtitle": "De humildes oficinas artesanais a um cluster industrial de malha de classe mundial — a jornada de quatro décadas de artesanato e inovação de Chenghai",
+    "timeline": [
+      {
+        "era": "1980s",
+        "title": "O Início — Era da Indústria Caseira",
+        "desc": "No início dos anos 80, a indústria de malha de Chenghai criou raízes com oficinas familiares e máquinas de tricotar planas manuais. Artesãos locais, baseados em gerações de tradição têxtil, começaram a produzir suéteres para o mercado doméstico, lançando as bases do que viria a ser a cidade de malha mais famosa da China."
+      },
+      {
+        "era": "1990s",
+        "title": "Era de Ouro do Comércio Exterior",
+        "desc": "Aproveitando a onda da política de abertura da China, a malha de Chenghai entrou no mercado global nos anos 90. As fábricas expandiram-se rapidamente, importando avançadas máquinas de tricotar planas computadorizadas do Japão e Alemanha. Pedidos de exportação da Europa, América e Sudeste Asiático chegaram em massa, estabelecendo a reputação de Chenghai por qualidade e artesanato."
+      },
+      {
+        "era": "2000s",
+        "title": "Formação do Cluster Industrial",
+        "desc": "Nos anos 2000, Chenghai já havia desenvolvido um ecossistema industrial completo — desde tingimento de fios, tecelagem de tecidos e design de padrões até acabamento, embalagem e logística. Milhares de fábricas e empresas de apoio se agruparam, criando eficiência e vantagens de custo inigualáveis que atraíram compradores de todo o mundo."
+      },
+      {
+        "era": "2010s",
+        "title": "Transformação e Modernização",
+        "desc": "A década de 2010 marcou uma mudança de OEM para ODM e desenvolvimento de marcas. As fábricas de Chenghai investiram fortemente em P&D de design, construíram equipes profissionais e começaram a lançar coleções originais. A indústria adotou a digitalização, automação e práticas de fabricação sustentável."
+      },
+      {
+        "era": "Hoje",
+        "title": "Manufatura Inteligente Digital",
+        "desc": "Hoje, Chenghai lidera a indústria de malha da China com linhas de produção totalmente automatizadas, sistemas de design digital e gestão inteligente da cadeia de suprimentos. Como «Cidade Famosa do Malha Artesanal da China» certificada, continua a fornecer às principais marcas de moda do mundo enquanto pioneira o futuro da fabricação de malha sustentável."
+      }
+    ],
+    "stats": [
+      { "value": "40+", "label": "Anos de História" },
+      { "value": "3,000+", "label": "Empresas" },
+      { "value": "100K+", "label": "Trabalhadores" },
+      { "value": "Cidade Famosa", "label": "Capital do Malha da China" }
+    ],
+    "quote": "Os fios de Chenghai teceram não apenas suéteres, mas os sonhos e o sustento de gerações — cada ponto um testemunho do espírito duradouro do artesanato.",
+    "quoteSource": "Associação da Indústria de Malha de Chenghai"
+  },
   "footer": {
     "about": "Sobre Nós",
     "aboutDesc": "Fábrica de malhas Yayuhong — 20 anos de fabricação, sua fábrica direta fast fashion.",
