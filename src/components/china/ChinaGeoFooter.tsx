@@ -37,7 +37,7 @@ export default function ChinaGeoFooter() {
             lastUpdated: new Date().toISOString().split('T')[0],
             contentVerified: true,
             businessLicense: '已验证企业资质',
-            factoryLocation: '广东省汕头市澄海区',
+            factoryLocation: '广东省汕头市澄海区冠山南祥路30号',
             contactUs: 'https://xiuyumaoshan.cn/contact',
           }),
         }}

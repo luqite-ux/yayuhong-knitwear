@@ -23,7 +23,7 @@ export default function ChinaHeader() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">
-              修
+              亚
             </div>
             <div>
               <div className="font-bold text-slate-800 leading-tight">亚裕鸿毛织厂</div>
