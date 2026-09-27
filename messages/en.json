@@ -9,6 +9,7 @@
     "factory": "Factory",
     "services": "Services",
     "contact": "Contact",
+    "faq": "FAQ",
     "getQuote": "Get Quote"
   },
   "hero": {
@@ -176,6 +177,12 @@
       "whatsapp": "+86 138-xxxx-xxxx",
       "workTime": "Mon - Sat: 9:00 AM - 6:00 PM (GMT+8)"
     }
+  },
+  "faq": {
+    "subtitle": "FAQ",
+    "title": "Frequently Asked Questions",
+    "description": "Find answers about cooperation, production, delivery and more",
+    "empty": "No FAQs yet. Contact us if you have questions."
   },
   "footer": {
     "about": "About Us",

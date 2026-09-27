@@ -8,16 +8,36 @@ export default function ContactForm() {
   const locale = useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
+  const [form, setForm] = useState({
+    name: '', company: '', email: '', phone: '',
+    subject: '', message: '',
+  });
+
+  const set = (field: string, value: string) => setForm((p) => ({ ...p, [field]: value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+    try {
+      const res = await fetch('/api/public/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, locale }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.error || 'Submission failed');
+        setIsSubmitting(false);
+        return;
+      }
+      setIsSubmitted(true);
+    } catch {
+      setError('Network error');
+    }
     setIsSubmitting(false);
-    setIsSubmitted(true);
   };
 
   if (isSubmitted) {
@@ -38,6 +58,9 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-lg border border-[var(--color-border)]">
+      {error && (
+        <div className="mb-4 p-3 rounded-lg bg-red-50 text-red-600 text-sm">{error}</div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
@@ -47,10 +70,12 @@ export default function ContactForm() {
             type="text"
             required
             className="form-input"
+            value={form.name}
+            onChange={(e) => set('name', e.target.value)}
             placeholder={locale === 'zh' ? '请输入您的姓名' : 'Enter your name'}
           />
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
             {t('company')}
@@ -58,10 +83,12 @@ export default function ContactForm() {
           <input
             type="text"
             className="form-input"
+            value={form.company}
+            onChange={(e) => set('company', e.target.value)}
             placeholder={locale === 'zh' ? '请输入公司名称' : 'Company name'}
           />
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
             {t('email')} *
@@ -70,10 +97,12 @@ export default function ContactForm() {
             type="email"
             required
             className="form-input"
+            value={form.email}
+            onChange={(e) => set('email', e.target.value)}
             placeholder={locale === 'zh' ? '请输入邮箱地址' : 'your@email.com'}
           />
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
             {t('phone')}
@@ -81,15 +110,21 @@ export default function ContactForm() {
           <input
             type="tel"
             className="form-input"
+            value={form.phone}
+            onChange={(e) => set('phone', e.target.value)}
             placeholder={locale === 'zh' ? '请输入联系电话' : 'Phone number'}
           />
         </div>
-        
-        <div>
+
+        <div className="md:col-span-2">
           <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
             {t('product')}
           </label>
-          <select className="form-input">
+          <select
+            className="form-input"
+            value={form.subject}
+            onChange={(e) => set('subject', e.target.value)}
+          >
             <option value="">{locale === 'zh' ? '请选择' : 'Please select'}</option>
             <option value="women">{locale === 'zh' ? '女装毛衫' : "Women's Sweaters"}</option>
             <option value="kids">{locale === 'zh' ? '童装毛衫' : "Kids' Sweaters"}</option>
@@ -99,21 +134,7 @@ export default function ContactForm() {
             <option value="other">{locale === 'zh' ? '其他' : 'Other'}</option>
           </select>
         </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
-            {t('quantity')}
-          </label>
-          <select className="form-input">
-            <option value="">{locale === 'zh' ? '请选择' : 'Please select'}</option>
-            <option value="50-100">50 - 100 {locale === 'zh' ? '件' : 'pcs'}</option>
-            <option value="100-500">100 - 500 {locale === 'zh' ? '件' : 'pcs'}</option>
-            <option value="500-1000">500 - 1,000 {locale === 'zh' ? '件' : 'pcs'}</option>
-            <option value="1000-5000">1,000 - 5,000 {locale === 'zh' ? '件' : 'pcs'}</option>
-            <option value="5000+">5,000+ {locale === 'zh' ? '件' : 'pcs'}</option>
-          </select>
-        </div>
-        
+
         <div className="md:col-span-2">
           <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
             {t('message')} *
@@ -122,6 +143,8 @@ export default function ContactForm() {
             required
             rows={5}
             className="form-input form-textarea"
+            value={form.message}
+            onChange={(e) => set('message', e.target.value)}
             placeholder={
               locale === 'zh'
                 ? '请描述您的具体需求，如款式、材质、目标价格等，我们会尽快给您回复...'
@@ -130,7 +153,7 @@ export default function ContactForm() {
           />
         </div>
       </div>
-      
+
       <button
         type="submit"
         disabled={isSubmitting}

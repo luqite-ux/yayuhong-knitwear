@@ -74,7 +74,7 @@ export default function Hero() {
           </div>
           
           {/* Right side - Hero image */}
-          <div className="hidden lg:block relative">
+          <div className="hidden lg:block relative px-6 py-4">
             <div className="relative">
               {/* Main product showcase */}
               <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
@@ -86,14 +86,14 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/20 to-transparent"></div>
               </div>
               
-              {/* Floating card 1 */}
-              <div className="absolute -left-6 top-20 bg-white rounded-2xl p-4 shadow-2xl max-w-[180px]">
+              {/* Floating card 1 - 7 days delivery */}
+              <div className="absolute -left-4 top-16 bg-white rounded-2xl px-4 py-3 shadow-xl max-w-[180px]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center text-xl">
+                  <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center text-xl flex-shrink-0">
                     ⚡
                   </div>
                   <div>
-                    <div className="font-bold text-[var(--color-primary)]">7 {locale === 'zh' ? '天' : 'Days'}</div>
+                    <div className="font-bold text-[var(--color-primary)] text-base">7 {locale === 'zh' ? '天' : 'Days'}</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
                       {locale === 'zh' ? '快速交货' : 'Fast Delivery'}
                     </div>
@@ -101,14 +101,14 @@ export default function Hero() {
                 </div>
               </div>
               
-              {/* Floating card 2 */}
-              <div className="absolute -right-4 bottom-24 bg-white rounded-2xl p-4 shadow-2xl max-w-[200px]">
+              {/* Floating card 2 - Daily capacity */}
+              <div className="absolute -right-2 bottom-32 bg-white rounded-2xl px-4 py-3 shadow-xl max-w-[200px]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)]/10 flex items-center justify-center text-xl">
+                  <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)]/10 flex items-center justify-center text-xl flex-shrink-0">
                     🏭
                   </div>
                   <div>
-                    <div className="font-bold text-[var(--color-primary)]">30,000+</div>
+                    <div className="font-bold text-[var(--color-primary)] text-base">30,000+</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
                       {locale === 'zh' ? '日产能' : 'Daily Capacity'}
                     </div>
@@ -116,14 +116,14 @@ export default function Hero() {
                 </div>
               </div>
               
-              {/* Floating card 3 */}
-              <div className="absolute -left-4 bottom-10 bg-white rounded-2xl p-4 shadow-2xl max-w-[190px]">
+              {/* Floating card 3 - MOQ */}
+              <div className="absolute -left-2 bottom-16 bg-white rounded-2xl px-4 py-3 shadow-xl max-w-[190px]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-xl">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-xl flex-shrink-0">
                     ✅
                   </div>
                   <div>
-                    <div className="font-bold text-[var(--color-primary)]">50 {locale === 'zh' ? '件起' : 'pcs MOQ'}</div>
+                    <div className="font-bold text-[var(--color-primary)] text-base">50 {locale === 'zh' ? '件起' : 'pcs MOQ'}</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
                       {locale === 'zh' ? '小单试款' : 'Small Order OK'}
                     </div>

@@ -1,0 +1,137 @@
+{
+  "metadata": {
+    "title": "Yayuhong Knitwear - Fábrica de Suéteres Fast Fashion | 20 Años de Experiencia",
+    "description": "Fábrica de punto Yayuhong en Chenghai, 20 años de experiencia en fabricación de suéteres. Capacidad de 30,000 piezas/día, MOQ 50 piezas, entrega 7 días. ODM/OEM/CMT para marcas globales de fast fashion."
+  },
+  "nav": {
+    "home": "Inicio",
+    "products": "Productos",
+    "factory": "Fábrica",
+    "services": "Servicios",
+    "contact": "Contacto",
+    "getQuote": "Solicitar Cotización"
+  },
+  "hero": {
+    "badge": "20 Años · Fábrica Directa · Pedidos Pequeños, Entrega Rápida",
+    "title": "Punto Fast Fashion",
+    "titleHighlight": "Fábrica Directa",
+    "subtitle": "30,000 pz/día · MOQ 50 pz · Entrega 7 días\nServicio integral: Diseño + Muestras + Producción",
+    "primaryBtn": "Solicitar Cotización",
+    "secondaryBtn": "Recorrido Virtual",
+    "stats": {
+      "years": "Años de Experiencia",
+      "dailyCapacity": "Pz/Día",
+      "moq": "Pz MOQ",
+      "delivery": "Días Entrega"
+    }
+  },
+  "advantages": {
+    "title": "Por Qué Elegirnos",
+    "subtitle": "Cuatro ventajas clave para su negocio de punto",
+    "items": [
+      {
+        "title": "MOQ Bajo, Entrega Rápida",
+        "desc": "Pedidos desde 50 piezas con entrega en 7 días. Manténgase al día con las tendencias, reduzca riesgos de inventario."
+      },
+      {
+        "title": "Capacidad de Diseño",
+        "desc": "Equipo profesional con 100+ nuevos modelos mensuales. Tendencias internacionales. Servicio ODM con referencias o fichas técnicas."
+      },
+      {
+        "title": "Ventaja de Costo",
+        "desc": "Fábrica directa en Chenghai con 30 talleres. Sin intermediarios, ahorre hasta 30% frente a comercializadoras."
+      },
+      {
+        "title": "Control de Calidad",
+        "desc": "20 años de experiencia con tres etapas de inspección. Control estricto en cada pieza, tasa de aprobación 99%+."
+      }
+    ]
+  },
+  "products": {
+    "title": "Nuestros Productos",
+    "subtitle": "Gama completa de productos de punto",
+    "viewAll": "Ver Todos",
+    "categories": [
+      { "name": "Suéteres de Mujer", "desc": "Jerséis, cárdigans, vestidos, abrigos de punto", "count": "200+ Modelos" },
+      { "name": "Suéteres Infantiles", "desc": "Modelos tiernos, conjuntos familiares", "count": "100+ Modelos" },
+      { "name": "Suéteres de Hombre", "desc": "Básicos, casual de negocio, moda", "count": "80+ Modelos" },
+      { "name": "Ropa de Hogar", "desc": "Conjuntos de punto cómodos y elegantes", "count": "50+ Modelos" },
+      { "name": "Ropa para Mascotas", "desc": "Suéteres para perros, gatos", "count": "30+ Modelos" },
+      { "name": "Accesorios", "desc": "Bufandas, gorros, guantes, bolsos", "count": "40+ Modelos" }
+    ]
+  },
+  "factory": {
+    "title": "Capacidades de Fábrica",
+    "subtitle": "20 años de experiencia en cada suéter",
+    "learnMore": "Saber Más",
+    "features": [
+      { "title": "Base Productiva Moderna", "desc": "Ubicada en Chenghai, Shantou. 30 talleres con máquinas computarizadas." },
+      { "title": "Equipo Técnico Experto", "desc": "20 técnicos con 20+ años de experiencia. Control profesional en diseño, patronaje y producción." },
+      { "title": "Control de Calidad Estricto", "desc": "Tres etapas: materia prima, semielaborados, producto final. Calidad en cada pieza." },
+      { "title": "Servicio de Respuesta Rápida", "desc": "Respuesta en 24 horas. 3-5 días muestras, 7-15 días producción." }
+    ]
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "subtitle": "Soluciones integrales de punto de diseño a entrega",
+    "items": [
+      { "title": "Desarrollo ODM", "desc": "Ofrecemos diseños originales. 100+ modelos nuevos mensuales.", "features": ["Diseño Original", "Nuevos Mensuales", "Licencia Exclusiva"] },
+      { "title": "Fabricación OEM", "desc": "Proporcione sus diseños o muestras. Marca propia con etiquetas.", "features": ["Por Diseño", "Por Muestra", "Marca Propia"] },
+      { "title": "Pequeños Lotes Rápidos", "desc": "MOQ desde 50 piezas, entrega 7 días. Ideal para e-commerce.", "features": ["MOQ 50 pz", "Entrega 7 días", "Reposición Rápida"] },
+      { "title": "Pedidos Grandes", "desc": "30,000 pz/día. Manejo de pedidos con pago escalonado.", "features": ["Alta Capacidad", "Entrega Fiable", "Calidad Consistente"] }
+    ]
+  },
+  "process": {
+    "title": "Cómo Trabajamos",
+    "subtitle": "6 pasos simples para comenzar",
+    "steps": [
+      { "title": "Consulta", "desc": "Contáctenos con sus necesidades" },
+      { "title": "Cotización", "desc": "Ofrecemos modelos y cotización" },
+      { "title": "Muestras", "desc": "3-5 días para confirmación" },
+      { "title": "Contrato", "desc": "Confirmar detalles y firmar" },
+      { "title": "Producción", "desc": "7-15 días con control" },
+      { "title": "Entrega", "desc": "Entrega con verificación" }
+    ]
+  },
+  "cta": {
+    "title": "¿Listo para Comenzar?",
+    "subtitle": "Contáctenos para cotización personalizada",
+    "primaryBtn": "Contáctenos",
+    "secondaryBtn": "Ver Productos"
+  },
+  "contact": {
+    "title": "Contáctenos",
+    "subtitle": "Esperamos una relación a largo plazo",
+    "form": {
+      "name": "Su Nombre",
+      "company": "Empresa",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "product": "Producto de Interés",
+      "quantity": "Cantidad Estimada",
+      "message": "Sus Requisitos",
+      "submit": "Enviar",
+      "submitting": "Enviando...",
+      "success": "¡Enviado! Le contactaremos en 24 horas."
+    },
+    "info": {
+      "factoryName": "Fábrica de Punto Yayuhong, Chenghai",
+      "companyName": "Shenzhen Xiuyu Network Technology Co., Ltd.",
+      "address": "Distrito Chenghai, Shantou, Guangdong, China",
+      "phone": "+86 138-xxxx-xxxx",
+      "email": "info@yayuhong.com",
+      "wechat": "Yayuhong-Knitting",
+      "whatsapp": "+86 138-xxxx-xxxx",
+      "workTime": "Lun-Sáb: 9:00-18:00 (GMT+8)"
+    }
+  },
+  "footer": {
+    "about": "Sobre Nosotros",
+    "aboutDesc": "Fábrica de punto Yayuhong - 20 años de fabricación, su fábrica directa fast fashion.",
+    "quickLinks": "Enlaces Rápidos",
+    "contactUs": "Contacto",
+    "followUs": "Síganos",
+    "copyright": "© 2024 Yayuhong Knitwear Factory. Todos los derechos reservados.",
+    "icp": ""
+  }
+}

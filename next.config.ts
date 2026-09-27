@@ -4,9 +4,15 @@ import type { NextConfig } from 'next';
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
-  // Image optimization config
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: process.env.R2_PUBLIC_BASE_URL
+          ? new URL(process.env.R2_PUBLIC_BASE_URL).hostname
+          : 'localhost',
+      },
+    ],
   },
 };
 

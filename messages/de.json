@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "title": "Yayuhong Knitwear - Fabrik für Fast-Fashion-Pullover | 20 Jahre Erfahrung",
+    "description": "Strickwarenfabrik Yayuhong in Chenghai, 20 Jahre Erfahrung in der Pulloverherstellung. Kapazität 30.000 Stück/Tag, MOQ ab 50 Stück, 7-Tage-Lieferung. ODM/OEM/CMT für globale Fast-Fashion-Marken."
+  },
+  "nav": {
+    "home": "Startseite",
+    "products": "Produkte",
+    "factory": "Fabrik",
+    "services": "Leistungen",
+    "contact": "Kontakt",
+    "getQuote": "Angebot anfragen"
+  },
+  "hero": {
+    "badge": "20 Jahre · Direktfabrik · Kleine Mengen, schnelle Lieferung",
+    "title": "Fast-Fashion-Strickwaren",
+    "titleHighlight": "Direktfabrik",
+    "subtitle": "30.000 Stk/Tag · MOQ ab 50 Stk · 7-Tage-Lieferung\nKomplettservice: Design + Muster + Produktion",
+    "primaryBtn": "Angebot anfragen",
+    "secondaryBtn": "Virtuelle Tour",
+    "stats": {
+      "years": "Jahre Erfahrung",
+      "dailyCapacity": "Stk/Tag",
+      "moq": "Stk MOQ",
+      "delivery": "Tage Lieferung"
+    }
+  },
+  "advantages": {
+    "title": "Warum wir",
+    "subtitle": "Vier Kernvorteile für Ihr Strickgeschäft",
+    "items": [
+      { "title": "Geringer MOQ, schnelle Lieferung", "desc": "Ab 50 Stück mit 7-Tage-Lieferung. Halten Sie Schritt mit Trends, reduzieren Sie Lagerbestandsrisiken." },
+      { "title": "Designkompetenz", "desc": "Professionelles Designteam mit 100+ neuen Modellen monatlich. Internationale Modetrends. ODM-Service." },
+      { "title": "Kostenvorteil", "desc": "Direktfabrik in Chenghai mit 30 Werkstätten. Keine Zwischenhändler — bis zu 30% Ersparnis." },
+      { "title": "Qualitätskontrolle", "desc": "20 Jahre Handwerkskunst mit drei Inspektionsstufen. Strenge Kontrolle jedes Teils, 99%+ Passrate." }
+    ]
+  },
+  "products": {
+    "title": "Unsere Produkte",
+    "subtitle": "Vollständiges Sortiment an Strickwaren",
+    "viewAll": "Alle ansehen",
+    "categories": [
+      { "name": "Damenpullover", "desc": "Pulli, Cardigan, Kleid, Strickmantel", "count": "200+ Modelle" },
+      { "name": "Kinderpullover", "desc": "Niedliche Modelle, Familien-Sets", "count": "100+ Modelle" },
+      { "name": "Herrenpullover", "desc": "Basismodelle, Business, Trends", "count": "80+ Modelle" },
+      { "name": "Loungewear", "desc": "Bequeme Strick-Sets", "count": "50+ Modelle" },
+      { "name": "Haustierbekleidung", "desc": "Hunde-Pullover, Katzen-Strick", "count": "30+ Modelle" },
+      { "name": "Accessoires", "desc": "Schals, Mützen, Handschuhe, Taschen", "count": "40+ Modelle" }
+    ]
+  },
+  "factory": {
+    "title": "Fabrikfähigkeiten",
+    "subtitle": "20 Jahre Erfahrung in jedem Pullover",
+    "learnMore": "Mehr erfahren",
+    "features": [
+      { "title": "Moderne Produktionsbasis", "desc": "In Chenghai, Shantou. 30 Werkstätten mit computerisierten Flachstrickmaschinen." },
+      { "title": "Expertenteam", "desc": "20 Techniker mit 20+ Jahren Erfahrung. Profi-Kontrolle in Design, Schnittmuster, Produktion." },
+      { "title": "Strenge Qualitätskontrolle", "desc": "Drei Stufen: Rohstoff, Halbzeug, Endprodukt. Qualität in jedem Teil." },
+      { "title": "Schneller Service", "desc": "Antwort innerhalb 24 Std. 3-5 Tage Muster, 7-15 Tage Produktion." }
+    ]
+  },
+  "services": {
+    "title": "Unsere Leistungen",
+    "subtitle": "Komplettlösungen von Design bis Lieferung",
+    "items": [
+      { "title": "ODM-Entwicklung", "desc": "Originale Designs. 100+ neue Modelle monatlich.", "features": ["Originaldesign", "Monatliche Neuheiten", "Exklusivlizenz"] },
+      { "title": "OEM-Produktion", "desc": "Liefern Sie Designs oder Muster. Eigenmarke mit Etiketten.", "features": ["Nach Design", "Nach Muster", "Eigenmarke"] },
+      { "title": "Kleine Mengen", "desc": "MOQ ab 50 Stk, 7-Tage-Lieferung. Ideal für E-Commerce.", "features": ["MOQ 50 Stk", "7-Tage-Lieferung", "Schnelle Nachbestellung"] },
+      { "title": "Großbestellungen", "desc": "30.000 Stk/Tag. Massenbestellungen mit Ratenzahlung.", "features": ["Hohe Kapazität", "Zuverlässige Lieferung", "Konstante Qualität"] }
+    ]
+  },
+  "process": {
+    "title": "So arbeiten wir",
+    "subtitle": "6 einfache Schritte zum Start",
+    "steps": [
+      { "title": "Beratung", "desc": "Kontaktieren Sie uns" },
+      { "title": "Angebot", "desc": "Modelle und Preisvorschlag" },
+      { "title": "Muster", "desc": "3-5 Tage für Bestätigung" },
+      { "title": "Vertrag", "desc": "Details bestätigen" },
+      { "title": "Produktion", "desc": "7-15 Tage mit Kontrolle" },
+      { "title": "Lieferung", "desc": "Geprüfte Lieferung" }
+    ]
+  },
+  "cta": {
+    "title": "Bereit zu starten?",
+    "subtitle": "Kontaktieren Sie uns für ein Angebot",
+    "primaryBtn": "Kontaktieren Sie uns",
+    "secondaryBtn": "Produkte ansehen"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Wir freuen sich auf langfristige Partnerschaft",
+    "form": {
+      "name": "Ihr Name",
+      "company": "Firma",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "product": "Produkt von Interesse",
+      "quantity": "Geschätzte Menge",
+      "message": "Ihre Anforderungen",
+      "submit": "Senden",
+      "submitting": "Senden...",
+      "success": "Gesendet! Wir melden uns in 24 Stunden."
+    },
+    "info": {
+      "factoryName": "Strickwarenfabrik Yayuhong, Chenghai",
+      "companyName": "Shenzhen Xiuyu Network Technology Co., Ltd.",
+      "address": "Bezirk Chenghai, Shantou, Guangdong, China",
+      "phone": "+86 138-xxxx-xxxx",
+      "email": "info@yayuhong.com",
+      "wechat": "Yayuhong-Knitting",
+      "whatsapp": "+86 138-xxxx-xxxx",
+      "workTime": "Mo-Sa: 9:00-18:00 (GMT+8)"
+    }
+  },
+  "footer": {
+    "about": "Über uns",
+    "aboutDesc": "Strickwarenfabrik Yayuhong — 20 Jahre Herstellung, Ihre Fast-Fashion-Direktfabrik.",
+    "quickLinks": "Schnellzugriff",
+    "contactUs": "Kontakt",
+    "followUs": "Folgen Sie uns",
+    "copyright": "© 2024 Yayuhong Knitwear Factory. Alle Rechte vorbehalten.",
+    "icp": ""
+  }
+}

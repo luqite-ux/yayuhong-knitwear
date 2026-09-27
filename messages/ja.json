@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "title": "Yayuhong Knitwear - ファストファッションセーター工場 | 20年の経験",
+    "description": "澄海のニットウェア工場Yayuhong、20年のセーター製造経験。日産30,000枚、MOQ 50枚、7日納期。世界的ファストファッションブランド向けODM/OEM/CMT。"
+  },
+  "nav": {
+    "home": "ホーム",
+    "products": "製品",
+    "factory": "工場",
+    "services": "サービス",
+    "contact": "お問合せ",
+    "getQuote": "見積依頼"
+  },
+  "hero": {
+    "badge": "20年 · 直営工場 · 小ロット・短納期",
+    "title": "ファストファッションニット",
+    "titleHighlight": "直営工場",
+    "subtitle": "30,000枚/日 · MOQ 50枚 · 7日納期\nワンストップ：デザイン + サンプル + 生産",
+    "primaryBtn": "見積依頼",
+    "secondaryBtn": "バーチャルツアー",
+    "stats": {
+      "years": "年の経験",
+      "dailyCapacity": "枚/日",
+      "moq": "枚 MOQ",
+      "delivery": "日 納期"
+    }
+  },
+  "advantages": {
+    "title": "選ばれる理由",
+    "subtitle": "ニットビジネスを支える4つの強み",
+    "items": [
+      { "title": "小ロット・短納期", "desc": "50枚から7日納期。トレンドに追従、在庫リスクを軽減。" },
+      { "title": "デザイン力", "desc": "プロデザイナーが月100+新モデル展開。国際トレンドに対応。" },
+      { "title": "コスト優位性", "desc": "澄海の直営工場、30工房。中間マージン不要、最大30%節約。" },
+      { "title": "品質管理", "desc": "20年の技術、3段階検査。高品質、合格率99%以上。" }
+    ]
+  },
+  "products": {
+    "title": "製品一覧",
+    "subtitle": "あらゆるニーズに応える製品ライン",
+    "viewAll": "全製品を見る",
+    "categories": [
+      { "name": "レディースセーター", "desc": "プルオーバー、カーディガン、ワンピース", "count": "200+モデル" },
+      { "name": "キッズセーター", "desc": "可愛いモデル、ファミリーセット", "count": "100+モデル" },
+      { "name": "メンズセーター", "desc": "ベーシック、ビジネス、トレンド", "count": "80+モデル" },
+      { "name": "ルームウェア", "desc": "快適なニットセット", "count": "50+モデル" },
+      { "name": "ペットアパレル", "desc": "犬用セーター、猫用ニット", "count": "30+モデル" },
+      { "name": "アクセサリー", "desc": "マフラー、帽子、手袋、バッグ", "count": "40+モデル" }
+    ]
+  },
+  "factory": {
+    "title": "工場能力",
+    "subtitle": "20年の技術が織りなす品質",
+    "learnMore": "詳細",
+    "features": [
+      { "title": "近代的生産拠点", "desc": "澄海、汕頭に位置。30工房、コンピュータ横編機。" },
+      { "title": "エキスパートチーム", "desc": "20年の技術者20名。全工程プロフェッショナル管理。" },
+      { "title": "厳格な品質管理", "desc": "3段階：原料、半製品、完成品。全点品質保証。" },
+      { "title": "迅速対応サービス", "desc": "24時間以内返信。サンプル3-5日、生産7-15日。" }
+    ]
+  },
+  "services": {
+    "title": "サービス",
+    "subtitle": "デザインから納品までの総合ソリューション",
+    "items": [
+      { "title": "ODM開発", "desc": "オリジナルデザイン。月100+新モデル。", "features": ["オリジナル", "月次新商品", "独占ライセンス"] },
+      { "title": "OEM製造", "desc": "デザイン・サンプル提供。プライベートブランド。", "features": ["デザイン基準", "サンプル基準", "プライベート"] },
+      { "title": "小ロット快速", "desc": "MOQ50枚、7日納品。ECに最適。", "features": ["MOQ50枚", "7日納期", "再注文迅速"] },
+      { "title": "大量注文", "desc": "30,000枚/日。分割払い対応。", "features": ["大容量", "確実納期", "安定品質"] }
+    ]
+  },
+  "process": {
+    "title": "ご利用の流れ",
+    "subtitle": "パートナーシップ開始の6ステップ",
+    "steps": [
+      { "title": "ご相談", "desc": "お問合せ" },
+      { "title": "見積", "desc": "モデルと価格" },
+      { "title": "サンプル", "desc": "3-5日で確認" },
+      { "title": "契約", "desc": "詳細確認・調印" },
+      { "title": "生産", "desc": "7-15日・品質管理" },
+      { "title": "納品", "desc": "検品後納品" }
+    ]
+  },
+  "cta": {
+    "title": "プロジェクト開始の準備は？",
+    "subtitle": "お問合せでカスタム見積を",
+    "primaryBtn": "お問合せ",
+    "secondaryBtn": "製品を見る"
+  },
+  "contact": {
+    "title": "お問合せ",
+    "subtitle": "長期的パートナーシップをお待ちしております",
+    "form": {
+      "name": "お名前",
+      "company": "会社名",
+      "email": "メール",
+      "phone": "電話番号",
+      "product": "製品名",
+      "quantity": "数量",
+      "message": "ご要望",
+      "submit": "送信",
+      "submitting": "送信中...",
+      "success": "送信完了！24時間以内にご連絡します。"
+    },
+    "info": {
+      "factoryName": "澄海ヤーユーホンニット工場",
+      "companyName": "Shenzhen Xiuyu Network Technology Co., Ltd.",
+      "address": "中国広東省汕頭市澄海区",
+      "phone": "+86 138-xxxx-xxxx",
+      "email": "info@yayuhong.com",
+      "wechat": "Yayuhong-Knitting",
+      "whatsapp": "+86 138-xxxx-xxxx",
+      "workTime": "月-土: 9:00-18:00 (GMT+8)"
+    }
+  },
+  "footer": {
+    "about": "会社情報",
+    "aboutDesc": "ヤーユーンホーンニット工場 — 20年の製造、ファストファッション直営工場。",
+    "quickLinks": "クイックリンク",
+    "contactUs": "お問合せ",
+    "followUs": "フォロー",
+    "copyright": "© 2024 Yayuhong Knitwear Factory. All rights reserved.",
+    "icp": ""
+  }
+}

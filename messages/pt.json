@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "title": "Yayuhong Knitwear - Fábrica de Suéteres Fast Fashion | 20 Anos de Experiência",
+    "description": "Fábrica de malhas Yayuhong em Chenghai, 20 anos de experiência na fabricação de suéteres. Capacidade de 30.000 peças/dia, MOQ 50 peças, entrega 7 dias. ODM/OEM/CMT para marcas globais de fast fashion."
+  },
+  "nav": {
+    "home": "Início",
+    "products": "Produtos",
+    "factory": "Fábrica",
+    "services": "Serviços",
+    "contact": "Contato",
+    "getQuote": "Solicitar Orçamento"
+  },
+  "hero": {
+    "badge": "20 Anos · Fábrica Direta · Pequenas quantidades, entrega rápida",
+    "title": "Malhas Fast Fashion",
+    "titleHighlight": "Fábrica Direta",
+    "subtitle": "30.000 pç/dia · MOQ 50 pç · Entrega 7 dias\nServiço completo: Design + Amostras + Produção",
+    "primaryBtn": "Solicitar Orçamento",
+    "secondaryBtn": "Tour Virtual",
+    "stats": {
+      "years": "Anos de Experiência",
+      "dailyCapacity": "Pç/Dia",
+      "moq": "Pç MOQ",
+      "delivery": "Dias Entrega"
+    }
+  },
+  "advantages": {
+    "title": "Por Que Nos Escolher",
+    "subtitle": "Quatro vantagens chave para seu negócio",
+    "items": [
+      { "title": "MOQ Baixo, Entrega Rápida", "desc": "A partir de 50 peças com entrega em 7 dias. Acompanhe tendências, reduza riscos." },
+      { "title": "Capacidade de Design", "desc": "Equipe profissional, 100+ novos modelos mensais. Tendências internacionais." },
+      { "title": "Vantagem de Custo", "desc": "Fábrica direta em Chenghai, 30 oficinas. Sem intermediários — até 30% de economia." },
+      { "title": "Controle de Qualidade", "desc": "20 anos de experiência, três etapas de inspeção. Taxa de aprovação 99%+." }
+    ]
+  },
+  "products": {
+    "title": "Nossos Produtos",
+    "subtitle": "Gama completa de produtos de malha",
+    "viewAll": "Ver Todos",
+    "categories": [
+      { "name": "Suéteres Femininos", "desc": "Blusas, cardigãs, vestidos, casacos", "count": "200+ Modelos" },
+      { "name": "Suéteres Infantis", "desc": "Modelos fofos, conjuntos familiares", "count": "100+ Modelos" },
+      { "name": "Suéteres Masculinos", "desc": "Básicos, business, tendências", "count": "80+ Modelos" },
+      { "name": "Roupa de Casa", "desc": "Conjuntos de malha confortáveis", "count": "50+ Modelos" },
+      { "name": "Roupa para Animais", "desc": "Suéteres para cães, gatos", "count": "30+ Modelos" },
+      { "name": "Acessórios", "desc": "Cachecóis, gorros, luvas, bolsas", "count": "40+ Modelos" }
+    ]
+  },
+  "factory": {
+    "title": "Capacidades da Fábrica",
+    "subtitle": "20 anos de experiência em cada suéter",
+    "learnMore": "Saber Mais",
+    "features": [
+      { "title": "Base Produtiva Moderna", "desc": "Em Chenghai, Shantou. 30 oficinas com máquinas informatizadas." },
+      { "title": "Equipe Técnica Especialista", "desc": "20 técnicos com 20+ anos. Controle profissional em todas as etapas." },
+      { "title": "Controle de Qualidade Rígido", "desc": "Três etapas: matéria-prima, semi-acabados, produto final." },
+      { "title": "Serviço Rápido", "desc": "Resposta em 24h. Amostras 3-5 dias, produção 7-15 dias." }
+    ]
+  },
+  "services": {
+    "title": "Nossos Serviços",
+    "subtitle": "Soluções completas de design a entrega",
+    "items": [
+      { "title": "Desenvolvimento ODM", "desc": "Designs originais. 100+ modelos novos mensais.", "features": ["Design Original", "Novidades Mensais", "Licença Exclusiva"] },
+      { "title": "Fabricação OEM", "desc": "Forneça designs ou amostras. Marca própria.", "features": ["Por Design", "Por Amostra", "Marca Própria"] },
+      { "title": "Pequenos Lotes Rápidos", "desc": "MOQ desde 50 pç, entrega 7 dias. Ideal para e-commerce.", "features": ["MOQ 50 pç", "Entrega 7 dias", "Reposição Rápida"] },
+      { "title": "Grandes Pedidos", "desc": "30.000 pç/dia. Pedidos com pagamento parcelado.", "features": ["Alta Capacidade", "Entrega Confiável", "Qualidade Consistente"] }
+    ]
+  },
+  "process": {
+    "title": "Como Trabalhamos",
+    "subtitle": "6 passos simples para começar",
+    "steps": [
+      { "title": "Consulta", "desc": "Contate-nos" },
+      { "title": "Orçamento", "desc": "Modelos e orçamento" },
+      { "title": "Amostras", "desc": "3-5 dias para confirmar" },
+      { "title": "Contrato", "desc": "Confirmar detalhes" },
+      { "title": "Produção", "desc": "7-15 dias com controle" },
+      { "title": "Entrega", "desc": "Entrega verificada" }
+    ]
+  },
+  "cta": {
+    "title": "Pronto para Começar?",
+    "subtitle": "Contate-nos para orçamento personalizado",
+    "primaryBtn": "Contate-nos",
+    "secondaryBtn": "Ver Produtos"
+  },
+  "contact": {
+    "title": "Contate-nos",
+    "subtitle": "Esperamos uma parceria duradoura",
+    "form": {
+      "name": "Seu Nome",
+      "company": "Empresa",
+      "email": "Email",
+      "phone": "Telefone",
+      "product": "Produto de Interesse",
+      "quantity": "Quantidade Estimada",
+      "message": "Seus Requisitos",
+      "submit": "Enviar",
+      "submitting": "Enviando...",
+      "success": "Enviado! Entraremos em contato em 24h."
+    },
+    "info": {
+      "factoryName": "Fábrica de Malhas Yayuhong, Chenghai",
+      "companyName": "Shenzhen Xiuyu Network Technology Co., Ltd.",
+      "address": "Distrito de Chenghai, Shantou, Guangdong, China",
+      "phone": "+86 138-xxxx-xxxx",
+      "email": "info@yayuhong.com",
+      "wechat": "Yayuhong-Knitting",
+      "whatsapp": "+86 138-xxxx-xxxx",
+      "workTime": "Seg-Sáb: 9h00-18h00 (GMT+8)"
+    }
+  },
+  "footer": {
+    "about": "Sobre Nós",
+    "aboutDesc": "Fábrica de malhas Yayuhong — 20 anos de fabricação, sua fábrica direta fast fashion.",
+    "quickLinks": "Links Rápidos",
+    "contactUs": "Contato",
+    "followUs": "Siga-nos",
+    "copyright": "© 2024 Yayuhong Knitwear Factory. Todos os direitos reservados.",
+    "icp": ""
+  }
+}

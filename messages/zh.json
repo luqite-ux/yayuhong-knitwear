@@ -8,6 +8,7 @@
     "products": "产品中心",
     "factory": "工厂实力",
     "services": "服务方案",
+    "faq": "常见问题",
     "contact": "联系我们",
     "getQuote": "获取报价"
   },
@@ -176,6 +177,12 @@
       "whatsapp": "+86 138-xxxx-xxxx",
       "workTime": "周一至周六 9:00 - 18:00"
     }
+  },
+  "faq": {
+    "subtitle": "FAQ",
+    "title": "常见问题解答",
+    "description": "关于合作、生产、交货等问题，在这里找到答案",
+    "empty": "暂无 FAQ，如有问题请联系我们。"
   },
   "footer": {
     "about": "关于我们",

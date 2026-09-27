@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yayuhong.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    alternateLocale: ['zh_CN'],
+    alternateLocale: ['zh_CN', 'ru_RU', 'es_ES', 'de_DE', 'fr_FR', 'pt_PT', 'ja_JP', 'ar_SA'],
     url: siteUrl,
     siteName: 'Yayuhong Knitwear',
     title: 'Yayuhong Knitwear - Fast Fashion Sweater Factory',
@@ -57,9 +57,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
 };
 
 export default function RootLayout({
@@ -67,11 +64,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <body className="min-h-screen flex flex-col bg-[var(--color-cream)]">
-        {children}
-      </body>
-    </html>
-  );
+  return children;
 }
