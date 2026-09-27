@@ -4,14 +4,14 @@ import { pick } from '@/lib/i18n';
 
 // 默认产品（数据库不可用时展示）
 const DEFAULT_PRODUCTS = [
-  { id: 1, slug: 'womens-sweater', name: { zh: '女装毛衫' }, cover_url: '', model: 'W001' },
-  { id: 2, slug: 'kids-sweater', name: { zh: '童装毛衣' }, cover_url: '', model: 'K001' },
-  { id: 3, slug: 'mens-sweater', name: { zh: '男装针织' }, cover_url: '', model: 'M001' },
-  { id: 4, slug: 'cardigan', name: { zh: '开衫外套' }, cover_url: '', model: 'C001' },
-  { id: 5, slug: 'dress', name: { zh: '针织连衣裙' }, cover_url: '', model: 'D001' },
-  { id: 6, slug: 'hoodie', name: { zh: '连帽卫衣' }, cover_url: '', model: 'H001' },
-  { id: 7, slug: 'vest', name: { zh: '针织马甲' }, cover_url: '', model: 'V001' },
-  { id: 8, slug: 'scarf', name: { zh: '围巾配饰' }, cover_url: '', model: 'S001' },
+  { id: 1, slug: 'womens-sweater', name: { zh: '女装毛衫' }, cover_url: '/images/china/products/womens-sweater.jpg', model: 'W001' },
+  { id: 2, slug: 'kids-sweater', name: { zh: '童装毛衣' }, cover_url: '/images/china/products/kids-sweater.jpg', model: 'K001' },
+  { id: 3, slug: 'mens-sweater', name: { zh: '男装针织' }, cover_url: '/images/china/products/mens-sweater.jpg', model: 'M001' },
+  { id: 4, slug: 'cardigan', name: { zh: '开衫外套' }, cover_url: '/images/china/products/cardigan.jpg', model: 'C001' },
+  { id: 5, slug: 'dress', name: { zh: '针织连衣裙' }, cover_url: '/images/china/products/dress.jpg', model: 'D001' },
+  { id: 6, slug: 'hoodie', name: { zh: '连帽卫衣' }, cover_url: '/images/china/products/hoodie.jpg', model: 'H001' },
+  { id: 7, slug: 'vest', name: { zh: '针织马甲' }, cover_url: '/images/china/products/vest.jpg', model: 'V001' },
+  { id: 8, slug: 'scarf', name: { zh: '围巾配饰' }, cover_url: '/images/china/products/scarf.jpg', model: 'S001' },
 ];
 
 export default async function ChinaProducts() {

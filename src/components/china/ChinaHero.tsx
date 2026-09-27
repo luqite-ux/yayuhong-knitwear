@@ -63,7 +63,7 @@ export default function ChinaHero() {
           <div className="relative hidden lg:block">
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="/images/hero/hero-main.jpg"
+                src="/images/china/hero/hero-main.jpg"
                 alt="亚裕鸿毛织厂生产车间"
                 className="w-full h-full object-cover"
               />

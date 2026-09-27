@@ -10,27 +10,33 @@ export default function ChinaFactory() {
             <div className="space-y-4">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src="/images/hero/hero-main.jpg"
+                  src="/images/china/hero/hero-main.jpg"
                   alt="工厂全貌"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
-                <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm">
-                  生产车间
-                </div>
+                <img
+                  src="/images/china/factory/quality-control.jpg"
+                  alt="品质检验"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             <div className="space-y-4 pt-10">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
-                <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm">
-                  电脑横机
-                </div>
+                <img
+                  src="/images/china/factory/workshop.jpg"
+                  alt="生产车间"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-lg">
-                <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm">
-                  后整车间
-                </div>
+                <img
+                  src="/images/china/factory/finishing.jpg"
+                  alt="后整车间"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
