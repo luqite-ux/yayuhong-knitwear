@@ -16,11 +16,18 @@ function getSql() {
   return _sql;
 }
 
-export const sql = new Proxy({} as ReturnType<typeof postgres>, {
+// 用一个函数作为代理目标，支持 sql`...` 调用
+const _sqlProxy = function () {} as unknown as ReturnType<typeof postgres>;
+
+export const sql = new Proxy(_sqlProxy, {
   get(_, prop) {
     const target = getSql();
     const value = Reflect.get(target, prop, target);
     return typeof value === 'function' ? value.bind(target) : value;
+  },
+  apply(_, thisArg, args) {
+    const target = getSql();
+    return Reflect.apply(target, thisArg, args);
   },
 });
 
