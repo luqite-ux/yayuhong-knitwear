@@ -2,35 +2,33 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { useState } from 'react';
 
-const catalogImages = [
-  { src: '/images/ready-stock/catalog-1.jpg', styles: '63032-63039', label: 'Set A' },
-  { src: '/images/ready-stock/catalog-2.jpg', styles: '63015-63022', label: 'Set B' },
-  { src: '/images/ready-stock/catalog-3.jpg', styles: '63023-63031', label: 'Set C' },
-  { src: '/images/ready-stock/catalog-4.jpg', styles: '63015-63022', label: 'Set D' },
-  { src: '/images/ready-stock/catalog-5.jpg', styles: '63032-63039', label: 'Set E' },
+const products = [
+  { src: '/images/ready-stock/style-01.jpg', code: '63032', label: { zh: '焦糖套装', en: 'Caramel Set' } },
+  { src: '/images/ready-stock/style-02.jpg', code: '63033', label: { zh: '奶白套装', en: 'Cream Set' } },
+  { src: '/images/ready-stock/style-03.jpg', code: '63034', label: { zh: '蓝色套装', en: 'Blue Set' } },
+  { src: '/images/ready-stock/style-04.jpg', code: '63035', label: { zh: '粉色套装', en: 'Pink Set' } },
+  { src: '/images/ready-stock/style-05.jpg', code: '63036', label: { zh: '薄荷套装', en: 'Mint Set' } },
+  { src: '/images/ready-stock/style-06.jpg', code: '63037', label: { zh: '白粉套装', en: 'White/Pink Set' } },
 ];
 
 export default function ReadyStock() {
   const t = useTranslations('readyStock');
   const locale = useLocale();
-  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="section-padding bg-gradient-to-b from-[var(--color-warm-gray)] to-white relative overflow-hidden">
-      {/* Decorative background */}
+    <section className="section-padding bg-gradient-to-b from-[var(--color-warm-gray)] to-white knit-texture relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[var(--color-accent)]/5 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-[var(--color-secondary)]/5 blur-3xl"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] text-sm font-semibold mb-4">
             <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
             {t('badge')}
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-primary)] mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-4">
             {t('title')}
           </h2>
           <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-lg">
@@ -39,7 +37,7 @@ export default function ReadyStock() {
         </div>
 
         {/* Key selling points */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {[
             { icon: '📦', title: t('points.stock'), desc: t('points.stockDesc') },
             { icon: '⚡', title: t('points.shipping'), desc: t('points.shippingDesc') },
@@ -54,82 +52,56 @@ export default function ReadyStock() {
           ))}
         </div>
 
-        {/* Main gallery */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Large preview */}
-          <div className="lg:col-span-8">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-white border border-[var(--color-warm-gray)]">
-              <img
-                src={catalogImages[activeIndex].src}
-                alt={`Ready stock catalog ${catalogImages[activeIndex].label}`}
-                className="w-full h-auto object-contain"
-              />
-              <div className="absolute top-4 left-4 px-4 py-2 rounded-full bg-[var(--color-accent)] text-white text-sm font-bold shadow-lg">
-                {t('inStock')}
+        {/* Product grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((product, index) => (
+            <div
+              key={index}
+              className="group bg-white rounded-2xl overflow-hidden card-hover cursor-pointer"
+            >
+              {/* Image area */}
+              <div className="aspect-[4/3] bg-[var(--color-warm-gray)] relative overflow-hidden">
+                <img
+                  src={product.src}
+                  alt={locale === 'zh' ? product.label.zh : product.label.en}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-[var(--color-primary)] shadow-sm">
+                  {locale === 'zh' ? `款号 ${product.code}` : `Style ${product.code}`}
+                </div>
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--color-accent)] text-white text-xs font-bold shadow-sm">
+                  {t('inStock')}
+                </div>
               </div>
-              <div className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm text-[var(--color-primary)] text-sm font-medium shadow-lg">
-                {locale === 'zh' ? `款号 ${catalogImages[activeIndex].styles}` : `Styles ${catalogImages[activeIndex].styles}`}
-              </div>
-            </div>
-          </div>
 
-          {/* Thumbnails + info */}
-          <div className="lg:col-span-4 flex flex-col gap-4">
-            {/* Thumbnails */}
-            <div className="grid grid-cols-5 lg:grid-cols-2 gap-3">
-              {catalogImages.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIndex(i)}
-                  className={`relative rounded-xl overflow-hidden border-2 transition-all aspect-square ${
-                    activeIndex === i
-                      ? 'border-[var(--color-accent)] shadow-md'
-                      : 'border-transparent hover:border-[var(--color-warm-gray)]'
-                  }`}
-                >
-                  <img
-                    src={img.src}
-                    alt={`Catalog ${img.label}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
-            </div>
-
-            {/* Product info card */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-[var(--color-warm-gray)]/50">
-              <h3 className="font-bold text-[var(--color-primary)] text-lg mb-3">
-                {t('collectionTitle')}
-              </h3>
-              <div className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-                <div className="flex justify-between">
-                  <span className="text-[var(--color-text-muted)]">{t('info.styles')}</span>
-                  <span className="font-medium text-[var(--color-primary)]">25+ {t('info.stylesUnit')}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[var(--color-text-muted)]">{t('info.sizes')}</span>
-                  <span className="font-medium text-[var(--color-primary)]">M / L / XL / XXL</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[var(--color-text-muted)]">{t('info.colors')}</span>
-                  <span className="font-medium text-[var(--color-primary)]">10+ {t('info.colorsUnit')}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[var(--color-text-muted)]">{t('info.category')}</span>
-                  <span className="font-medium text-[var(--color-primary)]">{t('info.categoryValue')}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[var(--color-text-muted)]">{t('info.shipping')}</span>
-                  <span className="font-medium text-[var(--color-accent)]">3 {t('info.shippingUnit')}</span>
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-[var(--color-primary)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
+                  {locale === 'zh' ? product.label.zh : product.label.en}
+                </h3>
+                <p className="text-[var(--color-text-muted)] text-sm mb-4">
+                  {t('collectionTitle')}
+                </p>
+                <div className="flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:gap-2 transition-all">
+                  {locale === 'zh' ? '查看详情' : 'Learn more'}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </div>
               </div>
             </div>
+          ))}
+        </div>
 
-            {/* CTA */}
-            <Link href="/contact" className="btn-primary text-center block">
-              {t('cta')}
-            </Link>
-          </div>
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Link href="/contact" className="btn-outline">
+            {t('cta')}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
