@@ -29,10 +29,22 @@
     "title": "Warum wir",
     "subtitle": "Vier Kernvorteile für Ihr Strickgeschäft",
     "items": [
-      { "title": "Geringer MOQ, schnelle Lieferung", "desc": "Ab 50 Stück mit 7-Tage-Lieferung. Halten Sie Schritt mit Trends, reduzieren Sie Lagerbestandsrisiken." },
-      { "title": "Designkompetenz", "desc": "Professionelles Designteam mit 100+ neuen Modellen monatlich. Internationale Modetrends. ODM-Service." },
-      { "title": "Kostenvorteil", "desc": "Direktfabrik in Chenghai mit 30 Werkstätten. Keine Zwischenhändler — bis zu 30% Ersparnis." },
-      { "title": "Qualitätskontrolle", "desc": "20 Jahre Handwerkskunst mit drei Inspektionsstufen. Strenge Kontrolle jedes Teils, 99%+ Passrate." }
+      {
+        "title": "Geringer MOQ, schnelle Lieferung",
+        "desc": "Ab 50 Stück mit 7-Tage-Lieferung. Halten Sie Schritt mit Trends, reduzieren Sie Lagerbestandsrisiken."
+      },
+      {
+        "title": "Designkompetenz",
+        "desc": "Professionelles Designteam mit 100+ neuen Modellen monatlich. Internationale Modetrends. ODM-Service."
+      },
+      {
+        "title": "Kostenvorteil",
+        "desc": "Direktfabrik in Chenghai mit 30 Werkstätten. Keine Zwischenhändler — bis zu 30% Ersparnis."
+      },
+      {
+        "title": "Qualitätskontrolle",
+        "desc": "20 Jahre Handwerkskunst mit drei Inspektionsstufen. Strenge Kontrolle jedes Teils, 99%+ Passrate."
+      }
     ]
   },
   "products": {
@@ -40,12 +52,36 @@
     "subtitle": "Vollständiges Sortiment an Strickwaren",
     "viewAll": "Alle ansehen",
     "categories": [
-      { "name": "Damenpullover", "desc": "Pulli, Cardigan, Kleid, Strickmantel", "count": "200+ Modelle" },
-      { "name": "Kinderpullover", "desc": "Niedliche Modelle, Familien-Sets", "count": "100+ Modelle" },
-      { "name": "Herrenpullover", "desc": "Basismodelle, Business, Trends", "count": "80+ Modelle" },
-      { "name": "Loungewear", "desc": "Bequeme Strick-Sets", "count": "50+ Modelle" },
-      { "name": "Haustierbekleidung", "desc": "Hunde-Pullover, Katzen-Strick", "count": "30+ Modelle" },
-      { "name": "Accessoires", "desc": "Schals, Mützen, Handschuhe, Taschen", "count": "40+ Modelle" }
+      {
+        "name": "Damenpullover",
+        "desc": "Pulli, Cardigan, Kleid, Strickmantel",
+        "count": "200+ Modelle"
+      },
+      {
+        "name": "Kinderpullover",
+        "desc": "Niedliche Modelle, Familien-Sets",
+        "count": "100+ Modelle"
+      },
+      {
+        "name": "Herrenpullover",
+        "desc": "Basismodelle, Business, Trends",
+        "count": "80+ Modelle"
+      },
+      {
+        "name": "Loungewear",
+        "desc": "Bequeme Strick-Sets",
+        "count": "50+ Modelle"
+      },
+      {
+        "name": "Haustierbekleidung",
+        "desc": "Hunde-Pullover, Katzen-Strick",
+        "count": "30+ Modelle"
+      },
+      {
+        "name": "Accessoires",
+        "desc": "Schals, Mützen, Handschuhe, Taschen",
+        "count": "40+ Modelle"
+      }
     ]
   },
   "factory": {
@@ -53,32 +89,94 @@
     "subtitle": "20 Jahre Erfahrung in jedem Pullover",
     "learnMore": "Mehr erfahren",
     "features": [
-      { "title": "Moderne Produktionsbasis", "desc": "In Chenghai, Shantou. 30 Werkstätten mit computerisierten Flachstrickmaschinen." },
-      { "title": "Expertenteam", "desc": "20 Techniker mit 20+ Jahren Erfahrung. Profi-Kontrolle in Design, Schnittmuster, Produktion." },
-      { "title": "Strenge Qualitätskontrolle", "desc": "Drei Stufen: Rohstoff, Halbzeug, Endprodukt. Qualität in jedem Teil." },
-      { "title": "Schneller Service", "desc": "Antwort innerhalb 24 Std. 3-5 Tage Muster, 7-15 Tage Produktion." }
+      {
+        "title": "Moderne Produktionsbasis",
+        "desc": "In Chenghai, Shantou. 30 Werkstätten mit computerisierten Flachstrickmaschinen."
+      },
+      {
+        "title": "Expertenteam",
+        "desc": "20 Techniker mit 20+ Jahren Erfahrung. Profi-Kontrolle in Design, Schnittmuster, Produktion."
+      },
+      {
+        "title": "Strenge Qualitätskontrolle",
+        "desc": "Drei Stufen: Rohstoff, Halbzeug, Endprodukt. Qualität in jedem Teil."
+      },
+      {
+        "title": "Schneller Service",
+        "desc": "Antwort innerhalb 24 Std. 3-5 Tage Muster, 7-15 Tage Produktion."
+      }
     ]
   },
   "services": {
     "title": "Unsere Leistungen",
     "subtitle": "Komplettlösungen von Design bis Lieferung",
     "items": [
-      { "title": "ODM-Entwicklung", "desc": "Originale Designs. 100+ neue Modelle monatlich.", "features": ["Originaldesign", "Monatliche Neuheiten", "Exklusivlizenz"] },
-      { "title": "OEM-Produktion", "desc": "Liefern Sie Designs oder Muster. Eigenmarke mit Etiketten.", "features": ["Nach Design", "Nach Muster", "Eigenmarke"] },
-      { "title": "Kleine Mengen", "desc": "MOQ ab 50 Stk, 7-Tage-Lieferung. Ideal für E-Commerce.", "features": ["MOQ 50 Stk", "7-Tage-Lieferung", "Schnelle Nachbestellung"] },
-      { "title": "Großbestellungen", "desc": "30.000 Stk/Tag. Massenbestellungen mit Ratenzahlung.", "features": ["Hohe Kapazität", "Zuverlässige Lieferung", "Konstante Qualität"] }
+      {
+        "title": "ODM-Entwicklung",
+        "desc": "Originale Designs. 100+ neue Modelle monatlich.",
+        "features": [
+          "Originaldesign",
+          "Monatliche Neuheiten",
+          "Exklusivlizenz"
+        ]
+      },
+      {
+        "title": "OEM-Produktion",
+        "desc": "Liefern Sie Designs oder Muster. Eigenmarke mit Etiketten.",
+        "features": [
+          "Nach Design",
+          "Nach Muster",
+          "Eigenmarke"
+        ]
+      },
+      {
+        "title": "Kleine Mengen",
+        "desc": "MOQ ab 50 Stk, 7-Tage-Lieferung. Ideal für E-Commerce.",
+        "features": [
+          "MOQ 50 Stk",
+          "7-Tage-Lieferung",
+          "Schnelle Nachbestellung"
+        ]
+      },
+      {
+        "title": "Großbestellungen",
+        "desc": "30.000 Stk/Tag. Massenbestellungen mit Ratenzahlung.",
+        "features": [
+          "Hohe Kapazität",
+          "Zuverlässige Lieferung",
+          "Konstante Qualität"
+        ]
+      }
     ]
   },
   "process": {
     "title": "So arbeiten wir",
     "subtitle": "6 einfache Schritte zum Start",
     "steps": [
-      { "title": "Beratung", "desc": "Kontaktieren Sie uns" },
-      { "title": "Angebot", "desc": "Modelle und Preisvorschlag" },
-      { "title": "Muster", "desc": "3-5 Tage für Bestätigung" },
-      { "title": "Vertrag", "desc": "Details bestätigen" },
-      { "title": "Produktion", "desc": "7-15 Tage mit Kontrolle" },
-      { "title": "Lieferung", "desc": "Geprüfte Lieferung" }
+      {
+        "title": "Beratung",
+        "desc": "Kontaktieren Sie uns"
+      },
+      {
+        "title": "Angebot",
+        "desc": "Modelle und Preisvorschlag"
+      },
+      {
+        "title": "Muster",
+        "desc": "3-5 Tage für Bestätigung"
+      },
+      {
+        "title": "Vertrag",
+        "desc": "Details bestätigen"
+      },
+      {
+        "title": "Produktion",
+        "desc": "7-15 Tage mit Kontrolle"
+      },
+      {
+        "title": "Lieferung",
+        "desc": "Geprüfte Lieferung"
+      }
     ]
   },
   "cta": {
@@ -145,10 +243,22 @@
       }
     ],
     "stats": [
-      { "value": "40+", "label": "Jahre Geschichte" },
-      { "value": "3.000+", "label": "Unternehmen" },
-      { "value": "100Tsd.+", "label": "Beschäftigte" },
-      { "value": "Berühmte Stadt", "label": "Chinas Strickhauptstadt" }
+      {
+        "value": "40+",
+        "label": "Jahre Geschichte"
+      },
+      {
+        "value": "3.000+",
+        "label": "Unternehmen"
+      },
+      {
+        "value": "100Tsd.+",
+        "label": "Beschäftigte"
+      },
+      {
+        "value": "Berühmte Stadt",
+        "label": "Chinas Strickhauptstadt"
+      }
     ],
     "quote": "Die Garne Chenghais haben nicht nur Pullover gestrickt, sondern die Träume und Existenzgrundlagen von Generationen — jede Masche ein Zeugnis des bleibenden Geistes der Handwerkskunst.",
     "quoteSource": "Chenghai Strickwarenindustrieverband"
@@ -161,5 +271,35 @@
     "followUs": "Folgen Sie uns",
     "copyright": "© 2024 Yayuhong Knitwear Factory. Alle Rechte vorbehalten.",
     "icp": ""
+  },
+  "wechatGuide": {
+    "title": "So verwenden Sie WeChat",
+    "subtitle": "WeChat ist die beliebteste Messaging-App in China. Folgen Sie diesen Schritten, um mit uns in Kontakt zu treten und Sofortangebote zu erhalten.",
+    "qrTitle": "Unser WeChat-QR-Code",
+    "qrDesc": "Scannen Sie diesen QR-Code mit WeChat, um uns als Kontakt hinzuzufügen",
+    "step1": {
+      "title": "WeChat herunterladen",
+      "desc": "WeChat ist kostenlos für iOS und Android. Laden Sie es aus dem App Store oder Google Play herunter."
+    },
+    "step2": {
+      "title": "Konto registrieren",
+      "desc": "Öffnen Sie WeChat und registrieren Sie sich mit Ihrer Telefonnummer. Eine Verifizierung ist erforderlich.",
+      "tip1": "Verwenden Sie Ihre echte Telefonnummer für die Verifizierung",
+      "tip2": "Legen Sie eine einprägsame WeChat-ID fest"
+    },
+    "step3": {
+      "title": "Scannen Sie unseren QR-Code",
+      "desc": "Öffnen Sie WeChat, tippen Sie oben rechts auf '+', wählen Sie 'Scannen' und richten Sie die Kamera auf unseren QR-Code oben."
+    },
+    "step4": {
+      "title": "Nachricht senden",
+      "desc": "Senden Sie uns nach dem Hinzufügen eine Nachricht mit Ihren Produktanforderungen. Unser Team antwortet innerhalb von 12 Stunden.",
+      "tip": "Tipp: Das Senden von Details (Stil, Menge, Zielpreis) hilft uns, schneller mit genauen Angeboten zu antworten."
+    },
+    "whatsappTitle": "Lieber WhatsApp?",
+    "whatsappDesc": "Wir antworten auch auf WhatsApp für Ihre Bequemlichkeit",
+    "whatsappBtn": "Auf WhatsApp chatten",
+    "contactPrompt": "Oder senden Sie eine Anfrage direkt über unsere Website",
+    "contactBtn": "Anfrage senden"
   }
 }
