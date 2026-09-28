@@ -115,22 +115,42 @@
       {
         "title": "ODM Development",
         "desc": "We provide original designs for you to choose from. 100+ new styles launched monthly, always on top of market trends.",
-        "features": ["Original Design", "Monthly New Drops", "Style Buyout", "Exclusive License"]
+        "features": [
+          "Original Design",
+          "Monthly New Drops",
+          "Style Buyout",
+          "Exclusive License"
+        ]
       },
       {
         "title": "OEM Manufacturing",
         "desc": "Provide us with your designs or samples, and we'll produce to your specifications. Full branding service including labels and hangtags.",
-        "features": ["Design-based", "Sample-based", "Private Label", "Custom Packaging"]
+        "features": [
+          "Design-based",
+          "Sample-based",
+          "Private Label",
+          "Custom Packaging"
+        ]
       },
       {
         "title": "Small Batch Fast Turnaround",
         "desc": "MOQ starting at 50 pieces with 7-day delivery. Perfect for e-commerce sellers, livestream clients, and emerging brands.",
-        "features": ["50 pcs MOQ", "7-Day Delivery", "Quick Reorder", "Flexible Adjustment"]
+        "features": [
+          "50 pcs MOQ",
+          "7-Day Delivery",
+          "Quick Reorder",
+          "Flexible Adjustment"
+        ]
       },
       {
         "title": "Large Volume Orders",
         "desc": "30,000 pcs daily capacity. Handling brand bulk orders and export orders with installment payment and inspection support.",
-        "features": ["Ample Capacity", "Reliable Delivery", "Consistent Quality", "Factory Audit Ready"]
+        "features": [
+          "Ample Capacity",
+          "Reliable Delivery",
+          "Consistent Quality",
+          "Factory Audit Ready"
+        ]
       }
     ]
   },
@@ -138,12 +158,30 @@
     "title": "How We Work",
     "subtitle": "6 simple steps to start our partnership",
     "steps": [
-      { "title": "Consultation", "desc": "Contact us with your needs and budget" },
-      { "title": "Quotation", "desc": "We provide style options and detailed quote" },
-      { "title": "Sampling", "desc": "3-5 days sampling for quality confirmation" },
-      { "title": "Contract", "desc": "Confirm order details and sign agreement" },
-      { "title": "Production", "desc": "7-15 days production with quality control" },
-      { "title": "Delivery", "desc": "Quality-checked delivery with after-sales support" }
+      {
+        "title": "Consultation",
+        "desc": "Contact us with your needs and budget"
+      },
+      {
+        "title": "Quotation",
+        "desc": "We provide style options and detailed quote"
+      },
+      {
+        "title": "Sampling",
+        "desc": "3-5 days sampling for quality confirmation"
+      },
+      {
+        "title": "Contract",
+        "desc": "Confirm order details and sign agreement"
+      },
+      {
+        "title": "Production",
+        "desc": "7-15 days production with quality control"
+      },
+      {
+        "title": "Delivery",
+        "desc": "Quality-checked delivery with after-sales support"
+      }
     ]
   },
   "cta": {
@@ -216,10 +254,22 @@
       }
     ],
     "stats": [
-      { "value": "40+", "label": "Years of History" },
-      { "value": "3,000+", "label": "Enterprises" },
-      { "value": "100K+", "label": "Industry Workers" },
-      { "value": "Famous City", "label": "China Knitwear Capital" }
+      {
+        "value": "40+",
+        "label": "Years of History"
+      },
+      {
+        "value": "3,000+",
+        "label": "Enterprises"
+      },
+      {
+        "value": "100K+",
+        "label": "Industry Workers"
+      },
+      {
+        "value": "Famous City",
+        "label": "China Knitwear Capital"
+      }
     ],
     "quote": "The yarns of Chenghai have woven not just sweaters, but the dreams and livelihoods of generations — each stitch a testament to the enduring spirit of craftsmanship.",
     "quoteSource": "Chenghai Knitwear Industry Association"
@@ -232,5 +282,35 @@
     "followUs": "Follow Us",
     "copyright": "© 2024 Yayuhong Knitwear Factory. All rights reserved.",
     "icp": ""
+  },
+  "wechatGuide": {
+    "title": "How to Use WeChat",
+    "subtitle": "WeChat is the most popular messaging app in China. Follow these steps to connect with us and get instant quotes.",
+    "qrTitle": "Our WeChat QR Code",
+    "qrDesc": "Scan this QR code with WeChat to add us as a contact",
+    "step1": {
+      "title": "Download WeChat",
+      "desc": "WeChat is available for free on both iOS and Android. Download it from the App Store or Google Play."
+    },
+    "step2": {
+      "title": "Register an Account",
+      "desc": "Open WeChat and sign up with your phone number. Verification is required.",
+      "tip1": "Use your real phone number for verification",
+      "tip2": "Set a memorable WeChat ID for easy searching"
+    },
+    "step3": {
+      "title": "Scan Our QR Code",
+      "desc": "Open WeChat, tap the '+' icon at the top right, select 'Scan', and point your camera at our QR code above."
+    },
+    "step4": {
+      "title": "Send a Message",
+      "desc": "Once added, send us a message with your product requirements. Our team responds within 12 hours.",
+      "tip": "Pro tip: Sending details about your product needs (style, quantity, target price) helps us respond faster with accurate quotes."
+    },
+    "whatsappTitle": "Prefer WhatsApp?",
+    "whatsappDesc": "We also respond on WhatsApp for your convenience",
+    "whatsappBtn": "Chat on WhatsApp",
+    "contactPrompt": "Or send us an inquiry directly through our website",
+    "contactBtn": "Send Inquiry"
   }
 }
