@@ -13,17 +13,24 @@ export async function GET(req: NextRequest) {
   const siteParam = searchParams.get('site');
   const effectiveSite = siteParam || siteKey;
 
-  const products = await sql`
-    select
-      p.id, p.slug, p.name, p.summary, p.cover_url, p.gallery_urls,
-      p.model, p.is_active, p.sort,
-      c.slug as category_slug
-    from content_products p
-    left join content_categories c on p.category_id = c.id
-    where p.is_active = true
-      and p.sites && array['global', ${effectiveSite}]::text[]
-    order by p.sort, p.created_at
-  `;
+  const [products, categories] = await Promise.all([
+    sql`
+      select
+        p.id, p.slug, p.name, p.summary, p.cover_url, p.gallery_urls,
+        p.model, p.is_active, p.sort,
+        c.slug as category_slug
+      from content_products p
+      left join content_categories c on p.category_id = c.id
+      where p.is_active = true
+        and p.sites && array['global', ${effectiveSite}]::text[]
+      order by p.sort, p.created_at
+    `,
+    sql`
+      select id, slug, name, sort
+      from content_categories
+      order by sort, created_at
+    `,
+  ]);
 
   const result = products.map((p) => ({
     id: p.id,
@@ -36,5 +43,12 @@ export async function GET(req: NextRequest) {
     categorySlug: p.category_slug,
   }));
 
-  return NextResponse.json({ products: result });
+  const catResult = categories.map((c) => ({
+    id: c.id,
+    slug: c.slug,
+    name: localizeText(c.name as Record<string, string>, locale),
+    sort: c.sort,
+  }));
+
+  return NextResponse.json({ products: result, categories: catResult });
 }
