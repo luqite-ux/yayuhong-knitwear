@@ -1,305 +1,334 @@
 {
-  "metadata": {
-    "title": "Yayuhong Knitwear - Fabrik für Fast-Fashion-Pullover | 20 Jahre Erfahrung",
-    "description": "Strickwarenfabrik Yayuhong in Chenghai, 20 Jahre Erfahrung in der Pulloverherstellung. Kapazität 30.000 Stück/Tag, MOQ ab 50 Stück, 7-Tage-Lieferung. ODM/OEM/CMT für globale Fast-Fashion-Marken."
-  },
-  "nav": {
-    "home": "Startseite",
-    "products": "Produkte",
-    "factory": "Fabrik",
-    "services": "Leistungen",
-    "contact": "Kontakt",
-    "getQuote": "Angebot anfragen"
-  },
-  "hero": {
-    "badge": "20 Jahre · Direktfabrik · Kleine Mengen, schnelle Lieferung",
-    "title": "Fast-Fashion-Strickwaren",
-    "titleHighlight": "Direktfabrik",
-    "subtitle": "30.000 Stk/Tag · MOQ ab 50 Stk · 7-Tage-Lieferung\nKomplettservice: Design + Muster + Produktion",
-    "primaryBtn": "Angebot anfragen",
-    "secondaryBtn": "Virtuelle Tour",
-    "stats": {
-      "years": "Jahre Erfahrung",
-      "dailyCapacity": "Stk/Tag",
-      "moq": "Stk MOQ",
-      "delivery": "Tage Lieferung"
-    }
-  },
-  "advantages": {
-    "title": "Warum wir",
-    "subtitle": "Vier Kernvorteile für Ihr Strickgeschäft",
-    "items": [
-      {
-        "title": "Geringer MOQ, schnelle Lieferung",
-        "desc": "Ab 50 Stück mit 7-Tage-Lieferung. Halten Sie Schritt mit Trends, reduzieren Sie Lagerbestandsrisiken."
-      },
-      {
-        "title": "Designkompetenz",
-        "desc": "Professionelles Designteam mit 100+ neuen Modellen monatlich. Internationale Modetrends. ODM-Service."
-      },
-      {
-        "title": "Kostenvorteil",
-        "desc": "Direktfabrik in Chenghai mit 30 Werkstätten. Keine Zwischenhändler — bis zu 30% Ersparnis."
-      },
-      {
-        "title": "Qualitätskontrolle",
-        "desc": "20 Jahre Handwerkskunst mit drei Inspektionsstufen. Strenge Kontrolle jedes Teils, 99%+ Passrate."
-      }
-    ]
-  },
-  "products": {
-    "title": "Unsere Produkte",
-    "subtitle": "Vollständiges Sortiment an Strickwaren",
-    "viewAll": "Alle ansehen",
-    "categories": [
-      {
-        "name": "Damenpullover",
-        "desc": "Pulli, Cardigan, Kleid, Strickmantel",
-        "count": "200+ Modelle"
-      },
-      {
-        "name": "Kinderpullover",
-        "desc": "Niedliche Modelle, Familien-Sets",
-        "count": "100+ Modelle"
-      },
-      {
-        "name": "Herrenpullover",
-        "desc": "Basismodelle, Business, Trends",
-        "count": "80+ Modelle"
-      },
-      {
-        "name": "Loungewear",
-        "desc": "Bequeme Strick-Sets",
-        "count": "50+ Modelle"
-      },
-      {
-        "name": "Haustierbekleidung",
-        "desc": "Hunde-Pullover, Katzen-Strick",
-        "count": "30+ Modelle"
-      },
-      {
-        "name": "Accessoires",
-        "desc": "Schals, Mützen, Handschuhe, Taschen",
-        "count": "40+ Modelle"
-      }
-    ]
-  },
-  "factory": {
-    "title": "Fabrikfähigkeiten",
-    "subtitle": "20 Jahre Erfahrung in jedem Pullover",
-    "learnMore": "Mehr erfahren",
-    "features": [
-      {
-        "title": "Moderne Produktionsbasis",
-        "desc": "In Chenghai, Shantou. 30 Werkstätten mit computerisierten Flachstrickmaschinen."
-      },
-      {
-        "title": "Expertenteam",
-        "desc": "20 Techniker mit 20+ Jahren Erfahrung. Profi-Kontrolle in Design, Schnittmuster, Produktion."
-      },
-      {
-        "title": "Strenge Qualitätskontrolle",
-        "desc": "Drei Stufen: Rohstoff, Halbzeug, Endprodukt. Qualität in jedem Teil."
-      },
-      {
-        "title": "Schneller Service",
-        "desc": "Antwort innerhalb 24 Std. 3-5 Tage Muster, 7-15 Tage Produktion."
-      }
-    ]
-  },
-  "services": {
-    "title": "Unsere Leistungen",
-    "subtitle": "Komplettlösungen von Design bis Lieferung",
-    "items": [
-      {
-        "title": "ODM-Entwicklung",
-        "desc": "Originale Designs. 100+ neue Modelle monatlich.",
-        "features": [
-          "Originaldesign",
-          "Monatliche Neuheiten",
-          "Exklusivlizenz"
-        ]
-      },
-      {
-        "title": "OEM-Produktion",
-        "desc": "Liefern Sie Designs oder Muster. Eigenmarke mit Etiketten.",
-        "features": [
-          "Nach Design",
-          "Nach Muster",
-          "Eigenmarke"
-        ]
-      },
-      {
-        "title": "Kleine Mengen",
-        "desc": "MOQ ab 50 Stk, 7-Tage-Lieferung. Ideal für E-Commerce.",
-        "features": [
-          "MOQ 50 Stk",
-          "7-Tage-Lieferung",
-          "Schnelle Nachbestellung"
-        ]
-      },
-      {
-        "title": "Großbestellungen",
-        "desc": "30.000 Stk/Tag. Massenbestellungen mit Ratenzahlung.",
-        "features": [
-          "Hohe Kapazität",
-          "Zuverlässige Lieferung",
-          "Konstante Qualität"
-        ]
-      }
-    ]
-  },
-  "process": {
-    "title": "So arbeiten wir",
-    "subtitle": "6 einfache Schritte zum Start",
-    "steps": [
-      {
-        "title": "Beratung",
-        "desc": "Kontaktieren Sie uns"
-      },
-      {
-        "title": "Angebot",
-        "desc": "Modelle und Preisvorschlag"
-      },
-      {
-        "title": "Muster",
-        "desc": "3-5 Tage für Bestätigung"
-      },
-      {
-        "title": "Vertrag",
-        "desc": "Details bestätigen"
-      },
-      {
-        "title": "Produktion",
-        "desc": "7-15 Tage mit Kontrolle"
-      },
-      {
-        "title": "Lieferung",
-        "desc": "Geprüfte Lieferung"
-      }
-    ]
-  },
-  "cta": {
-    "title": "Bereit zu starten?",
-    "subtitle": "Kontaktieren Sie uns für ein Angebot",
-    "primaryBtn": "Kontaktieren Sie uns",
-    "secondaryBtn": "Produkte ansehen"
-  },
-  "contact": {
-    "title": "Kontakt",
-    "subtitle": "Wir freuen sich auf langfristige Partnerschaft",
-    "form": {
-      "name": "Ihr Name",
-      "company": "Firma",
-      "email": "E-Mail",
-      "phone": "Telefon",
-      "product": "Produkt von Interesse",
-      "quantity": "Geschätzte Menge",
-      "message": "Ihre Anforderungen",
-      "submit": "Senden",
-      "submitting": "Senden...",
-      "success": "Gesendet! Wir melden uns in 24 Stunden."
-    },
-    "info": {
-      "factoryName": "Strickwarenfabrik Yayuhong, Chenghai",
-      "companyName": "Shenzhen Xiuyu Network Technology Co., Ltd.",
-      "address": "Nr. 30, Guanshan Nanxiang Road, Bezirk Chenghua, Chenghai, Stadt Shantou, Provinz Guangdong, China",
-      "phone": "+86 13715967918",
-      "email": "info@xiuyuknit.com",
-      "wechat": "Yayuhong-Knitting",
-      "whatsapp": "+86 13829659110",
-      "workTime": "Mo-Sa: 9:00-18:00 (GMT+8)"
-    }
-  },
-  "heritage": {
-    "badge": "Chenghai · Chinas Strickwaren-Hauptstadt",
-    "title": "40 Jahre Stricktradition",
-    "subtitle": "Von bescheidenen Handwerkswerkstätten zu einem weltweit führenden Strickindustrie-Cluster — Chenghais vier Jahrzehnte währende Reise aus Handwerkskunst und Innovation",
-    "timeline": [
-      {
-        "era": "1980er",
-        "title": "Der Anfang — Ära der Heimindustrie",
-        "desc": "In den frühen 1980er Jahren nahm die Strickwarenindustrie von Chenghai in Familienwerkstätten mit handbetriebenen Flachstrickmaschinen ihren Anfang. Lokale Kunsthandwerker, die auf Generationen textiler Tradition zurückblickten, begannen mit der Produktion von Pullovern für den Binnenmarkt und legten den Grundstein für das, was Chinas berühmteste Strickstadt werden sollte."
-      },
-      {
-        "era": "1990er",
-        "title": "Goldenes Zeitalter des Außenhandels",
-        "desc": "Auf der Welle der chinesischen Öffnungspolitik eroberte Chenghais Strickware in den 1990er Jahren den Weltmarkt. Die Fabriken expandierten rasant und importierten fortschrittliche computergesteuerte Flachstrickmaschinen aus Japan und Deutschland. Exportaufträge aus Europa, Amerika und Südostasien strömten herein und festigten Chenghais Ruf für Qualität und Handwerkskunst."
-      },
-      {
-        "era": "2000er",
-        "title": "Bildung des Industrieclusters",
-        "desc": "Bis zu den 2000er Jahren hatte Chenghai ein vollständiges Industrie-Ökosystem entwickelt — von Garnfärbung, Stoffstricken und Musterdesign bis hin zur Veredelung, Verpackung und Logistik. Tausende von Fabriken und Zulieferbetrieben siedelten sich hier an und schufen unübertroffene Effizienz und Kostenvorteile, die Käufer aus aller Welt anzogen."
-      },
-      {
-        "era": "2010er",
-        "title": "Transformation & Aufwertung",
-        "desc": "Die 2010er Jahre markierten den Wandel von OEM zu ODM und Markenentwicklung. Chenghais Fabriken investierten stark in Design-Forschung, bauten professionelle Designteams auf und begannen mit der Einführung eigener Kollektionen. Die Industrie setzte auf Digitalisierung, Automatisierung und nachhaltige Fertigungsverfahren."
-      },
-      {
-        "era": "Heute",
-        "title": "Digitale Smart-Fertigung",
-        "desc": "Heute führt Chenghai Chinas Strickwarenindustrie mit vollautomatisierten Produktionslinien, digitalen DesigndefSystemen und intelligentem Lieferkettenmanagement an. Als zertifizierte «Berühmte Stadt für kunsthandwerkliche Strickwaren Chinas» beliefert es weiterhin die weltweit führenden Modemarken und gestaltet die Zukunft nachhaltiger Strickfertigung."
-      }
-    ],
-    "stats": [
-      {
-        "value": "40+",
-        "label": "Jahre Geschichte"
-      },
-      {
-        "value": "3.000+",
-        "label": "Unternehmen"
-      },
-      {
-        "value": "100Tsd.+",
-        "label": "Beschäftigte"
-      },
-      {
-        "value": "Berühmte Stadt",
-        "label": "Chinas Strickhauptstadt"
-      }
-    ],
-    "quote": "Die Garne Chenghais haben nicht nur Pullover gestrickt, sondern die Träume und Existenzgrundlagen von Generationen — jede Masche ein Zeugnis des bleibenden Geistes der Handwerkskunst.",
-    "quoteSource": "Chenghai Strickwarenindustrieverband"
-  },
-  "footer": {
-    "about": "Über uns",
-    "aboutDesc": "Strickwarenfabrik Yayuhong — 20 Jahre Herstellung, Ihre Fast-Fashion-Direktfabrik.",
-    "quickLinks": "Schnellzugriff",
-    "contactUs": "Kontakt",
-    "followUs": "Folgen Sie uns",
-    "copyright": "© 2024 Yayuhong Knitwear Factory. Alle Rechte vorbehalten.",
-    "icp": ""
-  },
-  "wechatGuide": {
-    "title": "So verwenden Sie WeChat",
-    "subtitle": "WeChat ist die beliebteste Messaging-App in China. Folgen Sie diesen Schritten, um mit uns in Kontakt zu treten und Sofortangebote zu erhalten.",
-    "qrTitle": "Unser WeChat-QR-Code",
-    "qrDesc": "Scannen Sie diesen QR-Code mit WeChat, um uns als Kontakt hinzuzufügen",
-    "step1": {
-      "title": "WeChat herunterladen",
-      "desc": "WeChat ist kostenlos für iOS und Android. Laden Sie es aus dem App Store oder Google Play herunter."
-    },
-    "step2": {
-      "title": "Konto registrieren",
-      "desc": "Öffnen Sie WeChat und registrieren Sie sich mit Ihrer Telefonnummer. Eine Verifizierung ist erforderlich.",
-      "tip1": "Verwenden Sie Ihre echte Telefonnummer für die Verifizierung",
-      "tip2": "Legen Sie eine einprägsame WeChat-ID fest"
-    },
-    "step3": {
-      "title": "Scannen Sie unseren QR-Code",
-      "desc": "Öffnen Sie WeChat, tippen Sie oben rechts auf '+', wählen Sie 'Scannen' und richten Sie die Kamera auf unseren QR-Code oben."
-    },
-    "step4": {
-      "title": "Nachricht senden",
-      "desc": "Senden Sie uns nach dem Hinzufügen eine Nachricht mit Ihren Produktanforderungen. Unser Team antwortet innerhalb von 12 Stunden.",
-      "tip": "Tipp: Das Senden von Details (Stil, Menge, Zielpreis) hilft uns, schneller mit genauen Angeboten zu antworten."
-    },
-    "whatsappTitle": "Lieber WhatsApp?",
-    "whatsappDesc": "Wir antworten auch auf WhatsApp für Ihre Bequemlichkeit",
-    "whatsappBtn": "Auf WhatsApp chatten",
-    "contactPrompt": "Oder senden Sie eine Anfrage direkt über unsere Website",
-    "contactBtn": "Anfrage senden"
-  }
+    "metadata":  {
+                     "title":  "Yayuhong Knitwear - Fabrik für Fast-Fashion-Pullover | 20 Jahre Erfahrung",
+                     "description":  "Strickwarenfabrik Yayuhong in Chenghai, 20 Jahre Erfahrung in der Pulloverherstellung. Kapazität 30.000 Stück/Tag, MOQ ab 50 Stück, 7-Tage-Lieferung. ODM/OEM/CMT für globale Fast-Fashion-Marken."
+                 },
+    "nav":  {
+                "home":  "Startseite",
+                "products":  "Produkte",
+                "factory":  "Fabrik",
+                "services":  "Leistungen",
+                "contact":  "Kontakt",
+                "getQuote":  "Angebot anfragen"
+            },
+    "hero":  {
+                 "badge":  "20 Jahre · Direktfabrik · Kleine Mengen, schnelle Lieferung",
+                 "title":  "Fast-Fashion-Strickwaren",
+                 "titleHighlight":  "Direktfabrik",
+                 "subtitle":  "30.000 Stk/Tag · MOQ ab 50 Stk · 7-Tage-Lieferung\nKomplettservice: Design + Muster + Produktion",
+                 "primaryBtn":  "Angebot anfragen",
+                 "secondaryBtn":  "Virtuelle Tour",
+                 "stats":  {
+                               "years":  "Jahre Erfahrung",
+                               "dailyCapacity":  "Stk/Tag",
+                               "moq":  "Stk MOQ",
+                               "delivery":  "Tage Lieferung"
+                           }
+             },
+    "advantages":  {
+                       "title":  "Warum wir",
+                       "subtitle":  "Vier Kernvorteile für Ihr Strickgeschäft",
+                       "items":  [
+                                     {
+                                         "title":  "Geringer MOQ, schnelle Lieferung",
+                                         "desc":  "Ab 50 Stück mit 7-Tage-Lieferung. Halten Sie Schritt mit Trends, reduzieren Sie Lagerbestandsrisiken."
+                                     },
+                                     {
+                                         "title":  "Designkompetenz",
+                                         "desc":  "Professionelles Designteam mit 100+ neuen Modellen monatlich. Internationale Modetrends. ODM-Service."
+                                     },
+                                     {
+                                         "title":  "Kostenvorteil",
+                                         "desc":  "Direktfabrik in Chenghai mit 30 Werkstätten. Keine Zwischenhändler — bis zu 30% Ersparnis."
+                                     },
+                                     {
+                                         "title":  "Qualitätskontrolle",
+                                         "desc":  "20 Jahre Handwerkskunst mit drei Inspektionsstufen. Strenge Kontrolle jedes Teils, 99%+ Passrate."
+                                     }
+                                 ]
+                   },
+    "products":  {
+                     "title":  "Unsere Produkte",
+                     "subtitle":  "Vollständiges Sortiment an Strickwaren",
+                     "viewAll":  "Alle ansehen",
+                     "categories":  [
+                                        {
+                                            "name":  "Damenpullover",
+                                            "desc":  "Pulli, Cardigan, Kleid, Strickmantel",
+                                            "count":  "200+ Modelle"
+                                        },
+                                        {
+                                            "name":  "Kinderpullover",
+                                            "desc":  "Niedliche Modelle, Familien-Sets",
+                                            "count":  "100+ Modelle"
+                                        },
+                                        {
+                                            "name":  "Herrenpullover",
+                                            "desc":  "Basismodelle, Business, Trends",
+                                            "count":  "80+ Modelle"
+                                        },
+                                        {
+                                            "name":  "Loungewear",
+                                            "desc":  "Bequeme Strick-Sets",
+                                            "count":  "50+ Modelle"
+                                        },
+                                        {
+                                            "name":  "Haustierbekleidung",
+                                            "desc":  "Hunde-Pullover, Katzen-Strick",
+                                            "count":  "30+ Modelle"
+                                        },
+                                        {
+                                            "name":  "Accessoires",
+                                            "desc":  "Schals, Mützen, Handschuhe, Taschen",
+                                            "count":  "40+ Modelle"
+                                        }
+                                    ]
+                 },
+    "factory":  {
+                    "title":  "Fabrikfähigkeiten",
+                    "subtitle":  "20 Jahre Erfahrung in jedem Pullover",
+                    "learnMore":  "Mehr erfahren",
+                    "features":  [
+                                     {
+                                         "title":  "Moderne Produktionsbasis",
+                                         "desc":  "In Chenghai, Shantou. 30 Werkstätten mit computerisierten Flachstrickmaschinen."
+                                     },
+                                     {
+                                         "title":  "Expertenteam",
+                                         "desc":  "20 Techniker mit 20+ Jahren Erfahrung. Profi-Kontrolle in Design, Schnittmuster, Produktion."
+                                     },
+                                     {
+                                         "title":  "Strenge Qualitätskontrolle",
+                                         "desc":  "Drei Stufen: Rohstoff, Halbzeug, Endprodukt. Qualität in jedem Teil."
+                                     },
+                                     {
+                                         "title":  "Schneller Service",
+                                         "desc":  "Antwort innerhalb 24 Std. 3-5 Tage Muster, 7-15 Tage Produktion."
+                                     }
+                                 ]
+                },
+    "services":  {
+                     "title":  "Unsere Leistungen",
+                     "subtitle":  "Komplettlösungen von Design bis Lieferung",
+                     "items":  [
+                                   {
+                                       "title":  "ODM-Entwicklung",
+                                       "desc":  "Originale Designs. 100+ neue Modelle monatlich.",
+                                       "features":  [
+                                                        "Originaldesign",
+                                                        "Monatliche Neuheiten",
+                                                        "Exklusivlizenz"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "OEM-Produktion",
+                                       "desc":  "Liefern Sie Designs oder Muster. Eigenmarke mit Etiketten.",
+                                       "features":  [
+                                                        "Nach Design",
+                                                        "Nach Muster",
+                                                        "Eigenmarke"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Kleine Mengen",
+                                       "desc":  "MOQ ab 50 Stk, 7-Tage-Lieferung. Ideal für E-Commerce.",
+                                       "features":  [
+                                                        "MOQ 50 Stk",
+                                                        "7-Tage-Lieferung",
+                                                        "Schnelle Nachbestellung"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Großbestellungen",
+                                       "desc":  "30.000 Stk/Tag. Massenbestellungen mit Ratenzahlung.",
+                                       "features":  [
+                                                        "Hohe Kapazität",
+                                                        "Zuverlässige Lieferung",
+                                                        "Konstante Qualität"
+                                                    ]
+                                   }
+                               ]
+                 },
+    "process":  {
+                    "title":  "So arbeiten wir",
+                    "subtitle":  "6 einfache Schritte zum Start",
+                    "steps":  [
+                                  {
+                                      "title":  "Beratung",
+                                      "desc":  "Kontaktieren Sie uns"
+                                  },
+                                  {
+                                      "title":  "Angebot",
+                                      "desc":  "Modelle und Preisvorschlag"
+                                  },
+                                  {
+                                      "title":  "Muster",
+                                      "desc":  "3-5 Tage für Bestätigung"
+                                  },
+                                  {
+                                      "title":  "Vertrag",
+                                      "desc":  "Details bestätigen"
+                                  },
+                                  {
+                                      "title":  "Produktion",
+                                      "desc":  "7-15 Tage mit Kontrolle"
+                                  },
+                                  {
+                                      "title":  "Lieferung",
+                                      "desc":  "Geprüfte Lieferung"
+                                  }
+                              ]
+                },
+    "cta":  {
+                "title":  "Bereit zu starten?",
+                "subtitle":  "Kontaktieren Sie uns für ein Angebot",
+                "primaryBtn":  "Kontaktieren Sie uns",
+                "secondaryBtn":  "Produkte ansehen"
+            },
+    "contact":  {
+                    "title":  "Kontakt",
+                    "subtitle":  "Wir freuen sich auf langfristige Partnerschaft",
+                    "form":  {
+                                 "name":  "Ihr Name",
+                                 "company":  "Firma",
+                                 "email":  "E-Mail",
+                                 "phone":  "Telefon",
+                                 "product":  "Produkt von Interesse",
+                                 "quantity":  "Geschätzte Menge",
+                                 "message":  "Ihre Anforderungen",
+                                 "submit":  "Senden",
+                                 "submitting":  "Senden...",
+                                 "success":  "Gesendet! Wir melden uns in 24 Stunden."
+                             },
+                    "info":  {
+                                 "factoryName":  "Strickwarenfabrik Yayuhong, Chenghai",
+                                 "companyName":  "Shenzhen Xiuyu Network Technology Co., Ltd.",
+                                 "address":  "Nr. 30, Guanshan Nanxiang Road, Bezirk Chenghua, Chenghai, Stadt Shantou, Provinz Guangdong, China",
+                                 "phone":  "+86 13715967918",
+                                 "email":  "info@xiuyuknit.com",
+                                 "wechat":  "Yayuhong-Knitting",
+                                 "whatsapp":  "+86 13829659110",
+                                 "workTime":  "Mo-Sa: 9:00-18:00 (GMT+8)"
+                             }
+                },
+    "heritage":  {
+                     "badge":  "Chenghai · Chinas Strickwaren-Hauptstadt",
+                     "title":  "40 Jahre Stricktradition",
+                     "subtitle":  "Von bescheidenen Handwerkswerkstätten zu einem weltweit führenden Strickindustrie-Cluster — Chenghais vier Jahrzehnte währende Reise aus Handwerkskunst und Innovation",
+                     "timeline":  [
+                                      {
+                                          "era":  "1980er",
+                                          "title":  "Der Anfang — Ära der Heimindustrie",
+                                          "desc":  "In den frühen 1980er Jahren nahm die Strickwarenindustrie von Chenghai in Familienwerkstätten mit handbetriebenen Flachstrickmaschinen ihren Anfang. Lokale Kunsthandwerker, die auf Generationen textiler Tradition zurückblickten, begannen mit der Produktion von Pullovern für den Binnenmarkt und legten den Grundstein für das, was Chinas berühmteste Strickstadt werden sollte."
+                                      },
+                                      {
+                                          "era":  "1990er",
+                                          "title":  "Goldenes Zeitalter des Außenhandels",
+                                          "desc":  "Auf der Welle der chinesischen Öffnungspolitik eroberte Chenghais Strickware in den 1990er Jahren den Weltmarkt. Die Fabriken expandierten rasant und importierten fortschrittliche computergesteuerte Flachstrickmaschinen aus Japan und Deutschland. Exportaufträge aus Europa, Amerika und Südostasien strömten herein und festigten Chenghais Ruf für Qualität und Handwerkskunst."
+                                      },
+                                      {
+                                          "era":  "2000er",
+                                          "title":  "Bildung des Industrieclusters",
+                                          "desc":  "Bis zu den 2000er Jahren hatte Chenghai ein vollständiges Industrie-Ökosystem entwickelt — von Garnfärbung, Stoffstricken und Musterdesign bis hin zur Veredelung, Verpackung und Logistik. Tausende von Fabriken und Zulieferbetrieben siedelten sich hier an und schufen unübertroffene Effizienz und Kostenvorteile, die Käufer aus aller Welt anzogen."
+                                      },
+                                      {
+                                          "era":  "2010er",
+                                          "title":  "Transformation \u0026 Aufwertung",
+                                          "desc":  "Die 2010er Jahre markierten den Wandel von OEM zu ODM und Markenentwicklung. Chenghais Fabriken investierten stark in Design-Forschung, bauten professionelle Designteams auf und begannen mit der Einführung eigener Kollektionen. Die Industrie setzte auf Digitalisierung, Automatisierung und nachhaltige Fertigungsverfahren."
+                                      },
+                                      {
+                                          "era":  "Heute",
+                                          "title":  "Digitale Smart-Fertigung",
+                                          "desc":  "Heute führt Chenghai Chinas Strickwarenindustrie mit vollautomatisierten Produktionslinien, digitalen DesigndefSystemen und intelligentem Lieferkettenmanagement an. Als zertifizierte «Berühmte Stadt für kunsthandwerkliche Strickwaren Chinas» beliefert es weiterhin die weltweit führenden Modemarken und gestaltet die Zukunft nachhaltiger Strickfertigung."
+                                      }
+                                  ],
+                     "stats":  [
+                                   {
+                                       "value":  "40+",
+                                       "label":  "Jahre Geschichte"
+                                   },
+                                   {
+                                       "value":  "3.000+",
+                                       "label":  "Unternehmen"
+                                   },
+                                   {
+                                       "value":  "100Tsd.+",
+                                       "label":  "Beschäftigte"
+                                   },
+                                   {
+                                       "value":  "Berühmte Stadt",
+                                       "label":  "Chinas Strickhauptstadt"
+                                   }
+                               ],
+                     "quote":  "Die Garne Chenghais haben nicht nur Pullover gestrickt, sondern die Träume und Existenzgrundlagen von Generationen — jede Masche ein Zeugnis des bleibenden Geistes der Handwerkskunst.",
+                     "quoteSource":  "Chenghai Strickwarenindustrieverband"
+                 },
+    "footer":  {
+                   "about":  "Über uns",
+                   "aboutDesc":  "Strickwarenfabrik Yayuhong — 20 Jahre Herstellung, Ihre Fast-Fashion-Direktfabrik.",
+                   "quickLinks":  "Schnellzugriff",
+                   "contactUs":  "Kontakt",
+                   "followUs":  "Folgen Sie uns",
+                   "copyright":  "© 2024 Yayuhong Knitwear Factory. Alle Rechte vorbehalten.",
+                   "icp":  ""
+               },
+    "wechatGuide":  {
+                        "title":  "So verwenden Sie WeChat",
+                        "subtitle":  "WeChat ist die beliebteste Messaging-App in China. Folgen Sie diesen Schritten, um mit uns in Kontakt zu treten und Sofortangebote zu erhalten.",
+                        "qrTitle":  "Unser WeChat-QR-Code",
+                        "qrDesc":  "Scannen Sie diesen QR-Code mit WeChat, um uns als Kontakt hinzuzufügen",
+                        "step1":  {
+                                      "title":  "WeChat herunterladen",
+                                      "desc":  "WeChat ist kostenlos für iOS und Android. Laden Sie es aus dem App Store oder Google Play herunter."
+                                  },
+                        "step2":  {
+                                      "title":  "Konto registrieren",
+                                      "desc":  "Öffnen Sie WeChat und registrieren Sie sich mit Ihrer Telefonnummer. Eine Verifizierung ist erforderlich.",
+                                      "tip1":  "Verwenden Sie Ihre echte Telefonnummer für die Verifizierung",
+                                      "tip2":  "Legen Sie eine einprägsame WeChat-ID fest"
+                                  },
+                        "step3":  {
+                                      "title":  "Scannen Sie unseren QR-Code",
+                                      "desc":  "Öffnen Sie WeChat, tippen Sie oben rechts auf \u0027+\u0027, wählen Sie \u0027Scannen\u0027 und richten Sie die Kamera auf unseren QR-Code oben."
+                                  },
+                        "step4":  {
+                                      "title":  "Nachricht senden",
+                                      "desc":  "Senden Sie uns nach dem Hinzufügen eine Nachricht mit Ihren Produktanforderungen. Unser Team antwortet innerhalb von 12 Stunden.",
+                                      "tip":  "Tipp: Das Senden von Details (Stil, Menge, Zielpreis) hilft uns, schneller mit genauen Angeboten zu antworten."
+                                  },
+                        "whatsappTitle":  "Lieber WhatsApp?",
+                        "whatsappDesc":  "Wir antworten auch auf WhatsApp für Ihre Bequemlichkeit",
+                        "whatsappBtn":  "Auf WhatsApp chatten",
+                        "contactPrompt":  "Oder senden Sie eine Anfrage direkt über unsere Website",
+                        "contactBtn":  "Anfrage senden"
+                    },
+    "readyStock":  {
+                       "badge":  "Auf Lager",
+                       "title":  "Sofort lieferbare Kollektion",
+                       "subtitle":  "Premium Loungewear auf Lager — Versand in 3 Tagen",
+                       "inStock":  "Auf Lager",
+                       "collectionTitle":  "Loungewear Kollektion",
+                       "cta":  "Vollständigen Katalog anfordern",
+                       "points":  {
+                                      "stock":  "Echte Lagerbestände",
+                                      "stockDesc":  "Alle Modelle physisch auf Lager",
+                                      "shipping":  "3-Tage-Versand",
+                                      "shippingDesc":  "Versand innerhalb von 3 Werktagen",
+                                      "mix":  "Mix \u0026 Match",
+                                      "mixDesc":  "Modelle, Farben und Größen kombinierbar",
+                                      "moq":  "Niedrige MOQ",
+                                      "moqDesc":  "Ab 15 Stück pro Modell"
+                                  },
+                       "info":  {
+                                    "styles":  "Modelle gesamt",
+                                    "stylesUnit":  "Modelle",
+                                    "sizes":  "Verfügbare Größen",
+                                    "colors":  "Farben",
+                                    "colorsUnit":  "Farben",
+                                    "category":  "Kategorie",
+                                    "categoryValue":  "Strick-Loungewear",
+                                    "shipping":  "Lieferzeit",
+                                    "shippingUnit":  "Tage"
+                                }
+                   }
 }
