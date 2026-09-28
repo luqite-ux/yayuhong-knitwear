@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
+import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 
 export default function Footer() {
@@ -16,9 +17,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] flex items-center justify-center text-white font-bold text-xl">
-                Y
-              </div>
+              <Image
+                src="/images/logo/logo-new.jpg"
+                alt="Yayuhong Knit Logo"
+                width={48}
+                height={48}
+                className="rounded-xl"
+              />
               <div>
                 <div className="font-bold text-lg">
                   {locale === 'zh' ? '亚裕鸿毛织' : 'Yayuhong Knit'}
