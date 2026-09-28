@@ -1,305 +1,334 @@
 {
-  "metadata": {
-    "title": "Yayuhong Knitwear - Fábrica de Suéteres Fast Fashion | 20 Años de Experiencia",
-    "description": "Fábrica de punto Yayuhong en Chenghai, 20 años de experiencia en fabricación de suéteres. Capacidad de 30,000 piezas/día, MOQ 50 piezas, entrega 7 días. ODM/OEM/CMT para marcas globales de fast fashion."
-  },
-  "nav": {
-    "home": "Inicio",
-    "products": "Productos",
-    "factory": "Fábrica",
-    "services": "Servicios",
-    "contact": "Contacto",
-    "getQuote": "Solicitar Cotización"
-  },
-  "hero": {
-    "badge": "20 Años · Fábrica Directa · Pedidos Pequeños, Entrega Rápida",
-    "title": "Punto Fast Fashion",
-    "titleHighlight": "Fábrica Directa",
-    "subtitle": "30,000 pz/día · MOQ 50 pz · Entrega 7 días\nServicio integral: Diseño + Muestras + Producción",
-    "primaryBtn": "Solicitar Cotización",
-    "secondaryBtn": "Recorrido Virtual",
-    "stats": {
-      "years": "Años de Experiencia",
-      "dailyCapacity": "Pz/Día",
-      "moq": "Pz MOQ",
-      "delivery": "Días Entrega"
-    }
-  },
-  "advantages": {
-    "title": "Por Qué Elegirnos",
-    "subtitle": "Cuatro ventajas clave para su negocio de punto",
-    "items": [
-      {
-        "title": "MOQ Bajo, Entrega Rápida",
-        "desc": "Pedidos desde 50 piezas con entrega en 7 días. Manténgase al día con las tendencias, reduzca riesgos de inventario."
-      },
-      {
-        "title": "Capacidad de Diseño",
-        "desc": "Equipo profesional con 100+ nuevos modelos mensuales. Tendencias internacionales. Servicio ODM con referencias o fichas técnicas."
-      },
-      {
-        "title": "Ventaja de Costo",
-        "desc": "Fábrica directa en Chenghai con 30 talleres. Sin intermediarios, ahorre hasta 30% frente a comercializadoras."
-      },
-      {
-        "title": "Control de Calidad",
-        "desc": "20 años de experiencia con tres etapas de inspección. Control estricto en cada pieza, tasa de aprobación 99%+."
-      }
-    ]
-  },
-  "products": {
-    "title": "Nuestros Productos",
-    "subtitle": "Gama completa de productos de punto",
-    "viewAll": "Ver Todos",
-    "categories": [
-      {
-        "name": "Suéteres de Mujer",
-        "desc": "Jerséis, cárdigans, vestidos, abrigos de punto",
-        "count": "200+ Modelos"
-      },
-      {
-        "name": "Suéteres Infantiles",
-        "desc": "Modelos tiernos, conjuntos familiares",
-        "count": "100+ Modelos"
-      },
-      {
-        "name": "Suéteres de Hombre",
-        "desc": "Básicos, casual de negocio, moda",
-        "count": "80+ Modelos"
-      },
-      {
-        "name": "Ropa de Hogar",
-        "desc": "Conjuntos de punto cómodos y elegantes",
-        "count": "50+ Modelos"
-      },
-      {
-        "name": "Ropa para Mascotas",
-        "desc": "Suéteres para perros, gatos",
-        "count": "30+ Modelos"
-      },
-      {
-        "name": "Accesorios",
-        "desc": "Bufandas, gorros, guantes, bolsos",
-        "count": "40+ Modelos"
-      }
-    ]
-  },
-  "factory": {
-    "title": "Capacidades de Fábrica",
-    "subtitle": "20 años de experiencia en cada suéter",
-    "learnMore": "Saber Más",
-    "features": [
-      {
-        "title": "Base Productiva Moderna",
-        "desc": "Ubicada en Chenghai, Shantou. 30 talleres con máquinas computarizadas."
-      },
-      {
-        "title": "Equipo Técnico Experto",
-        "desc": "20 técnicos con 20+ años de experiencia. Control profesional en diseño, patronaje y producción."
-      },
-      {
-        "title": "Control de Calidad Estricto",
-        "desc": "Tres etapas: materia prima, semielaborados, producto final. Calidad en cada pieza."
-      },
-      {
-        "title": "Servicio de Respuesta Rápida",
-        "desc": "Respuesta en 24 horas. 3-5 días muestras, 7-15 días producción."
-      }
-    ]
-  },
-  "services": {
-    "title": "Nuestros Servicios",
-    "subtitle": "Soluciones integrales de punto de diseño a entrega",
-    "items": [
-      {
-        "title": "Desarrollo ODM",
-        "desc": "Ofrecemos diseños originales. 100+ modelos nuevos mensuales.",
-        "features": [
-          "Diseño Original",
-          "Nuevos Mensuales",
-          "Licencia Exclusiva"
-        ]
-      },
-      {
-        "title": "Fabricación OEM",
-        "desc": "Proporcione sus diseños o muestras. Marca propia con etiquetas.",
-        "features": [
-          "Por Diseño",
-          "Por Muestra",
-          "Marca Propia"
-        ]
-      },
-      {
-        "title": "Pequeños Lotes Rápidos",
-        "desc": "MOQ desde 50 piezas, entrega 7 días. Ideal para e-commerce.",
-        "features": [
-          "MOQ 50 pz",
-          "Entrega 7 días",
-          "Reposición Rápida"
-        ]
-      },
-      {
-        "title": "Pedidos Grandes",
-        "desc": "30,000 pz/día. Manejo de pedidos con pago escalonado.",
-        "features": [
-          "Alta Capacidad",
-          "Entrega Fiable",
-          "Calidad Consistente"
-        ]
-      }
-    ]
-  },
-  "process": {
-    "title": "Cómo Trabajamos",
-    "subtitle": "6 pasos simples para comenzar",
-    "steps": [
-      {
-        "title": "Consulta",
-        "desc": "Contáctenos con sus necesidades"
-      },
-      {
-        "title": "Cotización",
-        "desc": "Ofrecemos modelos y cotización"
-      },
-      {
-        "title": "Muestras",
-        "desc": "3-5 días para confirmación"
-      },
-      {
-        "title": "Contrato",
-        "desc": "Confirmar detalles y firmar"
-      },
-      {
-        "title": "Producción",
-        "desc": "7-15 días con control"
-      },
-      {
-        "title": "Entrega",
-        "desc": "Entrega con verificación"
-      }
-    ]
-  },
-  "cta": {
-    "title": "¿Listo para Comenzar?",
-    "subtitle": "Contáctenos para cotización personalizada",
-    "primaryBtn": "Contáctenos",
-    "secondaryBtn": "Ver Productos"
-  },
-  "contact": {
-    "title": "Contáctenos",
-    "subtitle": "Esperamos una relación a largo plazo",
-    "form": {
-      "name": "Su Nombre",
-      "company": "Empresa",
-      "email": "Correo Electrónico",
-      "phone": "Teléfono",
-      "product": "Producto de Interés",
-      "quantity": "Cantidad Estimada",
-      "message": "Sus Requisitos",
-      "submit": "Enviar",
-      "submitting": "Enviando...",
-      "success": "¡Enviado! Le contactaremos en 24 horas."
-    },
-    "info": {
-      "factoryName": "Fábrica de Punto Yayuhong, Chenghai",
-      "companyName": "Shenzhen Xiuyu Network Technology Co., Ltd.",
-      "address": "No.30, Carretera Guanshan Nanxiang, Subdistrito Chenghua, Distrito Chenghai, Ciudad Shantou, Guangdong, China",
-      "phone": "+86 13715967918",
-      "email": "info@xiuyuknit.com",
-      "wechat": "Yayuhong-Knitting",
-      "whatsapp": "+86 13829659110",
-      "workTime": "Lun-Sáb: 9:00-18:00 (GMT+8)"
-    }
-  },
-  "heritage": {
-    "badge": "Chenghai · Capital del Punto de China",
-    "title": "40 Años de Herencia Puntera",
-    "subtitle": "De humildes talleres artesanales a un clúster industrial de punto de clase mundial — el viaje de cuatro décadas de artesanía e innovación de Chenghai",
-    "timeline": [
-      {
-        "era": "1980s",
-        "title": "El Comienzo — Era de la Industria Artesanal",
-        "desc": "A principios de los años 80, la industria del punto de Chenghai echó raíces con talleres familiares y máquinas de punto planas manuales. Los artesanos locales, basándose en generaciones de tradición textil, comenzaron a producir jerséis para el mercado nacional, sentando las bases de lo que se convertiría en la ciudad del punto más famosa de China."
-      },
-      {
-        "era": "1990s",
-        "title": "Edad de Oro del Comercio Exterior",
-        "desc": "Aprovechando la ola de la política de apertura de China, el punto de Chenghai entró en el mercado global en los años 90. Las fábricas se expandieron rápidamente, importando avanzadas máquinas de punto planas computarizadas de Japón y Alemania. Los pedidos de exportación de Europa, América y el Sudeste Asiático llegaron en masa, consolidando la reputación de Chenghai por su calidad y artesanía."
-      },
-      {
-        "era": "2000s",
-        "title": "Formación del Clúster Industrial",
-        "desc": "Para los años 2000, Chenghai había desarrollado un ecosistema industrial completo — desde el teñido de hilos, el tejido de telas y el diseño de patrones hasta el acabado, empaquetado y logística. Miles de fábricas y empresas auxiliares se agruparon, creando una eficiencia y ventajas de coste inigualables que atrajeron a compradores de todo el mundo."
-      },
-      {
-        "era": "2010s",
-        "title": "Transformación y Modernización",
-        "desc": "La década de 2010 marcó un cambio de OEM a ODM y al desarrollo de marca. Las fábricas de Chenghai invirtieron fuertemente en I+D de diseño, formaron equipos profesionales y comenzaron a lanzar colecciones originales. La industria adoptó la digitalización, la automatización y las prácticas de fabricación sostenible."
-      },
-      {
-        "era": "Hoy",
-        "title": "Fabricación Inteligente Digital",
-        "desc": "Hoy en día, Chenghai lidera la industria del punto de China con líneas de producción totalmente automatizadas, sistemas de diseño digital y gestión inteligente de la cadena de suministro. Como «Ciudad Famosa del Punto Artesanal de China» certificada, sigue suministrando a las principales marcas de moda del mundo mientras escribe el futuro de la fabricación de punto sostenible."
-      }
-    ],
-    "stats": [
-      {
-        "value": "40+",
-        "label": "Años de Historia"
-      },
-      {
-        "value": "3,000+",
-        "label": "Empresas"
-      },
-      {
-        "value": "100K+",
-        "label": "Trabajadores"
-      },
-      {
-        "value": "Ciudad Famosa",
-        "label": "Capital del Punto de China"
-      }
-    ],
-    "quote": "Los hilos de Chenghai han tejido no solo jerséis, sino los sueños y el sustento de generaciones — cada puntada un testimonio del espíritu perdurable de la artesanía.",
-    "quoteSource": "Asociación de la Industria del Punto de Chenghai"
-  },
-  "footer": {
-    "about": "Sobre Nosotros",
-    "aboutDesc": "Fábrica de punto Yayuhong - 20 años de fabricación, su fábrica directa fast fashion.",
-    "quickLinks": "Enlaces Rápidos",
-    "contactUs": "Contacto",
-    "followUs": "Síganos",
-    "copyright": "© 2024 Yayuhong Knitwear Factory. Todos los derechos reservados.",
-    "icp": ""
-  },
-  "wechatGuide": {
-    "title": "Cómo usar WeChat",
-    "subtitle": "WeChat es la aplicación de mensajería más popular en China. Siga estos pasos para conectarse con nosotros y obtener cotizaciones instantáneas.",
-    "qrTitle": "Nuestro código QR de WeChat",
-    "qrDesc": "Escanee este código QR con WeChat para agregarnos como contacto",
-    "step1": {
-      "title": "Descargar WeChat",
-      "desc": "WeChat está disponible gratis en iOS y Android. Descárguelo de App Store o Google Play."
-    },
-    "step2": {
-      "title": "Registrar una cuenta",
-      "desc": "Abra WeChat y regístrese con su número de teléfono. Se requiere verificación.",
-      "tip1": "Use su número de teléfono real para la verificación",
-      "tip2": "Establezca un ID de WeChat memorable"
-    },
-    "step3": {
-      "title": "Escanee nuestro código QR",
-      "desc": "Abra WeChat, toque el icono '+' en la parte superior derecha, seleccione 'Escanear' y apunte la cámara a nuestro código QR."
-    },
-    "step4": {
-      "title": "Enviar un mensaje",
-      "desc": "Una vez agregado, envíenos un mensaje con sus requisitos de producto. Nuestro equipo responde en 12 horas.",
-      "tip": "Consejo: Enviar detalles (estilo, cantidad, precio objetivo) nos ayuda a responder más rápido con cotizaciones precisas."
-    },
-    "whatsappTitle": "¿Prefiere WhatsApp?",
-    "whatsappDesc": "También respondemos en WhatsApp para su conveniencia",
-    "whatsappBtn": "Chatear en WhatsApp",
-    "contactPrompt": "O envíe una consulta directamente a través de nuestro sitio web",
-    "contactBtn": "Enviar consulta"
-  }
+    "metadata":  {
+                     "title":  "Yayuhong Knitwear - Fábrica de Suéteres Fast Fashion | 20 Años de Experiencia",
+                     "description":  "Fábrica de punto Yayuhong en Chenghai, 20 años de experiencia en fabricación de suéteres. Capacidad de 30,000 piezas/día, MOQ 50 piezas, entrega 7 días. ODM/OEM/CMT para marcas globales de fast fashion."
+                 },
+    "nav":  {
+                "home":  "Inicio",
+                "products":  "Productos",
+                "factory":  "Fábrica",
+                "services":  "Servicios",
+                "contact":  "Contacto",
+                "getQuote":  "Solicitar Cotización"
+            },
+    "hero":  {
+                 "badge":  "20 Años · Fábrica Directa · Pedidos Pequeños, Entrega Rápida",
+                 "title":  "Punto Fast Fashion",
+                 "titleHighlight":  "Fábrica Directa",
+                 "subtitle":  "30,000 pz/día · MOQ 50 pz · Entrega 7 días\nServicio integral: Diseño + Muestras + Producción",
+                 "primaryBtn":  "Solicitar Cotización",
+                 "secondaryBtn":  "Recorrido Virtual",
+                 "stats":  {
+                               "years":  "Años de Experiencia",
+                               "dailyCapacity":  "Pz/Día",
+                               "moq":  "Pz MOQ",
+                               "delivery":  "Días Entrega"
+                           }
+             },
+    "advantages":  {
+                       "title":  "Por Qué Elegirnos",
+                       "subtitle":  "Cuatro ventajas clave para su negocio de punto",
+                       "items":  [
+                                     {
+                                         "title":  "MOQ Bajo, Entrega Rápida",
+                                         "desc":  "Pedidos desde 50 piezas con entrega en 7 días. Manténgase al día con las tendencias, reduzca riesgos de inventario."
+                                     },
+                                     {
+                                         "title":  "Capacidad de Diseño",
+                                         "desc":  "Equipo profesional con 100+ nuevos modelos mensuales. Tendencias internacionales. Servicio ODM con referencias o fichas técnicas."
+                                     },
+                                     {
+                                         "title":  "Ventaja de Costo",
+                                         "desc":  "Fábrica directa en Chenghai con 30 talleres. Sin intermediarios, ahorre hasta 30% frente a comercializadoras."
+                                     },
+                                     {
+                                         "title":  "Control de Calidad",
+                                         "desc":  "20 años de experiencia con tres etapas de inspección. Control estricto en cada pieza, tasa de aprobación 99%+."
+                                     }
+                                 ]
+                   },
+    "products":  {
+                     "title":  "Nuestros Productos",
+                     "subtitle":  "Gama completa de productos de punto",
+                     "viewAll":  "Ver Todos",
+                     "categories":  [
+                                        {
+                                            "name":  "Suéteres de Mujer",
+                                            "desc":  "Jerséis, cárdigans, vestidos, abrigos de punto",
+                                            "count":  "200+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Suéteres Infantiles",
+                                            "desc":  "Modelos tiernos, conjuntos familiares",
+                                            "count":  "100+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Suéteres de Hombre",
+                                            "desc":  "Básicos, casual de negocio, moda",
+                                            "count":  "80+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Ropa de Hogar",
+                                            "desc":  "Conjuntos de punto cómodos y elegantes",
+                                            "count":  "50+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Ropa para Mascotas",
+                                            "desc":  "Suéteres para perros, gatos",
+                                            "count":  "30+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Accesorios",
+                                            "desc":  "Bufandas, gorros, guantes, bolsos",
+                                            "count":  "40+ Modelos"
+                                        }
+                                    ]
+                 },
+    "factory":  {
+                    "title":  "Capacidades de Fábrica",
+                    "subtitle":  "20 años de experiencia en cada suéter",
+                    "learnMore":  "Saber Más",
+                    "features":  [
+                                     {
+                                         "title":  "Base Productiva Moderna",
+                                         "desc":  "Ubicada en Chenghai, Shantou. 30 talleres con máquinas computarizadas."
+                                     },
+                                     {
+                                         "title":  "Equipo Técnico Experto",
+                                         "desc":  "20 técnicos con 20+ años de experiencia. Control profesional en diseño, patronaje y producción."
+                                     },
+                                     {
+                                         "title":  "Control de Calidad Estricto",
+                                         "desc":  "Tres etapas: materia prima, semielaborados, producto final. Calidad en cada pieza."
+                                     },
+                                     {
+                                         "title":  "Servicio de Respuesta Rápida",
+                                         "desc":  "Respuesta en 24 horas. 3-5 días muestras, 7-15 días producción."
+                                     }
+                                 ]
+                },
+    "services":  {
+                     "title":  "Nuestros Servicios",
+                     "subtitle":  "Soluciones integrales de punto de diseño a entrega",
+                     "items":  [
+                                   {
+                                       "title":  "Desarrollo ODM",
+                                       "desc":  "Ofrecemos diseños originales. 100+ modelos nuevos mensuales.",
+                                       "features":  [
+                                                        "Diseño Original",
+                                                        "Nuevos Mensuales",
+                                                        "Licencia Exclusiva"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Fabricación OEM",
+                                       "desc":  "Proporcione sus diseños o muestras. Marca propia con etiquetas.",
+                                       "features":  [
+                                                        "Por Diseño",
+                                                        "Por Muestra",
+                                                        "Marca Propia"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Pequeños Lotes Rápidos",
+                                       "desc":  "MOQ desde 50 piezas, entrega 7 días. Ideal para e-commerce.",
+                                       "features":  [
+                                                        "MOQ 50 pz",
+                                                        "Entrega 7 días",
+                                                        "Reposición Rápida"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Pedidos Grandes",
+                                       "desc":  "30,000 pz/día. Manejo de pedidos con pago escalonado.",
+                                       "features":  [
+                                                        "Alta Capacidad",
+                                                        "Entrega Fiable",
+                                                        "Calidad Consistente"
+                                                    ]
+                                   }
+                               ]
+                 },
+    "process":  {
+                    "title":  "Cómo Trabajamos",
+                    "subtitle":  "6 pasos simples para comenzar",
+                    "steps":  [
+                                  {
+                                      "title":  "Consulta",
+                                      "desc":  "Contáctenos con sus necesidades"
+                                  },
+                                  {
+                                      "title":  "Cotización",
+                                      "desc":  "Ofrecemos modelos y cotización"
+                                  },
+                                  {
+                                      "title":  "Muestras",
+                                      "desc":  "3-5 días para confirmación"
+                                  },
+                                  {
+                                      "title":  "Contrato",
+                                      "desc":  "Confirmar detalles y firmar"
+                                  },
+                                  {
+                                      "title":  "Producción",
+                                      "desc":  "7-15 días con control"
+                                  },
+                                  {
+                                      "title":  "Entrega",
+                                      "desc":  "Entrega con verificación"
+                                  }
+                              ]
+                },
+    "cta":  {
+                "title":  "¿Listo para Comenzar?",
+                "subtitle":  "Contáctenos para cotización personalizada",
+                "primaryBtn":  "Contáctenos",
+                "secondaryBtn":  "Ver Productos"
+            },
+    "contact":  {
+                    "title":  "Contáctenos",
+                    "subtitle":  "Esperamos una relación a largo plazo",
+                    "form":  {
+                                 "name":  "Su Nombre",
+                                 "company":  "Empresa",
+                                 "email":  "Correo Electrónico",
+                                 "phone":  "Teléfono",
+                                 "product":  "Producto de Interés",
+                                 "quantity":  "Cantidad Estimada",
+                                 "message":  "Sus Requisitos",
+                                 "submit":  "Enviar",
+                                 "submitting":  "Enviando...",
+                                 "success":  "¡Enviado! Le contactaremos en 24 horas."
+                             },
+                    "info":  {
+                                 "factoryName":  "Fábrica de Punto Yayuhong, Chenghai",
+                                 "companyName":  "Shenzhen Xiuyu Network Technology Co., Ltd.",
+                                 "address":  "No.30, Carretera Guanshan Nanxiang, Subdistrito Chenghua, Distrito Chenghai, Ciudad Shantou, Guangdong, China",
+                                 "phone":  "+86 13715967918",
+                                 "email":  "info@xiuyuknit.com",
+                                 "wechat":  "Yayuhong-Knitting",
+                                 "whatsapp":  "+86 13829659110",
+                                 "workTime":  "Lun-Sáb: 9:00-18:00 (GMT+8)"
+                             }
+                },
+    "heritage":  {
+                     "badge":  "Chenghai · Capital del Punto de China",
+                     "title":  "40 Años de Herencia Puntera",
+                     "subtitle":  "De humildes talleres artesanales a un clúster industrial de punto de clase mundial — el viaje de cuatro décadas de artesanía e innovación de Chenghai",
+                     "timeline":  [
+                                      {
+                                          "era":  "1980s",
+                                          "title":  "El Comienzo — Era de la Industria Artesanal",
+                                          "desc":  "A principios de los años 80, la industria del punto de Chenghai echó raíces con talleres familiares y máquinas de punto planas manuales. Los artesanos locales, basándose en generaciones de tradición textil, comenzaron a producir jerséis para el mercado nacional, sentando las bases de lo que se convertiría en la ciudad del punto más famosa de China."
+                                      },
+                                      {
+                                          "era":  "1990s",
+                                          "title":  "Edad de Oro del Comercio Exterior",
+                                          "desc":  "Aprovechando la ola de la política de apertura de China, el punto de Chenghai entró en el mercado global en los años 90. Las fábricas se expandieron rápidamente, importando avanzadas máquinas de punto planas computarizadas de Japón y Alemania. Los pedidos de exportación de Europa, América y el Sudeste Asiático llegaron en masa, consolidando la reputación de Chenghai por su calidad y artesanía."
+                                      },
+                                      {
+                                          "era":  "2000s",
+                                          "title":  "Formación del Clúster Industrial",
+                                          "desc":  "Para los años 2000, Chenghai había desarrollado un ecosistema industrial completo — desde el teñido de hilos, el tejido de telas y el diseño de patrones hasta el acabado, empaquetado y logística. Miles de fábricas y empresas auxiliares se agruparon, creando una eficiencia y ventajas de coste inigualables que atrajeron a compradores de todo el mundo."
+                                      },
+                                      {
+                                          "era":  "2010s",
+                                          "title":  "Transformación y Modernización",
+                                          "desc":  "La década de 2010 marcó un cambio de OEM a ODM y al desarrollo de marca. Las fábricas de Chenghai invirtieron fuertemente en I+D de diseño, formaron equipos profesionales y comenzaron a lanzar colecciones originales. La industria adoptó la digitalización, la automatización y las prácticas de fabricación sostenible."
+                                      },
+                                      {
+                                          "era":  "Hoy",
+                                          "title":  "Fabricación Inteligente Digital",
+                                          "desc":  "Hoy en día, Chenghai lidera la industria del punto de China con líneas de producción totalmente automatizadas, sistemas de diseño digital y gestión inteligente de la cadena de suministro. Como «Ciudad Famosa del Punto Artesanal de China» certificada, sigue suministrando a las principales marcas de moda del mundo mientras escribe el futuro de la fabricación de punto sostenible."
+                                      }
+                                  ],
+                     "stats":  [
+                                   {
+                                       "value":  "40+",
+                                       "label":  "Años de Historia"
+                                   },
+                                   {
+                                       "value":  "3,000+",
+                                       "label":  "Empresas"
+                                   },
+                                   {
+                                       "value":  "100K+",
+                                       "label":  "Trabajadores"
+                                   },
+                                   {
+                                       "value":  "Ciudad Famosa",
+                                       "label":  "Capital del Punto de China"
+                                   }
+                               ],
+                     "quote":  "Los hilos de Chenghai han tejido no solo jerséis, sino los sueños y el sustento de generaciones — cada puntada un testimonio del espíritu perdurable de la artesanía.",
+                     "quoteSource":  "Asociación de la Industria del Punto de Chenghai"
+                 },
+    "footer":  {
+                   "about":  "Sobre Nosotros",
+                   "aboutDesc":  "Fábrica de punto Yayuhong - 20 años de fabricación, su fábrica directa fast fashion.",
+                   "quickLinks":  "Enlaces Rápidos",
+                   "contactUs":  "Contacto",
+                   "followUs":  "Síganos",
+                   "copyright":  "© 2024 Yayuhong Knitwear Factory. Todos los derechos reservados.",
+                   "icp":  ""
+               },
+    "wechatGuide":  {
+                        "title":  "Cómo usar WeChat",
+                        "subtitle":  "WeChat es la aplicación de mensajería más popular en China. Siga estos pasos para conectarse con nosotros y obtener cotizaciones instantáneas.",
+                        "qrTitle":  "Nuestro código QR de WeChat",
+                        "qrDesc":  "Escanee este código QR con WeChat para agregarnos como contacto",
+                        "step1":  {
+                                      "title":  "Descargar WeChat",
+                                      "desc":  "WeChat está disponible gratis en iOS y Android. Descárguelo de App Store o Google Play."
+                                  },
+                        "step2":  {
+                                      "title":  "Registrar una cuenta",
+                                      "desc":  "Abra WeChat y regístrese con su número de teléfono. Se requiere verificación.",
+                                      "tip1":  "Use su número de teléfono real para la verificación",
+                                      "tip2":  "Establezca un ID de WeChat memorable"
+                                  },
+                        "step3":  {
+                                      "title":  "Escanee nuestro código QR",
+                                      "desc":  "Abra WeChat, toque el icono \u0027+\u0027 en la parte superior derecha, seleccione \u0027Escanear\u0027 y apunte la cámara a nuestro código QR."
+                                  },
+                        "step4":  {
+                                      "title":  "Enviar un mensaje",
+                                      "desc":  "Una vez agregado, envíenos un mensaje con sus requisitos de producto. Nuestro equipo responde en 12 horas.",
+                                      "tip":  "Consejo: Enviar detalles (estilo, cantidad, precio objetivo) nos ayuda a responder más rápido con cotizaciones precisas."
+                                  },
+                        "whatsappTitle":  "¿Prefiere WhatsApp?",
+                        "whatsappDesc":  "También respondemos en WhatsApp para su conveniencia",
+                        "whatsappBtn":  "Chatear en WhatsApp",
+                        "contactPrompt":  "O envíe una consulta directamente a través de nuestro sitio web",
+                        "contactBtn":  "Enviar consulta"
+                    },
+    "readyStock":  {
+                       "badge":  "En Stock",
+                       "title":  "Colección de Envío Inmediato",
+                       "subtitle":  "Ropa de hogar premium en stock — envío en 3 días",
+                       "inStock":  "En Stock",
+                       "collectionTitle":  "Colección de Loungewear",
+                       "cta":  "Solicitar Catálogo Completo y Precios",
+                       "points":  {
+                                      "stock":  "Inventario Real",
+                                      "stockDesc":  "Todos los modelos están físicamente en stock",
+                                      "shipping":  "Envío en 3 Días",
+                                      "shippingDesc":  "Despacho en 3 días hábiles",
+                                      "mix":  "Mix \u0026 Match",
+                                      "mixDesc":  "Combina modelos, colores y tallas",
+                                      "moq":  "MOQ Bajo",
+                                      "moqDesc":  "Desde 15 piezas por modelo"
+                                  },
+                       "info":  {
+                                    "styles":  "Modelos Totales",
+                                    "stylesUnit":  "modelos",
+                                    "sizes":  "Tallas Disponibles",
+                                    "colors":  "Colores",
+                                    "colorsUnit":  "colores",
+                                    "category":  "Categoría",
+                                    "categoryValue":  "Loungewear de Punto",
+                                    "shipping":  "Plazo de Entrega",
+                                    "shippingUnit":  "días"
+                                }
+                   }
 }
