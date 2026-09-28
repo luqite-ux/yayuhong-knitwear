@@ -91,7 +91,10 @@ export default function ChinaFooter() {
 
         {/* 底部版权 */}
         <div className="border-t border-slate-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-slate-500">
-          <div>© 2025 亚裕鸿毛织厂 版权所有</div>
+          <div className="text-center md:text-left">
+            <div>© 2025 亚裕鸿毛织厂 版权所有</div>
+            <div className="mt-1 text-xs text-slate-600">本网站由深圳市秀裕网络科技有限公司运营 · 工厂地址：广东省汕头市澄海区澄华街道冠山南祥路30号</div>
+          </div>
           <div className="flex gap-5">
             <Link href="/articles" className="hover:text-slate-300">行业资讯</Link>
             <Link href="/faq" className="hover:text-slate-300">常见问题</Link>
