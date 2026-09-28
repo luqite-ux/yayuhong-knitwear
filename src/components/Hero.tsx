@@ -79,8 +79,8 @@ export default function Hero() {
               {/* Main product showcase */}
               <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                 <img 
-                  src="/images/hero/hero-main.jpg" 
-                  alt="Premium knitwear collection"
+                  src="/images/hero-sweater-model.jpg" 
+                  alt="Premium knitwear model showcase"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/20 to-transparent"></div>
