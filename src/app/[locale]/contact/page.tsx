@@ -153,6 +153,52 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   </div>
                 </div>
               </div>
+
+              {/* QR Codes */}
+              <div className="bg-white rounded-2xl p-6 border border-[var(--color-border)]/50">
+                <h3 className="font-semibold text-[var(--color-primary)] mb-4">
+                  {zhText(locale, '扫码联系', 'Scan to Connect')}
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {/* WeChat QR */}
+                  <div>
+                    <p className="text-xs text-[var(--color-text-secondary)] mb-2 text-center font-medium">
+                      {zhText(locale, '微信', 'WeChat')}
+                    </p>
+                    <div className="aspect-square bg-white rounded-lg border border-[var(--color-border)]/50 p-2">
+                      <img
+                        src="/images/wechat-qr.jpg"
+                        alt="WeChat QR Code"
+                        className="w-full h-full object-contain rounded"
+                      />
+                    </div>
+                    <p className="text-xs text-center mt-2 text-[var(--color-text-muted)]">
+                      {info('wechat')}
+                    </p>
+                  </div>
+                  {/* WhatsApp QR */}
+                  <a
+                    href="https://wa.me/8613829659110"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group"
+                  >
+                    <p className="text-xs text-green-600 mb-2 text-center font-medium">
+                      WhatsApp
+                    </p>
+                    <div className="aspect-square bg-white rounded-lg border-2 border-green-500/30 p-2 group-hover:border-green-500 transition-colors">
+                      <img
+                        src="/images/whatsapp-qr.jpg"
+                        alt="WhatsApp QR Code"
+                        className="w-full h-full object-contain rounded"
+                      />
+                    </div>
+                    <p className="text-xs text-center mt-2 text-green-600 font-medium">
+                      {info('whatsapp')}
+                    </p>
+                  </a>
+                </div>
+              </div>
             </div>
             
             {/* Right: Contact form */}
