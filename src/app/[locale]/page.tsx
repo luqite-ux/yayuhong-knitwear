@@ -5,6 +5,7 @@ import { getCurrentSiteKey } from '@/lib/site';
 import Hero from '@/components/Hero';
 import Advantages from '@/components/Advantages';
 import ProductShowcase from '@/components/ProductShowcase';
+import ReadyStock from '@/components/ReadyStock';
 import FactorySection from '@/components/FactorySection';
 import ChenghaiHeritage from '@/components/ChenghaiHeritage';
 import Services from '@/components/Services';
@@ -71,6 +72,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Hero />
       <Advantages />
       <ProductShowcase />
+      <ReadyStock />
       <FactorySection />
       <ChenghaiHeritage />
       <Services />
