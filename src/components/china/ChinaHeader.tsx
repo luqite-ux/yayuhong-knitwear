@@ -1,7 +1,8 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '/', label: '首页' },
@@ -22,12 +23,16 @@ export default function ChinaHeader() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">
-              亚
-            </div>
+            <Image
+              src="/images/logo/logo-new.jpg"
+              alt="亚裕鸿毛织厂 Logo"
+              width={40}
+              height={40}
+              className="rounded-lg object-cover shadow-sm"
+            />
             <div>
               <div className="font-bold text-slate-800 leading-tight">亚裕鸿毛织厂</div>
-              <div className="text-xs text-slate-400">Xiuyu Knitwear Factory</div>
+              <div className="text-xs text-slate-400">Yayuhong Knitwear Factory</div>
             </div>
           </Link>
 
