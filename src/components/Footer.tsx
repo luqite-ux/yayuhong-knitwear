@@ -151,9 +151,14 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/40 text-sm">
-            {t('copyright')}
-          </p>
+          <div className="text-white/40 text-sm text-center md:text-left">
+            <p>{t('copyright')}</p>
+            <p className="mt-1 text-xs text-white/30">
+              {locale === 'zh' 
+                ? '本网站由深圳市秀裕网络科技有限公司运营 · 工厂地址：广东省汕头市澄海区澄华街道冠山南祥路30号'
+                : 'Operated by Shenzhen Xiuyu Network Technology Co., Ltd. · Factory: No.30, Guanshan Nanxiang Road, Chenghua, Chenghai, Shantou, Guangdong, China'}
+            </p>
+          </div>
           <div className="flex items-center gap-6 text-sm text-white/40">
             {locale === 'zh' && <span>{t('icp')}</span>}
             <a href="#" className="hover:text-white/60 transition-colors">Privacy</a>
