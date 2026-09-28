@@ -29,10 +29,22 @@
     "title": "Pourquoi nous choisir",
     "subtitle": "Quatre avantages clés pour votre activité",
     "items": [
-      { "title": "MOQ faible, livraison rapide", "desc": "À partir de 50 pièces, livraison en 7 jours. Suivez les tendances, réduisez les risques de stock." },
-      { "title": "Capacité de design", "desc": "Équipe professionnelle, 100+ nouveaux modèles par mois. Tendances internationales. Service ODM." },
-      { "title": "Avantage prix", "desc": "Usine directe à Chenghai, 30 ateliers. Sans intermédiaire — jusqu'à 30% d'économie." },
-      { "title": "Contrôle qualité", "desc": "20 ans de savoir-faire, trois étapes d'inspection. Contrôle strict, taux de conformité 99%+." }
+      {
+        "title": "MOQ faible, livraison rapide",
+        "desc": "À partir de 50 pièces, livraison en 7 jours. Suivez les tendances, réduisez les risques de stock."
+      },
+      {
+        "title": "Capacité de design",
+        "desc": "Équipe professionnelle, 100+ nouveaux modèles par mois. Tendances internationales. Service ODM."
+      },
+      {
+        "title": "Avantage prix",
+        "desc": "Usine directe à Chenghai, 30 ateliers. Sans intermédiaire — jusqu'à 30% d'économie."
+      },
+      {
+        "title": "Contrôle qualité",
+        "desc": "20 ans de savoir-faire, trois étapes d'inspection. Contrôle strict, taux de conformité 99%+."
+      }
     ]
   },
   "products": {
@@ -40,12 +52,36 @@
     "subtitle": "Gamme complète de produits tricot",
     "viewAll": "Voir tout",
     "categories": [
-      { "name": "Pulls femme", "desc": "Pulls, cardigans, robes, manteaux tricot", "count": "200+ Modèles" },
-      { "name": "Pulls enfant", "desc": "Modèles mignons, ensembles famille", "count": "100+ Modèles" },
-      { "name": "Pulls homme", "desc": "Basiques, business, tendances", "count": "80+ Modèles" },
-      { "name": "Vêtements d'intérieur", "desc": "Ensembles tricot confortables", "count": "50+ Modèles" },
-      { "name": "Vêtements pour animaux", "desc": "Pulls pour chiens, chats", "count": "30+ Modèles" },
-      { "name": "Accessoires", "desc": "Écharpes, bonnets, gants, sacs", "count": "40+ Modèles" }
+      {
+        "name": "Pulls femme",
+        "desc": "Pulls, cardigans, robes, manteaux tricot",
+        "count": "200+ Modèles"
+      },
+      {
+        "name": "Pulls enfant",
+        "desc": "Modèles mignons, ensembles famille",
+        "count": "100+ Modèles"
+      },
+      {
+        "name": "Pulls homme",
+        "desc": "Basiques, business, tendances",
+        "count": "80+ Modèles"
+      },
+      {
+        "name": "Vêtements d'intérieur",
+        "desc": "Ensembles tricot confortables",
+        "count": "50+ Modèles"
+      },
+      {
+        "name": "Vêtements pour animaux",
+        "desc": "Pulls pour chiens, chats",
+        "count": "30+ Modèles"
+      },
+      {
+        "name": "Accessoires",
+        "desc": "Écharpes, bonnets, gants, sacs",
+        "count": "40+ Modèles"
+      }
     ]
   },
   "factory": {
@@ -53,32 +89,94 @@
     "subtitle": "20 ans de savoir-faire dans chaque pull",
     "learnMore": "En savoir plus",
     "features": [
-      { "title": "Base de production moderne", "desc": "À Chenghai, Shantou. 30 ateliers avec machines informatisées." },
-      { "title": "Équipe technique experte", "desc": "20 techniciens avec 20+ ans d'expérience. Contrôle professionnel." },
-      { "title": "Contrôle qualité strict", "desc": "Trois étapes : matière première, semi-fini, produit fini." },
-      { "title": "Service rapide", "desc": "Réponse en 24h. Échantillons 3-5 jours, production 7-15 jours." }
+      {
+        "title": "Base de production moderne",
+        "desc": "À Chenghai, Shantou. 30 ateliers avec machines informatisées."
+      },
+      {
+        "title": "Équipe technique experte",
+        "desc": "20 techniciens avec 20+ ans d'expérience. Contrôle professionnel."
+      },
+      {
+        "title": "Contrôle qualité strict",
+        "desc": "Trois étapes : matière première, semi-fini, produit fini."
+      },
+      {
+        "title": "Service rapide",
+        "desc": "Réponse en 24h. Échantillons 3-5 jours, production 7-15 jours."
+      }
     ]
   },
   "services": {
     "title": "Nos services",
     "subtitle": "Solutions complètes du design à la livraison",
     "items": [
-      { "title": "Développement ODM", "desc": "Designs originaux. 100+ nouveaux modèles par mois.", "features": ["Design original", "Nouveautés mensuelles", "Licence exclusive"] },
-      { "title": "Fabrication OEM", "desc": "Fournissez vos designs ou échantillons. Marque propre.", "features": ["Sur design", "Sur échantillon", "Marque propre"] },
-      { "title": "Petits lots rapides", "desc": "MOQ dès 50 pcs, livraison 7 jours. Idéal pour e-commerce.", "features": ["MOQ 50 pcs", "Livraison 7 jours", "Réappro rapide"] },
-      { "title": "Gros volumes", "desc": "30 000 pcs/jour. Commandes en gros avec paiement échelonné.", "features": ["Grande capacité", "Livraison fiable", "Qualité constante"] }
+      {
+        "title": "Développement ODM",
+        "desc": "Designs originaux. 100+ nouveaux modèles par mois.",
+        "features": [
+          "Design original",
+          "Nouveautés mensuelles",
+          "Licence exclusive"
+        ]
+      },
+      {
+        "title": "Fabrication OEM",
+        "desc": "Fournissez vos designs ou échantillons. Marque propre.",
+        "features": [
+          "Sur design",
+          "Sur échantillon",
+          "Marque propre"
+        ]
+      },
+      {
+        "title": "Petits lots rapides",
+        "desc": "MOQ dès 50 pcs, livraison 7 jours. Idéal pour e-commerce.",
+        "features": [
+          "MOQ 50 pcs",
+          "Livraison 7 jours",
+          "Réappro rapide"
+        ]
+      },
+      {
+        "title": "Gros volumes",
+        "desc": "30 000 pcs/jour. Commandes en gros avec paiement échelonné.",
+        "features": [
+          "Grande capacité",
+          "Livraison fiable",
+          "Qualité constante"
+        ]
+      }
     ]
   },
   "process": {
     "title": "Comment nous travaillons",
     "subtitle": "6 étapes simples pour commencer",
     "steps": [
-      { "title": "Consultation", "desc": "Contactez-nous" },
-      { "title": "Devis", "desc": "Modèles et devis" },
-      { "title": "Échantillons", "desc": "3-5 jours pour validation" },
-      { "title": "Contrat", "desc": "Confirmer les détails" },
-      { "title": "Production", "desc": "7-15 jours avec contrôle" },
-      { "title": "Livraison", "desc": "Livraison vérifiée" }
+      {
+        "title": "Consultation",
+        "desc": "Contactez-nous"
+      },
+      {
+        "title": "Devis",
+        "desc": "Modèles et devis"
+      },
+      {
+        "title": "Échantillons",
+        "desc": "3-5 jours pour validation"
+      },
+      {
+        "title": "Contrat",
+        "desc": "Confirmer les détails"
+      },
+      {
+        "title": "Production",
+        "desc": "7-15 jours avec contrôle"
+      },
+      {
+        "title": "Livraison",
+        "desc": "Livraison vérifiée"
+      }
     ]
   },
   "cta": {
@@ -145,10 +243,22 @@
       }
     ],
     "stats": [
-      { "value": "40+", "label": "Ans d'histoire" },
-      { "value": "3 000+", "label": "Entreprises" },
-      { "value": "100K+", "label": "Salariés" },
-      { "value": "Ville Célèbre", "label": "Capitale du tricot de Chine" }
+      {
+        "value": "40+",
+        "label": "Ans d'histoire"
+      },
+      {
+        "value": "3 000+",
+        "label": "Entreprises"
+      },
+      {
+        "value": "100K+",
+        "label": "Salariés"
+      },
+      {
+        "value": "Ville Célèbre",
+        "label": "Capitale du tricot de Chine"
+      }
     ],
     "quote": "Les fils de Chenghai ont tissé non seulement des pulls, mais les rêves et la subsistance de générations — chaque maille témoigne de l'esprit durable du savoir-faire artisanal.",
     "quoteSource": "Association de l'industrie du tricot de Chenghai"
@@ -161,5 +271,35 @@
     "followUs": "Suivez-nous",
     "copyright": "© 2024 Yayuhong Knitwear Factory. Tous droits réservés.",
     "icp": ""
+  },
+  "wechatGuide": {
+    "title": "Comment utiliser WeChat",
+    "subtitle": "WeChat est l'application de messagerie la plus populaire en Chine. Suivez ces étapes pour nous contacter et obtenir des devis instantanés.",
+    "qrTitle": "Notre code QR WeChat",
+    "qrDesc": "Scannez ce code QR avec WeChat pour nous ajouter comme contact",
+    "step1": {
+      "title": "Télécharger WeChat",
+      "desc": "WeChat est disponible gratuitement sur iOS et Android. Téléchargez-le depuis l'App Store ou Google Play."
+    },
+    "step2": {
+      "title": "Créer un compte",
+      "desc": "Ouvrez WeChat et inscrivez-vous avec votre numéro de téléphone. Une vérification est requise.",
+      "tip1": "Utilisez votre vrai numéro de téléphone pour la vérification",
+      "tip2": "Définissez un identifiant WeChat mémorable"
+    },
+    "step3": {
+      "title": "Scannez notre code QR",
+      "desc": "Ouvrez WeChat, appuyez sur l'icône '+' en haut à droite, sélectionnez 'Scanner' et pointez la caméra vers notre code QR."
+    },
+    "step4": {
+      "title": "Envoyer un message",
+      "desc": "Une fois ajouté, envoyez-nous un message avec vos besoins en produits. Notre équipe répond dans les 12 heures.",
+      "tip": "Astuce : Envoyer des détails (style, quantité, prix cible) nous aide à répondre plus rapidement avec des devis précis."
+    },
+    "whatsappTitle": "Vous préférez WhatsApp ?",
+    "whatsappDesc": "Nous répondons également sur WhatsApp pour votre commodité",
+    "whatsappBtn": "Discuter sur WhatsApp",
+    "contactPrompt": "Ou envoyez une demande directement via notre site web",
+    "contactBtn": "Envoyer une demande"
   }
 }
