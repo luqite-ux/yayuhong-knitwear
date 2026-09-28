@@ -1,305 +1,334 @@
 {
-  "metadata": {
-    "title": "Yayuhong Knitwear - Fábrica de Suéteres Fast Fashion | 20 Anos de Experiência",
-    "description": "Fábrica de malhas Yayuhong em Chenghai, 20 anos de experiência na fabricação de suéteres. Capacidade de 30.000 peças/dia, MOQ 50 peças, entrega 7 dias. ODM/OEM/CMT para marcas globais de fast fashion."
-  },
-  "nav": {
-    "home": "Início",
-    "products": "Produtos",
-    "factory": "Fábrica",
-    "services": "Serviços",
-    "contact": "Contato",
-    "getQuote": "Solicitar Orçamento"
-  },
-  "hero": {
-    "badge": "20 Anos · Fábrica Direta · Pequenas quantidades, entrega rápida",
-    "title": "Malhas Fast Fashion",
-    "titleHighlight": "Fábrica Direta",
-    "subtitle": "30.000 pç/dia · MOQ 50 pç · Entrega 7 dias\nServiço completo: Design + Amostras + Produção",
-    "primaryBtn": "Solicitar Orçamento",
-    "secondaryBtn": "Tour Virtual",
-    "stats": {
-      "years": "Anos de Experiência",
-      "dailyCapacity": "Pç/Dia",
-      "moq": "Pç MOQ",
-      "delivery": "Dias Entrega"
-    }
-  },
-  "advantages": {
-    "title": "Por Que Nos Escolher",
-    "subtitle": "Quatro vantagens chave para seu negócio",
-    "items": [
-      {
-        "title": "MOQ Baixo, Entrega Rápida",
-        "desc": "A partir de 50 peças com entrega em 7 dias. Acompanhe tendências, reduza riscos."
-      },
-      {
-        "title": "Capacidade de Design",
-        "desc": "Equipe profissional, 100+ novos modelos mensais. Tendências internacionais."
-      },
-      {
-        "title": "Vantagem de Custo",
-        "desc": "Fábrica direta em Chenghai, 30 oficinas. Sem intermediários — até 30% de economia."
-      },
-      {
-        "title": "Controle de Qualidade",
-        "desc": "20 anos de experiência, três etapas de inspeção. Taxa de aprovação 99%+."
-      }
-    ]
-  },
-  "products": {
-    "title": "Nossos Produtos",
-    "subtitle": "Gama completa de produtos de malha",
-    "viewAll": "Ver Todos",
-    "categories": [
-      {
-        "name": "Suéteres Femininos",
-        "desc": "Blusas, cardigãs, vestidos, casacos",
-        "count": "200+ Modelos"
-      },
-      {
-        "name": "Suéteres Infantis",
-        "desc": "Modelos fofos, conjuntos familiares",
-        "count": "100+ Modelos"
-      },
-      {
-        "name": "Suéteres Masculinos",
-        "desc": "Básicos, business, tendências",
-        "count": "80+ Modelos"
-      },
-      {
-        "name": "Roupa de Casa",
-        "desc": "Conjuntos de malha confortáveis",
-        "count": "50+ Modelos"
-      },
-      {
-        "name": "Roupa para Animais",
-        "desc": "Suéteres para cães, gatos",
-        "count": "30+ Modelos"
-      },
-      {
-        "name": "Acessórios",
-        "desc": "Cachecóis, gorros, luvas, bolsas",
-        "count": "40+ Modelos"
-      }
-    ]
-  },
-  "factory": {
-    "title": "Capacidades da Fábrica",
-    "subtitle": "20 anos de experiência em cada suéter",
-    "learnMore": "Saber Mais",
-    "features": [
-      {
-        "title": "Base Produtiva Moderna",
-        "desc": "Em Chenghai, Shantou. 30 oficinas com máquinas informatizadas."
-      },
-      {
-        "title": "Equipe Técnica Especialista",
-        "desc": "20 técnicos com 20+ anos. Controle profissional em todas as etapas."
-      },
-      {
-        "title": "Controle de Qualidade Rígido",
-        "desc": "Três etapas: matéria-prima, semi-acabados, produto final."
-      },
-      {
-        "title": "Serviço Rápido",
-        "desc": "Resposta em 24h. Amostras 3-5 dias, produção 7-15 dias."
-      }
-    ]
-  },
-  "services": {
-    "title": "Nossos Serviços",
-    "subtitle": "Soluções completas de design a entrega",
-    "items": [
-      {
-        "title": "Desenvolvimento ODM",
-        "desc": "Designs originais. 100+ modelos novos mensais.",
-        "features": [
-          "Design Original",
-          "Novidades Mensais",
-          "Licença Exclusiva"
-        ]
-      },
-      {
-        "title": "Fabricação OEM",
-        "desc": "Forneça designs ou amostras. Marca própria.",
-        "features": [
-          "Por Design",
-          "Por Amostra",
-          "Marca Própria"
-        ]
-      },
-      {
-        "title": "Pequenos Lotes Rápidos",
-        "desc": "MOQ desde 50 pç, entrega 7 dias. Ideal para e-commerce.",
-        "features": [
-          "MOQ 50 pç",
-          "Entrega 7 dias",
-          "Reposição Rápida"
-        ]
-      },
-      {
-        "title": "Grandes Pedidos",
-        "desc": "30.000 pç/dia. Pedidos com pagamento parcelado.",
-        "features": [
-          "Alta Capacidade",
-          "Entrega Confiável",
-          "Qualidade Consistente"
-        ]
-      }
-    ]
-  },
-  "process": {
-    "title": "Como Trabalhamos",
-    "subtitle": "6 passos simples para começar",
-    "steps": [
-      {
-        "title": "Consulta",
-        "desc": "Contate-nos"
-      },
-      {
-        "title": "Orçamento",
-        "desc": "Modelos e orçamento"
-      },
-      {
-        "title": "Amostras",
-        "desc": "3-5 dias para confirmar"
-      },
-      {
-        "title": "Contrato",
-        "desc": "Confirmar detalhes"
-      },
-      {
-        "title": "Produção",
-        "desc": "7-15 dias com controle"
-      },
-      {
-        "title": "Entrega",
-        "desc": "Entrega verificada"
-      }
-    ]
-  },
-  "cta": {
-    "title": "Pronto para Começar?",
-    "subtitle": "Contate-nos para orçamento personalizado",
-    "primaryBtn": "Contate-nos",
-    "secondaryBtn": "Ver Produtos"
-  },
-  "contact": {
-    "title": "Contate-nos",
-    "subtitle": "Esperamos uma parceria duradoura",
-    "form": {
-      "name": "Seu Nome",
-      "company": "Empresa",
-      "email": "Email",
-      "phone": "Telefone",
-      "product": "Produto de Interesse",
-      "quantity": "Quantidade Estimada",
-      "message": "Seus Requisitos",
-      "submit": "Enviar",
-      "submitting": "Enviando...",
-      "success": "Enviado! Entraremos em contato em 24h."
-    },
-    "info": {
-      "factoryName": "Fábrica de Malhas Yayuhong, Chenghai",
-      "companyName": "Shenzhen Xiuyu Network Technology Co., Ltd.",
-      "address": "No.30, Estrada Guanshan Nanxiang, Subdistrito Chenghua, Distrito de Chenghai, Cidade de Shantou, Guangdong, China",
-      "phone": "+86 13715967918",
-      "email": "info@xiuyuknit.com",
-      "wechat": "Yayuhong-Knitting",
-      "whatsapp": "+86 13829659110",
-      "workTime": "Seg-Sáb: 9h00-18h00 (GMT+8)"
-    }
-  },
-  "heritage": {
-    "badge": "Chenghai · Capital do Malha da China",
-    "title": "40 Anos de Herança Têxtil",
-    "subtitle": "De humildes oficinas artesanais a um cluster industrial de malha de classe mundial — a jornada de quatro décadas de artesanato e inovação de Chenghai",
-    "timeline": [
-      {
-        "era": "1980s",
-        "title": "O Início — Era da Indústria Caseira",
-        "desc": "No início dos anos 80, a indústria de malha de Chenghai criou raízes com oficinas familiares e máquinas de tricotar planas manuais. Artesãos locais, baseados em gerações de tradição têxtil, começaram a produzir suéteres para o mercado doméstico, lançando as bases do que viria a ser a cidade de malha mais famosa da China."
-      },
-      {
-        "era": "1990s",
-        "title": "Era de Ouro do Comércio Exterior",
-        "desc": "Aproveitando a onda da política de abertura da China, a malha de Chenghai entrou no mercado global nos anos 90. As fábricas expandiram-se rapidamente, importando avançadas máquinas de tricotar planas computadorizadas do Japão e Alemanha. Pedidos de exportação da Europa, América e Sudeste Asiático chegaram em massa, estabelecendo a reputação de Chenghai por qualidade e artesanato."
-      },
-      {
-        "era": "2000s",
-        "title": "Formação do Cluster Industrial",
-        "desc": "Nos anos 2000, Chenghai já havia desenvolvido um ecossistema industrial completo — desde tingimento de fios, tecelagem de tecidos e design de padrões até acabamento, embalagem e logística. Milhares de fábricas e empresas de apoio se agruparam, criando eficiência e vantagens de custo inigualáveis que atraíram compradores de todo o mundo."
-      },
-      {
-        "era": "2010s",
-        "title": "Transformação e Modernização",
-        "desc": "A década de 2010 marcou uma mudança de OEM para ODM e desenvolvimento de marcas. As fábricas de Chenghai investiram fortemente em P&D de design, construíram equipes profissionais e começaram a lançar coleções originais. A indústria adotou a digitalização, automação e práticas de fabricação sustentável."
-      },
-      {
-        "era": "Hoje",
-        "title": "Manufatura Inteligente Digital",
-        "desc": "Hoje, Chenghai lidera a indústria de malha da China com linhas de produção totalmente automatizadas, sistemas de design digital e gestão inteligente da cadeia de suprimentos. Como «Cidade Famosa do Malha Artesanal da China» certificada, continua a fornecer às principais marcas de moda do mundo enquanto pioneira o futuro da fabricação de malha sustentável."
-      }
-    ],
-    "stats": [
-      {
-        "value": "40+",
-        "label": "Anos de História"
-      },
-      {
-        "value": "3,000+",
-        "label": "Empresas"
-      },
-      {
-        "value": "100K+",
-        "label": "Trabalhadores"
-      },
-      {
-        "value": "Cidade Famosa",
-        "label": "Capital do Malha da China"
-      }
-    ],
-    "quote": "Os fios de Chenghai teceram não apenas suéteres, mas os sonhos e o sustento de gerações — cada ponto um testemunho do espírito duradouro do artesanato.",
-    "quoteSource": "Associação da Indústria de Malha de Chenghai"
-  },
-  "footer": {
-    "about": "Sobre Nós",
-    "aboutDesc": "Fábrica de malhas Yayuhong — 20 anos de fabricação, sua fábrica direta fast fashion.",
-    "quickLinks": "Links Rápidos",
-    "contactUs": "Contato",
-    "followUs": "Siga-nos",
-    "copyright": "© 2024 Yayuhong Knitwear Factory. Todos os direitos reservados.",
-    "icp": ""
-  },
-  "wechatGuide": {
-    "title": "Como usar o WeChat",
-    "subtitle": "O WeChat é o aplicativo de mensagens mais popular na China. Siga estes passos para se conectar conosco e obter cotações instantâneas.",
-    "qrTitle": "Nosso código QR do WeChat",
-    "qrDesc": "Leia este código QR com o WeChat para nos adicionar como contato",
-    "step1": {
-      "title": "Baixar o WeChat",
-      "desc": "O WeChat está disponível gratuitamente para iOS e Android. Baixe-o na App Store ou Google Play."
-    },
-    "step2": {
-      "title": "Registrar uma conta",
-      "desc": "Abra o WeChat e registre-se com seu número de telefone. Verificação é necessária.",
-      "tip1": "Use seu número de telefone real para verificação",
-      "tip2": "Defina um ID WeChat memorável"
-    },
-    "step3": {
-      "title": "Leia nosso código QR",
-      "desc": "Abra o WeChat, toque no ícone '+' no canto superior direito, selecione 'Escanear' e aponte a câmera para nosso código QR acima."
-    },
-    "step4": {
-      "title": "Envie uma mensagem",
-      "desc": "Após adicionar, envie-nos uma mensagem com seus requisitos de produto. Nossa equipe responde em 12 horas.",
-      "tip": "Dica: Enviar detalhes (estilo, quantidade, preço alvo) nos ajuda a responder mais rápido com cotações precisas."
-    },
-    "whatsappTitle": "Prefere WhatsApp?",
-    "whatsappDesc": "Também respondemos no WhatsApp para sua conveniência",
-    "whatsappBtn": "Conversar no WhatsApp",
-    "contactPrompt": "Ou envie uma consulta diretamente pelo nosso site",
-    "contactBtn": "Enviar consulta"
-  }
+    "metadata":  {
+                     "title":  "Yayuhong Knitwear - Fábrica de Suéteres Fast Fashion | 20 Anos de Experiência",
+                     "description":  "Fábrica de malhas Yayuhong em Chenghai, 20 anos de experiência na fabricação de suéteres. Capacidade de 30.000 peças/dia, MOQ 50 peças, entrega 7 dias. ODM/OEM/CMT para marcas globais de fast fashion."
+                 },
+    "nav":  {
+                "home":  "Início",
+                "products":  "Produtos",
+                "factory":  "Fábrica",
+                "services":  "Serviços",
+                "contact":  "Contato",
+                "getQuote":  "Solicitar Orçamento"
+            },
+    "hero":  {
+                 "badge":  "20 Anos · Fábrica Direta · Pequenas quantidades, entrega rápida",
+                 "title":  "Malhas Fast Fashion",
+                 "titleHighlight":  "Fábrica Direta",
+                 "subtitle":  "30.000 pç/dia · MOQ 50 pç · Entrega 7 dias\nServiço completo: Design + Amostras + Produção",
+                 "primaryBtn":  "Solicitar Orçamento",
+                 "secondaryBtn":  "Tour Virtual",
+                 "stats":  {
+                               "years":  "Anos de Experiência",
+                               "dailyCapacity":  "Pç/Dia",
+                               "moq":  "Pç MOQ",
+                               "delivery":  "Dias Entrega"
+                           }
+             },
+    "advantages":  {
+                       "title":  "Por Que Nos Escolher",
+                       "subtitle":  "Quatro vantagens chave para seu negócio",
+                       "items":  [
+                                     {
+                                         "title":  "MOQ Baixo, Entrega Rápida",
+                                         "desc":  "A partir de 50 peças com entrega em 7 dias. Acompanhe tendências, reduza riscos."
+                                     },
+                                     {
+                                         "title":  "Capacidade de Design",
+                                         "desc":  "Equipe profissional, 100+ novos modelos mensais. Tendências internacionais."
+                                     },
+                                     {
+                                         "title":  "Vantagem de Custo",
+                                         "desc":  "Fábrica direta em Chenghai, 30 oficinas. Sem intermediários — até 30% de economia."
+                                     },
+                                     {
+                                         "title":  "Controle de Qualidade",
+                                         "desc":  "20 anos de experiência, três etapas de inspeção. Taxa de aprovação 99%+."
+                                     }
+                                 ]
+                   },
+    "products":  {
+                     "title":  "Nossos Produtos",
+                     "subtitle":  "Gama completa de produtos de malha",
+                     "viewAll":  "Ver Todos",
+                     "categories":  [
+                                        {
+                                            "name":  "Suéteres Femininos",
+                                            "desc":  "Blusas, cardigãs, vestidos, casacos",
+                                            "count":  "200+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Suéteres Infantis",
+                                            "desc":  "Modelos fofos, conjuntos familiares",
+                                            "count":  "100+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Suéteres Masculinos",
+                                            "desc":  "Básicos, business, tendências",
+                                            "count":  "80+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Roupa de Casa",
+                                            "desc":  "Conjuntos de malha confortáveis",
+                                            "count":  "50+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Roupa para Animais",
+                                            "desc":  "Suéteres para cães, gatos",
+                                            "count":  "30+ Modelos"
+                                        },
+                                        {
+                                            "name":  "Acessórios",
+                                            "desc":  "Cachecóis, gorros, luvas, bolsas",
+                                            "count":  "40+ Modelos"
+                                        }
+                                    ]
+                 },
+    "factory":  {
+                    "title":  "Capacidades da Fábrica",
+                    "subtitle":  "20 anos de experiência em cada suéter",
+                    "learnMore":  "Saber Mais",
+                    "features":  [
+                                     {
+                                         "title":  "Base Produtiva Moderna",
+                                         "desc":  "Em Chenghai, Shantou. 30 oficinas com máquinas informatizadas."
+                                     },
+                                     {
+                                         "title":  "Equipe Técnica Especialista",
+                                         "desc":  "20 técnicos com 20+ anos. Controle profissional em todas as etapas."
+                                     },
+                                     {
+                                         "title":  "Controle de Qualidade Rígido",
+                                         "desc":  "Três etapas: matéria-prima, semi-acabados, produto final."
+                                     },
+                                     {
+                                         "title":  "Serviço Rápido",
+                                         "desc":  "Resposta em 24h. Amostras 3-5 dias, produção 7-15 dias."
+                                     }
+                                 ]
+                },
+    "services":  {
+                     "title":  "Nossos Serviços",
+                     "subtitle":  "Soluções completas de design a entrega",
+                     "items":  [
+                                   {
+                                       "title":  "Desenvolvimento ODM",
+                                       "desc":  "Designs originais. 100+ modelos novos mensais.",
+                                       "features":  [
+                                                        "Design Original",
+                                                        "Novidades Mensais",
+                                                        "Licença Exclusiva"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Fabricação OEM",
+                                       "desc":  "Forneça designs ou amostras. Marca própria.",
+                                       "features":  [
+                                                        "Por Design",
+                                                        "Por Amostra",
+                                                        "Marca Própria"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Pequenos Lotes Rápidos",
+                                       "desc":  "MOQ desde 50 pç, entrega 7 dias. Ideal para e-commerce.",
+                                       "features":  [
+                                                        "MOQ 50 pç",
+                                                        "Entrega 7 dias",
+                                                        "Reposição Rápida"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Grandes Pedidos",
+                                       "desc":  "30.000 pç/dia. Pedidos com pagamento parcelado.",
+                                       "features":  [
+                                                        "Alta Capacidade",
+                                                        "Entrega Confiável",
+                                                        "Qualidade Consistente"
+                                                    ]
+                                   }
+                               ]
+                 },
+    "process":  {
+                    "title":  "Como Trabalhamos",
+                    "subtitle":  "6 passos simples para começar",
+                    "steps":  [
+                                  {
+                                      "title":  "Consulta",
+                                      "desc":  "Contate-nos"
+                                  },
+                                  {
+                                      "title":  "Orçamento",
+                                      "desc":  "Modelos e orçamento"
+                                  },
+                                  {
+                                      "title":  "Amostras",
+                                      "desc":  "3-5 dias para confirmar"
+                                  },
+                                  {
+                                      "title":  "Contrato",
+                                      "desc":  "Confirmar detalhes"
+                                  },
+                                  {
+                                      "title":  "Produção",
+                                      "desc":  "7-15 dias com controle"
+                                  },
+                                  {
+                                      "title":  "Entrega",
+                                      "desc":  "Entrega verificada"
+                                  }
+                              ]
+                },
+    "cta":  {
+                "title":  "Pronto para Começar?",
+                "subtitle":  "Contate-nos para orçamento personalizado",
+                "primaryBtn":  "Contate-nos",
+                "secondaryBtn":  "Ver Produtos"
+            },
+    "contact":  {
+                    "title":  "Contate-nos",
+                    "subtitle":  "Esperamos uma parceria duradoura",
+                    "form":  {
+                                 "name":  "Seu Nome",
+                                 "company":  "Empresa",
+                                 "email":  "Email",
+                                 "phone":  "Telefone",
+                                 "product":  "Produto de Interesse",
+                                 "quantity":  "Quantidade Estimada",
+                                 "message":  "Seus Requisitos",
+                                 "submit":  "Enviar",
+                                 "submitting":  "Enviando...",
+                                 "success":  "Enviado! Entraremos em contato em 24h."
+                             },
+                    "info":  {
+                                 "factoryName":  "Fábrica de Malhas Yayuhong, Chenghai",
+                                 "companyName":  "Shenzhen Xiuyu Network Technology Co., Ltd.",
+                                 "address":  "No.30, Estrada Guanshan Nanxiang, Subdistrito Chenghua, Distrito de Chenghai, Cidade de Shantou, Guangdong, China",
+                                 "phone":  "+86 13715967918",
+                                 "email":  "info@xiuyuknit.com",
+                                 "wechat":  "Yayuhong-Knitting",
+                                 "whatsapp":  "+86 13829659110",
+                                 "workTime":  "Seg-Sáb: 9h00-18h00 (GMT+8)"
+                             }
+                },
+    "heritage":  {
+                     "badge":  "Chenghai · Capital do Malha da China",
+                     "title":  "40 Anos de Herança Têxtil",
+                     "subtitle":  "De humildes oficinas artesanais a um cluster industrial de malha de classe mundial — a jornada de quatro décadas de artesanato e inovação de Chenghai",
+                     "timeline":  [
+                                      {
+                                          "era":  "1980s",
+                                          "title":  "O Início — Era da Indústria Caseira",
+                                          "desc":  "No início dos anos 80, a indústria de malha de Chenghai criou raízes com oficinas familiares e máquinas de tricotar planas manuais. Artesãos locais, baseados em gerações de tradição têxtil, começaram a produzir suéteres para o mercado doméstico, lançando as bases do que viria a ser a cidade de malha mais famosa da China."
+                                      },
+                                      {
+                                          "era":  "1990s",
+                                          "title":  "Era de Ouro do Comércio Exterior",
+                                          "desc":  "Aproveitando a onda da política de abertura da China, a malha de Chenghai entrou no mercado global nos anos 90. As fábricas expandiram-se rapidamente, importando avançadas máquinas de tricotar planas computadorizadas do Japão e Alemanha. Pedidos de exportação da Europa, América e Sudeste Asiático chegaram em massa, estabelecendo a reputação de Chenghai por qualidade e artesanato."
+                                      },
+                                      {
+                                          "era":  "2000s",
+                                          "title":  "Formação do Cluster Industrial",
+                                          "desc":  "Nos anos 2000, Chenghai já havia desenvolvido um ecossistema industrial completo — desde tingimento de fios, tecelagem de tecidos e design de padrões até acabamento, embalagem e logística. Milhares de fábricas e empresas de apoio se agruparam, criando eficiência e vantagens de custo inigualáveis que atraíram compradores de todo o mundo."
+                                      },
+                                      {
+                                          "era":  "2010s",
+                                          "title":  "Transformação e Modernização",
+                                          "desc":  "A década de 2010 marcou uma mudança de OEM para ODM e desenvolvimento de marcas. As fábricas de Chenghai investiram fortemente em P\u0026D de design, construíram equipes profissionais e começaram a lançar coleções originais. A indústria adotou a digitalização, automação e práticas de fabricação sustentável."
+                                      },
+                                      {
+                                          "era":  "Hoje",
+                                          "title":  "Manufatura Inteligente Digital",
+                                          "desc":  "Hoje, Chenghai lidera a indústria de malha da China com linhas de produção totalmente automatizadas, sistemas de design digital e gestão inteligente da cadeia de suprimentos. Como «Cidade Famosa do Malha Artesanal da China» certificada, continua a fornecer às principais marcas de moda do mundo enquanto pioneira o futuro da fabricação de malha sustentável."
+                                      }
+                                  ],
+                     "stats":  [
+                                   {
+                                       "value":  "40+",
+                                       "label":  "Anos de História"
+                                   },
+                                   {
+                                       "value":  "3,000+",
+                                       "label":  "Empresas"
+                                   },
+                                   {
+                                       "value":  "100K+",
+                                       "label":  "Trabalhadores"
+                                   },
+                                   {
+                                       "value":  "Cidade Famosa",
+                                       "label":  "Capital do Malha da China"
+                                   }
+                               ],
+                     "quote":  "Os fios de Chenghai teceram não apenas suéteres, mas os sonhos e o sustento de gerações — cada ponto um testemunho do espírito duradouro do artesanato.",
+                     "quoteSource":  "Associação da Indústria de Malha de Chenghai"
+                 },
+    "footer":  {
+                   "about":  "Sobre Nós",
+                   "aboutDesc":  "Fábrica de malhas Yayuhong — 20 anos de fabricação, sua fábrica direta fast fashion.",
+                   "quickLinks":  "Links Rápidos",
+                   "contactUs":  "Contato",
+                   "followUs":  "Siga-nos",
+                   "copyright":  "© 2024 Yayuhong Knitwear Factory. Todos os direitos reservados.",
+                   "icp":  ""
+               },
+    "wechatGuide":  {
+                        "title":  "Como usar o WeChat",
+                        "subtitle":  "O WeChat é o aplicativo de mensagens mais popular na China. Siga estes passos para se conectar conosco e obter cotações instantâneas.",
+                        "qrTitle":  "Nosso código QR do WeChat",
+                        "qrDesc":  "Leia este código QR com o WeChat para nos adicionar como contato",
+                        "step1":  {
+                                      "title":  "Baixar o WeChat",
+                                      "desc":  "O WeChat está disponível gratuitamente para iOS e Android. Baixe-o na App Store ou Google Play."
+                                  },
+                        "step2":  {
+                                      "title":  "Registrar uma conta",
+                                      "desc":  "Abra o WeChat e registre-se com seu número de telefone. Verificação é necessária.",
+                                      "tip1":  "Use seu número de telefone real para verificação",
+                                      "tip2":  "Defina um ID WeChat memorável"
+                                  },
+                        "step3":  {
+                                      "title":  "Leia nosso código QR",
+                                      "desc":  "Abra o WeChat, toque no ícone \u0027+\u0027 no canto superior direito, selecione \u0027Escanear\u0027 e aponte a câmera para nosso código QR acima."
+                                  },
+                        "step4":  {
+                                      "title":  "Envie uma mensagem",
+                                      "desc":  "Após adicionar, envie-nos uma mensagem com seus requisitos de produto. Nossa equipe responde em 12 horas.",
+                                      "tip":  "Dica: Enviar detalhes (estilo, quantidade, preço alvo) nos ajuda a responder mais rápido com cotações precisas."
+                                  },
+                        "whatsappTitle":  "Prefere WhatsApp?",
+                        "whatsappDesc":  "Também respondemos no WhatsApp para sua conveniência",
+                        "whatsappBtn":  "Conversar no WhatsApp",
+                        "contactPrompt":  "Ou envie uma consulta diretamente pelo nosso site",
+                        "contactBtn":  "Enviar consulta"
+                    },
+    "readyStock":  {
+                       "badge":  "Em Stock",
+                       "title":  "Coleção de Envio Imediato",
+                       "subtitle":  "Roupa de casa premium em stock — envio em 3 dias",
+                       "inStock":  "Em Stock",
+                       "collectionTitle":  "Coleção de Loungewear",
+                       "cta":  "Solicitar Catálogo Completo e Preços",
+                       "points":  {
+                                      "stock":  "Stock Real",
+                                      "stockDesc":  "Todos os modelos estão fisicamente em stock",
+                                      "shipping":  "Envio em 3 Dias",
+                                      "shippingDesc":  "Expedido em 3 dias úteis",
+                                      "mix":  "Mix \u0026 Match",
+                                      "mixDesc":  "Combine modelos, cores e tamanhos",
+                                      "moq":  "MOQ Baixo",
+                                      "moqDesc":  "Desde 15 peças por modelo"
+                                  },
+                       "info":  {
+                                    "styles":  "Modelos Totais",
+                                    "stylesUnit":  "modelos",
+                                    "sizes":  "Tamanhos Disponíveis",
+                                    "colors":  "Cores",
+                                    "colorsUnit":  "cores",
+                                    "category":  "Categoria",
+                                    "categoryValue":  "Loungewear de Malha",
+                                    "shipping":  "Prazo de Entrega",
+                                    "shippingUnit":  "dias"
+                                }
+                   }
 }
