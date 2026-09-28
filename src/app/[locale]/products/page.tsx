@@ -6,12 +6,6 @@ const A = (id: string, suffix = 'UL640') => `https://m.media-amazon.com/images/I
 
 const AE = (hash: string) => `https://ae-pic-a1.aliexpress-media.com/kf/${hash}.jpg_480x480q75.jpg_.webp`;
 
-const imgApi = (prompt: string) =>
-  `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(prompt)}&image_size=square`;
-
-const P = (color: string, style: string, detail = '') =>
-  imgApi(`E-commerce product photo: ${color} ${style} knitwear sweater${detail ? ', ' + detail : ''}, flat lay on white background, professional fashion catalog, high quality`);
-
 const allProducts = {
   womens: {
     nameKey: 'categories.0.name',
@@ -51,27 +45,26 @@ const allProducts = {
     countKey: 'categories.1.count',
     cover: '/images/products/kids-sweater-1.jpg',
     items: [
-      { img: '/images/products/kids/kids16.avif', name: { en: 'Striped Pullover', zh: '条纹套头衫' } },
-      { img: '/images/products/kids/kids17.avif', name: { en: 'Color Block Knit', zh: '拼色针织' } },
-      { img: P('navy', 'kids graphic sweater', 'star pattern'), name: { en: 'Star Pattern Sweater', zh: '星星图案毛衣' } },
-      { img: P('grey', 'kids ribbed knit', 'crew neck'), name: { en: 'Ribbed Crew Neck', zh: '罗纹圆领' } },
-      { img: P('burgundy', 'kids cable knit', 'aran pattern'), name: { en: 'Cable Knit Sweater', zh: '麻花毛衣' } },
-      { img: P('cream', 'kids cardigan', 'button front'), name: { en: 'Button Cardigan', zh: '扣子开衫' } },
-      { img: P('blue', 'kids pullover', 'stripe pattern'), name: { en: 'Striped Pullover', zh: '条纹套头衫' } },
-      { img: P('yellow', 'kids knit set', 'matching set'), name: { en: 'Knit Set', zh: '针织套装' } },
-      { img: P('green', 'kids hooded sweater', 'kangaroo pocket'), name: { en: 'Hooded Sweater', zh: '连帽毛衣' } },
-      { img: P('pink', 'kids turtleneck', 'ribbed cuff'), name: { en: 'Kids Turtleneck', zh: '儿童高领' } },
-      { img: P('purple', 'kids knit vest', 'sleeveless'), name: { en: 'Knit Vest', zh: '针织马甲' } },
-      { img: P('red', 'kids fair isle', 'Nordic pattern'), name: { en: 'Fair Isle Sweater', zh: '提花毛衣' } },
-      { img: P('teal', 'kids patterned sweater', 'animal motif'), name: { en: 'Patterned Sweater', zh: '花纹毛衣' } },
-      { img: P('orange', 'kids zip-neck', 'quarter zip'), name: { en: 'Quarter Zip', zh: '半拉链' } },
-      { img: P('mint', 'kids crew neck', 'color block'), name: { en: 'Color Block Crew', zh: '拼色圆领' } },
-      { img: P('coral', 'kids knit poncho', 'fringe hem'), name: { en: 'Kids Poncho', zh: '儿童披肩' } },
-      { img: P('lavender', 'kids oversized sweater', 'slouchy fit'), name: { en: 'Oversized Sweater', zh: '宽松毛衣' } },
-      { img: P('white', 'kids knit hoodie', 'pom pom detail'), name: { en: 'Pom Pom Hoodie', zh: '毛球连帽衫' } },
-      { img: P('charcoal', 'kids polo sweater', 'collar detail'), name: { en: 'Polo Sweater', zh: 'Polo毛衣' } },
-      { img: P('mustard', 'kids geometric knit', 'diamond pattern'), name: { en: 'Geometric Knit', zh: '几何针织' } },
+      { img: A('71VeK2OC67L'), name: { en: 'Girls Cardigan Sweater', zh: '女童开衫毛衣' } },
+      { img: A('81+hZubygYL'), name: { en: 'Chunky Knit Striped Sweater', zh: '粗针条纹毛衣' } },
+      { img: A('719ltCK5qkL'), name: { en: 'Turtleneck Cable Knit', zh: '高领麻花针织' } },
+      { img: A('71ny6va6ONL'), name: { en: 'Long Sleeve Turtleneck', zh: '长袖高领毛衣' } },
+      { img: A('71lEexSFe0L'), name: { en: 'Button Cardigan', zh: '扣子开衫' } },
+      { img: A('71P4b97PGHL'), name: { en: 'Baby Knit Pullover', zh: '婴儿针织套头衫' } },
+      { img: A('71VEkouw0aL'), name: { en: 'Cotton V-Neck Sweater', zh: '棉质V领毛衣' } },
+      { img: A('81WdWBvaHbL'), name: { en: 'Toddler Knit Pullover', zh: '幼儿针织套头衫' } },
+      { img: A('81DzFvD5GhL'), name: { en: 'Baby Knit Cardigan', zh: '婴儿针织开衫' } },
+      { img: A('81GIJMQPLUL'), name: { en: 'Toddler Knit Sweater', zh: '幼儿针织毛衣' } },
+      { img: A('81VDq73hnsL'), name: { en: 'Christmas Cardigan', zh: '圣诞开衫' } },
+      { img: A('91fXWTAna9L'), name: { en: 'Zip Cardigan Sweater', zh: '拉链开衫毛衣' } },
+      { img: A('91zJvX0ld0L'), name: { en: 'Crewneck Pullover', zh: '圆领套头衫' } },
+      { img: A('71tmEYFi23L'), name: { en: 'Cable Knit Sweater', zh: '麻花毛衣' } },
+      { img: A('81w-uTR7U+L'), name: { en: 'Chunky Pullover', zh: '粗针套头衫' } },
+      { img: A('81Ap9JW0f0L'), name: { en: 'Boys Cable Cardigan', zh: '男童麻花开衫' } },
+      { img: A('61TMTJpTD1L'), name: { en: 'Knit Sweater Dress', zh: '针织毛衣裙' } },
+      { img: A('714bTwpjdeL'), name: { en: 'Crew Neck Sweater', zh: '圆领毛衣' } },
       { img: AE('S0f9b29bb9fa34ca49a1fef223929f00d1'), name: { en: 'Kids Knit Sweater', zh: '儿童针织毛衣' } },
+      { img: A('71L-oOW1qiL'), name: { en: 'Open Front Cardigan', zh: '敞襟开衫' } },
     ],
   },
   mens: {
