@@ -48,7 +48,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <img 
-              src="/images/logo/logo-primary.jpg" 
+              src="/images/logo/logo-new.jpg" 
               alt="Yayuhong Knitwear Logo" 
               className="w-10 h-10 rounded-lg object-cover shadow-sm"
             />
