@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
+import { notifyInquiry } from '@/lib/notify';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -15,6 +16,8 @@ export async function POST(req: NextRequest) {
     insert into inquiries (name, email, phone, company, subject, message, locale, ip)
     values (${name}, ${email}, ${phone || null}, ${company || null}, ${subject || null}, ${message}, ${locale || 'en'}, ${ip})
   `;
+
+  await notifyInquiry({ name, email, phone, company, subject, message, locale: locale || 'en' });
 
   return NextResponse.json({ ok: true });
 }
