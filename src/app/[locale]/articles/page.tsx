@@ -1,6 +1,6 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sql } from '@/lib/db';
-import { pick } from '@/lib/i18n';
+import { localizeText, zhText } from '@/lib/zh-hant';
 import { getCurrentSiteKey } from '@/lib/site';
 import Link from 'next/link';
 
@@ -34,16 +34,16 @@ export default async function ArticlesPage({
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">
-        {locale === 'zh' ? '文章资讯' : locale === 'ru' ? 'Статьи' : 'Articles'}
+        {locale === 'ru' ? 'Статьи' : zhText(locale, '文章资讯', 'Articles')}
       </h1>
       <p className="text-gray-500 mb-8">
-        {locale === 'zh' ? '行业资讯、采购指南与技术深度分享'
-          : locale === 'ru' ? 'Отраслевые статьи, руководства и технический анализ'
-          : 'Industry insights, buying guides and technical deep-dives'}
+        {locale === 'ru'
+          ? 'Отраслевые статьи, руководства и технический анализ'
+          : zhText(locale, '行业资讯、采购指南与技术深度分享', 'Industry insights, buying guides and technical deep-dives')}
       </p>
 
       {articles.length === 0 ? (
-        <p className="text-gray-400 py-12 text-center">No articles yet.</p>
+        <p className="text-gray-400 py-12 text-center">{zhText(locale, '暂无文章', 'No articles yet.')}</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map((a) => (
@@ -56,17 +56,17 @@ export default async function ArticlesPage({
                 <div className="aspect-video overflow-hidden">
                   <img
                     src={a.cover_url}
-                    alt={pick(a.title as Record<string, string>, locale)}
+                    alt={localizeText(a.title as Record<string, string>, locale)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               )}
               <div className="p-5">
                 <h2 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                  {pick(a.title as Record<string, string>, locale)}
+                  {localizeText(a.title as Record<string, string>, locale)}
                 </h2>
                 <p className="text-sm text-gray-500 line-clamp-3 mb-3">
-                  {pick(a.excerpt as Record<string, string>, locale)}
+                  {localizeText(a.excerpt as Record<string, string>, locale)}
                 </p>
                 <div className="flex items-center text-xs text-gray-400">
                   {a.published_at && new Date(a.published_at).toLocaleDateString(locale)}

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
-import { pick } from '@/lib/i18n';
+import { localizeText } from '@/lib/zh-hant';
 import { detectSiteKey } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
@@ -36,10 +36,10 @@ export async function GET(
     article: {
       id: a.id,
       slug: a.slug,
-      title: pick(a.title as Record<string, string>, locale),
-      excerpt: pick(a.excerpt as Record<string, string>, locale),
-      contentHtml: pick(a.content_html as Record<string, string>, locale),
-      metaDescription: pick(a.meta_description as Record<string, string>, locale),
+      title: localizeText(a.title as Record<string, string>, locale),
+      excerpt: localizeText(a.excerpt as Record<string, string>, locale),
+      contentHtml: localizeText(a.content_html as Record<string, string>, locale),
+      metaDescription: localizeText(a.meta_description as Record<string, string>, locale),
       coverUrl: a.cover_url,
       supportingKeywords: a.supporting_keywords || [],
       faqSchema: a.faq_schema,

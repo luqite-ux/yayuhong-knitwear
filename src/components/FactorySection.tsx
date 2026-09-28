@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { zhOrEn } from '@/lib/locale-text';
 
 const factoryIcons = ['🏭', '👥', '🔍', '⚡'];
 
@@ -35,7 +36,7 @@ export default function FactorySection() {
                 <div className="rounded-2xl aspect-square overflow-hidden shadow-lg bg-gradient-to-br from-[var(--color-accent)]/90 to-[var(--color-secondary)]/90 flex items-center justify-center">
                   <div className="text-center text-white p-4">
                     <div className="text-3xl font-bold">30K+</div>
-                    <div className="text-sm opacity-80">{locale === 'zh' ? '日产能' : 'Daily Output'}</div>
+                    <div className="text-sm opacity-80">{zhOrEn(locale, '日产能', '日產能', 'Daily Output')}</div>
                   </div>
                 </div>
               </div>
@@ -45,7 +46,7 @@ export default function FactorySection() {
             <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl">
               <div className="text-4xl font-bold text-gold-gradient">20+</div>
               <div className="text-sm text-[var(--color-text-muted)] mt-1">
-                {locale === 'zh' ? '年行业经验' : 'Years Experience'}
+                {zhOrEn(locale, '年行业经验', '年行業經驗', 'Years Experience')}
               </div>
             </div>
           </div>
@@ -53,7 +54,7 @@ export default function FactorySection() {
           {/* Right - Content */}
           <div>
             <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium mb-4">
-              {locale === 'zh' ? '关于工厂' : 'About Factory'}
+              {zhOrEn(locale, '关于工厂', '關於工廠', 'About Factory')}
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-6">
               {t('title')}

@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import { sql } from '@/lib/db';
-import { pick } from '@/lib/i18n';
+import { localizeText } from '@/lib/zh-hant';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getCurrentSiteKey } from '@/lib/site';
@@ -23,9 +23,9 @@ export async function generateMetadata({
   `;
   if (rows.length === 0) return {};
   const a = rows[0];
-  const title = pick(a.title as Record<string, string>, locale);
-  const desc = pick(a.meta_description as Record<string, string>, locale) ||
-    pick(a.excerpt as Record<string, string>, locale);
+  const title = localizeText(a.title as Record<string, string>, locale);
+  const desc = localizeText(a.meta_description as Record<string, string>, locale) ||
+    localizeText(a.excerpt as Record<string, string>, locale);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
   return {
@@ -63,8 +63,8 @@ export default async function ArticleDetailPage({
   if (rows.length === 0) notFound();
 
   const a = rows[0];
-  const title = pick(a.title as Record<string, string>, locale);
-  const contentHtml = pick(a.content_html as Record<string, string>, locale);
+  const title = localizeText(a.title as Record<string, string>, locale);
+  const contentHtml = localizeText(a.content_html as Record<string, string>, locale);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
   const jsonLd: Record<string, unknown> = {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
+import { zhOrEn } from '@/lib/locale-text';
 
 const serviceIcons = ['🎨', '🏷️', '⚡', '📦'];
 
@@ -15,7 +16,7 @@ export default function Services() {
         {/* Section header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] text-sm font-medium mb-4">
-            {locale === 'zh' ? '服务模式' : 'Service Models'}
+            {zhOrEn(locale, '服务模式', '服務模式', 'Service Models')}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-4">
             {t('title')}

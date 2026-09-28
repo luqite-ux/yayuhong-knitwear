@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
-import { pick } from '@/lib/i18n';
+import { localizeText } from '@/lib/zh-hant';
 import { detectSiteKey } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
@@ -24,8 +24,8 @@ export async function GET(req: NextRequest) {
   const result = articles.map((a) => ({
     id: a.id,
     slug: a.slug,
-    title: pick(a.title as Record<string, string>, locale),
-    excerpt: pick(a.excerpt as Record<string, string>, locale),
+    title: localizeText(a.title as Record<string, string>, locale),
+    excerpt: localizeText(a.excerpt as Record<string, string>, locale),
     coverUrl: a.cover_url,
     publishedAt: a.published_at,
     locale: a.locale,

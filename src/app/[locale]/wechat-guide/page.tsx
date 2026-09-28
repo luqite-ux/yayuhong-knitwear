@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getCurrentSiteKey } from '@/lib/site';
 import { Link } from '@/i18n/navigation';
+import { zhText } from '@/lib/zh-hant';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -16,6 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const titles: Record<string, string> = {
     en: 'How to Use WeChat - Yayuhong Knitwear',
     zh: '如何使用微信 - 亚裕鸿毛织厂',
+    'zh-TW': '如何使用微信 - 亞裕鴻毛織廠',
     ru: 'Как использовать WeChat - Yayuhong Knitwear',
     ar: 'كيفية استخدام WeChat - Yayuhong Knitwear',
     de: 'So verwenden Sie WeChat - Yayuhong Knitwear',
@@ -27,9 +29,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   return {
     title: titles[locale] || titles.en,
-    description: locale === 'zh'
-      ? '微信安装使用指南 - 下载微信、注册账号、扫描二维码添加联系人'
-      : 'WeChat guide - Download, register, and scan QR code to connect with us',
+    description: zhText(
+      locale,
+      '微信安装使用指南 - 下载微信、注册账号、扫描二维码添加联系人',
+      'WeChat guide - Download, register, and scan QR code to connect with us',
+    ),
   };
 }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
+import { zhOrEn } from '@/lib/locale-text';
 
 export default function FloatingContact() {
   const locale = useLocale();
@@ -26,7 +27,7 @@ export default function FloatingContact() {
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className="floating-btn bg-[var(--color-primary)] hover:bg-[var(--color-primary-light)]"
         aria-label="Back to top"
-        title={locale === 'zh' ? '返回顶部' : 'Back to top'}
+        title={zhOrEn(locale, '返回顶部', '返回頂部', 'Back to top')}
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />

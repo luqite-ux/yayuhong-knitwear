@@ -132,7 +132,8 @@ export default function SettingsForm({ profile }: { profile: SiteProfile }) {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">默认语言</label>
             <select className="admin-input" value={data.default_locale} onChange={(e) => set('default_locale', e.target.value)}>
-              <option value="zh">中文</option>
+              <option value="zh">简体中文</option>
+              <option value="zh-TW">繁體中文</option>
               <option value="en">英文</option>
               <option value="ru">俄文</option>
             </select>

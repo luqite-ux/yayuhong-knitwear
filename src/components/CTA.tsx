@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { zhOrEn } from '@/lib/locale-text';
 
 export default function CTA() {
   const t = useTranslations('cta');
@@ -39,19 +40,19 @@ export default function CTA() {
             <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            {locale === 'zh' ? '免费报价' : 'Free Quote'}
+            {zhOrEn(locale, '免费报价', '免費報價', 'Free Quote')}
           </div>
           <div className="flex items-center gap-2 text-white/60 text-sm">
             <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            {locale === 'zh' ? '24小时响应' : '24hr Response'}
+            {zhOrEn(locale, '24小时响应', '24小時響應', '24hr Response')}
           </div>
           <div className="flex items-center gap-2 text-white/60 text-sm">
             <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            {locale === 'zh' ? '3-5天打样' : '3-5 Day Sampling'}
+            {zhOrEn(locale, '3-5天打样', '3-5天打樣', '3-5 Day Sampling')}
           </div>
         </div>
       </div>

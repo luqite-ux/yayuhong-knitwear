@@ -2,7 +2,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { isRTL } from '@/lib/i18n';
+import { isRTL, LOCALES } from '@/lib/i18n';
+import { zhText } from '@/lib/zh-hant';
 import { getCurrentSiteKey } from '@/lib/site';
 import { getChinaSeoConfig, getChinaSeoMetas } from '@/lib/china-seo';
 import Header from '@/components/Header';
@@ -19,6 +20,7 @@ export function generateStaticParams() {
 
 const OG_LOCALES: Record<string, string> = {
   zh: 'zh_CN',
+  'zh-TW': 'zh_TW',
   en: 'en_US',
   ru: 'ru_RU',
   es: 'es_ES',
@@ -29,7 +31,11 @@ const OG_LOCALES: Record<string, string> = {
   ar: 'ar_SA',
 };
 
-const ALL_LOCALES = ['zh', 'en', 'ru', 'es', 'de', 'fr', 'pt', 'ja', 'ar'];
+function hreflang(locale: string) {
+  if (locale === 'zh') return 'zh-CN';
+  if (locale === 'zh-TW') return 'zh-Hant';
+  return locale;
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -78,13 +84,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    keywords: locale === 'zh'
-      ? '毛织厂,毛衫加工,毛衣定制,澄海毛织,快时尚毛衫,源头工厂,ODM,OEM,小单快反'
-      : 'knitwear manufacturer, sweater factory, custom knitwear, China sweater supplier, OEM knitwear, ODM sweater, fast fashion, small MOQ',
+    keywords: zhText(
+      locale,
+      '毛织厂,毛衫加工,毛衣定制,澄海毛织,快时尚毛衫,源头工厂,ODM,OEM,小单快反',
+      'knitwear manufacturer, sweater factory, custom knitwear, China sweater supplier, OEM knitwear, ODM sweater, fast fashion, small MOQ',
+    ),
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: Object.fromEntries(
-        ALL_LOCALES.map((l) => [l, `${baseUrl}/${l}`]),
+        LOCALES.map((l) => [hreflang(l), `${baseUrl}/${l}`]),
       ),
     },
     openGraph: {
@@ -122,9 +130,10 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   const dir = isRTL(locale) ? 'rtl' : 'ltr';
   const isChina = siteKey === 'china';
+  const htmlLang = locale === 'zh' ? 'zh-Hans' : locale === 'zh-TW' ? 'zh-Hant' : locale;
 
   return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
+    <html lang={htmlLang} dir={dir} suppressHydrationWarning>
       <body className={`min-h-screen flex flex-col ${isChina ? 'bg-white' : 'bg-[var(--color-cream)]'}`}>
         <NextIntlClientProvider messages={messages}>
           <SiteUrlNormalizer />

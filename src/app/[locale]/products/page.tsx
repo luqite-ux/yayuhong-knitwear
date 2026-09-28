@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import FloatingContact from '@/components/FloatingContact';
+import { zhText } from '@/lib/zh-hant';
 
 const A = (id: string, suffix = 'UL640') => `https://m.media-amazon.com/images/I/${id}._AC_${suffix}_.jpg`;
 
@@ -271,7 +272,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                     <p className="text-[var(--color-text-secondary)]">{desc}</p>
                   </div>
                   <Link href="/contact" className="hidden sm:inline-flex text-[var(--color-accent)] font-medium text-sm hover:underline">
-                    {locale === 'zh' ? '询价 →' : 'Get Quote →'}
+                    {zhText(locale, '询价 →', 'Get Quote →')}
                   </Link>
                 </div>
 
@@ -284,17 +285,17 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                       <div className="aspect-square overflow-hidden bg-[var(--color-warm-gray)]">
                         <img
                           src={item.img}
-                          alt={`${name} - ${locale === 'zh' ? item.name.zh : item.name.en}`}
+                          alt={`${name} - ${zhText(locale, item.name.zh, item.name.en)}`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           loading="lazy"
                         />
                       </div>
                       <div className="p-3">
                         <p className="text-sm font-medium text-[var(--color-primary)] truncate">
-                          {locale === 'zh' ? item.name.zh : item.name.en}
+                          {zhText(locale, item.name.zh, item.name.en)}
                         </p>
                         <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
-                          {locale === 'zh' ? '支持定制' : 'Customizable'}
+                          {zhText(locale, '支持定制', 'Customizable')}
                         </p>
                       </div>
                     </div>
@@ -309,15 +310,17 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
       <section className="py-20 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent-dark)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            {locale === 'zh' ? '没有找到合适的款式？' : "Can't find what you're looking for?"}
+            {zhText(locale, '没有找到合适的款式？', "Can't find what you're looking for?")}
           </h2>
           <p className="text-white/70 text-lg mb-8">
-            {locale === 'zh'
-              ? '我们支持来图来样定制，专业设计团队为您量身打造'
-              : 'We offer custom design services. Our professional team can bring your ideas to life.'}
+            {zhText(
+              locale,
+              '我们支持来图来样定制，专业设计团队为您量身打造',
+              'We offer custom design services. Our professional team can bring your ideas to life.',
+            )}
           </p>
           <Link href="/contact" className="btn-primary !bg-white !text-[var(--color-primary)]">
-            {locale === 'zh' ? '立即定制' : 'Customize Now'}
+            {zhText(locale, '立即定制', 'Customize Now')}
           </Link>
         </div>
       </section>

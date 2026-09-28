@@ -1,11 +1,12 @@
-export const LOCALES = ['zh', 'en', 'ru', 'es', 'de', 'fr', 'pt', 'ja', 'ar'] as const;
+export const LOCALES = ['zh', 'zh-TW', 'en', 'ru', 'es', 'de', 'fr', 'pt', 'ja', 'ar'] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = 'zh';
 export const WRITING_LOCALE: Locale = 'en';
 
 export const LOCALE_LABELS: Record<Locale, string> = {
-  zh: '中文',
+  zh: '简体中文',
+  'zh-TW': '繁體中文',
   en: 'English',
   ru: 'Русский',
   es: 'Español',

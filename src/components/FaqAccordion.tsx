@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useLocale } from 'next-intl';
+import { zhOrEn } from '@/lib/locale-text';
 
 interface FaqItem {
   id: string;
@@ -16,7 +17,7 @@ export default function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
 
   // 按分类分组
   const groups = faqs.reduce((acc: Record<string, FaqItem[]>, f) => {
-    const cat = f.category || (locale === 'zh' ? '常见问题' : 'FAQ');
+    const cat = f.category || zhOrEn(locale, '常见问题', '常見問題', 'FAQ');
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(f);
     return acc;

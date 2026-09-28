@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import { zhOrEn } from '@/lib/locale-text';
 
 export default function ContactForm() {
   const t = useTranslations('contact.form');
@@ -72,7 +73,7 @@ export default function ContactForm() {
             className="form-input"
             value={form.name}
             onChange={(e) => set('name', e.target.value)}
-            placeholder={locale === 'zh' ? '请输入您的姓名' : 'Enter your name'}
+            placeholder={zhOrEn(locale, '请输入您的姓名', '請輸入您的姓名', 'Enter your name')}
           />
         </div>
 
@@ -85,7 +86,7 @@ export default function ContactForm() {
             className="form-input"
             value={form.company}
             onChange={(e) => set('company', e.target.value)}
-            placeholder={locale === 'zh' ? '请输入公司名称' : 'Company name'}
+            placeholder={zhOrEn(locale, '请输入公司名称', '請輸入公司名稱', 'Company name')}
           />
         </div>
 
@@ -99,7 +100,7 @@ export default function ContactForm() {
             className="form-input"
             value={form.email}
             onChange={(e) => set('email', e.target.value)}
-            placeholder={locale === 'zh' ? '请输入邮箱地址' : 'your@email.com'}
+            placeholder={zhOrEn(locale, '请输入邮箱地址', '請輸入郵箱地址', 'your@email.com')}
           />
         </div>
 
@@ -112,7 +113,7 @@ export default function ContactForm() {
             className="form-input"
             value={form.phone}
             onChange={(e) => set('phone', e.target.value)}
-            placeholder={locale === 'zh' ? '请输入联系电话' : 'Phone number'}
+            placeholder={zhOrEn(locale, '请输入联系电话', '請輸入聯繫電話', 'Phone number')}
           />
         </div>
 
@@ -125,13 +126,13 @@ export default function ContactForm() {
             value={form.subject}
             onChange={(e) => set('subject', e.target.value)}
           >
-            <option value="">{locale === 'zh' ? '请选择' : 'Please select'}</option>
-            <option value="women">{locale === 'zh' ? '女装毛衫' : "Women's Sweaters"}</option>
-            <option value="kids">{locale === 'zh' ? '童装毛衫' : "Kids' Sweaters"}</option>
-            <option value="men">{locale === 'zh' ? '男装毛衫' : "Men's Sweaters"}</option>
-            <option value="loungewear">{locale === 'zh' ? '家居服' : 'Loungewear'}</option>
-            <option value="pet">{locale === 'zh' ? '宠物衣帽' : 'Pet Apparel'}</option>
-            <option value="other">{locale === 'zh' ? '其他' : 'Other'}</option>
+            <option value="">{zhOrEn(locale, '请选择', '請選擇', 'Please select')}</option>
+            <option value="women">{zhOrEn(locale, '女装毛衫', '女裝毛衫', "Women's Sweaters")}</option>
+            <option value="kids">{zhOrEn(locale, '童装毛衫', '童裝毛衫', "Kids' Sweaters")}</option>
+            <option value="men">{zhOrEn(locale, '男装毛衫', '男裝毛衫', "Men's Sweaters")}</option>
+            <option value="loungewear">{zhOrEn(locale, '家居服', '家居服', 'Loungewear')}</option>
+            <option value="pet">{zhOrEn(locale, '宠物衣帽', '寵物衣帽', 'Pet Apparel')}</option>
+            <option value="other">{zhOrEn(locale, '其他', '其他', 'Other')}</option>
           </select>
         </div>
 
@@ -145,11 +146,12 @@ export default function ContactForm() {
             className="form-input form-textarea"
             value={form.message}
             onChange={(e) => set('message', e.target.value)}
-            placeholder={
-              locale === 'zh'
-                ? '请描述您的具体需求，如款式、材质、目标价格等，我们会尽快给您回复...'
-                : 'Please describe your requirements, e.g. styles, materials, target price, etc. We will get back to you soon...'
-            }
+            placeholder={zhOrEn(
+              locale,
+              '请描述您的具体需求，如款式、材质、目标价格等，我们会尽快给您回复...',
+              '請描述您的具體需求，如款式、材質、目標價格等，我們會盡快給您回覆...',
+              'Please describe your requirements, e.g. styles, materials, target price, etc. We will get back to you soon...',
+            )}
           />
         </div>
       </div>

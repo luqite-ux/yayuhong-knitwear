@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { zhOrEn } from '@/lib/locale-text';
 
 export default function Hero() {
   const t = useTranslations('hero');
@@ -56,19 +57,19 @@ export default function Hero() {
                 <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                {locale === 'zh' ? 'BSCI认证工厂' : 'BSCI Certified'}
+                {zhOrEn(locale, 'BSCI认证工厂', 'BSCI認證工廠', 'BSCI Certified')}
               </div>
               <div className="flex items-center gap-2 text-white/60 text-sm">
                 <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                {locale === 'zh' ? 'ISO9001质量体系' : 'ISO 9001 Quality'}
+                {zhOrEn(locale, 'ISO9001质量体系', 'ISO9001質量體系', 'ISO 9001 Quality')}
               </div>
               <div className="flex items-center gap-2 text-white/60 text-sm">
                 <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                {locale === 'zh' ? '20年行业经验' : '20+ Years Experience'}
+                {zhOrEn(locale, '20年行业经验', '20年行業經驗', '20+ Years Experience')}
               </div>
             </div>
           </div>
@@ -93,9 +94,9 @@ export default function Hero() {
                     ⚡
                   </div>
                   <div>
-                    <div className="font-bold text-[var(--color-primary)] text-base">7 {locale === 'zh' ? '天' : 'Days'}</div>
+                    <div className="font-bold text-[var(--color-primary)] text-base">7 {zhOrEn(locale, '天', '天', 'Days')}</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
-                      {locale === 'zh' ? '快速交货' : 'Fast Delivery'}
+                      {zhOrEn(locale, '快速交货', '快速交貨', 'Fast Delivery')}
                     </div>
                   </div>
                 </div>
@@ -110,7 +111,7 @@ export default function Hero() {
                   <div>
                     <div className="font-bold text-[var(--color-primary)] text-base">30,000+</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
-                      {locale === 'zh' ? '日产能' : 'Daily Capacity'}
+                      {zhOrEn(locale, '日产能', '日產能', 'Daily Capacity')}
                     </div>
                   </div>
                 </div>
@@ -123,9 +124,9 @@ export default function Hero() {
                     ✅
                   </div>
                   <div>
-                    <div className="font-bold text-[var(--color-primary)] text-base">50 {locale === 'zh' ? '件起' : 'pcs MOQ'}</div>
+                    <div className="font-bold text-[var(--color-primary)] text-base">50 {zhOrEn(locale, '件起', '件起', 'pcs MOQ')}</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
-                      {locale === 'zh' ? '小单试款' : 'Small Order OK'}
+                      {zhOrEn(locale, '小单试款', '小單試款', 'Small Order OK')}
                     </div>
                   </div>
                 </div>

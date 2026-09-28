@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import FloatingContact from '@/components/FloatingContact';
 import ProcessTimeline from '@/components/ProcessTimeline';
+import { zhText } from '@/lib/zh-hant';
 
 const servicesData = [
   {
@@ -151,14 +152,14 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                           </svg>
                         </div>
                         <span className="text-[var(--color-text-secondary)]">
-                          {locale === 'zh' ? h.zh : h.en}
+                          {zhText(locale, h.zh, h.en)}
                         </span>
                       </div>
                     ))}
                   </div>
                   <div className="mt-8">
                     <Link href="/contact" className="btn-outline">
-                      {locale === 'zh' ? '了解详情' : 'Learn More'}
+                      {zhText(locale, '了解详情', 'Learn More')}
                     </Link>
                   </div>
                 </div>
@@ -185,10 +186,10 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[var(--color-primary)] mb-4">
-              {locale === 'zh' ? '常见问题' : 'FAQ'}
+              {zhText(locale, '常见问题', 'FAQ')}
             </h2>
             <p className="text-[var(--color-text-secondary)]">
-              {locale === 'zh' ? '以下是客户最常问的问题，希望能解答您的疑惑' : 'Here are the most frequently asked questions'}
+              {zhText(locale, '以下是客户最常问的问题，希望能解答您的疑惑', 'Here are the most frequently asked questions')}
             </p>
           </div>
           <div className="space-y-4">
@@ -198,10 +199,10 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                   <span className="w-6 h-6 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center text-sm flex-shrink-0">
                     Q
                   </span>
-                  {locale === 'zh' ? faq.qZh : faq.qEn}
+                  {zhText(locale, faq.qZh, faq.qEn)}
                 </h3>
                 <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed pl-9">
-                  {locale === 'zh' ? faq.aZh : faq.aEn}
+                  {zhText(locale, faq.aZh, faq.aEn)}
                 </p>
               </div>
             ))}
@@ -213,15 +214,17 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       <section className="py-20 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent-dark)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            {locale === 'zh' ? '还有其他问题？' : 'Have more questions?'}
+            {zhText(locale, '还有其他问题？', 'Have more questions?')}
           </h2>
           <p className="text-white/70 text-lg mb-8">
-            {locale === 'zh'
-              ? '随时联系我们，专业团队为您一对一解答'
-              : 'Contact us anytime for personalized answers from our expert team'}
+            {zhText(
+              locale,
+              '随时联系我们，专业团队为您一对一解答',
+              'Contact us anytime for personalized answers from our expert team',
+            )}
           </p>
           <Link href="/contact" className="btn-primary !bg-white !text-[var(--color-primary)]">
-            {locale === 'zh' ? '立即咨询' : 'Contact Us'}
+            {zhText(locale, '立即咨询', 'Contact Us')}
           </Link>
         </div>
       </section>

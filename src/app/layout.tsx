@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    alternateLocale: ['zh_CN', 'ru_RU', 'es_ES', 'de_DE', 'fr_FR', 'pt_PT', 'ja_JP', 'ar_SA'],
+    alternateLocale: ['zh_CN', 'zh_TW', 'ru_RU', 'es_ES', 'de_DE', 'fr_FR', 'pt_PT', 'ja_JP', 'ar_SA'],
     url: siteUrl,
     siteName: 'Yayuhong Knitwear',
     title: 'Yayuhong Knitwear - Fast Fashion Sweater Factory',

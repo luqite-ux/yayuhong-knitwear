@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { detectSiteKey } from '@/lib/site';
+import { localizeText, toTraditional } from '@/lib/zh-hant';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -35,9 +36,9 @@ export async function GET(req: NextRequest) {
     const a = f.answer as Record<string, string>;
     return {
       id: f.id,
-      category: f.category,
-      question: q[locale] || q.en || q.zh || '',
-      answer: a[locale] || a.en || a.zh || '',
+      category: f.category && locale === 'zh-TW' ? toTraditional(String(f.category)) : f.category,
+      question: localizeText(q, locale),
+      answer: localizeText(a, locale),
     };
   });
 

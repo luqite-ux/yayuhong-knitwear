@@ -2,10 +2,15 @@ import { MetadataRoute } from 'next';
 import { headers } from 'next/headers';
 import { detectSiteKey } from '@/lib/site';
 import { sql } from '@/lib/db';
+import { LOCALES } from '@/lib/i18n';
+
+function hreflang(locale: string) {
+  if (locale === 'zh') return 'zh-CN';
+  if (locale === 'zh-TW') return 'zh-Hant';
+  return locale;
+}
 
 export const dynamic = 'force-dynamic';
-
-const ALL_LOCALES = ['zh', 'en', 'ru', 'es', 'de', 'fr', 'pt', 'ja', 'ar'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const h = await headers();
@@ -59,7 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   } else {
     // 海外站：多语言 locale 前缀
-    const locales = ALL_LOCALES;
+    const locales = [...LOCALES];
     for (const route of staticRoutes) {
       entries.push({
         url: `${baseUrl}/zh${route.path}`,
@@ -68,7 +73,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: route.priority,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((locale) => [locale, `${baseUrl}/${locale}${route.path}`]),
+            locales.map((locale) => [hreflang(locale), `${baseUrl}/${locale}${route.path}`]),
           ),
         },
       });
@@ -81,7 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((locale) => [locale, `${baseUrl}/${locale}/articles/${a.slug}`]),
+            locales.map((locale) => [hreflang(locale), `${baseUrl}/${locale}/articles/${a.slug}`]),
           ),
         },
       });

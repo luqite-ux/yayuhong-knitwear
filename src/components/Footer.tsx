@@ -3,6 +3,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+import { zhOrEn } from '@/lib/locale-text';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -26,10 +27,10 @@ export default function Footer() {
               />
               <div>
                 <div className="font-bold text-lg">
-                  {locale === 'zh' ? '亚裕鸿毛织' : 'Yayuhong Knit'}
+                  {zhOrEn(locale, '亚裕鸿毛织', '亞裕鴻毛織', 'Yayuhong Knit')}
                 </div>
                 <div className="text-xs text-white/50">
-                  {locale === 'zh' ? '快时尚源头工厂' : 'Fast Fashion Factory'}
+                  {zhOrEn(locale, '快时尚源头工厂', '快時尚源頭工廠', 'Fast Fashion Factory')}
                 </div>
               </div>
             </div>
@@ -114,12 +115,15 @@ export default function Footer() {
           {/* WeChat QR + Guide */}
           <div>
             <h4 className="font-semibold text-base mb-5">
-              {locale === 'zh' ? '添加微信' : 'WeChat'}
+              {zhOrEn(locale, '添加微信', '添加微信', 'WeChat')}
             </h4>
             <p className="text-white/60 text-sm mb-4">
-              {locale === 'zh' 
-                ? '扫描二维码添加业务微信，获取最新款式和报价'
-                : 'Scan to add us on WeChat for instant quote and latest styles'}
+              {zhOrEn(
+                locale,
+                '扫描二维码添加业务微信，获取最新款式和报价',
+                '掃描二維碼添加業務微信，獲取最新款式和報價',
+                'Scan to add us on WeChat for instant quote and latest styles',
+              )}
             </p>
             <div className="w-32 h-32 bg-white rounded-lg flex items-center justify-center text-[var(--color-primary)] text-xs text-center p-2 mb-3">
               <img 
@@ -137,7 +141,7 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.657-1.79 3-4 3-.083 0-.165-.003-.246-.009C9.689 13.063 8 14.362 8 16" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v12" />
                 </svg>
-                How to use WeChat?
+                {locale === 'zh-TW' ? '如何使用微信？' : 'How to use WeChat?'}
               </Link>
             )}
             <div className="mt-3 flex items-center gap-2 text-sm text-white/60">
@@ -154,9 +158,12 @@ export default function Footer() {
           <div className="text-white/40 text-sm text-center md:text-left">
             <p>{t('copyright')}</p>
             <p className="mt-1 text-xs text-white/30">
-              {locale === 'zh' 
-                ? '本网站由深圳市秀裕网络科技有限公司运营 · 工厂地址：广东省汕头市澄海区澄华街道冠山南祥路30号'
-                : 'Operated by Shenzhen Xiuyu Network Technology Co., Ltd. · Factory: No.30, Guanshan Nanxiang Road, Chenghua, Chenghai, Shantou, Guangdong, China'}
+              {zhOrEn(
+                locale,
+                '本网站由深圳市秀裕网络科技有限公司运营 · 工厂地址：广东省汕头市澄海区澄华街道冠山南祥路30号',
+                '本網站由深圳市秀裕網絡科技有限公司運營 · 工廠地址：廣東省汕頭市澄海區澄華街道冠山南祥路30號',
+                'Operated by Shenzhen Xiuyu Network Technology Co., Ltd. · Factory: No.30, Guanshan Nanxiang Road, Chenghua, Chenghai, Shantou, Guangdong, China',
+              )}
             </p>
           </div>
           <div className="flex items-center gap-6 text-sm text-white/40">

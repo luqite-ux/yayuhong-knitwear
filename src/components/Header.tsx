@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import LocaleSwitcher from './LocaleSwitcher';
+import { zhOrEn } from '@/lib/locale-text';
 
 export default function Header() {
   const t = useTranslations('nav');
@@ -54,10 +55,10 @@ export default function Header() {
             />
             <div className="hidden sm:block">
               <div className={`font-bold text-base leading-tight ${isScrolled ? 'text-[var(--color-primary)]' : 'text-white'}`}>
-                {locale === 'zh' ? '亚裕鸿毛织' : 'Yayuhong Knit'}
+                {zhOrEn(locale, '亚裕鸿毛织', '亞裕鴻毛織', 'Yayuhong Knit')}
               </div>
               <div className={`text-xs ${isScrolled ? 'text-[var(--color-text-muted)]' : 'text-white/60'}`}>
-                {locale === 'zh' ? '快时尚源头工厂' : 'Fast Fashion Factory'}
+                {zhOrEn(locale, '快时尚源头工厂', '快時尚源頭工廠', 'Fast Fashion Factory')}
               </div>
             </div>
           </Link>

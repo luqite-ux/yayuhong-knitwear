@@ -24,9 +24,15 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 国内站：单语言中文，无 locale 前缀
+  // 国内站：单语言简体，无 locale 前缀
   // 把 /xxx 内部重写到 /zh/xxx
   if (siteKey === 'china') {
+    if (pathname === '/zh-TW' || pathname.startsWith('/zh-TW/')) {
+      const rest = pathname.slice('/zh-TW'.length) || '/';
+      const newUrl = request.nextUrl.clone();
+      newUrl.pathname = rest;
+      return NextResponse.redirect(newUrl);
+    }
     // 如果已经有 /zh/ 前缀（直接访问的），继续走 intl middleware
     if (pathname.startsWith('/zh/') || pathname === '/zh') {
       return intlMiddleware(request);
@@ -43,7 +49,7 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/(zh|en|ru|es|de|fr|pt|ja|ar)/:path*',
+    '/(zh-TW|zh|en|ru|es|de|fr|pt|ja|ar)/:path*',
     '/((?!_next|_vercel|admin|api|llms\\.txt|sitemap\\.xml|robots\\.txt|.*\\..*).*)',
   ],
 };

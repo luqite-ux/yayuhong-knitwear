@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
-import { pick } from '@/lib/i18n';
+import { localizeText } from '@/lib/zh-hant';
 import { detectSiteKey } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
@@ -28,8 +28,8 @@ export async function GET(req: NextRequest) {
   const result = products.map((p) => ({
     id: p.id,
     slug: p.slug,
-    name: pick(p.name as Record<string, string>, locale),
-    summary: pick(p.summary as Record<string, string>, locale),
+    name: localizeText(p.name as Record<string, string>, locale),
+    summary: localizeText(p.summary as Record<string, string>, locale),
     coverUrl: p.cover_url,
     galleryUrls: p.gallery_urls || [],
     model: p.model,

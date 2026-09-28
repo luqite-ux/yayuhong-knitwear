@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { zhOrEn } from '@/lib/locale-text';
 
 const productImages = [
   '/images/products/womens-sweater-1.jpg',
@@ -23,7 +24,7 @@ export default function ProductShowcase() {
         {/* Section header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-secondary)]/10 text-[var(--color-secondary-dark)] text-sm font-medium mb-4">
-            {locale === 'zh' ? '产品系列' : 'Product Range'}
+            {zhOrEn(locale, '产品系列', '產品系列', 'Product Range')}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-4">
             {t('title')}
@@ -62,7 +63,7 @@ export default function ProductShowcase() {
                   {cat.desc}
                 </p>
                 <Link href="/products" className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:gap-2 transition-all">
-                  {locale === 'zh' ? '查看详情' : 'Learn more'}
+                  {zhOrEn(locale, '查看详情', '查看詳情', 'Learn more')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

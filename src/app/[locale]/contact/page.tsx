@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import ContactForm from '@/components/ContactForm';
 import FloatingContact from '@/components/FloatingContact';
+import { zhText } from '@/lib/zh-hant';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -45,7 +46,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <div className="lg:col-span-2 space-y-6">
               <div>
                 <h2 className="text-2xl font-bold text-[var(--color-primary)] mb-6">
-                  {locale === 'zh' ? '联系方式' : 'Contact Information'}
+                  {zhText(locale, '联系方式', 'Contact Information')}
                 </h2>
               </div>
               
@@ -87,16 +88,18 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   </h3>
                 </div>
                 <p className="text-sm text-[var(--color-text-secondary)]">
-                  {locale === 'zh' 
-                    ? '深圳分公司，负责国内及海外市场业务对接'
-                    : 'Shenzhen branch - responsible for domestic and overseas business development'}
+                  {zhText(
+                    locale,
+                    '深圳分公司，负责国内及海外市场业务对接',
+                    'Shenzhen branch - responsible for domestic and overseas business development',
+                  )}
                 </p>
               </div>
               
               {/* Quick contact */}
               <div className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent-dark)] rounded-2xl p-6 text-white">
                 <h3 className="font-semibold text-lg mb-4">
-                  {locale === 'zh' ? '快速联系' : 'Quick Contact'}
+                  {zhText(locale, '快速联系', 'Quick Contact')}
                 </h3>
                 <div className="space-y-4">
                   <a href={`mailto:${info('email')}`} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
@@ -106,7 +109,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                       </svg>
                     </div>
                     <div>
-                      <div className="text-sm text-white/60">{locale === 'zh' ? '邮箱' : 'Email'}</div>
+                      <div className="text-sm text-white/60">{zhText(locale, '邮箱', 'Email')}</div>
                       <div className="font-medium">{info('email')}</div>
                     </div>
                   </a>
@@ -118,7 +121,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                       </svg>
                     </div>
                     <div>
-                      <div className="text-sm text-white/60">{locale === 'zh' ? '微信' : 'WeChat'}</div>
+                      <div className="text-sm text-white/60">{zhText(locale, '微信', 'WeChat')}</div>
                       <div className="font-medium">{info('wechat')}</div>
                     </div>
                   </div>
@@ -150,7 +153,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             {/* Right: Contact form */}
             <div className="lg:col-span-3">
               <h2 className="text-2xl font-bold text-[var(--color-primary)] mb-6">
-                {locale === 'zh' ? '发送询盘' : 'Send Inquiry'}
+                {zhText(locale, '发送询盘', 'Send Inquiry')}
               </h2>
               <ContactForm />
             </div>
@@ -163,7 +166,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         <div className="text-center">
           <div className="text-4xl mb-2">📍</div>
           <p className="text-[var(--color-text-muted)]">
-            {locale === 'zh' ? '地图位置（待嵌入）' : 'Map location (to be embedded)'}
+            {zhText(locale, '地图位置（待嵌入）', 'Map location (to be embedded)')}
           </p>
         </div>
       </section>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
+import { zhOrEn } from '@/lib/locale-text';
 
 const stepNumbers = ['01', '02', '03', '04', '05', '06'];
 
@@ -15,7 +16,7 @@ export default function ProcessTimeline() {
         {/* Section header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-secondary)]/10 text-[var(--color-secondary-dark)] text-sm font-medium mb-4">
-            {locale === 'zh' ? '合作流程' : 'Process'}
+            {zhOrEn(locale, '合作流程', '合作流程', 'Process')}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-4">
             {t('title')}

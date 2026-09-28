@@ -2,6 +2,7 @@ import { sql } from '@/lib/db';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import FaqAccordion from '@/components/FaqAccordion';
 import { getCurrentSiteKey } from '@/lib/site';
+import { localizeText, toTraditional } from '@/lib/zh-hant';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,9 +25,9 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
     const a = r.answer as Record<string, string>;
     return {
       id: r.id,
-      category: r.category,
-      question: q[locale] || q.en || q.zh || '',
-      answer: a[locale] || a.en || a.zh || '',
+      category: r.category && locale === 'zh-TW' ? toTraditional(String(r.category)) : r.category,
+      question: localizeText(q, locale),
+      answer: localizeText(a, locale),
     };
   }).filter(f => f.question && f.answer);
 
