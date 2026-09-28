@@ -5,7 +5,6 @@ import { getCurrentSiteKey } from '@/lib/site';
 import Hero from '@/components/Hero';
 import Advantages from '@/components/Advantages';
 import ProductShowcase from '@/components/ProductShowcase';
-import ReadyStock from '@/components/ReadyStock';
 import FactorySection from '@/components/FactorySection';
 import ChenghaiHeritage from '@/components/ChenghaiHeritage';
 import Services from '@/components/Services';
@@ -22,6 +21,9 @@ import ChenghaiHistory from '@/components/china/ChenghaiHistory';
 import ChinaServices from '@/components/china/ChinaServices';
 import ChinaProcess from '@/components/china/ChinaProcess';
 import ChinaCTA from '@/components/china/ChinaCTA';
+
+// 仅非中文locale显示的组件
+import ReadyStock from '@/components/ReadyStock';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -72,7 +74,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Hero />
       <Advantages />
       <ProductShowcase />
-      <ReadyStock />
+      {locale !== 'zh' && <ReadyStock />}
       <FactorySection />
       <ChenghaiHeritage />
       <Services />
