@@ -52,12 +52,36 @@
     "subtitle": "Gama completa de productos de punto",
     "viewAll": "Ver Todos",
     "categories": [
-      { "name": "Suéteres de Mujer", "desc": "Jerséis, cárdigans, vestidos, abrigos de punto", "count": "200+ Modelos" },
-      { "name": "Suéteres Infantiles", "desc": "Modelos tiernos, conjuntos familiares", "count": "100+ Modelos" },
-      { "name": "Suéteres de Hombre", "desc": "Básicos, casual de negocio, moda", "count": "80+ Modelos" },
-      { "name": "Ropa de Hogar", "desc": "Conjuntos de punto cómodos y elegantes", "count": "50+ Modelos" },
-      { "name": "Ropa para Mascotas", "desc": "Suéteres para perros, gatos", "count": "30+ Modelos" },
-      { "name": "Accesorios", "desc": "Bufandas, gorros, guantes, bolsos", "count": "40+ Modelos" }
+      {
+        "name": "Suéteres de Mujer",
+        "desc": "Jerséis, cárdigans, vestidos, abrigos de punto",
+        "count": "200+ Modelos"
+      },
+      {
+        "name": "Suéteres Infantiles",
+        "desc": "Modelos tiernos, conjuntos familiares",
+        "count": "100+ Modelos"
+      },
+      {
+        "name": "Suéteres de Hombre",
+        "desc": "Básicos, casual de negocio, moda",
+        "count": "80+ Modelos"
+      },
+      {
+        "name": "Ropa de Hogar",
+        "desc": "Conjuntos de punto cómodos y elegantes",
+        "count": "50+ Modelos"
+      },
+      {
+        "name": "Ropa para Mascotas",
+        "desc": "Suéteres para perros, gatos",
+        "count": "30+ Modelos"
+      },
+      {
+        "name": "Accesorios",
+        "desc": "Bufandas, gorros, guantes, bolsos",
+        "count": "40+ Modelos"
+      }
     ]
   },
   "factory": {
@@ -65,32 +89,94 @@
     "subtitle": "20 años de experiencia en cada suéter",
     "learnMore": "Saber Más",
     "features": [
-      { "title": "Base Productiva Moderna", "desc": "Ubicada en Chenghai, Shantou. 30 talleres con máquinas computarizadas." },
-      { "title": "Equipo Técnico Experto", "desc": "20 técnicos con 20+ años de experiencia. Control profesional en diseño, patronaje y producción." },
-      { "title": "Control de Calidad Estricto", "desc": "Tres etapas: materia prima, semielaborados, producto final. Calidad en cada pieza." },
-      { "title": "Servicio de Respuesta Rápida", "desc": "Respuesta en 24 horas. 3-5 días muestras, 7-15 días producción." }
+      {
+        "title": "Base Productiva Moderna",
+        "desc": "Ubicada en Chenghai, Shantou. 30 talleres con máquinas computarizadas."
+      },
+      {
+        "title": "Equipo Técnico Experto",
+        "desc": "20 técnicos con 20+ años de experiencia. Control profesional en diseño, patronaje y producción."
+      },
+      {
+        "title": "Control de Calidad Estricto",
+        "desc": "Tres etapas: materia prima, semielaborados, producto final. Calidad en cada pieza."
+      },
+      {
+        "title": "Servicio de Respuesta Rápida",
+        "desc": "Respuesta en 24 horas. 3-5 días muestras, 7-15 días producción."
+      }
     ]
   },
   "services": {
     "title": "Nuestros Servicios",
     "subtitle": "Soluciones integrales de punto de diseño a entrega",
     "items": [
-      { "title": "Desarrollo ODM", "desc": "Ofrecemos diseños originales. 100+ modelos nuevos mensuales.", "features": ["Diseño Original", "Nuevos Mensuales", "Licencia Exclusiva"] },
-      { "title": "Fabricación OEM", "desc": "Proporcione sus diseños o muestras. Marca propia con etiquetas.", "features": ["Por Diseño", "Por Muestra", "Marca Propia"] },
-      { "title": "Pequeños Lotes Rápidos", "desc": "MOQ desde 50 piezas, entrega 7 días. Ideal para e-commerce.", "features": ["MOQ 50 pz", "Entrega 7 días", "Reposición Rápida"] },
-      { "title": "Pedidos Grandes", "desc": "30,000 pz/día. Manejo de pedidos con pago escalonado.", "features": ["Alta Capacidad", "Entrega Fiable", "Calidad Consistente"] }
+      {
+        "title": "Desarrollo ODM",
+        "desc": "Ofrecemos diseños originales. 100+ modelos nuevos mensuales.",
+        "features": [
+          "Diseño Original",
+          "Nuevos Mensuales",
+          "Licencia Exclusiva"
+        ]
+      },
+      {
+        "title": "Fabricación OEM",
+        "desc": "Proporcione sus diseños o muestras. Marca propia con etiquetas.",
+        "features": [
+          "Por Diseño",
+          "Por Muestra",
+          "Marca Propia"
+        ]
+      },
+      {
+        "title": "Pequeños Lotes Rápidos",
+        "desc": "MOQ desde 50 piezas, entrega 7 días. Ideal para e-commerce.",
+        "features": [
+          "MOQ 50 pz",
+          "Entrega 7 días",
+          "Reposición Rápida"
+        ]
+      },
+      {
+        "title": "Pedidos Grandes",
+        "desc": "30,000 pz/día. Manejo de pedidos con pago escalonado.",
+        "features": [
+          "Alta Capacidad",
+          "Entrega Fiable",
+          "Calidad Consistente"
+        ]
+      }
     ]
   },
   "process": {
     "title": "Cómo Trabajamos",
     "subtitle": "6 pasos simples para comenzar",
     "steps": [
-      { "title": "Consulta", "desc": "Contáctenos con sus necesidades" },
-      { "title": "Cotización", "desc": "Ofrecemos modelos y cotización" },
-      { "title": "Muestras", "desc": "3-5 días para confirmación" },
-      { "title": "Contrato", "desc": "Confirmar detalles y firmar" },
-      { "title": "Producción", "desc": "7-15 días con control" },
-      { "title": "Entrega", "desc": "Entrega con verificación" }
+      {
+        "title": "Consulta",
+        "desc": "Contáctenos con sus necesidades"
+      },
+      {
+        "title": "Cotización",
+        "desc": "Ofrecemos modelos y cotización"
+      },
+      {
+        "title": "Muestras",
+        "desc": "3-5 días para confirmación"
+      },
+      {
+        "title": "Contrato",
+        "desc": "Confirmar detalles y firmar"
+      },
+      {
+        "title": "Producción",
+        "desc": "7-15 días con control"
+      },
+      {
+        "title": "Entrega",
+        "desc": "Entrega con verificación"
+      }
     ]
   },
   "cta": {
@@ -157,10 +243,22 @@
       }
     ],
     "stats": [
-      { "value": "40+", "label": "Años de Historia" },
-      { "value": "3,000+", "label": "Empresas" },
-      { "value": "100K+", "label": "Trabajadores" },
-      { "value": "Ciudad Famosa", "label": "Capital del Punto de China" }
+      {
+        "value": "40+",
+        "label": "Años de Historia"
+      },
+      {
+        "value": "3,000+",
+        "label": "Empresas"
+      },
+      {
+        "value": "100K+",
+        "label": "Trabajadores"
+      },
+      {
+        "value": "Ciudad Famosa",
+        "label": "Capital del Punto de China"
+      }
     ],
     "quote": "Los hilos de Chenghai han tejido no solo jerséis, sino los sueños y el sustento de generaciones — cada puntada un testimonio del espíritu perdurable de la artesanía.",
     "quoteSource": "Asociación de la Industria del Punto de Chenghai"
@@ -173,5 +271,35 @@
     "followUs": "Síganos",
     "copyright": "© 2024 Yayuhong Knitwear Factory. Todos los derechos reservados.",
     "icp": ""
+  },
+  "wechatGuide": {
+    "title": "Cómo usar WeChat",
+    "subtitle": "WeChat es la aplicación de mensajería más popular en China. Siga estos pasos para conectarse con nosotros y obtener cotizaciones instantáneas.",
+    "qrTitle": "Nuestro código QR de WeChat",
+    "qrDesc": "Escanee este código QR con WeChat para agregarnos como contacto",
+    "step1": {
+      "title": "Descargar WeChat",
+      "desc": "WeChat está disponible gratis en iOS y Android. Descárguelo de App Store o Google Play."
+    },
+    "step2": {
+      "title": "Registrar una cuenta",
+      "desc": "Abra WeChat y regístrese con su número de teléfono. Se requiere verificación.",
+      "tip1": "Use su número de teléfono real para la verificación",
+      "tip2": "Establezca un ID de WeChat memorable"
+    },
+    "step3": {
+      "title": "Escanee nuestro código QR",
+      "desc": "Abra WeChat, toque el icono '+' en la parte superior derecha, seleccione 'Escanear' y apunte la cámara a nuestro código QR."
+    },
+    "step4": {
+      "title": "Enviar un mensaje",
+      "desc": "Una vez agregado, envíenos un mensaje con sus requisitos de producto. Nuestro equipo responde en 12 horas.",
+      "tip": "Consejo: Enviar detalles (estilo, cantidad, precio objetivo) nos ayuda a responder más rápido con cotizaciones precisas."
+    },
+    "whatsappTitle": "¿Prefiere WhatsApp?",
+    "whatsappDesc": "También respondemos en WhatsApp para su conveniencia",
+    "whatsappBtn": "Chatear en WhatsApp",
+    "contactPrompt": "O envíe una consulta directamente a través de nuestro sitio web",
+    "contactBtn": "Enviar consulta"
   }
 }
