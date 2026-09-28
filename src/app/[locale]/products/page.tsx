@@ -4,6 +4,8 @@ import FloatingContact from '@/components/FloatingContact';
 
 const A = (id: string, suffix = 'UL640') => `https://m.media-amazon.com/images/I/${id}._AC_${suffix}_.jpg`;
 
+const AE = (hash: string) => `https://ae-pic-a1.aliexpress-media.com/kf/${hash}.jpg_480x480q75.jpg_.webp`;
+
 const imgApi = (prompt: string) =>
   `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(prompt)}&image_size=square`;
 
@@ -37,6 +39,10 @@ const allProducts = {
       { img: A('71l9N09tGUL'), name: { en: 'Mock Neck', zh: '半高领' } },
       { img: A('81opFGAsGEL'), name: { en: 'Classic Cardigan', zh: '经典开衫' } },
       { img: A('61E2I1WMn2L'), name: { en: 'Casual Knit', zh: '休闲针织' } },
+      { img: AE('Sab811e739bbf4c919809910c20ca9bc5d'), name: { en: 'Knit Pullover', zh: '针织套头衫' } },
+      { img: AE('S086494d2d6ec4f3695056364de3874b0A'), name: { en: 'Casual Cardigan', zh: '休闲开衫' } },
+      { img: AE('Sc599169132fa4fb787717a6927666628H'), name: { en: 'Fashion Sweater', zh: '时尚毛衣' } },
+      { img: AE('S3bf69909ca1a410184fc2f90a3f25449N'), name: { en: 'Slim Knit', zh: '修身针织' } },
     ],
   },
   kids: {
@@ -65,6 +71,7 @@ const allProducts = {
       { img: P('white', 'kids knit hoodie', 'pom pom detail'), name: { en: 'Pom Pom Hoodie', zh: '毛球连帽衫' } },
       { img: P('charcoal', 'kids polo sweater', 'collar detail'), name: { en: 'Polo Sweater', zh: 'Polo毛衣' } },
       { img: P('mustard', 'kids geometric knit', 'diamond pattern'), name: { en: 'Geometric Knit', zh: '几何针织' } },
+      { img: AE('S0f9b29bb9fa34ca49a1fef223929f00d1'), name: { en: 'Kids Knit Sweater', zh: '儿童针织毛衣' } },
     ],
   },
   mens: {
@@ -93,6 +100,8 @@ const allProducts = {
       { img: A('81zbUrUlm0L'), name: { en: 'Basic Pullover', zh: '基础套头衫' } },
       { img: A('71zt76aD5DL'), name: { en: 'Crew Neck Knit', zh: '圆领针织' } },
       { img: A('A1Tv-5E3lPL'), name: { en: 'Stand Collar Pullover', zh: '立领套头衫' } },
+      { img: AE('S7716de674d1147bb9726abbc1454c800K'), name: { en: 'Men Knit Sweater', zh: '男款针织毛衣' } },
+      { img: AE('S17e51289db414bb287097dfe096ac183O'), name: { en: 'Casual Men Knit', zh: '男款休闲针织' } },
     ],
   },
   loungewear: {
