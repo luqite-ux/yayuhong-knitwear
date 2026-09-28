@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import ContactForm from '@/components/ContactForm';
 import FloatingContact from '@/components/FloatingContact';
 import { zhText } from '@/lib/zh-hant';
+import { Link } from '@/i18n/navigation';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -175,6 +176,18 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                     <p className="text-xs text-center mt-2 text-[var(--color-text-muted)]">
                       {info('wechat')}
                     </p>
+                    {locale !== 'zh' && (
+                      <Link
+                        href="/wechat-guide"
+                        className="flex items-center justify-center gap-1 mt-2 text-xs text-[#07C160] hover:opacity-70 transition-opacity"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.657-1.79 3-4 3-.083 0-.165-.003-.246-.009C9.689 13.063 8 14.362 8 16" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v12" />
+                        </svg>
+                        {locale === 'zh-TW' ? '如何使用微信？' : 'How to use WeChat?'}
+                      </Link>
+                    )}
                   </div>
                   {/* WhatsApp QR */}
                   <a
