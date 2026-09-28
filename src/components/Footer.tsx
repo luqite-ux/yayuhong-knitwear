@@ -111,16 +111,40 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter / WeChat */}
+          {/* WeChat QR + Guide */}
           <div>
-            <h4 className="font-semibold text-base mb-5">{locale === 'zh' ? '添加微信' : 'WhatsApp / WeChat'}</h4>
+            <h4 className="font-semibold text-base mb-5">
+              {locale === 'zh' ? '添加微信' : 'WeChat'}
+            </h4>
             <p className="text-white/60 text-sm mb-4">
               {locale === 'zh' 
                 ? '扫描二维码添加业务微信，获取最新款式和报价'
-                : 'Add us on WhatsApp for instant quote and latest styles'}
+                : 'Scan to add us on WeChat for instant quote and latest styles'}
             </p>
-            <div className="w-28 h-28 bg-white rounded-lg flex items-center justify-center text-[var(--color-primary)] text-xs text-center p-2">
-              {locale === 'zh' ? '微信二维码' : 'QR Code'}
+            <div className="w-32 h-32 bg-white rounded-lg flex items-center justify-center text-[var(--color-primary)] text-xs text-center p-2 mb-3">
+              <img 
+                src="/images/wechat-qr.jpg" 
+                alt="WeChat QR Code"
+                className="w-full h-full object-contain rounded-lg"
+              />
+            </div>
+            {locale !== 'zh' && (
+              <Link
+                href="/wechat-guide"
+                className="inline-flex items-center gap-1 text-sm text-[var(--color-secondary-light)] hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.657-1.79 3-4 3-.083 0-.165-.003-.246-.009C9.689 13.063 8 14.362 8 16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v12" />
+                </svg>
+                How to use WeChat?
+              </Link>
+            )}
+            <div className="mt-3 flex items-center gap-2 text-sm text-white/60">
+              <svg className="w-4 h-4 flex-shrink-0 text-[var(--color-secondary-light)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>WhatsApp: +86 13829659110</span>
             </div>
           </div>
         </div>
