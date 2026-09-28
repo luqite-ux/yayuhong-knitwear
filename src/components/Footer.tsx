@@ -143,9 +143,9 @@ export default function Footer() {
                 </p>
                 <div className="w-full aspect-square bg-white rounded-lg flex items-center justify-center p-2">
                   <img 
-                    src="/images/whatsapp-qr.jpg" 
+                    src="/images/whatsapp-qr.png" 
                     alt="WhatsApp QR Code"
-                    className="w-full h-full object-contain rounded-lg"
+                    className="w-full h-full object-contain"
                   />
                 </div>
               </a>

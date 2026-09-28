@@ -188,7 +188,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                     </p>
                     <div className="aspect-square bg-white rounded-lg border-2 border-green-500/30 p-2 group-hover:border-green-500 transition-colors">
                       <img
-                        src="/images/whatsapp-qr.jpg"
+                        src="/images/whatsapp-qr.png"
                         alt="WhatsApp QR Code"
                         className="w-full h-full object-contain rounded"
                       />
