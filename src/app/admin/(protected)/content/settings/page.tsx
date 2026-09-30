@@ -4,7 +4,7 @@ import SettingsForm from '@/components/admin/SettingsForm';
 export const dynamic = 'force-dynamic';
 
 export default async function SettingsPage() {
-  const profile = await sql`select * from site_profile where id = 1`;
+  const profile = await sql`select * from site_profile order by created_at limit 1`;
   const p = profile[0];
 
   return (

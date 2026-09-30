@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
           site_name = ${JSON.stringify({ zh: site_name_zh, en: site_name_en })}::jsonb,
           domain = ${domain},
           updated_at = now()
-        where id = 1
+        where id = (select id from site_profile order by created_at limit 1)
       `;
     }
 
@@ -135,13 +135,13 @@ export async function POST(req: NextRequest) {
           indexing_enabled = ${indexing_enabled !== false},
           enabled = true,
           updated_at = now()
-        where id = 1
+        where id = (select id from seo_config order by created_at limit 1)
       `;
     }
 
     if (skip) {
       const row = await sql<{ onboarding_steps: unknown }[]>`
-        select onboarding_steps from seo_config where id = 1
+        select onboarding_steps from seo_config order by created_at limit 1
       `;
       const steps = (row[0]?.onboarding_steps as Record<string, boolean>) || {};
       steps[step] = false;
@@ -149,14 +149,14 @@ export async function POST(req: NextRequest) {
         update seo_config set
           onboarding_steps = ${JSON.stringify(steps)}::jsonb,
           updated_at = now()
-        where id = 1
+        where id = (select id from seo_config order by created_at limit 1)
       `;
       if (step === 'cloudflare') await updateSecretStatus('cloudflare', 'skipped');
       if (step === 'geo_engine') await updateSecretStatus('geo_engine', 'skipped');
       if (step === 'notification') await updateSecretStatus('notification', 'skipped');
     } else {
       const row = await sql<{ onboarding_steps: unknown }[]>`
-        select onboarding_steps from seo_config where id = 1
+        select onboarding_steps from seo_config order by created_at limit 1
       `;
       const steps = (row[0]?.onboarding_steps as Record<string, boolean>) || {};
       steps[step] = true;
@@ -164,7 +164,7 @@ export async function POST(req: NextRequest) {
         update seo_config set
           onboarding_steps = ${JSON.stringify(steps)}::jsonb,
           updated_at = now()
-        where id = 1
+        where id = (select id from seo_config order by created_at limit 1)
       `;
     }
 
@@ -186,11 +186,11 @@ export async function GET() {
   const config = await sql`
     select enabled, onboarding_steps, monthly_articles, publish_mode, style_quota,
            geo_monthly_budget_usd, indexing_enabled
-    from seo_config where id = 1
+    from seo_config order by created_at limit 1
   `;
 
   const profile = await sql`
-    select site_name, domain, default_locale from site_profile where id = 1
+    select site_name, domain, default_locale from site_profile order by created_at limit 1
   `;
 
   const secrets = await sql`

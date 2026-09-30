@@ -14,7 +14,7 @@ export async function getChinaSeoConfig() {
              haosou_verification, sogou_verification, shenma_verification,
              doubao_verification, china_seo, china_geo
       from site_profile
-      where id = 1
+      order by created_at
       limit 1
     `;
     return rows[0] || {};

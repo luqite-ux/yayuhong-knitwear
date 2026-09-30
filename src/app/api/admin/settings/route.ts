@@ -9,7 +9,7 @@ export async function GET() {
   const ok = await requireAdmin();
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
-  const profile = await sql`select * from site_profile where id = 1`;
+  const profile = await sql`select * from site_profile order by created_at limit 1`;
   return NextResponse.json({ profile: profile[0] });
 }
 
@@ -48,7 +48,7 @@ export async function PUT(req: NextRequest) {
       china_seo = ${JSON.stringify(china_seo || {})}::jsonb,
       china_geo = ${JSON.stringify(china_geo || {})}::jsonb,
       updated_at = now()
-    where id = 1
+    where id = (select id from site_profile order by created_at limit 1)
   `;
   await logAudit('admin', 'update', 'site_profile', { domain, china_seo_updated: !!china_seo });
   return NextResponse.json({ ok: true });

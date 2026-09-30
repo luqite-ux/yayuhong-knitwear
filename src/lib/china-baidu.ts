@@ -16,7 +16,7 @@ export interface BaiduPushResult {
  */
 async function getBaiduPushToken(): Promise<string | null> {
   const rows = await sql`
-    select baidu_push_token from site_profile where id = 1 limit 1
+    select baidu_push_token from site_profile order by created_at limit 1
   `;
   return rows[0]?.baidu_push_token || null;
 }

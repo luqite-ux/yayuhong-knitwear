@@ -22,7 +22,7 @@ export async function GET() {
   `;
 
   const profile = await sql<{ site_name: Record<string, string>; intro: Record<string, string> | null }[]>`
-    select site_name, intro from site_profile where id = 1
+    select site_name, intro from site_profile order by created_at limit 1
   `;
 
   const p = profile[0];

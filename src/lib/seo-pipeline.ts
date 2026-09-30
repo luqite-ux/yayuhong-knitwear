@@ -25,7 +25,7 @@ interface SeoConfig {
 }
 
 async function getSeoConfig(): Promise<SeoConfig | null> {
-  const rows = await sql<SeoConfig[]>`select * from seo_config where id = 1`;
+  const rows = await sql<SeoConfig[]>`select * from seo_config order by created_at limit 1`;
   return rows.length > 0 ? rows[0] : null;
 }
 
@@ -95,7 +95,7 @@ async function generateDraft(
   style: Style,
   config: SeoConfig,
 ): Promise<{ draft: ArticleDraft; promptTokens: number; completionTokens: number; cost: number }> {
-  const profile = await sql`select site_name, company_name, intro, brand_voice from site_profile where id = 1`;
+  const profile = await sql`select site_name, company_name, intro, brand_voice from site_profile order by created_at limit 1`;
   const p = profile[0];
   const siteName = pick(p.site_name as Record<string, string>, config.writing_locale);
   const intro = p.intro ? pick(p.intro as Record<string, string>, config.writing_locale) : '';
@@ -369,7 +369,7 @@ export async function runBootstrap(triggeredBy: string): Promise<{ ok: boolean; 
   const details: Record<string, unknown> = {};
 
   try {
-    const profile = await sql`select * from site_profile where id = 1`;
+    const profile = await sql`select * from site_profile order by created_at limit 1`;
     const p = profile[0];
     const siteName = pick(p.site_name as Record<string, string>, 'en');
     const intro = p.intro ? pick(p.intro as Record<string, string>, 'en') : '';
@@ -412,7 +412,7 @@ Return ONLY a JSON object:
         competitor_domains = ${competitorDomains}::jsonb,
         brand_voice = ${brandVoice},
         updated_at = now()
-      where id = 1
+      where id = (select id from seo_config order by created_at limit 1)
     `;
 
     details.keywords = ((llmResult.data.keywords as any[]) || []).length;
