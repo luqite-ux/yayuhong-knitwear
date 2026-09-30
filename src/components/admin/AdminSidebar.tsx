@@ -27,7 +27,7 @@ export default function AdminSidebar() {
   return (
     <aside className="w-60 bg-white border-r border-gray-200 min-h-screen flex flex-col">
       <div className="p-4 border-b border-gray-200">
-        <h1 className="text-lg font-bold text-gray-900">雅育鸿后台</h1>
+        <h1 className="text-lg font-bold text-gray-900">秀裕毛衫后台</h1>
         <p className="text-xs text-gray-500">xiuyuknit.com</p>
       </div>
       <nav className="flex-1 p-2 overflow-y-auto">

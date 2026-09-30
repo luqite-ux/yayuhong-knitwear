@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="admin-card max-w-md w-full">
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">雅育鸿管理后台</h1>
+          <h1 className="text-2xl font-bold text-gray-900">秀裕毛衫管理后台</h1>
           <p className="text-sm text-gray-500 mt-1">xiuyuknit.com</p>
         </div>
 
