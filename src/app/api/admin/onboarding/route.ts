@@ -139,11 +139,23 @@ export async function POST(req: NextRequest) {
       `;
     }
 
+    // 安全解析 jsonb 字段（多重保险：postgres 驱动可能返回字符串或对象）
+    const row = await sql<{ onboarding_steps: unknown }[]>`
+      select onboarding_steps from seo_config order by created_at limit 1
+    `;
+    let steps: Record<string, boolean> = {};
+    if (row[0]?.onboarding_steps) {
+      let raw: unknown = row[0].onboarding_steps;
+      // 反复解析，直到得到真正的对象（防止双重编码）
+      for (let i = 0; i < 3 && typeof raw === 'string'; i++) {
+        try { raw = JSON.parse(raw); } catch { break; }
+      }
+      if (typeof raw === 'object' && raw !== null) {
+        steps = raw as Record<string, boolean>;
+      }
+    }
+
     if (skip) {
-      const row = await sql<{ onboarding_steps: unknown }[]>`
-        select onboarding_steps from seo_config order by created_at limit 1
-      `;
-      const steps = (row[0]?.onboarding_steps as Record<string, boolean>) || {};
       steps[step] = false;
       await sql`
         update seo_config set
@@ -155,10 +167,6 @@ export async function POST(req: NextRequest) {
       if (step === 'geo_engine') await updateSecretStatus('geo_engine', 'skipped');
       if (step === 'notification') await updateSecretStatus('notification', 'skipped');
     } else {
-      const row = await sql<{ onboarding_steps: unknown }[]>`
-        select onboarding_steps from seo_config order by created_at limit 1
-      `;
-      const steps = (row[0]?.onboarding_steps as Record<string, boolean>) || {};
       steps[step] = true;
       await sql`
         update seo_config set
@@ -197,9 +205,30 @@ export async function GET() {
     select key, masked, status from integration_secrets order by key
   `;
 
+  // 安全解析 JSON 字段（postgres 驱动可能返回字符串或对象）
+  function safeParseJson(val: unknown): Record<string, unknown> {
+    if (!val) return {};
+    if (typeof val === 'object') return val as Record<string, unknown>;
+    if (typeof val === 'string') {
+      try { return JSON.parse(val); } catch { return {}; }
+    }
+    return {};
+  }
+
+  const cfg = config[0] ? {
+    ...config[0],
+    onboarding_steps: safeParseJson(config[0].onboarding_steps),
+    style_quota: safeParseJson(config[0].style_quota),
+  } : null;
+
+  const prof = profile[0] ? {
+    ...profile[0],
+    site_name: safeParseJson(profile[0].site_name),
+  } : null;
+
   return NextResponse.json({
-    config: config[0],
-    profile: profile[0],
+    config: cfg,
+    profile: prof,
     secrets,
   });
 }
