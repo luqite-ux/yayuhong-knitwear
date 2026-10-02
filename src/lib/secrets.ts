@@ -30,12 +30,12 @@ export async function setSecret(
   key: string,
   plaintext: string,
   masked: string,
-  meta?: Record<string, unknown>,
+  meta: Record<string, unknown> = {},
 ): Promise<void> {
   const enc = encryptToBytes(plaintext);
   await sql`
     insert into integration_secrets (key, ciphertext, iv, tag, masked, meta, status)
-    values (${key}, ${enc.ciphertext}, ${enc.iv}, ${enc.tag}, ${masked}, ${meta ? JSON.stringify(meta) : null}, 'pending')
+    values (${key}, ${enc.ciphertext}, ${enc.iv}, ${enc.tag}, ${masked}, ${JSON.stringify(meta)}::jsonb, 'pending')
     on conflict (key) do update
     set ciphertext = excluded.ciphertext,
         iv = excluded.iv,
