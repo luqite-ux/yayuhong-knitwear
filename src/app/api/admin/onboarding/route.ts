@@ -47,12 +47,22 @@ export async function POST(req: NextRequest) {
     if (step === 'content_source' && data) {
       const { source_url, source_type } = data as { source_url: string; source_type: string };
       if (source_url) {
-        await sql`
-          insert into content_sync_sources (name, source_type, url, is_active)
-          values ('官网内容', ${source_type || 'scrape'}, ${source_url}, true)
-          on conflict (name) do update
-          set url = excluded.url, source_type = excluded.source_type, updated_at = now()
+        const config = JSON.stringify({ url: source_url, source_type: source_type || 'scrape' });
+        const existing = await sql<{ id: string }[]>`
+          select id from content_sync_sources where type = ${'site_scrape'} limit 1
         `;
+        if (existing.length > 0) {
+          await sql`
+            update content_sync_sources
+            set config_encrypted = ${config}::bytea, status = 'active', updated_at = now()
+            where id = ${existing[0].id}
+          `;
+        } else {
+          await sql`
+            insert into content_sync_sources (type, config_encrypted, status)
+            values ('site_scrape', ${config}::bytea, 'active')
+          `;
+        }
       }
     }
 
