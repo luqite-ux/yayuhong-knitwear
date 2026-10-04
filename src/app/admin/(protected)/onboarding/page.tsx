@@ -32,7 +32,7 @@ export default function OnboardingPage() {
     ga4: { measurement_id: '', property_id: '' },
     cloudflare: { api_token: '', zone_id: '' },
     geo_engine: { engine: 'perplexity', api_key: '' },
-    notification: { webhook_url: '', webhook_type: 'feishu' },
+    notification: { webhook_url: '', webhook_type: 'feishu', email_host: 'smtp.qq.com', email_port: '465', email_user: '', email_pass: '', email_to: '' },
     automation: {
       monthly_articles: '4',
       publish_mode: 'auto',
@@ -50,7 +50,12 @@ export default function OnboardingPage() {
       const res = await fetch('/api/admin/onboarding');
       const data = await res.json();
       if (data.profile) {
-        const name = typeof data.profile.site_name === 'object' ? data.profile.site_name : {};
+        let name: Record<string, string> = {};
+        if (typeof data.profile.site_name === 'object' && data.profile.site_name) {
+          name = data.profile.site_name as Record<string, string>;
+        } else if (typeof data.profile.site_name === 'string') {
+          try { name = JSON.parse(data.profile.site_name); } catch {}
+        }
         setFormData((prev) => ({
           ...prev,
           site_identity: {
@@ -62,7 +67,13 @@ export default function OnboardingPage() {
         }));
       }
       if (data.config?.onboarding_steps) {
-        setCompleted(data.config.onboarding_steps);
+        let steps: Record<string, boolean> = {};
+        if (typeof data.config.onboarding_steps === 'object') {
+          steps = data.config.onboarding_steps as Record<string, boolean>;
+        } else if (typeof data.config.onboarding_steps === 'string') {
+          try { steps = JSON.parse(data.config.onboarding_steps); } catch {}
+        }
+        setCompleted(steps);
       }
     } catch {
       // ignore
@@ -302,22 +313,53 @@ export default function OnboardingPage() {
         )}
 
         {step.id === 'notification' && (
-          <div className="space-y-4">
-            <p className="text-sm text-gray-500">可选。任务完成、错误等通知推送。</p>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">通知类型</label>
-              <select className="admin-input"
-                value={formData.notification.webhook_type}
-                onChange={(e) => updateField('webhook_type', e.target.value)}>
-                <option value="feishu">飞书</option>
-                <option value="email">邮件</option>
-              </select>
+          <div className="space-y-6">
+            <p className="text-sm text-gray-500">可选。新询盘、任务完成、错误等通知推送。可同时配置飞书和邮件。</p>
+
+            <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+              <h3 className="font-medium text-gray-800">💬 飞书通知</h3>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">飞书群机器人 Webhook URL</label>
+                <input className="admin-input" placeholder="https://open.feishu.cn/open-apis/bot/v2/hook/..."
+                  value={formData.notification.webhook_url}
+                  onChange={(e) => updateField('webhook_url', e.target.value)} />
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Webhook URL</label>
-              <input className="admin-input" placeholder="https://..."
-                value={formData.notification.webhook_url}
-                onChange={(e) => updateField('webhook_url', e.target.value)} />
+
+            <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+              <h3 className="font-medium text-gray-800">📧 邮件通知</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">SMTP 服务器</label>
+                  <input className="admin-input" placeholder="smtp.qq.com"
+                    value={formData.notification.email_host}
+                    onChange={(e) => updateField('email_host', e.target.value)} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">端口</label>
+                  <input className="admin-input" placeholder="465"
+                    value={formData.notification.email_port}
+                    onChange={(e) => updateField('email_port', e.target.value)} />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">发件邮箱</label>
+                <input className="admin-input" placeholder="your@email.com"
+                  value={formData.notification.email_user}
+                  onChange={(e) => updateField('email_user', e.target.value)} />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">邮箱授权码/密码</label>
+                <input className="admin-input" type="password" placeholder="授权码或密码"
+                  value={formData.notification.email_pass}
+                  onChange={(e) => updateField('email_pass', e.target.value)} />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">收件邮箱（留空则发给发件人）</label>
+                <input className="admin-input" placeholder="receive@email.com"
+                  value={formData.notification.email_to}
+                  onChange={(e) => updateField('email_to', e.target.value)} />
+              </div>
             </div>
           </div>
         )}
