@@ -110,10 +110,23 @@ export async function POST(req: NextRequest) {
     }
 
     if (step === 'notification' && data) {
-      const { webhook_url, webhook_type } = data as { webhook_url: string; webhook_type: string };
+      const { webhook_url, webhook_type, email_host, email_user, email_pass, email_port, email_to } =
+        data as Record<string, string>;
       if (webhook_url) {
         const cfg = JSON.stringify({ url: webhook_url, type: webhook_type });
         await setSecret('notification', cfg, maskSecret(webhook_url));
+      }
+      if (email_pass) {
+        const cfg = JSON.stringify({
+          host: email_host || 'smtp.qq.com',
+          port: Number(email_port) || 465,
+          secure: true,
+          user: email_user,
+          pass: email_pass,
+          fromName: '网站询盘通知',
+          to: email_to || email_user,
+        });
+        await setSecret('notification_email', cfg, email_user || '');
       }
     }
 
