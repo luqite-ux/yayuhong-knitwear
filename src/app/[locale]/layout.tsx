@@ -12,6 +12,7 @@ import ChinaHeader from '@/components/china/ChinaHeader';
 import ChinaFooter from '@/components/china/ChinaFooter';
 import ChinaSeoHead from '@/components/china/ChinaSeoHead';
 import ChinaGeoFooter from '@/components/china/ChinaGeoFooter';
+import Ga4Script from '@/components/Ga4Script';
 import SiteUrlNormalizer from '@/components/SiteUrlNormalizer';
 
 export function generateStaticParams() {
@@ -138,6 +139,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <SiteUrlNormalizer />
           {isChina && <ChinaSeoHead />}
+          {!isChina && <Ga4Script />}
           {isChina ? <ChinaHeader /> : <Header />}
           <main className="flex-1">{children}</main>
           {isChina ? <ChinaFooter /> : <Footer />}
