@@ -7,7 +7,7 @@ import { zhText } from '@/lib/zh-hant';
 import { getCurrentSiteKey } from '@/lib/site';
 import { getChinaSeoConfig, getChinaSeoMetas } from '@/lib/china-seo';
 import Header from '@/components/Header';
-import FooterServer from '@/components/FooterServer';
+import Footer from '@/components/Footer';
 import ChinaHeader from '@/components/china/ChinaHeader';
 import ChinaFooter from '@/components/china/ChinaFooter';
 import ChinaSeoHead from '@/components/china/ChinaSeoHead';
@@ -142,7 +142,7 @@ export default async function LocaleLayout({
           {!isChina && <Ga4Script />}
           {isChina ? <ChinaHeader /> : <Header />}
           <main className="flex-1">{children}</main>
-          {isChina ? <ChinaFooter /> : <FooterServer locale={locale} />}
+          {isChina ? <ChinaFooter /> : <Footer />}
           {isChina && <ChinaGeoFooter />}
         </NextIntlClientProvider>
       </body>
