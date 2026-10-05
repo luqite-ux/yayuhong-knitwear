@@ -253,7 +253,7 @@ async function fetchProductsFromDB(siteKey: string) {
     if (products.length === 0) return null;
 
     // 手动解析 JSON 字段（postgres.js 默认返回字符串）
-    const parsedProducts = products.map((p) => ({
+    const parsedProducts = products.map((p: any) => ({
       id: p.id,
       slug: p.slug,
       model: p.model,
@@ -264,7 +264,7 @@ async function fetchProductsFromDB(siteKey: string) {
       gallery_urls: deepParseJson(p.gallery_urls) as string[] | null,
     }));
 
-    const parsedCategories = categories.map((c) => ({
+    const parsedCategories = categories.map((c: any) => ({
       id: c.id,
       slug: c.slug,
       sort: c.sort,
@@ -342,11 +342,23 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
   const siteKey = await getCurrentSiteKey();
 
   // 尝试从数据库读取产品
-  const dbData = await fetchProductsFromDB(siteKey);
-
-  // 使用数据库数据或兜底数据
-  const categories = dbData ? dbData.categories : (fallbackProducts as any);
-  const activeCategoryKeys = dbData ? dbData.categoryKeys : (categoryKeys as unknown as string[]);
+  let categories: any;
+  let activeCategoryKeys: string[];
+  
+  try {
+    const dbData = await fetchProductsFromDB(siteKey);
+    if (dbData) {
+      categories = dbData.categories;
+      activeCategoryKeys = dbData.categoryKeys;
+    } else {
+      categories = fallbackProducts as any;
+      activeCategoryKeys = categoryKeys as unknown as string[];
+    }
+  } catch (e) {
+    console.error('ProductsPage error:', e);
+    categories = fallbackProducts as any;
+    activeCategoryKeys = categoryKeys as unknown as string[];
+  }
 
   return (
     <>
