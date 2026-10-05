@@ -4,9 +4,6 @@ import FloatingContact from '@/components/FloatingContact';
 import ProductGrid from '@/components/ProductGrid';
 import { zhText } from '@/lib/zh-hant';
 import { type ProductItem } from '@/components/ProductDetailModal';
-import { sql } from '@/lib/db';
-import { getCurrentSiteKey } from '@/lib/site';
-import { deepParseJson } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,7 +11,6 @@ const A = (id: string, suffix = 'UL640') => `https://m.media-amazon.com/images/I
 
 const AE = (hash: string) => `https://ae-pic-a1.aliexpress-media.com/kf/${hash}.jpg_480x480q75.jpg_.webp`;
 
-// 兜底数据（数据库没有产品时使用）
 const fallbackProducts = {
   womens: {
     nameKey: 'categories.0.name',
@@ -133,159 +129,12 @@ const fallbackProducts = {
   },
 };
 
-const categoryKeys = ['womens', 'kids', 'mens', 'loungewear', 'pet', 'accessories'] as const;
-type CategoryKey = typeof categoryKeys[number];
-
-// slug 到分类 key 的映射（根据数据库实际 slug 调整）
-const slugToKeyMap: Record<string, CategoryKey> = {
-  'womens-sweater': 'womens',
-  'womens': 'womens',
-  'women': 'womens',
-  'kids-sweater': 'kids',
-  'kids': 'kids',
-  'children': 'kids',
-  'mens-sweater': 'mens',
-  'mens': 'mens',
-  'men': 'mens',
-  'loungewear': 'loungewear',
-  'lounge': 'loungewear',
-  'homewear': 'loungewear',
-  'pet-clothes': 'pet',
-  'pet': 'pet',
-  'dog': 'pet',
-  'accessories': 'accessories',
-  'knit-accessories': 'accessories',
-  'hats': 'accessories',
-};
-
-// 分类封面图（兜底用）
-const categoryCovers: Record<CategoryKey, string> = {
-  womens: A('71WfBqJdQOL'),
-  kids: A('71g3KqZJw-L'),
-  mens: A('713vq5n8GqL'),
-  loungewear: A('71V7sZnGqgL'),
-  pet: AE('S65cc01234567456789abcdef012345673'),
-  accessories: A('61T8JZLqNcL'),
-};
-
-async function fetchProductsFromDB(siteKey: string) {
-  try {
-    const [products, categories] = await Promise.all([
-      sql`
-        select
-          p.id, p.slug, p.name, p.summary, p.cover_url, p.gallery_urls,
-          p.model, p.is_active, p.sort,
-          c.slug as category_slug
-        from content_products p
-        left join content_categories c on p.category_id = c.id
-        where p.is_active = true
-          and p.sites && array['global', ${siteKey}]::text[]
-        order by p.sort, p.created_at
-      `,
-      sql`
-        select id, slug, name, sort
-        from content_categories
-        order by sort, created_at
-      `,
-    ]);
-
-    if (products.length === 0) return null;
-
-    // 深度解析 JSON
-    const parsedProducts = products.map((p) => ({
-      id: p.id,
-      slug: p.slug,
-      model: p.model,
-      cover_url: p.cover_url,
-      category_slug: p.category_slug,
-      name: deepParseJson(p.name) as Record<string, string>,
-      summary: deepParseJson(p.summary) as Record<string, string>,
-      gallery_urls: deepParseJson(p.gallery_urls) as string[] | null,
-    }));
-
-    const parsedCategories = categories.map((c) => ({
-      id: c.id,
-      slug: c.slug,
-      sort: c.sort,
-      name: deepParseJson(c.name) as Record<string, string>,
-    }));
-
-    // 按分类分组
-    const grouped: Record<string, {
-      nameKey: string;
-      descKey: string;
-      countKey: string;
-      cover: string;
-      items: ProductItem[];
-      categoryName?: Record<string, string>;
-    }> = {};
-
-    for (const key of categoryKeys) {
-      grouped[key] = {
-        nameKey: '',
-        descKey: '',
-        countKey: '',
-        cover: categoryCovers[key] || '/images/products/placeholder.jpg',
-        items: [],
-      };
-    }
-
-    // 处理分类信息
-    for (const cat of parsedCategories) {
-      const key = slugToKeyMap[cat.slug || ''];
-      if (key && grouped[key]) {
-        grouped[key].categoryName = cat.name;
-      }
-    }
-
-    // 处理产品
-    for (const p of parsedProducts) {
-      const key = slugToKeyMap[p.category_slug || ''];
-      if (key && grouped[key]) {
-        const item: ProductItem = {
-          img: p.cover_url || '',
-          name: {
-            en: p.name?.en || p.model || 'Product',
-            zh: p.name?.zh || p.name?.en || p.model || '产品',
-          },
-          material: p.summary ? {
-            en: p.summary.en || '',
-            zh: p.summary.zh || '',
-          } : undefined,
-        };
-        grouped[key].items.push(item);
-      }
-    }
-
-    // 过滤掉没有产品的分类
-    const filtered: Record<string, typeof grouped[string]> = {};
-    for (const key of categoryKeys) {
-      if (grouped[key].items.length > 0) {
-        filtered[key] = grouped[key];
-      }
-    }
-
-    const activeKeys = categoryKeys.filter((k) => filtered[k]);
-
-    return { categories: filtered, categoryKeys: activeKeys };
-  } catch (err) {
-    console.error('Failed to fetch products from DB:', err);
-    return null;
-  }
-}
+const categoryKeys = ['womens', 'kids', 'mens', 'loungewear', 'pet', 'accessories'];
 
 export default async function ProductsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'products' });
-  const siteKey = await getCurrentSiteKey();
-
-  // 尝试从数据库读取产品
-  const dbData = await fetchProductsFromDB(siteKey);
-
-  // 使用数据库数据或兜底数据
-  const categories = dbData ? dbData.categories : (fallbackProducts as any);
-  const activeCategoryKeys = dbData ? dbData.categoryKeys : (categoryKeys as unknown as string[]);
 
   return (
     <>
@@ -313,9 +162,9 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
       <section id="categories" className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {activeCategoryKeys.map((key, i) => {
-              const cat = categories[key];
-              const name = cat.categoryName?.[locale] || cat.categoryName?.en || (cat.nameKey ? t(cat.nameKey) : '');
+            {categoryKeys.map((key, i) => {
+              const cat = fallbackProducts[key as keyof typeof fallbackProducts];
+              const name = t(cat.nameKey);
               return (
                 <a
                   key={i}
@@ -341,8 +190,8 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
       {/* Product Grid */}
       <ProductGrid
-        categories={categories}
-        categoryKeys={activeCategoryKeys}
+        categories={fallbackProducts as any}
+        categoryKeys={categoryKeys}
         t={t}
         locale={locale}
       />
