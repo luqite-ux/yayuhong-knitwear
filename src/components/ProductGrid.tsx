@@ -8,11 +8,14 @@ import ProductDetailModal, { type ProductItem } from '@/components/ProductDetail
 import { sizeCharts } from '@/data/size-charts';
 
 interface ProductCategory {
-  nameKey: string;
-  descKey: string;
-  countKey: string;
+  nameKey?: string;
+  descKey?: string;
+  countKey?: string;
   cover: string;
   items: ProductItem[];
+  // 直接提供的分类名（从数据库读取时使用）
+  categoryName?: { zh?: string; en?: string; [key: string]: string | undefined };
+  categoryDesc?: { zh?: string; en?: string; [key: string]: string | undefined };
 }
 
 interface Props {
@@ -40,14 +43,39 @@ export default function ProductGrid({ categories, categoryKeys, t, locale }: Pro
     ? sizeCharts[selectedProduct.category]
     : null;
 
+  // 获取分类名的辅助函数
+  const getCategoryName = (key: string): string => {
+    const cat = categories[key];
+    if (!cat) return '';
+    if (cat.categoryName?.[locale]) return cat.categoryName[locale] || '';
+    if (cat.categoryName?.en) return cat.categoryName.en;
+    if (cat.nameKey) return t(cat.nameKey);
+    return '';
+  };
+
   return (
     <>
       <section className="pb-20 bg-[var(--color-cream)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           {categoryKeys.map((key, catIndex) => {
             const cat = categories[key];
-            const name = t(cat.nameKey);
-            const desc = t(cat.descKey);
+            // 优先使用直接提供的分类名（数据库模式），否则用翻译 key（兜底模式）
+            let name = '';
+            let desc = '';
+            if (cat.categoryName?.[locale]) {
+              name = cat.categoryName[locale] || '';
+            } else if (cat.categoryName?.en) {
+              name = cat.categoryName.en;
+            } else if (cat.nameKey) {
+              name = t(cat.nameKey);
+            }
+            if (cat.categoryDesc?.[locale]) {
+              desc = cat.categoryDesc[locale] || '';
+            } else if (cat.categoryDesc?.en) {
+              desc = cat.categoryDesc.en;
+            } else if (cat.descKey) {
+              desc = t(cat.descKey);
+            }
 
             return (
               <div key={catIndex} id={`category-${catIndex}`}>
@@ -99,7 +127,7 @@ export default function ProductGrid({ categories, categoryKeys, t, locale }: Pro
       {selectedProduct && currentSizeChart && (
         <ProductDetailModal
           product={selectedProduct.item}
-          categoryName={t(categories[selectedProduct.category].nameKey)}
+          categoryName={getCategoryName(selectedProduct.category)}
           sizeChart={currentSizeChart.rows}
           sizeLabels={currentSizeChart.labels}
           sizeTitle={currentSizeChart.title}

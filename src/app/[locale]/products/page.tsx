@@ -4,12 +4,16 @@ import FloatingContact from '@/components/FloatingContact';
 import ProductGrid from '@/components/ProductGrid';
 import { zhText } from '@/lib/zh-hant';
 import { type ProductItem } from '@/components/ProductDetailModal';
+import { sql } from '@/lib/db';
+import { getCurrentSiteKey } from '@/lib/site';
+import { deepParseJson } from '@/lib/db';
 
 const A = (id: string, suffix = 'UL640') => `https://m.media-amazon.com/images/I/${id}._AC_${suffix}_.jpg`;
 
 const AE = (hash: string) => `https://ae-pic-a1.aliexpress-media.com/kf/${hash}.jpg_480x480q75.jpg_.webp`;
 
-const allProducts = {
+// 兜底数据（数据库没有产品时使用）
+const fallbackProducts = {
   womens: {
     nameKey: 'categories.0.name',
     descKey: 'categories.0.desc',
@@ -188,6 +192,32 @@ const allProducts = {
 
 const categoryKeys = ['womens', 'kids', 'mens', 'loungewear', 'pet', 'accessories'] as const;
 
+// 数据库分类 slug 映射到页面分类 key
+const slugToKeyMap: Record<string, string> = {
+  'womens-sweater': 'womens',
+  'womens-knitwear': 'womens',
+  'kids-sweater': 'kids',
+  'kids-knitwear': 'kids',
+  'mens-sweater': 'mens',
+  'mens-knitwear': 'mens',
+  'loungewear-set': 'loungewear',
+  'loungewear': 'loungewear',
+  'pet-clothes': 'pet',
+  'pet-knitwear': 'pet',
+  'knit-accessories': 'accessories',
+  'accessories': 'accessories',
+};
+
+// 分类封面图
+const categoryCovers: Record<string, string> = {
+  womens: '/images/products/womens-sweater-1.jpg',
+  kids: '/images/products/kids-sweater-1.jpg',
+  mens: '/images/products/mens-sweater-1.jpg',
+  loungewear: '/images/products/loungewear-1.jpg',
+  pet: '/images/products/pet-clothes-1.jpg',
+  accessories: '/images/products/accessories-1.jpg',
+};
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'products' });
@@ -198,10 +228,122 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+async function fetchProductsFromDB(siteKey: string) {
+  try {
+    const [products, categories] = await Promise.all([
+      sql`
+        select
+          p.id, p.slug, p.name, p.summary, p.cover_url, p.gallery_urls,
+          p.model, p.is_active, p.sort,
+          c.slug as category_slug
+        from content_products p
+        left join content_categories c on p.category_id = c.id
+        where p.is_active = true
+          and p.sites && array['global', ${siteKey}]::text[]
+        order by p.sort, p.created_at
+      `,
+      sql`
+        select id, slug, name, sort, cover_url
+        from content_categories
+        where is_active = true or is_active is null
+        order by sort, created_at
+      `,
+    ]);
+
+    if (products.length === 0) return null;
+
+    // 深度解析 JSON
+    const parsedProducts = products.map((p) => ({
+      ...p,
+      name: deepParseJson(p.name) as Record<string, string>,
+      summary: deepParseJson(p.summary) as Record<string, string>,
+      gallery_urls: deepParseJson(p.gallery_urls) as string[] | null,
+    }));
+
+    const parsedCategories = categories.map((c) => ({
+      ...c,
+      name: deepParseJson(c.name) as Record<string, string>,
+    }));
+
+    // 按分类分组
+    const grouped: Record<string, {
+      nameKey: string;
+      descKey: string;
+      countKey: string;
+      cover: string;
+      items: ProductItem[];
+      categoryName?: Record<string, string>;
+    }> = {};
+
+    for (const key of categoryKeys) {
+      grouped[key] = {
+        nameKey: '',
+        descKey: '',
+        countKey: '',
+        cover: categoryCovers[key] || '/images/products/placeholder.jpg',
+        items: [],
+      };
+    }
+
+    // 处理分类信息
+    for (const cat of parsedCategories) {
+      const key = slugToKeyMap[cat.slug || ''];
+      if (key && grouped[key]) {
+        grouped[key].categoryName = cat.name;
+        if (cat.cover_url) {
+          grouped[key].cover = cat.cover_url;
+        }
+      }
+    }
+
+    // 处理产品
+    for (const p of parsedProducts) {
+      const key = slugToKeyMap[p.category_slug || ''];
+      if (key && grouped[key]) {
+        const item: ProductItem = {
+          img: p.cover_url || '',
+          name: {
+            en: p.name?.en || p.model || 'Product',
+            zh: p.name?.zh || p.name?.en || p.model || '产品',
+          },
+          material: p.summary ? {
+            en: p.summary.en || '',
+            zh: p.summary.zh || '',
+          } : undefined,
+        };
+        grouped[key].items.push(item);
+      }
+    }
+
+    // 过滤掉没有产品的分类
+    const filtered: Record<string, typeof grouped[string]> = {};
+    for (const key of categoryKeys) {
+      if (grouped[key].items.length > 0) {
+        filtered[key] = grouped[key];
+      }
+    }
+
+    const activeKeys = categoryKeys.filter((k) => filtered[k]);
+
+    return { categories: filtered, categoryKeys: activeKeys };
+  } catch (err) {
+    console.error('Failed to fetch products from DB:', err);
+    return null;
+  }
+}
+
 export default async function ProductsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'products' });
+  const siteKey = await getCurrentSiteKey();
+
+  // 尝试从数据库读取产品
+  const dbData = await fetchProductsFromDB(siteKey);
+
+  // 使用数据库数据或兜底数据
+  const categories = dbData ? dbData.categories : (fallbackProducts as any);
+  const activeCategoryKeys = dbData ? dbData.categoryKeys : (categoryKeys as unknown as string[]);
 
   return (
     <>
@@ -224,10 +366,13 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
       <section className="py-16 bg-[var(--color-cream)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {categoryKeys.map((key, index) => {
-              const cat = allProducts[key];
-              const name = t(cat.nameKey);
-              const count = t(cat.countKey);
+            {activeCategoryKeys.map((key, index) => {
+              const cat = categories[key];
+              // 如果有数据库的分类名就用，否则用翻译
+              const name = cat.categoryName
+                ? (locale === 'zh' ? cat.categoryName.zh : cat.categoryName.en || cat.categoryName.zh || key)
+                : t(cat.nameKey || `categories.${index}.name`);
+              const count = `${cat.items.length} ${zhText(locale, '款', 'SKUs')}`;
               return (
                 <a
                   key={index}
@@ -258,8 +403,8 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
       </section>
 
       <ProductGrid
-        categories={allProducts as Record<string, { nameKey: string; descKey: string; countKey: string; cover: string; items: ProductItem[] }>}
-        categoryKeys={categoryKeys as unknown as string[]}
+        categories={categories}
+        categoryKeys={activeCategoryKeys}
         t={t}
         locale={locale}
       />
