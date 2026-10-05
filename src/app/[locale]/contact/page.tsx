@@ -134,7 +134,6 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   {zhText(
                     locale,
                     '深圳分公司，负责国内及海外市场业务对接',
-                    '深圳分公司，負責國內及海外市場業務對接',
                     'Shenzhen branch - responsible for domestic and overseas business development',
                   )}
                 </p>

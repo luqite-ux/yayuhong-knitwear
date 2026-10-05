@@ -7,8 +7,8 @@ const defaultIcons = ['⚡', '🎨', '💰', '✅'];
 
 interface AdvantageItem {
   icon?: string;
-  title: { zh: string; hant: string; en: string };
-  desc: { zh: string; hant: string; en: string };
+  title: Record<string, string>;
+  desc: Record<string, string>;
 }
 
 interface AdvantagesProps {
@@ -23,7 +23,7 @@ export default function Advantages({ items }: AdvantagesProps) {
   // 如果外部传入了 items 且不为空，则使用外部数据
   const hasExternalItems = items && items.length > 0;
 
-  const displayItems = hasExternalItems
+  const displayItems: AdvantageItem[] = hasExternalItems
     ? items
     : defaultItems.map((item: { title: string; desc: string }, index: number) => ({
         icon: defaultIcons[index] || '✨',

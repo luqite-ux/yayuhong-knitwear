@@ -7,7 +7,7 @@ import { zhOrEn } from '@/lib/locale-text';
 interface ReadyStockProductItem {
   code: string;
   image_url: string;
-  label: { zh: string; hant: string; en: string };
+  label: Record<string, string>;
 }
 
 interface ReadyStockProps {
