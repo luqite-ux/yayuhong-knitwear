@@ -285,7 +285,7 @@ export async function POST() {
           ${p.model},
           ${slug},
           ${p.img},
-          ${JSON.stringify([p.img])}::jsonb,
+          ${[p.img]},
           true,
           ${i + 1},
           ${['global']}::text[]
