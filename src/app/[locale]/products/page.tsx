@@ -254,14 +254,21 @@ async function fetchProductsFromDB(siteKey: string) {
 
     // 深度解析 JSON
     const parsedProducts = products.map((p) => ({
-      ...p,
+      id: p.id,
+      slug: p.slug,
+      model: p.model,
+      cover_url: p.cover_url,
+      category_slug: p.category_slug,
       name: deepParseJson(p.name) as Record<string, string>,
       summary: deepParseJson(p.summary) as Record<string, string>,
       gallery_urls: deepParseJson(p.gallery_urls) as string[] | null,
     }));
 
     const parsedCategories = categories.map((c) => ({
-      ...c,
+      id: c.id,
+      slug: c.slug,
+      sort: c.sort,
+      cover_url: c.cover_url,
       name: deepParseJson(c.name) as Record<string, string>,
     }));
 
