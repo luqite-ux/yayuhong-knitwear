@@ -51,16 +51,7 @@ export const sql = new Proxy(_sqlProxy, {
   get(_, prop) {
     const target = getSql();
     const value = Reflect.get(target, prop, target);
-    if (typeof value !== 'function') return value;
-    // 对方法调用也做 JSON 解析包装
-    const fn = value.bind(target);
-    return (...args: unknown[]) => {
-      const result = fn(...args);
-      if (result && typeof result.then === 'function') {
-        return result.then((rows: unknown) => deepParseJson(rows));
-      }
-      return deepParseJson(result);
-    };
+    return typeof value === 'function' ? value.bind(target) : value;
   },
   apply(_, thisArg, args) {
     const target = getSql();
