@@ -243,9 +243,8 @@ async function fetchProductsFromDB(siteKey: string) {
         order by p.sort, p.created_at
       `,
       sql`
-        select id, slug, name, sort, cover_url
+        select id, slug, name, sort
         from content_categories
-        where is_active = true or is_active is null
         order by sort, created_at
       `,
     ]);
@@ -268,7 +267,6 @@ async function fetchProductsFromDB(siteKey: string) {
       id: c.id,
       slug: c.slug,
       sort: c.sort,
-      cover_url: c.cover_url,
       name: deepParseJson(c.name) as Record<string, string>,
     }));
 
@@ -297,9 +295,6 @@ async function fetchProductsFromDB(siteKey: string) {
       const key = slugToKeyMap[cat.slug || ''];
       if (key && grouped[key]) {
         grouped[key].categoryName = cat.name;
-        if (cat.cover_url) {
-          grouped[key].cover = cat.cover_url;
-        }
       }
     }
 
