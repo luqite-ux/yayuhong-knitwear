@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { zhText } from '@/lib/zh-hant';
 import { Link } from '@/i18n/navigation';
 import ProductDetailModal, { type ProductItem } from '@/components/ProductDetailModal';
@@ -13,7 +13,6 @@ interface ProductCategory {
   countKey?: string;
   cover: string;
   items: ProductItem[];
-  // 直接提供的分类名（从数据库读取时使用）
   categoryName?: { zh?: string; en?: string; [key: string]: string | undefined };
   categoryDesc?: { zh?: string; en?: string; [key: string]: string | undefined };
 }
@@ -21,11 +20,11 @@ interface ProductCategory {
 interface Props {
   categories: Record<string, ProductCategory>;
   categoryKeys: string[];
-  t: (key: string) => string;
-  locale: string;
 }
 
-export default function ProductGrid({ categories, categoryKeys, t, locale }: Props) {
+export default function ProductGrid({ categories, categoryKeys }: Props) {
+  const t = useTranslations('products');
+  const locale = useLocale();
   const [selectedProduct, setSelectedProduct] = useState<{
     item: ProductItem;
     category: string;
@@ -43,7 +42,6 @@ export default function ProductGrid({ categories, categoryKeys, t, locale }: Pro
     ? sizeCharts[selectedProduct.category]
     : null;
 
-  // 获取分类名的辅助函数
   const getCategoryName = (key: string): string => {
     const cat = categories[key];
     if (!cat) return '';
@@ -59,7 +57,6 @@ export default function ProductGrid({ categories, categoryKeys, t, locale }: Pro
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           {categoryKeys.map((key, catIndex) => {
             const cat = categories[key];
-            // 优先使用直接提供的分类名（数据库模式），否则用翻译 key（兜底模式）
             let name = '';
             let desc = '';
             if (cat.categoryName?.[locale]) {
@@ -123,7 +120,6 @@ export default function ProductGrid({ categories, categoryKeys, t, locale }: Pro
         </div>
       </section>
 
-      {/* Product detail modal */}
       {selectedProduct && currentSizeChart && (
         <ProductDetailModal
           product={selectedProduct.item}
