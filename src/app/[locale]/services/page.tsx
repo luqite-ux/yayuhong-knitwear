@@ -3,6 +3,10 @@ import { Link } from '@/i18n/navigation';
 import FloatingContact from '@/components/FloatingContact';
 import ProcessTimeline from '@/components/ProcessTimeline';
 import { zhText } from '@/lib/zh-hant';
+import { sql, deepParseJson } from '@/lib/db';
+import { getCurrentSiteKey } from '@/lib/site';
+
+export const dynamic = 'force-dynamic';
 
 const servicesData = [
   {
@@ -84,6 +88,105 @@ const faqData = [
   },
 ];
 
+async function fetchServicesFromDB(siteKey: string) {
+  try {
+    const rows = await sql`
+      select id, title, summary, description, highlights, icon_key, gradient_from, gradient_to, sort
+      from content_services
+      where is_active = true
+        and sites && array['global', ${siteKey}]::text[]
+      order by sort, id asc
+    `;
+
+    if (!rows || rows.length === 0) return null;
+
+    const services = (rows as any[]).map((s) => {
+      const title = deepParseJson(s.title) as Record<string, string>;
+      const desc = deepParseJson(s.description) as Record<string, string>;
+      const highlightsRaw = deepParseJson(s.highlights) as Record<string, string[]> | string[] | null;
+
+      // 处理 highlights：可能是 { zh: [...], en: [...] } 或数组
+      let highlights: Array<{ zh: string; en: string }> = [];
+      if (highlightsRaw && !Array.isArray(highlightsRaw)) {
+        const zhList = highlightsRaw.zh || [];
+        const enList = highlightsRaw.en || [];
+        const maxLen = Math.max(zhList.length, enList.length);
+        for (let i = 0; i < maxLen; i++) {
+          highlights.push({
+            zh: zhList[i] || '',
+            en: enList[i] || '',
+          });
+        }
+      }
+
+      // 构建渐变色类名
+      let color = 'from-[var(--color-primary)] to-[var(--color-primary-light)]';
+      if (s.gradient_from && s.gradient_to) {
+        color = `from-[${s.gradient_from}] to-[${s.gradient_to}]`;
+      }
+
+      return {
+        icon: s.icon_key || '🎨',
+        color,
+        title: { zh: title?.zh || '', en: title?.en || '' },
+        desc: { zh: desc?.zh || '', en: desc?.en || '' },
+        highlights,
+      };
+    });
+
+    return services;
+  } catch (err) {
+    console.error('Failed to fetch services from DB:', err);
+    return null;
+  }
+}
+
+async function fetchFaqsFromDB(siteKey: string) {
+  try {
+    // 先尝试 services 分类的 FAQ
+    let rows = await sql`
+      select id, category, question, answer, sort
+      from content_faqs
+      where is_active = true
+        and category = 'services'
+        and sites && array['global', ${siteKey}]::text[]
+      order by sort, id asc
+      limit 10
+    `;
+
+    // 如果没有 services 分类的，取 general 分类的前 5 条
+    if (!rows || rows.length === 0) {
+      rows = await sql`
+        select id, category, question, answer, sort
+        from content_faqs
+        where is_active = true
+          and (category = 'general' or category is null)
+          and sites && array['global', ${siteKey}]::text[]
+        order by sort, id asc
+        limit 5
+      `;
+    }
+
+    if (!rows || rows.length === 0) return null;
+
+    const faqs = (rows as any[]).map((f) => {
+      const q = deepParseJson(f.question) as Record<string, string>;
+      const a = deepParseJson(f.answer) as Record<string, string>;
+      return {
+        qZh: q?.zh || '',
+        qEn: q?.en || '',
+        aZh: a?.zh || '',
+        aEn: a?.en || '',
+      };
+    });
+
+    return faqs;
+  } catch (err) {
+    console.error('Failed to fetch FAQs from DB:', err);
+    return null;
+  }
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'services' });
@@ -98,6 +201,17 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'services' });
+  const siteKey = await getCurrentSiteKey();
+
+  // 尝试从数据库读取，失败则用兜底数据
+  const [dbServices, dbFaqs] = await Promise.all([
+    fetchServicesFromDB(siteKey),
+    fetchFaqsFromDB(siteKey),
+  ]);
+
+  const services = dbServices || servicesData;
+  const faqs = dbFaqs || faqData;
+  const useDbServices = !!dbServices;
 
   return (
     <>
@@ -121,9 +235,13 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       {/* Services detail */}
       <section className="py-20 bg-[var(--color-cream)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {servicesData.map((service, index) => {
-            const title = t(`${service.key}.title`);
-            const desc = t(`${service.key}.desc`);
+          {services.map((service, index) => {
+            const title = useDbServices && (service as any).title
+              ? zhText(locale, (service as any).title.zh, (service as any).title.en)
+              : t(`${(service as any).key}.title`);
+            const desc = useDbServices && (service as any).desc
+              ? zhText(locale, (service as any).desc.zh, (service as any).desc.en)
+              : t(`${(service as any).key}.desc`);
             const isReverse = index % 2 === 1;
             
             return (
@@ -193,7 +311,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
             </p>
           </div>
           <div className="space-y-4">
-            {faqData.map((faq, index) => (
+            {faqs.map((faq, index) => (
               <div key={index} className="bg-white rounded-xl p-6 border border-[var(--color-border)]/50">
                 <h3 className="font-semibold text-[var(--color-primary)] mb-3 flex items-start gap-3">
                   <span className="w-6 h-6 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center text-sm flex-shrink-0">

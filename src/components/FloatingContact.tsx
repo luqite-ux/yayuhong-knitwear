@@ -3,14 +3,21 @@
 import { useLocale } from 'next-intl';
 import { zhOrEn } from '@/lib/locale-text';
 
-export default function FloatingContact() {
+const DEFAULT_WHATSAPP = '8613829659110';
+
+interface FloatingContactProps {
+  whatsappNumber?: string;
+}
+
+export default function FloatingContact({ whatsappNumber }: FloatingContactProps) {
   const locale = useLocale();
+  const waNumber = whatsappNumber || DEFAULT_WHATSAPP;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       {/* WhatsApp */}
       <a
-        href="https://wa.me/8613829659110"
+        href={`https://wa.me/${waNumber}`}
         target="_blank"
         rel="noopener noreferrer"
         className="floating-btn bg-[#25D366] hover:bg-[#128C7E]"
