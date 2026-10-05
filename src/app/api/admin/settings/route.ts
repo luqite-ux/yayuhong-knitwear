@@ -25,6 +25,8 @@ export async function PUT(req: NextRequest) {
     baidu_verification, baidu_analytics, baidu_push_token,
     haosou_verification, sogou_verification, shenma_verification,
     doubao_verification, china_seo, china_geo,
+    // 首页与展示
+    stats, social_links, footer_config, hero_config,
   } = body;
 
   await sql`
@@ -47,6 +49,10 @@ export async function PUT(req: NextRequest) {
       doubao_verification = ${doubao_verification || null},
       china_seo = ${JSON.stringify(china_seo || {})}::jsonb,
       china_geo = ${JSON.stringify(china_geo || {})}::jsonb,
+      stats = ${JSON.stringify(stats || {})}::jsonb,
+      social_links = ${JSON.stringify(social_links || {})}::jsonb,
+      footer_config = ${JSON.stringify(footer_config || {})}::jsonb,
+      hero_config = ${JSON.stringify(hero_config || {})}::jsonb,
       updated_at = now()
     where id = (select id from site_profile order by created_at limit 1)
   `;
