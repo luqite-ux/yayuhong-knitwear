@@ -1,11 +1,8 @@
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+﻿import { setRequestLocale, getTranslations } from 'next-intl/server';
 import ContactForm from '@/components/ContactForm';
 import FloatingContact from '@/components/FloatingContact';
 import { zhText } from '@/lib/zh-hant';
 import { Link } from '@/i18n/navigation';
-import { getSiteProfile } from '@/lib/site-profile';
-
-export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -17,50 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-/**
- * 从可能是多语言对象或纯字符串的值中获取当前语言的文本
- */
-function getLocalized(val: unknown, locale: string, fallback: string): string {
-  if (!val) return fallback;
-  if (typeof val === 'string') return val;
-  if (typeof val === 'object' && val !== null) {
-    const obj = val as Record<string, string>;
-    if (locale === 'zh' && obj.zh) return obj.zh;
-    if (locale === 'zh-TW' && obj.hant) return obj.hant;
-    if (obj.en) return obj.en;
-    if (obj.zh) return obj.zh;
-  }
-  return fallback;
-}
-
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'contact' });
   const info = await getTranslations({ locale, namespace: 'contact.info' });
-
-  // 读取 site_profile，失败时用翻译文件兜底
-  let siteProfile = null;
-  try {
-    siteProfile = await getSiteProfile();
-  } catch (err) {
-    console.error('ContactPage: failed to fetch site_profile, using fallbacks', err);
-  }
-
-  const contact = siteProfile?.contact || null;
-
-  // 从 DB 读取或使用翻译兜底
-  const email = contact?.email || info('email');
-  const phone = contact?.phone || info('phone');
-  const whatsapp = contact?.whatsapp || info('whatsapp');
-  const address = getLocalized(contact?.address, locale, info('address'));
-  const workTime = contact?.work_time
-    ? getLocalized(contact.work_time, locale, info('workTime'))
-    : info('workTime');
-
-  // WhatsApp 号码（用于链接），优先从 contact.whatsapp 取纯数字部分
-  const whatsappNumber = contact?.whatsapp ? String(contact.whatsapp).replace(/\D/g, '') : '8613829659110';
-  const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
     <>
@@ -109,13 +67,13 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span className="text-[var(--color-text-secondary)]">{address}</span>
+                    <span className="text-[var(--color-text-secondary)]">{info('address')}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <svg className="w-4 h-4 text-[var(--color-accent)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    <span className="text-[var(--color-text-secondary)]">{phone}</span>
+                    <span className="text-[var(--color-text-secondary)]">{info('phone')}</span>
                   </div>
                 </div>
               </div>
@@ -145,7 +103,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   {zhText(locale, '快速联系', 'Quick Contact')}
                 </h3>
                 <div className="space-y-4">
-                  <a href={`mailto:${email}`} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                  <a href={`mailto:${info('email')}`} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -153,7 +111,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                     </div>
                     <div>
                       <div className="text-sm text-white/60">{zhText(locale, '邮箱', 'Email')}</div>
-                      <div className="font-medium">{email}</div>
+                      <div className="font-medium">{info('email')}</div>
                     </div>
                   </a>
                   
@@ -170,7 +128,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   </div>
                   
                   <a
-                    href={whatsappLink}
+                    href="https://wa.me/8613829659110"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 hover:opacity-80 transition-opacity"
@@ -182,7 +140,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                     </div>
                     <div>
                       <div className="text-sm text-white/60">WhatsApp</div>
-                      <div className="font-medium">{whatsapp}</div>
+                      <div className="font-medium">{info('whatsapp')}</div>
                     </div>
                   </a>
                 </div>
@@ -192,7 +150,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    {workTime}
+                    {info('workTime')}
                   </div>
                 </div>
               </div>
@@ -233,7 +191,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   </div>
                   {/* WhatsApp QR */}
                   <a
-                    href={whatsappLink}
+                    href="https://wa.me/8613829659110"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block group"
@@ -249,7 +207,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                       />
                     </div>
                     <p className="text-xs text-center mt-2 text-green-600 font-medium">
-                      {whatsapp}
+                      {info('whatsapp')}
                     </p>
                   </a>
                 </div>
@@ -277,7 +235,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      <FloatingContact whatsappNumber={whatsappNumber} />
+      <FloatingContact />
     </>
   );
 }

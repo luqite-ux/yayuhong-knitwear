@@ -1,20 +1,10 @@
-'use client';
+﻿'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { zhOrEn } from '@/lib/locale-text';
 
-interface ReadyStockProductItem {
-  code: string;
-  image_url: string;
-  label: Record<string, string>;
-}
-
-interface ReadyStockProps {
-  products?: ReadyStockProductItem[];
-}
-
-const defaultProducts = [
+const products = [
   { src: '/images/ready-stock/style-01.jpg', code: '63032', label: { zh: '焦糖套装', hant: '焦糖套裝', en: 'Caramel Set' } },
   { src: '/images/ready-stock/style-02.jpg', code: '63033', label: { zh: '奶白套装', hant: '奶白套裝', en: 'Cream Set' } },
   { src: '/images/ready-stock/style-03.jpg', code: '63034', label: { zh: '蓝色套装', hant: '藍色套裝', en: 'Blue Set' } },
@@ -23,18 +13,9 @@ const defaultProducts = [
   { src: '/images/ready-stock/style-06.jpg', code: '63037', label: { zh: '白粉套装', hant: '白粉套裝', en: 'White/Pink Set' } },
 ];
 
-export default function ReadyStock({ products }: ReadyStockProps) {
+export default function ReadyStock() {
   const t = useTranslations('readyStock');
   const locale = useLocale();
-
-  const hasExternalProducts = products && products.length > 0;
-  const displayProducts = hasExternalProducts
-    ? products.map((p) => ({
-        src: p.image_url,
-        code: p.code,
-        label: p.label,
-      }))
-    : defaultProducts;
 
   return (
     <section className="section-padding bg-gradient-to-b from-[var(--color-warm-gray)] to-white knit-texture relative overflow-hidden">
@@ -74,7 +55,7 @@ export default function ReadyStock({ products }: ReadyStockProps) {
 
         {/* Product grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayProducts.map((product, index) => (
+          {products.map((product, index) => (
             <div
               key={index}
               className="group bg-white rounded-2xl overflow-hidden card-hover cursor-pointer"

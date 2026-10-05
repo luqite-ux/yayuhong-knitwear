@@ -1,11 +1,7 @@
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+﻿import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import FloatingContact from '@/components/FloatingContact';
 import { zhText } from '@/lib/zh-hant';
-import { sql, deepParseJson } from '@/lib/db';
-import { getCurrentSiteKey } from '@/lib/site';
-
-export const dynamic = 'force-dynamic';
 
 const features = [
   { icon: '🏭', key: 'features.0' },
@@ -32,56 +28,6 @@ const processSteps = [
   { icon: '✅', title: '质检包装', titleEn: 'QC & Packaging', desc: '三道质检工序，确保每一件产品合格', descEn: 'Three QC stages ensuring every piece meets standards' },
 ];
 
-async function fetchFactoryData(siteKey: string) {
-  try {
-    const [equipments, processes] = await Promise.all([
-      sql`
-        select id, name, quantity, icon_key, sort
-        from content_factory_equipments
-        where is_active = true
-          and sites && array['global', ${siteKey}]::text[]
-        order by sort, id asc
-      `,
-      sql`
-        select id, title, description, step_number, icon_key, sort
-        from content_factory_processes
-        where is_active = true
-          and sites && array['global', ${siteKey}]::text[]
-        order by sort, step_number, id asc
-      `,
-    ]);
-
-    const parsedEquipments = (equipments as any[]).map((e) => ({
-      name: (deepParseJson(e.name) as Record<string, string>)?.zh || '',
-      nameEn: (deepParseJson(e.name) as Record<string, string>)?.en || '',
-      count: e.quantity || 0,
-    }));
-
-    const defaultIcons = ['📐', '🧶', '🪡', '🔗', '🔥', '✅', '📦', '🎨'];
-    const parsedProcesses = (processes as any[]).map((p, i) => {
-      const title = deepParseJson(p.title) as Record<string, string>;
-      const desc = deepParseJson(p.description) as Record<string, string>;
-      return {
-        icon: p.icon_key || defaultIcons[i % defaultIcons.length],
-        title: title?.zh || '',
-        titleEn: title?.en || '',
-        desc: desc?.zh || '',
-        descEn: desc?.en || '',
-      };
-    });
-
-    if (parsedEquipments.length === 0 && parsedProcesses.length === 0) return null;
-
-    return {
-      equipments: parsedEquipments.length > 0 ? parsedEquipments : null,
-      processes: parsedProcesses.length > 0 ? parsedProcesses : null,
-    };
-  } catch (err) {
-    console.error('Failed to fetch factory data from DB:', err);
-    return null;
-  }
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'factory' });
@@ -96,12 +42,6 @@ export default async function FactoryPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'factory' });
-  const siteKey = await getCurrentSiteKey();
-
-  // 尝试从数据库读取，失败则用兜底数据
-  const dbData = await fetchFactoryData(siteKey);
-  const equipmentData = dbData?.equipments || equipmentList;
-  const processData = dbData?.processes || processSteps;
 
   return (
     <>
@@ -208,7 +148,7 @@ export default async function FactoryPage({ params }: { params: Promise<{ locale
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {equipmentData.map((item, index) => (
+            {equipmentList.map((item, index) => (
               <div key={index} className="bg-white rounded-xl p-6 text-center card-hover">
                 <div className="text-3xl font-bold text-gold-gradient mb-2">
                   {item.count}+
@@ -238,7 +178,7 @@ export default async function FactoryPage({ params }: { params: Promise<{ locale
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {processData.map((step, index) => (
+            {processSteps.map((step, index) => (
               <div key={index} className="text-center relative">
                 <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] flex items-center justify-center text-2xl text-white mb-4">
                   {step.icon}
@@ -249,7 +189,7 @@ export default async function FactoryPage({ params }: { params: Promise<{ locale
                 <p className="text-xs text-[var(--color-text-muted)]">
                   {zhText(locale, step.desc, step.descEn)}
                 </p>
-                {index < processData.length - 1 && (
+                {index < processSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-8 -right-3 text-[var(--color-border)]">
                     →
                   </div>

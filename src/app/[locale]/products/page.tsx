@@ -1,4 +1,4 @@
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+﻿import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import FloatingContact from '@/components/FloatingContact';
 import ProductGrid from '@/components/ProductGrid';
