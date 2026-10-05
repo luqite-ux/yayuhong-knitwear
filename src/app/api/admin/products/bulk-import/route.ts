@@ -209,6 +209,24 @@ function buildSeoSummary(zh: string, en: string, cat: string) {
   };
 }
 
+export async function GET() {
+  const ok = await requireAdmin();
+  if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
+
+  return new Response(
+    `<!DOCTYPE html><html><head><title>批量导入产品</title></head><body style="font-family:system-ui;padding:40px;">
+      <h2>批量导入产品</h2>
+      <p>点击按钮导入 126 款 SEO 优化的示例产品到数据库。</p>
+      <p style="color:#666;">包含 6 个分类：女式毛衣(24)、童装毛衣(20)、男式毛衣(22)、家居服(20)、宠物服饰(20)、针织配饰(20)</p>
+      <form method="POST">
+        <button type="submit" id="importBtn" style="padding:12px 24px;background:#2563eb;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:16px;">开始导入</button>
+      </form>
+      <div id="result" style="margin-top:20px;white-space:pre-wrap;"></div>
+    </body></html>`,
+    { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+  );
+}
+
 export async function POST() {
   const ok = await requireAdmin();
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
