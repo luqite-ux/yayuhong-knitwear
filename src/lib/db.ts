@@ -16,6 +16,35 @@ function getSql() {
   return _sql;
 }
 
+/**
+ * 深度递归解析结果中的 JSON 字符串。
+ * postgres.js 默认不会自动解析 jsonb 字段（返回字符串），
+ * 这里统一处理，确保所有看起来像 JSON 的值都被正确解析为对象。
+ * 注意：请在需要的地方手动调用，不要全局代理，否则会导致 SSR 异常。
+ */
+export function deepParseJson(val: unknown): unknown {
+  if (val === null || val === undefined) return val;
+  if (typeof val === 'string') {
+    const trimmed = val.trim();
+    if (
+      (trimmed.startsWith('{') && trimmed.endsWith('}')) ||
+      (trimmed.startsWith('[') && trimmed.endsWith(']'))
+    ) {
+      try { return JSON.parse(val); } catch { return val; }
+    }
+    return val;
+  }
+  if (Array.isArray(val)) return val.map(deepParseJson);
+  if (typeof val === 'object') {
+    const result: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(val as Record<string, unknown>)) {
+      result[k] = deepParseJson(v);
+    }
+    return result;
+  }
+  return val;
+}
+
 // 用一个函数作为代理目标，支持 sql`...` 调用
 const _sqlProxy = function () {} as unknown as ReturnType<typeof postgres>;
 
