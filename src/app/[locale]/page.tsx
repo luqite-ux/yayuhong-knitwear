@@ -1,6 +1,8 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getCurrentSiteKey } from '@/lib/site';
 import { zhText } from '@/lib/zh-hant';
+import { getSiteProfile } from '@/lib/site-profile';
+import { getReadyStockProducts, getFeatures } from '@/lib/content';
 
 // 海外站组件
 import Hero from '@/components/Hero';
@@ -25,6 +27,8 @@ import ChinaCTA from '@/components/china/ChinaCTA';
 
 // 仅非中文locale显示的组件
 import ReadyStock from '@/components/ReadyStock';
+
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -71,19 +75,69 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     );
   }
 
+  // 海外站：读取数据库数据（全部 try-catch，失败用兜底）
+  let readyStockProducts: Awaited<ReturnType<typeof getReadyStockProducts>> = [];
+  let homeFeatures: Awaited<ReturnType<typeof getFeatures>> = [];
+  let siteProfile: Awaited<ReturnType<typeof getSiteProfile>> = null;
+
+  try {
+    [readyStockProducts, homeFeatures, siteProfile] = await Promise.all([
+      getReadyStockProducts(),
+      getFeatures('home'),
+      getSiteProfile(),
+    ]);
+  } catch (err) {
+    console.error('HomePage: failed to fetch data from DB, using fallbacks', err);
+  }
+
+  // 从 site_profile 提取 hero badges
+  const heroBadges = siteProfile?.hero_config?.trust_texts && Array.isArray(siteProfile.hero_config.trust_texts)
+    ? siteProfile.hero_config.trust_texts
+    : undefined;
+
+  // 从 site_profile 提取 stats
+  const heroStats = siteProfile?.stats
+    ? {
+        years: siteProfile.stats.years,
+        dailyCapacity: siteProfile.stats.daily_capacity,
+        moq: siteProfile.stats.moq,
+        delivery: siteProfile.stats.delivery_days,
+      }
+    : undefined;
+
+  // 准备 advantages items
+  const advantageItems = homeFeatures.length > 0
+    ? homeFeatures.map((f) => ({
+        icon: f.icon,
+        title: f.title,
+        desc: f.desc,
+      }))
+    : undefined;
+
+  // 准备 ready stock products
+  const readyStockItems = readyStockProducts.length > 0
+    ? readyStockProducts.map((p) => ({
+        code: p.code,
+        image_url: p.image_url,
+        label: p.label,
+      }))
+    : undefined;
+
+  const whatsappNumber = siteProfile?.contact?.whatsapp || undefined;
+
   // 海外站：原版式
   return (
     <>
-      <Hero />
-      <Advantages />
+      <Hero badges={heroBadges} stats={heroStats} />
+      <Advantages items={advantageItems} />
       <ProductShowcase />
-      {locale !== 'zh' && <ReadyStock />}
+      {locale !== 'zh' && <ReadyStock products={readyStockItems} />}
       <FactorySection />
       <ChenghaiHeritage />
       <Services />
       <ProcessTimeline />
       <CTA />
-      <FloatingContact />
+      <FloatingContact whatsappNumber={whatsappNumber} />
     </>
   );
 }

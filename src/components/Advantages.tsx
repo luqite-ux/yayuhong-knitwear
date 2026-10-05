@@ -1,12 +1,35 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import { zhOrEn } from '@/lib/locale-text';
 
-const icons = ['⚡', '🎨', '💰', '✅'];
+const defaultIcons = ['⚡', '🎨', '💰', '✅'];
 
-export default function Advantages() {
+interface AdvantageItem {
+  icon?: string;
+  title: { zh: string; hant: string; en: string };
+  desc: { zh: string; hant: string; en: string };
+}
+
+interface AdvantagesProps {
+  items?: AdvantageItem[];
+}
+
+export default function Advantages({ items }: AdvantagesProps) {
   const t = useTranslations('advantages');
-  const items = t.raw('items');
+  const locale = useLocale();
+  const defaultItems = t.raw('items');
+
+  // 如果外部传入了 items 且不为空，则使用外部数据
+  const hasExternalItems = items && items.length > 0;
+
+  const displayItems = hasExternalItems
+    ? items
+    : defaultItems.map((item: { title: string; desc: string }, index: number) => ({
+        icon: defaultIcons[index] || '✨',
+        title: { zh: item.title, hant: item.title, en: item.title },
+        desc: { zh: item.desc, hant: item.desc, en: item.desc },
+      }));
 
   return (
     <section className="section-padding bg-[var(--color-cream)]">
@@ -26,19 +49,23 @@ export default function Advantages() {
         
         {/* Advantage cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {items.map((item: { title: string; desc: string }, index: number) => (
+          {displayItems.map((item, index: number) => (
             <div
               key={index}
               className="bg-white rounded-2xl p-7 card-hover border border-[var(--color-border)]/50"
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center text-2xl mb-5">
-                {icons[index]}
+                {item.icon || defaultIcons[index] || '✨'}
               </div>
               <h3 className="text-xl font-bold text-[var(--color-primary)] mb-3">
-                {item.title}
+                {hasExternalItems
+                  ? zhOrEn(locale, item.title.zh, item.title.hant, item.title.en)
+                  : item.title.zh}
               </h3>
               <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-                {item.desc}
+                {hasExternalItems
+                  ? zhOrEn(locale, item.desc.zh, item.desc.hant, item.desc.en)
+                  : item.desc.zh}
               </p>
             </div>
           ))}

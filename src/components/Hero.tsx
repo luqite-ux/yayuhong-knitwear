@@ -4,9 +4,40 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { zhOrEn } from '@/lib/locale-text';
 
-export default function Hero() {
+interface TrustBadge {
+  zh: string;
+  hant: string;
+  en: string;
+}
+
+interface HeroStats {
+  years?: string;
+  dailyCapacity?: string;
+  moq?: string;
+  delivery?: string;
+}
+
+interface HeroProps {
+  badges?: TrustBadge[];
+  stats?: HeroStats;
+}
+
+const DEFAULT_BADGES: TrustBadge[] = [
+  { zh: 'BSCI认证工厂', hant: 'BSCI認證工廠', en: 'BSCI Certified' },
+  { zh: 'ISO9001质量体系', hant: 'ISO9001質量體系', en: 'ISO 9001 Quality' },
+  { zh: '20年行业经验', hant: '20年行業經驗', en: '20+ Years Experience' },
+];
+
+export default function Hero({ badges, stats }: HeroProps) {
   const t = useTranslations('hero');
   const locale = useLocale();
+
+  const trustBadges = badges && badges.length > 0 ? badges : DEFAULT_BADGES;
+
+  const statYears = stats?.years ?? '20+';
+  const statDailyCapacity = stats?.dailyCapacity ?? '30K';
+  const statMoq = stats?.moq ?? '50';
+  const statDelivery = stats?.delivery ?? '7';
 
   return (
     <section className="hero-gradient min-h-screen flex items-center pt-20 knit-texture relative overflow-hidden">
@@ -53,24 +84,14 @@ export default function Hero() {
             
             {/* Trust badges */}
             <div className="flex flex-wrap items-center gap-6 mt-10 pt-10 border-t border-white/10 animate-fade-in-up stagger-4">
-              <div className="flex items-center gap-2 text-white/60 text-sm">
-                <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                {zhOrEn(locale, 'BSCI认证工厂', 'BSCI認證工廠', 'BSCI Certified')}
-              </div>
-              <div className="flex items-center gap-2 text-white/60 text-sm">
-                <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                {zhOrEn(locale, 'ISO9001质量体系', 'ISO9001質量體系', 'ISO 9001 Quality')}
-              </div>
-              <div className="flex items-center gap-2 text-white/60 text-sm">
-                <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                {zhOrEn(locale, '20年行业经验', '20年行業經驗', '20+ Years Experience')}
-              </div>
+              {trustBadges.map((badge, index) => (
+                <div key={index} className="flex items-center gap-2 text-white/60 text-sm">
+                  <svg className="w-5 h-5 text-[var(--color-secondary-light)]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  {zhOrEn(locale, badge.zh, badge.hant, badge.en)}
+                </div>
+              ))}
             </div>
           </div>
           
@@ -94,7 +115,7 @@ export default function Hero() {
                     ⚡
                   </div>
                   <div>
-                    <div className="font-bold text-[var(--color-primary)] text-base">7 {zhOrEn(locale, '天', '天', 'Days')}</div>
+                    <div className="font-bold text-[var(--color-primary)] text-base">{statDelivery} {zhOrEn(locale, '天', '天', 'Days')}</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
                       {zhOrEn(locale, '快速交货', '快速交貨', 'Fast Delivery')}
                     </div>
@@ -109,7 +130,7 @@ export default function Hero() {
                     🏭
                   </div>
                   <div>
-                    <div className="font-bold text-[var(--color-primary)] text-base">30,000+</div>
+                    <div className="font-bold text-[var(--color-primary)] text-base">{statDailyCapacity}</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
                       {zhOrEn(locale, '日产能', '日產能', 'Daily Capacity')}
                     </div>
@@ -124,7 +145,7 @@ export default function Hero() {
                     ✅
                   </div>
                   <div>
-                    <div className="font-bold text-[var(--color-primary)] text-base">50 {zhOrEn(locale, '件起', '件起', 'pcs MOQ')}</div>
+                    <div className="font-bold text-[var(--color-primary)] text-base">{statMoq} {zhOrEn(locale, '件起', '件起', 'pcs MOQ')}</div>
                     <div className="text-xs text-[var(--color-text-muted)]">
                       {zhOrEn(locale, '小单试款', '小單試款', 'Small Order OK')}
                     </div>
@@ -138,19 +159,19 @@ export default function Hero() {
         {/* Stats bar */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-white/10">
           <div className="text-center">
-            <div className="stat-number">20+</div>
+            <div className="stat-number">{statYears}</div>
             <p className="text-white/60 text-sm mt-2">{t('stats.years')}</p>
           </div>
           <div className="text-center">
-            <div className="stat-number">30K</div>
+            <div className="stat-number">{statDailyCapacity}</div>
             <p className="text-white/60 text-sm mt-2">{t('stats.dailyCapacity')}</p>
           </div>
           <div className="text-center">
-            <div className="stat-number">50</div>
+            <div className="stat-number">{statMoq}</div>
             <p className="text-white/60 text-sm mt-2">{t('stats.moq')}</p>
           </div>
           <div className="text-center">
-            <div className="stat-number">7</div>
+            <div className="stat-number">{statDelivery}</div>
             <p className="text-white/60 text-sm mt-2">{t('stats.delivery')}</p>
           </div>
         </div>
