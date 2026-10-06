@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 }
 
 // 获取国内站 URL 列表 + 推送状态
-export async function GET() {
+export async function GET(req: NextRequest) {
   const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 

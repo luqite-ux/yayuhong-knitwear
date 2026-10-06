@@ -2,7 +2,7 @@
 import { requireAdmin } from '@/lib/guard';
 import { runBootstrap } from '@/lib/seo-pipeline';
 
-export async function POST() {
+export async function POST(req: NextRequest) {
   const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
