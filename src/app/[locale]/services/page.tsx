@@ -7,6 +7,7 @@ import { zhText } from '@/lib/zh-hant';
 const servicesData = [
   {
     icon: '🎨',
+    image: '/images/services/odm-development.jpg',
     key: 'items.0',
     color: 'from-[var(--color-primary)] to-[var(--color-primary-light)]',
     highlights: [
@@ -18,6 +19,7 @@ const servicesData = [
   },
   {
     icon: '🏷️',
+    image: '/images/services/oem-manufacturing.jpg',
     key: 'items.1',
     color: 'from-[var(--color-accent)] to-[var(--color-accent-light)]',
     highlights: [
@@ -29,6 +31,7 @@ const servicesData = [
   },
   {
     icon: '⚡',
+    image: '/images/services/small-batch.jpg',
     key: 'items.2',
     color: 'from-[var(--color-secondary)] to-[var(--color-secondary-light)]',
     highlights: [
@@ -40,6 +43,7 @@ const servicesData = [
   },
   {
     icon: '📦',
+    image: '/images/services/large-volume.jpg',
     key: 'items.3',
     color: 'from-[var(--color-yarn-forest)] to-[#3d5e50]',
     highlights: [
@@ -164,8 +168,12 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                   </div>
                 </div>
                 <div className={`${isReverse ? 'lg:order-1' : ''}`}>
-                  <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-white to-[var(--color-warm-gray)] border border-[var(--color-border)] flex items-center justify-center text-8xl">
-                    {service.icon}
+                  <div className="aspect-[4/3] rounded-3xl overflow-hidden border border-[var(--color-border)] shadow-lg">
+                    <img
+                      src={service.image}
+                      alt={title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
               </div>
