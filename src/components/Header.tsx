@@ -31,17 +31,20 @@ export default function Header() {
     { href: '/contact', label: t('contact') },
   ];
 
+  const isHome = pathname === '/';
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
     return pathname?.startsWith(href);
   };
 
+  const showTransparent = isHome && !isScrolled;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm py-3'
-          : 'bg-transparent py-5'
+        showTransparent
+          ? 'bg-transparent py-5'
+          : 'bg-white/95 backdrop-blur-md shadow-sm py-3'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,10 +57,10 @@ export default function Header() {
               className="w-10 h-10 rounded-lg object-cover shadow-sm"
             />
             <div className="hidden sm:block">
-              <div className={`font-bold text-base leading-tight ${isScrolled ? 'text-[var(--color-primary)]' : 'text-white'}`}>
+              <div className={`font-bold text-base leading-tight ${showTransparent ? 'text-white' : 'text-[var(--color-primary)]'}`}>
                 {zhOrEn(locale, '亚裕鸿毛织', '亞裕鴻毛織', 'Yayuhong Knit')}
               </div>
-              <div className={`text-xs ${isScrolled ? 'text-[var(--color-text-muted)]' : 'text-white/60'}`}>
+              <div className={`text-xs ${showTransparent ? 'text-white/60' : 'text-[var(--color-text-muted)]'}`}>
                 {zhOrEn(locale, '快时尚源头工厂', '快時尚源頭工廠', 'Fast Fashion Factory')}
               </div>
             </div>
@@ -70,13 +73,13 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 className={`nav-link text-sm font-medium ${
-                  isScrolled
+                  showTransparent
                     ? isActive(item.href)
+                      ? 'text-[var(--color-secondary-light)]'
+                      : 'text-white/80 hover:text-white'
+                    : isActive(item.href)
                       ? 'text-[var(--color-accent)]'
                       : 'text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]'
-                    : isActive(item.href)
-                    ? 'text-[var(--color-secondary-light)]'
-                    : 'text-white/80 hover:text-white'
                 }`}
               >
                 {item.label}
@@ -86,7 +89,7 @@ export default function Header() {
 
           {/* Right side: Locale + CTA + Mobile menu */}
           <div className="flex items-center gap-3">
-            <LocaleSwitcher isScrolled={isScrolled} />
+            <LocaleSwitcher isScrolled={!showTransparent} />
             
             <Link
               href="/contact"
@@ -102,7 +105,7 @@ export default function Header() {
               aria-label="Toggle menu"
             >
               <svg
-                className={`w-6 h-6 transition-colors ${isScrolled ? 'text-[var(--color-primary)]' : 'text-white'}`}
+                className={`w-6 h-6 transition-colors ${showTransparent ? 'text-white' : 'text-[var(--color-primary)]'}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

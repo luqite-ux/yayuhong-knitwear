@@ -1,4 +1,4 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import FaqAccordion from '@/components/FaqAccordion';
 import { getCurrentSiteKey } from '@/lib/site';
@@ -21,8 +21,9 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
   `;
 
   const faqs = rows.map((r) => {
-    const q = r.question as Record<string, string>;
-    const a = r.answer as Record<string, string>;
+    const row = deepParseJson(r) as typeof r;
+    const q = row.question as Record<string, string>;
+    const a = row.answer as Record<string, string>;
     return {
       id: r.id,
       category: r.category && locale === 'zh-TW' ? toTraditional(String(r.category)) : r.category,

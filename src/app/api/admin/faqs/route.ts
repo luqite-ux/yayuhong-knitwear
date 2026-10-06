@@ -1,5 +1,5 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
 
@@ -7,11 +7,23 @@ export async function GET(req: NextRequest) {
   const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
-  const faqs = await sql`
+  const rows = await sql`
     select id, category, question, answer, sort, is_active, sites, created_at, updated_at
     from content_faqs
     order by sort, created_at desc
   `;
+
+  const faqs = deepParseJson(rows) as Array<{
+    id: string;
+    category: string | null;
+    question: Record<string, string>;
+    answer: Record<string, string>;
+    sort: number;
+    is_active: boolean;
+    sites: string[];
+    created_at: string;
+    updated_at: string;
+  }>;
 
   return NextResponse.json({ faqs });
 }
