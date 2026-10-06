@@ -106,7 +106,7 @@ export default async function ArticleDetailPage({
     <article className="max-w-3xl mx-auto px-4 py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      {a.faq_schema && (
+      {a.faq_schema != null && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(a.faq_schema) }} />
       )}
 
