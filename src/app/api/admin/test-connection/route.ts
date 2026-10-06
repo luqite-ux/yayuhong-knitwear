@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/guard';
 import { getSecret, getSecretMeta } from '@/lib/secrets';
 import { testLLMConnection } from '@/lib/llm';
 
 export async function POST(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   const { service } = await req.json();

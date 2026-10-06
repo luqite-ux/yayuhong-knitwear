@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
@@ -6,7 +6,7 @@ import { logAudit } from '@/lib/audit';
 const VALID_STATUSES = ['new', 'contacting', 'quoted', 'won', 'lost', 'spam'];
 
 export async function GET(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   const { searchParams } = new URL(req.url);
@@ -45,7 +45,7 @@ export async function GET(req: NextRequest) {
 
 // 状态变更
 export async function PATCH(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   try {
@@ -82,7 +82,7 @@ export async function PATCH(req: NextRequest) {
 
 // 添加备注/跟进记录
 export async function POST(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   try {

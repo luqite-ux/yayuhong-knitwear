@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/guard';
 import { uploadToR2 } from '@/lib/r2';
 import { logAudit } from '@/lib/audit';
 
 export async function POST(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   const formData = await req.formData();

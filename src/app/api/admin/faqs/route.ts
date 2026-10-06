@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
 
 export async function GET() {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   const faqs = await sql`
@@ -17,7 +17,7 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   try {
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   try {
@@ -75,7 +75,7 @@ export async function PUT(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   try {

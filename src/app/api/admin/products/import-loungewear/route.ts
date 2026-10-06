@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+﻿import { NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 export const maxDuration = 120;
 
 export async function GET() {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   return new Response(
@@ -28,7 +28,7 @@ export async function GET() {
 }
 
 export async function POST() {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   const categories = await sql`

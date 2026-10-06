@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { setSecret, updateSecretStatus, maskSecret } from '@/lib/secrets';
 import { logAudit } from '@/lib/audit';
 import { requireAdmin } from '@/lib/guard';
 
 export async function POST(req: NextRequest) {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   const body = await req.json();
@@ -211,7 +211,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  const ok = await requireAdmin();
+  const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   const config = await sql`
