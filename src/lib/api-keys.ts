@@ -106,7 +106,7 @@ export async function listApiKeys(): Promise<ApiKeyInfo[]> {
     from admin_api_keys
     order by created_at desc
   `;
-  return rows as ApiKeyInfo[];
+  return rows as unknown as ApiKeyInfo[];
 }
 
 export async function revokeApiKey(id: string): Promise<boolean> {
