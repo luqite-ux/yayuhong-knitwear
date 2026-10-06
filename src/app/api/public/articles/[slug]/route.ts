@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { localizeText } from '@/lib/zh-hant';
 import { detectSiteKey } from '@/lib/site';
 
@@ -31,15 +31,28 @@ export async function GET(
     return NextResponse.json({ error: '文章不存在' }, { status: 404 });
   }
 
-  const a = rows[0];
+  const a = deepParseJson(rows[0]) as {
+    id: string;
+    slug: string;
+    title: Record<string, string>;
+    excerpt: Record<string, string>;
+    content_html: Record<string, string>;
+    meta_description: Record<string, string>;
+    cover_url: string;
+    supporting_keywords: string[];
+    faq_schema: unknown;
+    article_schema: unknown;
+    published_at: string;
+    locale: string;
+  };
   return NextResponse.json({
     article: {
       id: a.id,
       slug: a.slug,
-      title: localizeText(a.title as Record<string, string>, locale),
-      excerpt: localizeText(a.excerpt as Record<string, string>, locale),
-      contentHtml: localizeText(a.content_html as Record<string, string>, locale),
-      metaDescription: localizeText(a.meta_description as Record<string, string>, locale),
+      title: localizeText(a.title, locale),
+      excerpt: localizeText(a.excerpt, locale),
+      contentHtml: localizeText(a.content_html, locale),
+      metaDescription: localizeText(a.meta_description, locale),
       coverUrl: a.cover_url,
       supportingKeywords: a.supporting_keywords || [],
       faqSchema: a.faq_schema,

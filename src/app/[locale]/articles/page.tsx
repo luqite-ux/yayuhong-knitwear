@@ -1,5 +1,5 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { localizeText, zhText } from '@/lib/zh-hant';
 import { getCurrentSiteKey } from '@/lib/site';
 import Link from 'next/link';
@@ -23,13 +23,22 @@ export default async function ArticlesPage({
   setRequestLocale(locale);
   const siteKey = await getCurrentSiteKey();
 
-  const articles = await sql`
+  const rows = await sql`
     select slug, title, excerpt, cover_url, published_at, locale as article_locale
     from content_articles
     where status = 'published'
       and sites && array['global', ${siteKey}]::text[]
     order by published_at desc
   `;
+
+  const articles = deepParseJson(rows) as Array<{
+    slug: string;
+    title: Record<string, string>;
+    excerpt: Record<string, string>;
+    cover_url: string;
+    published_at: string;
+    article_locale: string;
+  }>;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
@@ -56,17 +65,17 @@ export default async function ArticlesPage({
                 <div className="aspect-video overflow-hidden">
                   <img
                     src={a.cover_url}
-                    alt={localizeText(a.title as Record<string, string>, locale)}
+                    alt={localizeText(a.title, locale)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               )}
               <div className="p-5">
                 <h2 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                  {localizeText(a.title as Record<string, string>, locale)}
+                  {localizeText(a.title, locale)}
                 </h2>
                 <p className="text-sm text-gray-500 line-clamp-3 mb-3">
-                  {localizeText(a.excerpt as Record<string, string>, locale)}
+                  {localizeText(a.excerpt, locale)}
                 </p>
                 <div className="flex items-center text-xs text-gray-400">
                   {a.published_at && new Date(a.published_at).toLocaleDateString(locale)}

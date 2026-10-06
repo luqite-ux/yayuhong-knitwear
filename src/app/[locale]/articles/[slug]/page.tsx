@@ -1,5 +1,5 @@
 import { setRequestLocale } from 'next-intl/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { localizeText } from '@/lib/zh-hant';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -22,10 +22,15 @@ export async function generateMetadata({
     limit 1
   `;
   if (rows.length === 0) return {};
-  const a = rows[0];
-  const title = localizeText(a.title as Record<string, string>, locale);
-  const desc = localizeText(a.meta_description as Record<string, string>, locale) ||
-    localizeText(a.excerpt as Record<string, string>, locale);
+  const a = deepParseJson(rows[0]) as {
+    title: Record<string, string>;
+    meta_description: Record<string, string>;
+    excerpt: Record<string, string>;
+    cover_url: string;
+  };
+  const title = localizeText(a.title, locale);
+  const desc = localizeText(a.meta_description, locale) ||
+    localizeText(a.excerpt, locale);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
   return {
@@ -62,9 +67,22 @@ export default async function ArticleDetailPage({
 
   if (rows.length === 0) notFound();
 
-  const a = rows[0];
-  const title = localizeText(a.title as Record<string, string>, locale);
-  const contentHtml = localizeText(a.content_html as Record<string, string>, locale);
+  const a = deepParseJson(rows[0]) as {
+    slug: string;
+    title: Record<string, string>;
+    excerpt: Record<string, string>;
+    content_html: Record<string, string>;
+    meta_description: Record<string, string>;
+    cover_url: string;
+    supporting_keywords: string[];
+    faq_schema: unknown;
+    article_schema: unknown;
+    published_at: string;
+    article_locale: string;
+  };
+
+  const title = localizeText(a.title, locale);
+  const contentHtml = localizeText(a.content_html, locale);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
   const jsonLd: Record<string, unknown> = {

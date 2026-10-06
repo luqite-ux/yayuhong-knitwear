@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { localizeText } from '@/lib/zh-hant';
 import { detectSiteKey } from '@/lib/site';
 
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const siteParam = searchParams.get('site');
   const effectiveSite = siteParam || siteKey;
 
-  const articles = await sql`
+  const rows = await sql`
     select id, slug, title, excerpt, cover_url, published_at, locale
     from content_articles
     where status = 'published'
@@ -21,11 +21,21 @@ export async function GET(req: NextRequest) {
     order by published_at desc
   `;
 
+  const articles = deepParseJson(rows) as Array<{
+    id: string;
+    slug: string;
+    title: Record<string, string>;
+    excerpt: Record<string, string>;
+    cover_url: string;
+    published_at: string;
+    locale: string;
+  }>;
+
   const result = articles.map((a) => ({
     id: a.id,
     slug: a.slug,
-    title: localizeText(a.title as Record<string, string>, locale),
-    excerpt: localizeText(a.excerpt as Record<string, string>, locale),
+    title: localizeText(a.title, locale),
+    excerpt: localizeText(a.excerpt, locale),
     coverUrl: a.cover_url,
     publishedAt: a.published_at,
     locale: a.locale,

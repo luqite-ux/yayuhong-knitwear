@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { localizeText } from '@/lib/zh-hant';
 import { detectSiteKey } from '@/lib/site';
 
@@ -32,21 +32,41 @@ export async function GET(req: NextRequest) {
     `,
   ]);
 
-  const result = products.map((p) => ({
+  const parsedProducts = deepParseJson(products) as Array<{
+    id: string;
+    slug: string;
+    name: Record<string, string>;
+    summary: Record<string, string>;
+    cover_url: string;
+    gallery_urls: string[] | null;
+    model: string;
+    is_active: boolean;
+    sort: number;
+    category_slug: string;
+  }>;
+
+  const parsedCategories = deepParseJson(categories) as Array<{
+    id: string;
+    slug: string;
+    name: Record<string, string>;
+    sort: number;
+  }>;
+
+  const result = parsedProducts.map((p) => ({
     id: p.id,
     slug: p.slug,
-    name: localizeText(p.name as Record<string, string>, locale),
-    summary: localizeText(p.summary as Record<string, string>, locale),
+    name: localizeText(p.name, locale),
+    summary: localizeText(p.summary, locale),
     coverUrl: p.cover_url,
     galleryUrls: p.gallery_urls || [],
     model: p.model,
     categorySlug: p.category_slug,
   }));
 
-  const catResult = categories.map((c) => ({
+  const catResult = parsedCategories.map((c) => ({
     id: c.id,
     slug: c.slug,
-    name: localizeText(c.name as Record<string, string>, locale),
+    name: localizeText(c.name, locale),
     sort: c.sort,
   }));
 

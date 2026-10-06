@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { detectSiteKey } from '@/lib/site';
 import { localizeText, toTraditional } from '@/lib/zh-hant';
 
@@ -12,9 +12,9 @@ export async function GET(req: NextRequest) {
   const siteParam = searchParams.get('site');
   const effectiveSite = siteParam || siteKey;
 
-  let faqs;
+  let rows;
   if (category) {
-    faqs = await sql`
+    rows = await sql`
       select id, category, question, answer, sort
       from content_faqs
       where is_active = true and category = ${category}
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
       order by sort, created_at desc
     `;
   } else {
-    faqs = await sql`
+    rows = await sql`
       select id, category, question, answer, sort
       from content_faqs
       where is_active = true
@@ -31,14 +31,20 @@ export async function GET(req: NextRequest) {
     `;
   }
 
+  const faqs = deepParseJson(rows) as Array<{
+    id: string;
+    category: string | null;
+    question: Record<string, string>;
+    answer: Record<string, string>;
+    sort: number;
+  }>;
+
   const data = faqs.map((f) => {
-    const q = f.question as Record<string, string>;
-    const a = f.answer as Record<string, string>;
     return {
       id: f.id,
-      category: f.category && locale === 'zh-TW' ? toTraditional(String(f.category)) : f.category,
-      question: localizeText(q, locale),
-      answer: localizeText(a, locale),
+      category: f.category && locale === 'zh-TW' ? toTraditional(f.category) : f.category,
+      question: localizeText(f.question, locale),
+      answer: localizeText(f.answer, locale),
     };
   });
 
