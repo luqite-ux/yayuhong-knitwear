@@ -20,13 +20,33 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
     order by sort, created_at desc
   `;
 
+  // FAQ 分类名翻译映射
+  const categoryLabels: Record<string, { zh: string; en: string }> = {
+    order: { zh: '订单与起订量', en: 'Order & MOQ' },
+    sampling: { zh: '打样与交期', en: 'Sampling & Lead Time' },
+    quality: { zh: '产品与质量', en: 'Products & Quality' },
+    payment: { zh: '付款与物流', en: 'Payment & Shipping' },
+    service: { zh: '合作与服务', en: 'Cooperation & Service' },
+    general: { zh: '常见问题', en: 'General' },
+  };
+
+  const getCategoryLabel = (cat: string | null): string => {
+    if (!cat) return locale === 'en' ? 'General' : '常见问题';
+    const label = categoryLabels[cat];
+    if (label) {
+      const text = locale === 'en' ? label.en : label.zh;
+      return locale === 'zh-TW' ? toTraditional(text) : text;
+    }
+    return locale === 'zh-TW' ? toTraditional(cat) : cat;
+  };
+
   const faqs = rows.map((r) => {
     const row = deepParseJson(r) as typeof r;
     const q = row.question as Record<string, string>;
     const a = row.answer as Record<string, string>;
     return {
       id: r.id,
-      category: r.category && locale === 'zh-TW' ? toTraditional(String(r.category)) : r.category,
+      category: getCategoryLabel(row.category as string | null),
       question: localizeText(q, locale),
       answer: localizeText(a, locale),
     };
