@@ -211,6 +211,48 @@
                                  "workTime":  "7×24 Stunden Service"
                              }
                 },
+    "process":  {
+                    "badge":  "Herstellungsprozess",
+                    "title":  "Kompletter Pullover-Produktionsablauf",
+                    "subtitle":  "Vom Design bis zur Lieferung — 7 sorgfältige Schritte für Qualität in jedem Pullover",
+                    "steps":  [
+                                  {
+                                      "num":  "01",
+                                      "title":  "Design und Mustererstellung",
+                                      "desc":  "Unser professionelles Design-Team erstellt Styles und entwickelt Muster nach Ihren Wünschen oder Vorlagen. Ein erstes Muster wird gefertigt, um Passform und Verarbeitung zu bestätigen."
+                                  },
+                                  {
+                                      "num":  "02",
+                                      "title":  "Materialbeschaffung",
+                                      "desc":  "Wir beziehen hochwertige Garne aus Wolle, Kaschmir, Baumwolle, Acryl und Mischgeweben. Strenge Qualitätskontrollen von Garnnummer und Farbechtheit vor der Produktion."
+                                  },
+                                  {
+                                      "num":  "03",
+                                      "title":  "Computerisierte Strickerei",
+                                      "desc":  "Importierte vollautomatische Flachstrickmaschinen fertigen präzise Teile. Unterstützt Jersey, Rippen, Jacquard, Zopfmuster und diverse Maschenarten mit gleichbleibender Qualität."
+                                  },
+                                  {
+                                      "num":  "04",
+                                      "title":  "Verknüpfen und Nähen",
+                                      "desc":  "Erfahrene Handwerker übernehmen das manuelle Verknüpfen und die Näharbeiten. Körper, Ärmel und Ausschnitt werden präzise mit sauberen, gleichmäßigen Nähten verbunden."
+                                  },
+                                  {
+                                      "num":  "05",
+                                      "title":  "Waschen und Fixieren",
+                                      "desc":  "Ein professioneller Waschprozess verleiht dem Pullover weichen Griff und stabile Form. Dazu gehören Walken, Weichspülung und Dampfformung für genaue, gleichbleibende Größen."
+                                  },
+                                  {
+                                      "num":  "06",
+                                      "title":  "Qualitätskontrolle",
+                                      "desc":  "Dreistufige Qualitätskontrolle — Halbzeugprüfung, Fertigprüfung und Endaudit. Jedes Stück wird auf Größe, Aussehen und Fehler geprüft. Erfolgsquote > 99% bei Großaufträgen."
+                                  },
+                                  {
+                                      "num":  "07",
+                                      "title":  "Verpackung und Versand",
+                                      "desc":  "Individuell gefaltet, auf Bügeln oder kundenspezifisch verpackt. Etiketten, Anhänger und Polybeutel inklusive. Weltweiter Versand pünktlich per Ihrem bevorzugten Logistikpartner."
+                                  }
+                              ]
+                },
     "heritage":  {
                      "badge":  "Chenghai · Chinas Strickwaren-Hauptstadt",
                      "title":  "40 Jahre Stricktradition",

@@ -211,6 +211,48 @@
                                  "workTime":  "Servicio 7×24"
                              }
                 },
+    "process":  {
+                    "badge":  "Proceso de producción",
+                    "title":  "Proceso completo de fabricación de jerseys",
+                    "subtitle":  "Del diseño a la entrega — 7 pasos meticulosos para garantizar la calidad en cada prenda",
+                    "steps":  [
+                                  {
+                                      "num":  "01",
+                                      "title":  "Diseño y muestreo",
+                                      "desc":  "Nuestro equipo de diseño profesional crea estilos y desarrolla patrones según sus necesidades o referencias. Se produce una primera muestra para confirmar el ajuste y la artesanía."
+                                  },
+                                  {
+                                      "num":  "02",
+                                      "title":  "Suministro de materiales",
+                                      "desc":  "Seleccionamos hilos premium incluyendo lana, cachemira, algodón, acrílico y mezclas. Estrictos controles de calidad sobre el número de hilo y la solidez del color antes de la producción."
+                                  },
+                                  {
+                                      "num":  "03",
+                                      "title":  "Tejido computarizado",
+                                      "desc":  "Máquinas de tejer planas totalmente automáticas importadas producen paneles precisos. Compatible con punto jersey, canalé, jacquard, trenza y diversos puntos con uniformidad constante."
+                                  },
+                                  {
+                                      "num":  "04",
+                                      "title":  "Enlazado y costura",
+                                      "desc":  "Artesanos experimentados realizan el enlazado manual y las operaciones de costura. Cuerpo, mangas y cuello se unen con precisión y costuras limpias y uniformes."
+                                  },
+                                  {
+                                      "num":  "05",
+                                      "title":  "Lavado y fijado",
+                                      "desc":  "El proceso de lavado profesional aporta un tacto suave y una forma estable. Incluye fullado, ablandamiento y fijado al vapor para tallas precisas y consistentes."
+                                  },
+                                  {
+                                      "num":  "06",
+                                      "title":  "Control de calidad",
+                                      "desc":  "Tres etapas de control de calidad — inspección de semielaborado, inspección de producto terminado y auditoría final. Cada prenda se revisa por talla, apariencia y defectos. Tasa de aprobación superior al 99% en pedidos grandes."
+                                  },
+                                  {
+                                      "num":  "07",
+                                      "title":  "Embalaje y envío",
+                                      "desc":  "Dobladas individualmente, en percha o embalaje personalizado según especificación. Etiquetas, colgantes y bolsas de plástico incluidos. Envío mundial por su socio logístico preferido en plazo."
+                                  }
+                              ]
+                },
     "heritage":  {
                      "badge":  "Chenghai · Capital del Punto de China",
                      "title":  "40 Años de Herencia Puntera",

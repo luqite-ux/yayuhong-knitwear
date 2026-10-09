@@ -211,6 +211,48 @@
                                  "workTime":  "Atendimento 7×24"
                              }
                 },
+    "process":  {
+                    "badge":  "Processo de produção",
+                    "title":  "Processo completo de fabricação de blusas de lã",
+                    "subtitle":  "Do design à entrega — 7 etapas meticulosas para garantir qualidade em cada peça",
+                    "steps":  [
+                                  {
+                                      "num":  "01",
+                                      "title":  "Design e amostragem",
+                                      "desc":  "Nossa equipe profissional de design cria estilos e desenvolve padrões conforme suas necessidades ou referências. Uma primeira amostra é produzida para confirmar o caimento e o acabamento."
+                                  },
+                                  {
+                                      "num":  "02",
+                                      "title":  "Aquisição de materiais",
+                                      "desc":  "Selecionamos fios premium incluindo lã, cashmere, algodão, acrílico e misturas. Controles rigorosos de qualidade na contagem do fio e solidez da cor antes da produção."
+                                  },
+                                  {
+                                      "num":  "03",
+                                      "title":  "Tricô computadorizado",
+                                      "desc":  "Máquinas de tricotar retas totalmente automáticas importadas produzem painéis precisos. Suporta ponto jersey, canelado, jacquard, trança e diversos pontos com uniformidade consistente."
+                                  },
+                                  {
+                                      "num":  "04",
+                                      "title":  "Ligação e costura",
+                                      "desc":  "Artesãos experientes realizam a ligação manual e as operações de costura. Corpo, mangas e gola são unidos com precisão, com costuras limpas e uniformes."
+                                  },
+                                  {
+                                      "num":  "05",
+                                      "title":  "Lavagem e fixação",
+                                      "desc":  "Um processo de lavagem profissional confere toque macio e forma estável. Inclui feltragem, amaciamento e fixação a vapor para tamanhos precisos e consistentes."
+                                  },
+                                  {
+                                      "num":  "06",
+                                      "title":  "Controle de qualidade",
+                                      "desc":  "Três etapas de QC — inspeção de semi-acabado, inspeção de produto acabado e auditoria final. Cada peça é verificada quanto a tamanho, aparência e defeitos. Taxa de aprovação > 99% em pedidos em grande quantidade."
+                                  },
+                                  {
+                                      "num":  "07",
+                                      "title":  "Embalagem e envio",
+                                      "desc":  "Dobrada individualmente, em cabide ou embalagem personalizada conforme especificação. Etiquetas, tags e sacos plásticos incluídos. Envio mundial por seu parceiro logístico preferido dentro do prazo."
+                                  }
+                              ]
+                },
     "heritage":  {
                      "badge":  "Chenghai · Capital do Malha da China",
                      "title":  "40 Anos de Herança Têxtil",

@@ -10,6 +10,7 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('faq');
+  const tp = await getTranslations('process');
   const siteKey = await getCurrentSiteKey();
 
   const rows = await sql`
@@ -70,6 +71,12 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
     })),
   };
 
+  const processSteps = Array.from({ length: 7 }, (_, i) => ({
+    num: tp(`steps.${i}.num`),
+    title: tp(`steps.${i}.title`),
+    desc: tp(`steps.${i}.desc`),
+  }));
+
   return (
     <>
       <script
@@ -77,7 +84,7 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <section className="pt-28 pb-20 bg-[var(--color-cream)] knit-texture">
+      <section className="pt-28 pb-16 bg-[var(--color-cream)] knit-texture">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-[var(--color-accent)] font-medium mb-3">{t('subtitle')}</p>
@@ -88,7 +95,65 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
               {t('description')}
             </p>
           </div>
+        </div>
+      </section>
 
+      {/* Production Process Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p className="text-[var(--color-accent)] font-medium mb-3">{tp('badge')}</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-4">
+              {tp('title')}
+            </h2>
+            <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+              {tp('subtitle')}
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Desktop vertical line */}
+            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-[var(--color-primary)]/10 -translate-x-1/2" />
+
+            <div className="space-y-10 lg:space-y-0">
+              {processSteps.map((step, index) => (
+                <div
+                  key={index}
+                  className={`lg:grid lg:grid-cols-2 lg:gap-12 items-center ${
+                    index % 2 === 0 ? '' : 'lg:[&>div:first-child]:order-2'
+                  }`}
+                >
+                  {/* Content */}
+                  <div className={`relative ${index % 2 === 0 ? 'lg:text-right lg:pr-12' : 'lg:pl-12'}`}>
+                    <div className="bg-[var(--color-cream)] rounded-2xl p-6 sm:p-8 border border-[var(--color-primary)]/10 hover:shadow-lg hover:shadow-[var(--color-primary)]/5 transition-shadow">
+                      <div className="text-5xl sm:text-6xl font-bold text-[var(--color-accent)]/20 mb-2">
+                        {step.num}
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-[var(--color-primary)] mb-3">
+                        {step.title}
+                      </h3>
+                      <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Circle marker */}
+                  <div className="hidden lg:flex justify-center items-center">
+                    <div className="relative z-10 w-12 h-12 rounded-full bg-[var(--color-accent)] text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-[var(--color-accent)]/30">
+                      {index + 1}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-[var(--color-cream)] knit-texture">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {faqs.length === 0 ? (
             <div className="text-center py-20 text-[var(--color-text-muted)]">
               {t('empty')}

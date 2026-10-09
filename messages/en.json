@@ -222,6 +222,48 @@
                 "description":  "Find answers about cooperation, production, delivery and more",
                 "empty":  "No FAQs yet. Contact us if you have questions."
             },
+    "process":  {
+                    "badge":  "Our Process",
+                    "title":  "Sweater Production Flow",
+                    "subtitle":  "From design to delivery — 7 meticulous steps ensuring quality in every sweater",
+                    "steps":  [
+                                  {
+                                      "num":  "01",
+                                      "title":  "Design & Sampling",
+                                      "desc":  "Our professional design team creates styles and develops patterns based on your requirements or references. First sample is produced to confirm fit and craftsmanship."
+                                  },
+                                  {
+                                      "num":  "02",
+                                      "title":  "Material Sourcing",
+                                      "desc":  "Sourcing premium yarns including wool, cashmere, cotton, acrylic and blends. Strict quality checks on yarn count and color fastness before production."
+                                  },
+                                  {
+                                      "num":  "03",
+                                      "title":  "Computerized Knitting",
+                                      "desc":  "Imported fully automatic flat knitting machines produce precise panels. Supports jersey, rib, jacquard, cable and various stitch patterns with consistent uniformity."
+                                  },
+                                  {
+                                      "num":  "04",
+                                      "title":  "Linking & Sewing",
+                                      "desc":  "Experienced craftsmen perform hand linking and sewing operations. Body, sleeves and neckline are precisely joined with clean, even stitching."
+                                  },
+                                  {
+                                      "num":  "05",
+                                      "title":  "Washing & Setting",
+                                      "desc":  "Professional washing process gives sweaters soft hand feel and stable shape. Includes milling, softening treatment and steam setting for accurate, consistent sizing."
+                                  },
+                                  {
+                                      "num":  "06",
+                                      "title":  "Quality Inspection",
+                                      "desc":  "Three-stage QC — semi-finished inspection, finished inspection, and final audit. Each piece checked for size, appearance and defects. 99%+ pass rate for bulk orders."
+                                  },
+                                  {
+                                      "num":  "07",
+                                      "title":  "Packaging & Shipping",
+                                      "desc":  "Individually folded, hung or custom-packed as specified. Labels, hang tags and polybags included. Shipped worldwide via your preferred logistics partner on schedule."
+                                  }
+                              ]
+                },
     "heritage":  {
                      "badge":  "Chenghai · China Knitwear Capital",
                      "title":  "40 Years of Knitwear Heritage",

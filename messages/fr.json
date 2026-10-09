@@ -211,6 +211,48 @@
                                  "workTime":  "Service 7j/24h"
                              }
                 },
+    "process":  {
+                    "badge":  "Processus de fabrication",
+                    "title":  "Processus complet de production de pulls",
+                    "subtitle":  "Du design à la livraison — 7 étapes méticuleuses pour garantir la qualité de chaque maille",
+                    "steps":  [
+                                  {
+                                      "num":  "01",
+                                      "title":  "Design et échantillonnage",
+                                      "desc":  "Notre équipe de design professionnelle crée des modèles et développe des motifs selon vos besoins ou références. Un premier échantillon est produit pour confirmer la coupe et le savoir-faire."
+                                  },
+                                  {
+                                      "num":  "02",
+                                      "title":  "Approvisionnement en matières",
+                                      "desc":  "Nous sélectionnons des fils haut de gamme : laine, cachemire, coton, acrylique et mélanges. Contrôles qualité stricts sur le numéro de fil et la solidité des couleurs avant production."
+                                  },
+                                  {
+                                      "num":  "03",
+                                      "title":  "Tricotage informatisé",
+                                      "desc":  "Des machines à tricoter rectilignes entièrement automatiques importées produisent des panneaux précis. Jersey, côtes, jacquard, torsades et divers points avec une uniformité parfaite."
+                                  },
+                                  {
+                                      "num":  "04",
+                                      "title":  "Assemblage et couture",
+                                      "desc":  "Des artisans expérimentés réalisent l'assemblage manuel et les coutures. Corps, manches et col sont réunis avec précision pour des finitions nettes et régulières."
+                                  },
+                                  {
+                                      "num":  "05",
+                                      "title":  "Lavage et formage",
+                                      "desc":  "Un processus de lavage professionnel confère au pull un toucher doux et une forme stable. Inclut le foulage, l'adoucissement et le formage à la vapeur pour des tailles précises et constantes."
+                                  },
+                                  {
+                                      "num":  "06",
+                                      "title":  "Contrôle qualité",
+                                      "desc":  "Trois étapes de QC — inspection semi-finie, inspection produit fini et audit final. Chaque pièce est vérifiée pour la taille, l'aspect et les défauts. Taux de réussite > 99% sur les commandes en gros."
+                                  },
+                                  {
+                                      "num":  "07",
+                                      "title":  "Emballage et expédition",
+                                      "desc":  "Emballage individuel plié, sur cintre ou personnalisé selon spécifications. Étiquettes, médaillons et sachets plastique inclus. Livraison mondiale par votre transporteur préféré dans les délais."
+                                  }
+                              ]
+                },
     "heritage":  {
                      "badge":  "Chenghai · Capitale du tricot de Chine",
                      "title":  "40 Ans d\u0027Héritage Tricot",
