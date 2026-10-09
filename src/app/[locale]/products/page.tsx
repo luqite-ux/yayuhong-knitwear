@@ -271,6 +271,7 @@ async function fetchProductsFromDB(siteKey: string) {
       cover: string;
       items: ProductItem[];
       categoryName?: Record<string, string>;
+      categorySlug?: string;
     }> = {};
 
     for (const key of categoryKeys) {
@@ -287,6 +288,7 @@ async function fetchProductsFromDB(siteKey: string) {
       const key = slugToKeyMap[cat.slug || ''];
       if (key && grouped[key]) {
         grouped[key].categoryName = cat.name;
+        grouped[key].categorySlug = cat.slug;
       }
     }
 
@@ -299,6 +301,7 @@ async function fetchProductsFromDB(siteKey: string) {
             en: p.name?.en || p.model || 'Product',
             zh: p.name?.zh || p.name?.en || p.model || '产品',
           },
+          slug: p.slug,
           material: p.summary ? {
             en: p.summary.en || '',
             zh: p.summary.zh || '',
@@ -356,18 +359,21 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                 ? (locale === 'zh' ? cat.categoryName.zh : cat.categoryName.en || cat.categoryName.zh || key)
                 : t(cat.nameKey || `categories.${index}.name`);
               const count = `${cat.items.length} ${zhText(locale, '款', 'SKUs')}`;
+              const linkHref = cat.categorySlug
+                ? `/products/category/${cat.categorySlug}`
+                : `#category-${index}`;
               return (
-                <a key={index} href={`#category-${index}`} className="bg-white rounded-xl overflow-hidden card-hover border border-[var(--color-border)]/50 block group">
+                <Link key={index} href={linkHref} className="bg-white rounded-xl overflow-hidden card-hover border border-[var(--color-border)]/50 block group">
                   <div className="aspect-square overflow-hidden relative">
-                    <img src={cat.cover} alt={name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                    <img src={cat.cover} alt={`${name} - ${t('title')}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3">
                       <span className="text-white text-xs font-medium">{count}</span>
                     </div>
                   </div>
                   <div className="p-3 text-center">
-                    <h4 className="font-semibold text-sm text-[var(--color-primary)]">{name}</h4>
+                    <h3 className="font-semibold text-sm text-[var(--color-primary)]">{name}</h3>
                   </div>
-                </a>
+                </Link>
               );
             })}
           </div>

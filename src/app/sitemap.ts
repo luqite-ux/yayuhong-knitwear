@@ -42,6 +42,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     order by published_at desc
   `;
 
+  // 产品分类
+  const categories = await sql`
+    select slug, updated_at
+    from content_categories
+    order by sort, created_at
+  `;
+
+  // 产品列表
+  const products = await sql`
+    select slug, updated_at
+    from content_products
+    where is_active = true
+      and sites && array['global', ${siteKey}]::text[]
+    order by created_at desc
+  `;
+
   const entries: MetadataRoute.Sitemap = [];
 
   if (isChina) {
@@ -54,6 +70,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: route.priority,
       });
     }
+
+    // 分类页
+    for (const cat of categories) {
+      entries.push({
+        url: `${baseUrl}/products/category/${cat.slug}`,
+        lastModified: cat.updated_at || new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    }
+
+    // 产品详情页
+    for (const p of products) {
+      entries.push({
+        url: `${baseUrl}/products/${p.slug}`,
+        lastModified: p.updated_at || new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      });
+    }
+
     for (const a of articles) {
       entries.push({
         url: `${baseUrl}/articles/${a.slug}`,
@@ -78,6 +115,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       });
     }
+
+    // 分类页
+    for (const cat of categories) {
+      entries.push({
+        url: `${baseUrl}/zh/products/category/${cat.slug}`,
+        lastModified: cat.updated_at || new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((locale) => [hreflang(locale), `${baseUrl}/${locale}/products/category/${cat.slug}`]),
+          ),
+        },
+      });
+    }
+
+    // 产品详情页
+    for (const p of products) {
+      entries.push({
+        url: `${baseUrl}/zh/products/${p.slug}`,
+        lastModified: p.updated_at || new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((locale) => [hreflang(locale), `${baseUrl}/${locale}/products/${p.slug}`]),
+          ),
+        },
+      });
+    }
+
     for (const a of articles) {
       entries.push({
         url: `${baseUrl}/zh/articles/${a.slug}`,

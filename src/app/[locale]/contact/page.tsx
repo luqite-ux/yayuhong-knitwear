@@ -225,12 +225,33 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* Map placeholder */}
-      <section className="h-64 bg-[var(--color-warm-gray)] flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-4xl mb-2">📍</div>
-          <p className="text-[var(--color-text-muted)]">
-            {zhText(locale, '地图位置（待嵌入）', 'Map location (to be embedded)')}
+      {/* Map */}
+      <section className="py-16 bg-[var(--color-cream)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-[var(--color-primary)] mb-6">
+            {zhText(locale, '工厂位置', 'Factory Location')}
+          </h2>
+          <div className="rounded-2xl overflow-hidden border border-[var(--color-border)]/50 shadow-sm bg-white">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=116.716%2C23.476%2C116.726%2C23.486&layer=mapnik&marker=23.4812%2C116.7213"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              title="Yayuhong Knitwear Factory - Shantou, Guangdong"
+              className="w-full"
+            />
+          </div>
+          <p className="text-sm text-[var(--color-text-muted)] mt-3 text-center">
+            <a
+              href="https://www.openstreetmap.org/?mlat=23.4812&mlon=116.7213#map=16/23.4812/116.7213"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--color-primary)] transition-colors"
+            >
+              {zhText(locale, '在新窗口查看大图', 'View larger map')} ↗
+            </a>
           </p>
         </div>
       </section>

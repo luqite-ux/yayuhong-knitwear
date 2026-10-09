@@ -8,6 +8,7 @@ import { Link } from '@/i18n/navigation';
 export interface ProductItem {
   img: string;
   name: { en: string; zh: string };
+  slug?: string;
   material?: { en: string; zh: string };
 }
 

@@ -139,19 +139,19 @@ export default function Hero() {
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-white/10">
           <div className="text-center">
             <div className="stat-number">20+</div>
-            <p className="text-white/60 text-sm mt-2">{t('stats.years')}</p>
+            <p className="text-white/90 text-base font-medium mt-2">{t('stats.years')}</p>
           </div>
           <div className="text-center">
             <div className="stat-number">30K</div>
-            <p className="text-white/60 text-sm mt-2">{t('stats.dailyCapacity')}</p>
+            <p className="text-white/90 text-base font-medium mt-2">{t('stats.dailyCapacity')}</p>
           </div>
           <div className="text-center">
             <div className="stat-number">50</div>
-            <p className="text-white/60 text-sm mt-2">{t('stats.moq')}</p>
+            <p className="text-white/90 text-base font-medium mt-2">{t('stats.moq')}</p>
           </div>
           <div className="text-center">
             <div className="stat-number">7</div>
-            <p className="text-white/60 text-sm mt-2">{t('stats.delivery')}</p>
+            <p className="text-white/90 text-base font-medium mt-2">{t('stats.delivery')}</p>
           </div>
         </div>
       </div>

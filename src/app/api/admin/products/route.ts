@@ -85,7 +85,7 @@ export async function PUT(req: NextRequest) {
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
   const body = await req.json();
-  const { id, name, summary, detail_html, features, applications, advantages, specs, model, category_id, cover_url, gallery_urls, is_active, sort, sites } = body;
+  const { id, name, summary, detail_html, features, applications, advantages, specs, model, slug, category_id, cover_url, gallery_urls, is_active, sort, sites } = body;
   const effectiveSites = Array.isArray(sites) && sites.length > 0 ? sites : ['global'];
 
   try {
@@ -100,6 +100,7 @@ export async function PUT(req: NextRequest) {
         advantages = ${JSON.stringify(advantages || {})}::jsonb,
         specs = ${JSON.stringify(specs || {})}::jsonb,
         model = ${model || null},
+        slug = ${slug || null},
         cover_url = ${cover_url || null},
         gallery_urls = ${gallery_urls || null},
         is_active = ${is_active !== false},
