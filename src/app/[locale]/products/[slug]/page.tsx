@@ -43,10 +43,21 @@ export async function generateMetadata({
 
     const productName = localizeText(p.name, locale);
     const categoryName = localizeText(p.category_name, locale);
+    const description = localizeText(p.summary, locale) || `${productName} - ${categoryName}`;
+
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
+    const productUrl = `${baseUrl}/${locale}/products/${slug}`;
 
     return {
       title: `${productName} - ${categoryName} | Yayuhong Knitwear`,
-      description: localizeText(p.summary, locale) || `${productName} - ${categoryName}`,
+      description,
+      openGraph: {
+        title: `${productName} - ${categoryName}`,
+        description,
+        type: 'product',
+        url: productUrl,
+        siteName: 'Yayuhong Knitwear',
+      },
     };
   } catch (err) {
     console.error('Error in product detail generateMetadata:', err);
