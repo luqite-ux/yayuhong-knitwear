@@ -21,13 +21,6 @@ async function checkAuth(req: NextRequest): Promise<boolean> {
     const token = authHeader.replace('Bearer ', '').trim();
     if (token === migrationToken) return true;
   }
-
-  // 临时密钥（一次性使用，用后即删）
-  if (authHeader?.startsWith('Bearer ')) {
-    const token = authHeader.replace('Bearer ', '').trim();
-    if (token === 'vn_upload_' + '20261010_' + 'yayuhong_knitwear') return true;
-  }
-
   return false;
 }
 

@@ -18,12 +18,6 @@ export async function POST(req: NextRequest) {
     if (token === migrationToken) authorized = true;
   }
 
-  // 临时密钥
-  if (!authorized && authHeader?.startsWith('Bearer ')) {
-    const token = authHeader.replace('Bearer ', '').trim();
-    if (token === 'vn_cover_' + '20261010_' + 'yayuhong_knitwear') authorized = true;
-  }
-
   if (!authorized) return NextResponse.json({ error: '未授权' }, { status: 401 });
 
   try {
