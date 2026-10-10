@@ -28,12 +28,6 @@ async function checkAuth(req: NextRequest): Promise<boolean> {
     if (token === migrationToken) return true;
   }
 
-  // 方式3: 临时硬编码密钥（一次性使用，用后即删）
-  if (authHeader?.startsWith('Bearer ')) {
-    const token = authHeader.replace('Bearer ', '').trim();
-    if (token === 'vn_migrate_' + '20261010_' + 'yayuhong_knitwear') return true;
-  }
-
   return false;
 }
 
