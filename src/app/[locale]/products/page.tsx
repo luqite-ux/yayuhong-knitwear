@@ -393,7 +393,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
             {activeCategoryKeys.map((key, index) => {
               const cat = categories[key];
               const name = cat.categoryName
-                ? localizeText(cat.categoryName, locale) || key
+                ? (localizeText(cat.categoryName, locale) || key)
                 : t(cat.nameKey || `categories.${index}.name`);
               const count = `${cat.items.length} ${zhText(locale, '款', 'SKUs')}`;
               const linkHref = cat.categorySlug

@@ -13,24 +13,7 @@ const toHant = ConverterFactory(
 
 export const HANT_LOCALE = 'zh-TW';
 
-export function toTraditional(text: string): string {
-  if (!text) return '';
-  return toHant(text);
-}
-
-/** 简体站用原文，繁体站转繁体，其余语言用英文 */
-export function zhText(locale: string, hans: string, en: string): string {
-  if (locale === 'zh') return hans;
-  if (locale === HANT_LOCALE) return toHant(hans);
-  if (locale === 'vn') {
-    if (viTextDict[hans]) return viTextDict[hans];
-    if (viTextDict[en]) return viTextDict[en];
-    return en;
-  }
-  return en;
-}
-
-// zhText 越南语翻译字典
+// 越南语翻译字典（供 zhText / localizeText 共用）
 const viTextDict: Record<string, string> = {
   // Products page
   '款': 'chiếc',
@@ -53,13 +36,19 @@ const viTextDict: Record<string, string> = {
   'Get Quote': 'Nhận báo giá',
   'Get Quote →': 'Nhận báo giá →',
 
-  // Categories
+  // Categories (global category names fallback)
   'Womens Sweater': 'Áo Len Nữ',
   'Kids Sweater': 'Áo Len Trẻ Em',
   'Mens Sweater': 'Áo Len Nam',
   'Loungewear Set': 'Đồ Mặc Nhà',
   'Pet Clothes': 'Quần Áo Thú Cưng',
   'Knit Accessories': 'Phụ Kiện Dệt Kim',
+  'womens-sweater': 'Áo Len Nữ',
+  'kids-sweater': 'Áo Len Trẻ Em',
+  'mens-sweater': 'Áo Len Nam',
+  'loungewear-set': 'Đồ Mặc Nhà',
+  'pet-clothes': 'Quần Áo Thú Cưng',
+  'knit-accessories': 'Phụ Kiện Dệt Kim',
 
   // Hero
   '快时尚源头工厂': 'Nhà Máy Thời Trang Nhanh',
@@ -101,6 +90,23 @@ const viTextDict: Record<string, string> = {
   '天交货': 'ngày giao hàng',
 };
 
+export function toTraditional(text: string): string {
+  if (!text) return '';
+  return toHant(text);
+}
+
+/** 简体站用原文，繁体站转繁体，其余语言用英文 */
+export function zhText(locale: string, hans: string, en: string): string {
+  if (locale === 'zh') return hans;
+  if (locale === HANT_LOCALE) return toHant(hans);
+  if (locale === 'vn') {
+    if (viTextDict[hans]) return viTextDict[hans];
+    if (viTextDict[en]) return viTextDict[en];
+    return en;
+  }
+  return en;
+}
+
 /** 多语言关键词：支持 vi 等额外语言的本地化关键词 */
 export function localizedKeywords(locale: string, hans: string, en: string, vi?: string): string {
   if (locale === 'zh') return hans;
@@ -113,22 +119,26 @@ type JsonbText = Record<string, string> | string | null | undefined;
 
 /**
  * 多语言字段取值。繁体没有独立文案时，用简体转换，避免落到英文。
- * 越南语（vn）兼容 vi 字段名。
+ * 越南语（vn）兼容 vi 字段名，并尝试用字典翻译英文字段。
  */
 export function localizeText(text: JsonbText, locale: string): string {
   if (text == null) return '';
   if (typeof text === 'string') {
-    return locale === HANT_LOCALE ? toHant(text) : text;
+    if (locale === HANT_LOCALE) return toHant(text);
+    if (locale === 'vn' && viTextDict[text]) return viTextDict[text];
+    return text;
   }
   if (locale === HANT_LOCALE) {
     if (text['zh-TW']) return text['zh-TW'];
     if (text.zh) return toHant(text.zh);
     if (text.en) return text.en;
   }
-  // 越南语兼容：vn locale 先找 vi 字段，再找 vn 字段
+  // 越南语兼容：vn locale 先找 vi 字段，再找 vn 字段，再用字典翻译英文
   if (locale === 'vn') {
     if (text.vi) return text.vi;
     if (text.vn) return text.vn;
+    if (text.en && viTextDict[text.en]) return viTextDict[text.en];
+    if (text.zh && viTextDict[text.zh]) return viTextDict[text.zh];
   }
   const order = [locale, 'en', 'zh'];
   for (const key of order) {
