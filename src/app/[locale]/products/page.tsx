@@ -207,10 +207,10 @@ const slugToKeyMap: Record<string, string> = {
   'knit-accessories': 'accessories',
   'accessories': 'accessories',
   // 越南站点分类
-  'vn-cardigans': 'womens',
-  'vn-knit-tops': 'womens',
-  'vn-polo-shirts': 'mens',
-  'vn-basics': 'womens',
+  'vn-sun-protection': 'womens',
+  'vn-cardigan': 'womens',
+  'vn-knit-tee': 'womens',
+  'vn-polo-knit': 'mens',
   'vn-loungewear': 'loungewear',
 };
 
