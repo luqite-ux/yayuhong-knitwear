@@ -24,98 +24,33 @@ export async function generateMetadata({
     const { slug, locale } = await params;
     const siteKey = await getCurrentSiteKey();
 
-    const isVn = locale === 'vn';
-    const rows = isVn
-      ? await sql`
-          select p.name, p.summary, p.cover_url, p.detail_html,
-                 p.model, c.slug as category_slug, c.name as category_name
-          from content_products p
-          left join content_categories c on p.category_id = c.id
-          where p.slug = ${slug} and p.is_active = true
-            and (p.slug like 'vn-%' or p.sites && array['global', ${siteKey}]::text[])
-          limit 1
-        `
-      : await sql`
-          select p.name, p.summary, p.cover_url, p.detail_html,
-                 p.model, c.slug as category_slug, c.name as category_name
-          from content_products p
-          left join content_categories c on p.category_id = c.id
-          where p.slug = ${slug} and p.is_active = true
-            and p.sites && array['global', ${siteKey}]::text[]
-          limit 1
-        `;
+    const rows = await sql`
+      select p.name, p.summary, c.name as category_name
+      from content_products p
+      left join content_categories c on p.category_id = c.id
+      where p.slug = ${slug} and p.is_active = true
+        and p.sites && array['global', ${siteKey}]::text[]
+      limit 1
+    `;
 
     if (rows.length === 0) return {};
 
     const p = deepParseJson(rows[0]) as {
       name: Record<string, string>;
       summary: Record<string, string>;
-      cover_url: string;
-      detail_html: Record<string, string>;
-      model: string;
-      category_slug: string;
       category_name: Record<string, string>;
     };
 
     const productName = localizeText(p.name, locale);
     const categoryName = localizeText(p.category_name, locale);
-    const summary = localizeText(p.summary, locale);
-    const metaDesc = zhText(
-      locale,
-      '专业针织服装厂，20年经验，支持OEM/ODM定制',
-      'Professional knitwear manufacturer with 20 years experience. OEM/ODM custom service',
-    );
-    const description = summary || `${productName} - ${metaDesc} - ${categoryName}. MOQ 50 pcs, 7-day delivery.`;
-
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
-    const productUrl = `${baseUrl}/${locale}/products/${slug}`;
-
-    const isChina = siteKey === 'china';
-    const locales = isChina ? [] : [...LOCALES];
 
     return {
       title: `${productName} - ${categoryName} | Yayuhong Knitwear`,
-      description,
-      keywords: [
-        productName,
-        categoryName,
-        'knitwear manufacturer',
-        'sweater factory',
-        'custom knitwear',
-        'OEM sweater',
-        'wholesale sweater',
-      ],
-      alternates: {
-        canonical: productUrl,
-        languages: isChina ? undefined : Object.fromEntries(
-          locales.map((l) => [hreflang(l), `${baseUrl}/${l}/products/${slug}`]),
-        ),
-      },
-      openGraph: {
-        title: `${productName} - ${categoryName}`,
-        description,
-        type: 'product',
-        url: productUrl,
-        siteName: 'Yayuhong Knitwear',
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: `${productName} - ${categoryName}`,
-        description,
-      },
-      robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          'max-image-preview': 'large',
-        },
-      },
+      description: localizeText(p.summary, locale) || `${productName} - ${categoryName}`,
     };
   } catch (err) {
     console.error('Error in product detail generateMetadata:', err);
-    return {};
+    return { title: 'Error', description: String(err) };
   }
 }
 
