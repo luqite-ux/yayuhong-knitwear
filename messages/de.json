@@ -214,45 +214,76 @@
     "process":  {
                     "badge":  "Herstellungsprozess",
                     "title":  "Kompletter Pullover-Produktionsablauf",
-                    "subtitle":  "Vom Design bis zur Lieferung — 7 sorgfältige Schritte für Qualität in jedem Pullover",
+                    "subtitle":  "Vom Design bis zur Lieferung — 7 zentrale Produktionsstufen und 20 Jahre Handwerkskunst für Spitzenqualität bei jedem Pullover",
                     "steps":  [
                                   {
                                       "num":  "01",
-                                      "title":  "Design und Mustererstellung",
-                                      "desc":  "Unser professionelles Design-Team erstellt Styles und entwickelt Muster nach Ihren Wünschen oder Vorlagen. Ein erstes Muster wird gefertigt, um Passform und Verarbeitung zu bestätigen."
+                                      "title":  "Design, Mustererstellung und Schnittkonstruktion",
+                                      "desc":  "Un professionelles Design-Team erstellt Styles, entwickelt Muster und bereitet Farbkarten nach Ihren Wünschen oder Vorlagen. Erfahrene Techniker berechnen präzise Maschenzahl, Formungsverläufe und Reihenanzahl für Rücken-, Vorderteile, Ärmel und Bündchen und erstellen detaillierte Technische Datenblätter. Das erste Muster bestätigt Passform, Maße und Verarbeitung vor der Serienproduktion."
                                   },
                                   {
                                       "num":  "02",
-                                      "title":  "Materialbeschaffung",
-                                      "desc":  "Wir beziehen hochwertige Garne aus Wolle, Kaschmir, Baumwolle, Acryl und Mischgeweben. Strenge Qualitätskontrollen von Garnnummer und Farbechtheit vor der Produktion."
+                                      "title":  "Garnbeschaffung und Prüfung",
+                                      "desc":  "Wir beziehen hochwertige Garne aus Wolle, Kaschmir, Baumwolle, Acryl und Mischgeweben. Eingangsgarn durchläuft strenge Qualitätskontrollen: Garnnummerprüfung, Gleichmäßigkeit, Farbechtheit, Pillingbeständigkeit und Zugfestigkeit — alles muss vor Produktion freigegeben werden. Stranggarn wird auf Kone gewickelt, um für Flachstrickmaschinen geeignet zu sein."
                                   },
                                   {
                                       "num":  "03",
-                                      "title":  "Computerisierte Strickerei",
-                                      "desc":  "Importierte vollautomatische Flachstrickmaschinen fertigen präzise Teile. Unterstützt Jersey, Rippen, Jacquard, Zopfmuster und diverse Maschenarten mit gleichbleibender Qualität."
+                                      "title":  "Computerisierte Flachstrickerei",
+                                      "desc":  "Vollautomatische Flachstrickmaschinen (Stoll, Shima Seiki, Cixing) fertigen nach Technischer Datenblatt präzise Teile — Vorderteil, Rücken, Ärmel, Kragen und Rippbündchen. Unser Maschinenpark deckt die Nadelstärken 3G, 5G, 7G und 12G ab, von groben Mänteln bis hin zu feinen leichten Modellen. Unterstützt die gesamte Bandbreite an Strickstrukturen: Jersey, 1×1 / 2×2 Rippen, Jacquard, Zöpfe, Waffel, Drop Needle und Piqué. Teile werden auf fallende Maschen, Löcher und Gleichmäßigkeit geprüft bevor sie in die Montage gehen."
                                   },
                                   {
                                       "num":  "04",
-                                      "title":  "Verknüpfen und Nähen",
-                                      "desc":  "Erfahrene Handwerker übernehmen das manuelle Verknüpfen und die Näharbeiten. Körper, Ärmel und Ausschnitt werden präzise mit sauberen, gleichmäßigen Nähten verbunden."
+                                      "title":  "Ketteln und Handveredelung",
+                                      "desc":  "Erfahrene Kettler benutzen Kettelmaschinen um Teile präzise zu verbinden — Ärmel einsetzen, Seiten schließen, Kragen und Bündchen annähen, mit passender Maschenzahl und sauberen Nähten. Handveredler erledigen Details, die Maschinen nicht können: Fäden vernähen, V-Spitzen pfropfen, Maschen aufnehmen und lose Fäden abschneiden. Ein Kettlehrling braucht etwa zwei Jahre um das Handwerk zu meistern."
                                   },
                                   {
                                       "num":  "05",
-                                      "title":  "Waschen und Fixieren",
-                                      "desc":  "Ein professioneller Waschprozess verleiht dem Pullover weichen Griff und stabile Form. Dazu gehören Walken, Weichspülung und Dampfformung für genaue, gleichbleibende Größen."
+                                      "title":  "Waschen und Blocken",
+                                      "desc":  "Ein professioneller Waschprozess verleiht dem Pullover weichen Griff und stabile Form: Walken erzeugt eine feine Flor-Oberfläche, Weichspüler verbessert den Griff, und Dampfbügeln / Blocken gibt die endgültige Form. Waschrezeptur, Temperatur und Dauer werden streng kontrolliert für Maßtoleranz innerhalb von ±1–1,5 cm — ohne Einlaufen oder Verformung."
                                   },
                                   {
                                       "num":  "06",
-                                      "title":  "Qualitätskontrolle",
-                                      "desc":  "Dreistufige Qualitätskontrolle — Halbzeugprüfung, Fertigprüfung und Endaudit. Jedes Stück wird auf Größe, Aussehen und Fehler geprüft. Erfolgsquote > 99% bei Großaufträgen."
+                                      "title":  "Qualitätskontrolle und Ausbesserung",
+                                      "desc":  "Dreistufige Qualitätskontrolle sichert Qualität in jedem Schritt: ① Teilprüfung — fallende Maschen, Löcher, Maschenspannung, Maße; ② Nahtprüfung — Nahtspannung, fehlende Stiche, Schulterbalance, Armhausausrichtung; ③ Endprüfung / AQL-Audit — Aussehen, Fehler, Größe, Farbschatten. Ausbesserer reparieren kleine Mängel direkt vor Ort. Erfolgsquote > 99% bei Großaufträgen."
                                   },
                                   {
                                       "num":  "07",
-                                      "title":  "Verpackung und Versand",
-                                      "desc":  "Individuell gefaltet, auf Bügeln oder kundenspezifisch verpackt. Etiketten, Anhänger und Polybeutel inklusive. Weltweiter Versand pünktlich per Ihrem bevorzugten Logistikpartner."
+                                      "title":  "Bügeln, Verpackung und Versand",
+                                      "desc":  "Nach dem finalen Dampfbügeln gehen die Kleidungsstücke in die Verpackung: Fusselentfernung und Fadenschneiden, Anbringen von Haupt- und Pflegeetiketten, Anhänger und Preisschilder, dann gefaltet oder auf Bügeln nach Kundenspezifikation. Nach Farbe und Größe sortiert, in Exportkartons mit korrekten Versandmarken verpackt. FOB-, CIF- und DDP-Handelskonditionen verfügbar — weltweite Lieferung per See-, Luft- oder Expressversand pünktlich."
                                   }
                               ]
                 },
+    "gaugeGuide":  {
+                       "badge":  "Fachwissen",
+                       "title":  "Die richtige Nadelstärke wählen",
+                       "subtitle":  "Gauge (G) gibt die Anzahl der Nadeln pro Zoll auf dem Nadelbett an. Je höher die Zahl, desto feiner die Masche und desto dichter der Stoff. Die richtige Nadelstärke bestimmt Stil und Gewicht eines Pullovers maßgeblich.",
+                       "items":  [
+                                     {
+                                         "gauge":  "3G",
+                                         "name":  "Grob",
+                                         "thickness":  "Dick & Warm",
+                                         "usage":  "Schwere Mäntel, lange Strickjacken, Winterkleider — markante Textur und maximale Wärme für kalte Klimazonen"
+                                     },
+                                     {
+                                         "gauge":  "5G",
+                                         "name":  "Mittel",
+                                         "thickness":  "Mittleres Gewicht",
+                                         "usage":  "Herbst-/Winterpullover, klassische Cardigans, Stehkragen-Layer — die vielseitigste Nadelstärke für Strickware"
+                                     },
+                                     {
+                                         "gauge":  "7G",
+                                         "name":  "Fein",
+                                         "thickness":  "Leicht & Ausgewogen",
+                                         "usage":  "Frühlings-/Herbstmodelle, Basislagen, Polo-Strick, Business-Casual — die breiteste jahreszeitliche Spanne"
+                                     },
+                                     {
+                                         "gauge":  "12G",
+                                         "name":  "Sehr fein",
+                                         "thickness":  "Leicht & Glatt",
+                                         "usage":  "Sommer-T-Shirts, hautnahe Strickwaren, fein gesponnene leichte Modelle, formelle Einlagen — glatte, edle Stoffoberfläche"
+                                     }
+                                 ]
+                   },
     "heritage":  {
                      "badge":  "Chenghai · Chinas Strickwaren-Hauptstadt",
                      "title":  "40 Jahre Stricktradition",

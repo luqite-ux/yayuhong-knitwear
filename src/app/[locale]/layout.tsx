@@ -3,7 +3,7 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { isRTL, LOCALES } from '@/lib/i18n';
-import { zhText } from '@/lib/zh-hant';
+import { zhText, localizedKeywords } from '@/lib/zh-hant';
 import { getCurrentSiteKey } from '@/lib/site';
 import { getChinaSeoConfig, getChinaSeoMetas } from '@/lib/china-seo';
 import Header from '@/components/Header';
@@ -30,6 +30,7 @@ const OG_LOCALES: Record<string, string> = {
   pt: 'pt_PT',
   ja: 'ja_JP',
   ar: 'ar_SA',
+  vn: 'vi_VN',
 };
 
 function hreflang(locale: string) {
@@ -85,10 +86,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    keywords: zhText(
+    keywords: localizedKeywords(
       locale,
       '毛织厂,毛衫加工,毛衣定制,澄海毛织,快时尚毛衫,源头工厂,ODM,OEM,小单快反',
       'knitwear manufacturer, sweater factory, custom knitwear, China sweater supplier, OEM knitwear, ODM sweater, fast fashion, small MOQ',
+      'nhà máy dệt kim, áo len, áo cardigan mỏng, áo thun dệt kim, OEM dệt kim, ODM áo len, xưởng dệt kim Trung Quốc, áo len mùa hè, áo khoác chống nắng, thời trang nhanh, MOQ thấp',
     ),
     alternates: {
       canonical: `${baseUrl}/${locale}`,

@@ -214,45 +214,76 @@
     "process":  {
                     "badge":  "Processo de produção",
                     "title":  "Processo completo de fabricação de blusas de lã",
-                    "subtitle":  "Do design à entrega — 7 etapas meticulosas para garantir qualidade em cada peça",
+                    "subtitle":  "Do design à entrega — 7 etapas fundamentais e 20 anos de artesanato garantindo excelência em cada peça",
                     "steps":  [
                                   {
                                       "num":  "01",
-                                      "title":  "Design e amostragem",
-                                      "desc":  "Nossa equipe profissional de design cria estilos e desenvolve padrões conforme suas necessidades ou referências. Uma primeira amostra é produzida para confirmar o caimento e o acabamento."
+                                      "title":  "Design, amostragem e modelagem",
+                                      "desc":  "Nossa equipe profissional de design cria estilos, desenvolve padrões e prepara cartelas de cores conforme suas necessidades ou referências. Técnicos especializados calculam com precisão o número de pontos, as curvas de diminuição e o número de carreiras para costas, frente, mangas e acabamentos, produzindo fichas técnicas detalhadas. A primeira amostra confirma o caimento, as medidas e o acabamento antes da produção em massa."
                                   },
                                   {
                                       "num":  "02",
-                                      "title":  "Aquisição de materiais",
-                                      "desc":  "Selecionamos fios premium incluindo lã, cashmere, algodão, acrílico e misturas. Controles rigorosos de qualidade na contagem do fio e solidez da cor antes da produção."
+                                      "title":  "Fornecimento e inspeção de fios",
+                                      "desc":  "Selecionamos fios premium incluindo lã, cashmere, algodão, acrílico e misturas. O fio recebido passa por rigoroso controle de qualidade: verificação de contagem, uniformidade, solidez da cor, resistência ao pilling e resistência à tração — tudo deve ser aprovado antes da produção. O fio em novelo é enrolado em cone para ser adequado às máquinas de tricotar retas."
                                   },
                                   {
                                       "num":  "03",
-                                      "title":  "Tricô computadorizado",
-                                      "desc":  "Máquinas de tricotar retas totalmente automáticas importadas produzem painéis precisos. Suporta ponto jersey, canelado, jacquard, trança e diversos pontos com uniformidade consistente."
+                                      "title":  "Tricô reto computadorizado",
+                                      "desc":  "Máquinas de tricotar retas totalmente automáticas (Stoll, Shima Seiki, Cixing) produzem peças precisas conforme ficha técnica: frente, costas, mangas, golas e punhos. Nosso parque de máquinas cobre bitolas 3G, 5G, 7G e 12G, desde casacos grossos até modelos leves de ponto fino. Suporta toda a gama de estruturas: ponto jersey, canelado 1×1 / 2×2, jacquard, trança, waffle, drop needle e piqué. As peças são inspecionadas para pontos caídos, furos e uniformidade antes da montagem."
                                   },
                                   {
                                       "num":  "04",
-                                      "title":  "Ligação e costura",
-                                      "desc":  "Artesãos experientes realizam a ligação manual e as operações de costura. Corpo, mangas e gola são unidos com precisão, com costuras limpas e uniformes."
+                                      "title":  "Ligação e acabamento manual",
+                                      "desc":  "Operadores experientes usam máquinas de ligação para unir com precisão as peças — colocar mangas, costurar laterais, aplicar golas e punhos, com correspondência de pontos e costuras limpas. Acabadores manuais realizam detalhes que as máquinas não conseguem: arrematar fios, enxertar pontas de V, recolher pontos e cortar fios soltos. Um aprendiz de ligação leva cerca de dois anos para dominar o ofício."
                                   },
                                   {
                                       "num":  "05",
                                       "title":  "Lavagem e fixação",
-                                      "desc":  "Um processo de lavagem profissional confere toque macio e forma estável. Inclui feltragem, amaciamento e fixação a vapor para tamanhos precisos e consistentes."
+                                      "desc":  "Um processo de lavagem profissional confere toque macio e forma estável: a felpagem cria uma fina camada de pêlo na superfície, o amaciamento melhora o toque, e o engomado a vapor / fixação define a forma final. Fórmula, temperatura e tempo são estritamente controlados para tolerância dimensional de ±1–1,5 cm, sem encolhimento ou deformação."
                                   },
                                   {
                                       "num":  "06",
-                                      "title":  "Controle de qualidade",
-                                      "desc":  "Três etapas de QC — inspeção de semi-acabado, inspeção de produto acabado e auditoria final. Cada peça é verificada quanto a tamanho, aparência e defeitos. Taxa de aprovação > 99% em pedidos em grande quantidade."
+                                      "title":  "Controle de qualidade e remendo",
+                                      "desc":  "Três etapas de controle de qualidade garantem qualidade em cada passo: ① Inspeção de peças — pontos caídos, furos, tensão do ponto, medidas; ② Inspeção de costuras — tensão, pontos perdidos, equilíbrio dos ombros, alinhamento das cavas; ③ Inspeção final / auditoria AQL — aparência, defeitos, tamanho, variação de cor. Remendadores consertam pequenos defeitos na hora. Taxa de aprovação > 99% em pedidos em grande quantidade."
                                   },
                                   {
                                       "num":  "07",
-                                      "title":  "Embalagem e envio",
-                                      "desc":  "Dobrada individualmente, em cabide ou embalagem personalizada conforme especificação. Etiquetas, tags e sacos plásticos incluídos. Envio mundial por seu parceiro logístico preferido dentro do prazo."
+                                      "title":  "Engomagem, embalagem e envio",
+                                      "desc":  "Após o engomado a vapor final, as peças seguem para embalagem: remoção de pelos e corte de fios, fixação de etiqueta principal e de cuidados, etiquetas penduradas e preços, depois dobradas ou em cabides conforme especificação. Classificadas por cor e tamanho, embaladas em caixas de exportação com marcas corretas. Condições FOB, CIF e DDP disponíveis — envio mundial por mar, ar ou expresso dentro do prazo."
                                   }
                               ]
                 },
+    "gaugeGuide":  {
+                       "badge":  "Guia especializado",
+                       "title":  "Como escolher a bitola certa",
+                       "subtitle":  "Bitola (Gauge, G) refere-se ao número de agulhas por polegada na cama da máquina. Quanto maior o número, mais fino o ponto e mais denso o tecido. Escolher a bitola correta é a chave para definir o estilo e o peso da peça.",
+                       "items":  [
+                                     {
+                                         "gauge":  "3G",
+                                         "name":  "Grosso",
+                                         "thickness":  "Espesso e quente",
+                                         "usage":  "Casacos grossos, cardigans longos, vestidos de inverno — textura marcante e máximo calor para climas frios"
+                                     },
+                                     {
+                                         "gauge":  "5G",
+                                         "name":  "Médio",
+                                         "thickness":  "Peso médio",
+                                         "usage":  "Blusas de outono/inverno, cardigans clássicos, gola alta — a bitola mais versátil para malhas"
+                                     },
+                                     {
+                                         "gauge":  "7G",
+                                         "name":  "Fino",
+                                         "thickness":  "Leve e equilibrado",
+                                         "usage":  "Modelos primavera/outono, camadas base, polo de malha, smart-casual — a maior gama de estações"
+                                     },
+                                     {
+                                         "gauge":  "12G",
+                                         "name":  "Extra-fino",
+                                         "thickness":  "Leve e liso",
+                                         "usage":  "Camisetas de verão, malha pele, modelos finos leves, camadas formais — tecido liso e refinado"
+                                     }
+                                 ]
+                   },
     "heritage":  {
                      "badge":  "Chenghai · Capital do Malha da China",
                      "title":  "40 Anos de Herança Têxtil",

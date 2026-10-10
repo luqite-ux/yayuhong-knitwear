@@ -11,6 +11,7 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
   setRequestLocale(locale);
   const t = await getTranslations('faq');
   const tp = await getTranslations('process');
+  const tg = await getTranslations('gaugeGuide');
   const siteKey = await getCurrentSiteKey();
 
   const rows = await sql`
@@ -75,6 +76,13 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
     num: tp(`steps.${i}.num`),
     title: tp(`steps.${i}.title`),
     desc: tp(`steps.${i}.desc`),
+  }));
+
+  const gaugeItems = Array.from({ length: 4 }, (_, i) => ({
+    gauge: tg(`items.${i}.gauge`),
+    name: tg(`items.${i}.name`),
+    thickness: tg(`items.${i}.thickness`),
+    usage: tg(`items.${i}.usage`),
   }));
 
   return (
@@ -147,6 +155,45 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gauge Guide Section */}
+      <section className="py-20 bg-[var(--color-cream)] knit-texture">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p className="text-[var(--color-accent)] font-medium mb-3">{tg('badge')}</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-4">
+              {tg('title')}
+            </h2>
+            <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+              {tg('subtitle')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {gaugeItems.map((item, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl p-6 border border-[var(--color-primary)]/10 hover:shadow-xl hover:shadow-[var(--color-primary)]/5 transition-all hover:-translate-y-1"
+              >
+                <div className="flex items-baseline gap-2 mb-3">
+                  <span className="text-4xl font-bold text-[var(--color-accent)]">
+                    {item.gauge}
+                  </span>
+                  <span className="text-lg font-semibold text-[var(--color-primary)]">
+                    {item.name}
+                  </span>
+                </div>
+                <div className="inline-block px-3 py-1 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] text-sm font-medium mb-4">
+                  {item.thickness}
+                </div>
+                <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
+                  {item.usage}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

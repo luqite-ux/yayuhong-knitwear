@@ -25,6 +25,14 @@ export function zhText(locale: string, hans: string, en: string): string {
   return en;
 }
 
+/** 多语言关键词：支持 vi 等额外语言的本地化关键词 */
+export function localizedKeywords(locale: string, hans: string, en: string, vi?: string): string {
+  if (locale === 'zh') return hans;
+  if (locale === HANT_LOCALE) return toHant(hans);
+  if (locale === 'vn' && vi) return vi;
+  return en;
+}
+
 type JsonbText = Record<string, string> | string | null | undefined;
 
 /**

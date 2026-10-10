@@ -225,45 +225,76 @@
     "process":  {
                     "badge":  "Our Process",
                     "title":  "Sweater Production Flow",
-                    "subtitle":  "From design to delivery — 7 meticulous steps ensuring quality in every sweater",
+                    "subtitle":  "From design to delivery — 7 core production stages, 20 years of craftsmanship ensuring excellence in every sweater",
                     "steps":  [
                                   {
                                       "num":  "01",
-                                      "title":  "Design & Sampling",
-                                      "desc":  "Our professional design team creates styles and develops patterns based on your requirements or references. First sample is produced to confirm fit and craftsmanship."
+                                      "title":  "Design, Sampling & Pattern Grading",
+                                      "desc":  "Our professional design team creates styles, develops patterns and prepares color cards based on your requirements or references. Skilled pattern technicians calculate precise stitch counts, shaping curves and row ratios for back, front, sleeves and trims — producing detailed technical specification sheets. First sample is made to confirm fit, measurements and craftsmanship before bulk production."
                                   },
                                   {
                                       "num":  "02",
-                                      "title":  "Material Sourcing",
-                                      "desc":  "Sourcing premium yarns including wool, cashmere, cotton, acrylic and blends. Strict quality checks on yarn count and color fastness before production."
+                                      "title":  "Yarn Sourcing & Testing",
+                                      "desc":  "We source premium yarns including wool, cashmere, cotton, acrylic and blends. Incoming yarn undergoes strict quality control: yarn count verification, evenness testing, color fastness grading, pilling resistance and tensile strength — all must pass before production. Hank yarn is wound into cone form suitable for flat knitting machines."
                                   },
                                   {
                                       "num":  "03",
-                                      "title":  "Computerized Knitting",
-                                      "desc":  "Imported fully automatic flat knitting machines produce precise panels. Supports jersey, rib, jacquard, cable and various stitch patterns with consistent uniformity."
+                                      "title":  "Computerized Flat Knitting",
+                                      "desc":  "Fully automatic flat knitting machines (Stoll, Shima Seiki, Cixing) knit precise panels per the technical spec — front, back, sleeves, collars and rib trims. Our machine fleet covers gauges 3G, 5G, 7G and 12G, from chunky coats to fine-gauge lightweight styles. Supports a full range of stitch structures: jersey, 1×1 / 2×2 rib, jacquard, cable, waffle, drop needle and pique. Panels are inspected for dropped stitches, holes and tension consistency before assembly."
                                   },
                                   {
                                       "num":  "04",
-                                      "title":  "Linking & Sewing",
-                                      "desc":  "Experienced craftsmen perform hand linking and sewing operations. Body, sleeves and neckline are precisely joined with clean, even stitching."
+                                      "title":  "Linking & Hand Finishing",
+                                      "desc":  "Experienced linking operators use linking machines to precisely join panels — setting sleeves, side seams, collars and cuffs with matching stitch counts and clean seams. Hand finishers handle details machines cannot: weaving in ends, grafting V-points, picking stitches and trimming loose threads. A linking apprentice typically takes about two years to master the craft."
                                   },
                                   {
                                       "num":  "05",
-                                      "title":  "Washing & Setting",
-                                      "desc":  "Professional washing process gives sweaters soft hand feel and stable shape. Includes milling, softening treatment and steam setting for accurate, consistent sizing."
+                                      "title":  "Washing & Blocking",
+                                      "desc":  "Professional washing process gives sweaters soft hand feel and stable shape: milling creates a fine nap surface, softener improves touch, and steam pressing / blocking sets the final form. Washing formula, temperature and timing are strictly controlled to ensure size tolerance within ±1–1.5 cm with zero shrinkage or distortion."
                                   },
                                   {
                                       "num":  "06",
-                                      "title":  "Quality Inspection",
-                                      "desc":  "Three-stage QC — semi-finished inspection, finished inspection, and final audit. Each piece checked for size, appearance and defects. 99%+ pass rate for bulk orders."
+                                      "title":  "Quality Control & Mending",
+                                      "desc":  "Three-stage QC ensures quality at every step: ① Panel inspection — dropped stitches, holes, stitch tension, measurements; ② Seam inspection — seam tension, missed stitches, shoulder balance, armhole alignment; ③ Final inspection / AQL audit — appearance, defects, sizing, shading. Menders repair minor issues on the spot. 99%+ pass rate for bulk orders."
                                   },
                                   {
                                       "num":  "07",
-                                      "title":  "Packaging & Shipping",
-                                      "desc":  "Individually folded, hung or custom-packed as specified. Labels, hang tags and polybags included. Shipped worldwide via your preferred logistics partner on schedule."
+                                      "title":  "Pressing, Packaging & Shipping",
+                                      "desc":  "After final steam pressing, garments go through packaging: de-linting and thread trimming, attaching main / care labels, hang tags and price tickets, then folded or hung per customer specification. Sorted by color and size, packed into export cartons with correct shipping marks. FOB, CIF and DDP trade terms available — delivered worldwide by sea, air or express on schedule."
                                   }
                               ]
                 },
+    "gaugeGuide":  {
+                       "badge":  "Expert Guide",
+                       "title":  "How to Choose the Right Gauge",
+                       "subtitle":  "Gauge (G) refers to the number of needles per inch on the needle bed. The higher the number, the finer the stitch and the denser the fabric. Choosing the right gauge is key to defining a sweater's style and weight.",
+                       "items":  [
+                                     {
+                                         "gauge":  "3G",
+                                         "name":  "Chunky",
+                                         "thickness":  "Thick & Warm",
+                                         "usage":  "Heavy coats, long cardigans, winter dresses — bold texture and maximum warmth for cold climates"
+                                     },
+                                     {
+                                         "gauge":  "5G",
+                                         "name":  "Mid-Gauge",
+                                         "thickness":  "Medium Weight",
+                                         "usage":  "Autumn/winter pullovers, classic cardigans, mock-neck layers — the most versatile sweater gauge"
+                                     },
+                                     {
+                                         "gauge":  "7G",
+                                         "name":  "Fine Gauge",
+                                         "thickness":  "Light & Balanced",
+                                         "usage":  "Spring/autumn styles, base layers, polo knits, smart-casual — the broadest seasonal range"
+                                     },
+                                     {
+                                         "gauge":  "12G",
+                                         "name":  "Ultra-Fine",
+                                         "thickness":  "Lightweight & Smooth",
+                                         "usage":  "Summer tees, next-to-skin knits, fine-spun lightweight styles, formal layering — smooth, refined fabric face"
+                                     }
+                                 ]
+                   },
     "heritage":  {
                      "badge":  "Chenghai · China Knitwear Capital",
                      "title":  "40 Years of Knitwear Heritage",

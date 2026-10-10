@@ -214,45 +214,76 @@
     "process":  {
                     "badge":  "Processus de fabrication",
                     "title":  "Processus complet de production de pulls",
-                    "subtitle":  "Du design à la livraison — 7 étapes méticuleuses pour garantir la qualité de chaque maille",
+                    "subtitle":  "Du design à la livraison — 7 étapes clés et 20 ans de savoir-faire pour l'excellence de chaque maille",
                     "steps":  [
                                   {
                                       "num":  "01",
-                                      "title":  "Design et échantillonnage",
-                                      "desc":  "Notre équipe de design professionnelle crée des modèles et développe des motifs selon vos besoins ou références. Un premier échantillon est produit pour confirmer la coupe et le savoir-faire."
+                                      "title":  "Design, échantillonnage et patronage",
+                                      "desc":  "Notre équipe de design professionnelle crée des modèles, développe des motifs et prépare des nuanciers selon vos besoins ou références. Des techniciens spécialisés calculent avec précision le nombre de mailles, les courbes de diminution et le nombre de rangs pour dos, devant, manches et bords-côtes, produisant des fiches techniques détaillées. Le premier échantillon confirme la coupe, les mesures et le savoir-faire avant la production en série."
                                   },
                                   {
                                       "num":  "02",
-                                      "title":  "Approvisionnement en matières",
-                                      "desc":  "Nous sélectionnons des fils haut de gamme : laine, cachemire, coton, acrylique et mélanges. Contrôles qualité stricts sur le numéro de fil et la solidité des couleurs avant production."
+                                      "title":  "Approvisionnement et contrôle des fils",
+                                      "desc":  "Nous sélectionnons des fils haut de gamme : laine, cachemire, coton, acrylique et mélanges. Le fil entrant subit des contrôles qualité stricts : vérification du titre, régularité, solidité des couleurs, résistance au boulochage et résistance à la traction — tout doit être approuvé avant production. Le fil en écheveau est remonté en cône pour être adapté aux machines à tricoter rectilignes."
                                   },
                                   {
                                       "num":  "03",
-                                      "title":  "Tricotage informatisé",
-                                      "desc":  "Des machines à tricoter rectilignes entièrement automatiques importées produisent des panneaux précis. Jersey, côtes, jacquard, torsades et divers points avec une uniformité parfaite."
+                                      "title":  "Tricotage rectiligne informatisé",
+                                      "desc":  "Des machines à tricoter rectilignes entièrement automatiques (Stoll, Shima Seiki, Cixing) produisent des pièces précises selon la fiche technique : devant, dos, manches, cols et poignets. Notre parc couvre les gauges 3G, 5G, 7G et 12G, des manteaux épais aux modèles légers en maille fine. Supporte toute la gamme des structures : jersey, côtes 1×1 / 2×2, jacquard, torsades, gaufré, point fantaisie et piqué. Les pièces sont inspectées pour mailles tombées, trous et uniformité avant montage."
                                   },
                                   {
                                       "num":  "04",
-                                      "title":  "Assemblage et couture",
-                                      "desc":  "Des artisans expérimentés réalisent l'assemblage manuel et les coutures. Corps, manches et col sont réunis avec précision pour des finitions nettes et régulières."
+                                      "title":  "Raboutage et finition à la main",
+                                      "desc":  "Des rabouteurs expérimentés utilisent des machines à raboter pour assembler avec précision les pièces — pose des manches, coutures latérales, cols et poignets, avec alignement des mailles et coutures nettes. Les finisseurs à la main réalisent les détails impossibles aux machines : rentrage des fils, greffage des pointes de V, reprise de mailles et coupe des fils lâches. Un apprenti rabouteur met environ deux ans pour maîtriser le métier."
                                   },
                                   {
                                       "num":  "05",
-                                      "title":  "Lavage et formage",
-                                      "desc":  "Un processus de lavage professionnel confère au pull un toucher doux et une forme stable. Inclut le foulage, l'adoucissement et le formage à la vapeur pour des tailles précises et constantes."
+                                      "title":  "Lavage et blocage",
+                                      "desc":  "Un processus de lavage professionnel confère au pull un toucher doux et une forme stable : le foulage crée une fine couche de velours en surface, l'adoucissant améliore le toucher, et le repassage à la vapeur / blocage donne la forme finale. Formule, température et durée sont strictement contrôlés pour une tolérance dimensionnelle de ±1–1,5 cm, sans rétrécissement ni déformation."
                                   },
                                   {
                                       "num":  "06",
-                                      "title":  "Contrôle qualité",
-                                      "desc":  "Trois étapes de QC — inspection semi-finie, inspection produit fini et audit final. Chaque pièce est vérifiée pour la taille, l'aspect et les défauts. Taux de réussite > 99% sur les commandes en gros."
+                                      "title":  "Contrôle qualité et reprisage",
+                                      "desc":  "Trois étapes de QC garantissent la qualité à chaque étape : ① Contrôle des pièces — mailles tombées, trous, tension du point, mesures ; ② Contrôle des coutures — tension, points manquants, équilibre des épaules, alignement des emmanchures ; ③ Contrôle final / audit AQL — aspect, défauts, taille, délavage. Les repriseurs réparent les petits défauts sur place. Taux de réussite > 99% sur les commandes en gros."
                                   },
                                   {
                                       "num":  "07",
-                                      "title":  "Emballage et expédition",
-                                      "desc":  "Emballage individuel plié, sur cintre ou personnalisé selon spécifications. Étiquettes, médaillons et sachets plastique inclus. Livraison mondiale par votre transporteur préféré dans les délais."
+                                      "title":  "Repassage, emballage et expédition",
+                                      "desc":  "Après le repassage à la vapeur final, les vêtements passent à l'emballage : épilature et coupe des fils, pose des étiquettes principales et d'entretien, des étiquettes suspendues et des prix, puis pliage ou sur cintres selon spécification. Triés par couleur et taille, emballés dans des cartons d'exportation avec les bonnes marques. Conditions FOB, CIF et DDP disponibles — livraison mondiale par mer, air ou express dans les délais."
                                   }
                               ]
                 },
+    "gaugeGuide":  {
+                       "badge":  "Guide expert",
+                       "title":  "Comment choisir le bon gauge",
+                       "subtitle":  "Le gauge (G) correspond au nombre d'aiguilles par pouce sur le plateau de la machine. Plus le chiffre est élevé, plus le point est fin et le tricot serré. Choisir le bon gauge est essentiel pour définir le style et l'épaisseur d'un pull.",
+                       "items":  [
+                                     {
+                                         "gauge":  "3G",
+                                         "name":  "Épais",
+                                         "thickness":  "Chaud et volumineux",
+                                         "usage":  "Manteaux épais, longs cardigans, robes d'hiver — texture affirmée et chaleur maximale pour les climats froids"
+                                     },
+                                     {
+                                         "gauge":  "5G",
+                                         "name":  "Intermédiaire",
+                                         "thickness":  "Poids moyen",
+                                         "usage":  "Pulls automne/hiver, cardigans classiques, cols roulés légers — le gauge le plus polyvalent en maille"
+                                     },
+                                     {
+                                         "gauge":  "7G",
+                                         "name":  "Fin",
+                                         "thickness":  "Léger et équilibré",
+                                         "usage":  "Modèles printemps/automne, sous-pulls, polos en maille, smart-casual — la plus large plage saisonnière"
+                                     },
+                                     {
+                                         "gauge":  "12G",
+                                         "name":  "Très fin",
+                                         "thickness":  "Léger et doux",
+                                         "usage":  "T-shirts d'été, mailles peau, modèles fins légers, sous-vêtements formels — maille lisse et raffinée"
+                                     }
+                                 ]
+                   },
     "heritage":  {
                      "badge":  "Chenghai · Capitale du tricot de Chine",
                      "title":  "40 Ans d\u0027Héritage Tricot",

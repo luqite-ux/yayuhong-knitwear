@@ -1,0 +1,418 @@
+{
+    "metadata":  {
+                     "title":  "Yayuhong - Xưởng Dệt Kim Áo Len Mỏng, OEM/ODM | Nhà Máy Gốc Trung Quốc",
+                     "description":  "Xưởng dệt kim Yayuhong tại Chenghai Trung Quốc, 20 năm kinh nghiệm sản xuất áo len mỏng, áo cardigan, áo thun dệt kim mùa hè. Năng lực 30.000 chiếc/ngày, MOQ 50 chiếc, giao 7 ngày. Dịch vụ OEM/ODM cho thị trường Việt Nam và Đông Nam Á. Áo len mỏng thoáng khí, chống nắng, phù hợp khí hậu nhiệt đới."
+                 },
+    "nav":  {
+                "home":  "Trang Chủ",
+                "products":  "Sản Phẩm",
+                "factory":  "Nhà Máy",
+                "services":  "Dịch Vụ",
+                "contact":  "Liên Hệ",
+                "faq":  "Hỏi Đáp",
+                "getQuote":  "Báo Giá"
+            },
+    "hero":  {
+                 "badge":  "20 Năm · Nhà Máy Gốc · Đơn Nhỏ Giao Nhanh",
+                 "title":  "Dệt Kim Thời Trang Nhanh",
+                 "titleHighlight":  "Nhà Máy Gốc",
+                 "subtitle":  "Năng lực 30.000 chiếc/ngày · MOQ 50 chiếc · Giao 7 ngày\nDịch vụ trọn gói: Thiết kế + Làm mẫu + Sản xuất",
+                 "primaryBtn":  "Nhận Báo Giá",
+                 "secondaryBtn":  "Tham Quan Ảo",
+                 "stats":  {
+                               "years":  "Năm Kinh Nghiệm",
+                               "dailyCapacity":  "Chiếc/Năng Lực Ngày",
+                               "moq":  "MOQ",
+                               "delivery":  "Ngày Giao Nhanh"
+                           }
+             },
+    "advantages":  {
+                       "title":  "Vì Sao Chọn Chúng Tôi",
+                       "subtitle":  "Bốn ưu thế cốt lõi giúp doanh nghiệp dệt kim của bạn luôn đi trước",
+                       "items":  [
+                                     {
+                                         "title":  "MOQ Thấp, Giao Nhanh",
+                                         "desc":  "Bắt đầu từ chỉ 50 chiếc, giao hàng 7 ngày. Bắt kịp xu hướng thời trang nhanh, giảm rủi ro tồn kho, nhanh chóng bổ sung bestseller."
+                                     },
+                                     {
+                                         "title":  "Năng Lực Thiết Kế",
+                                         "desc":  "Đội ngũ thiết kế chuyên nghiệp ra mắt 100+ mẫu mới mỗi tháng. Theo dõi xu hướng thời trang quốc tế. Dịch vụ ODM với bản thiết kế hoặc tech pack."
+                                     },
+                                     {
+                                         "title":  "Lợi Thế Chi Phí",
+                                         "desc":  "Nhà máy gốc tại vùng công nghiệp dệt kim Chenghai với 30 xưởng sản xuất. Cắt bỏ trung gian, tiết kiệm tới 30% so với công ty thương mại."
+                                     },
+                                     {
+                                         "title":  "Đảm Bảo Chất Lượng",
+                                         "desc":  "20 năm thủ công với ba giai đoạn kiểm tra chất lượng. Kiểm soát nghiêm ngặt từng chiếc, tỷ lệ đạt 99%+ cho đơn hàng lớn."
+                                     }
+                                 ]
+                   },
+    "products":  {
+                     "title":  "Sản Phẩm Của Chúng Tôi",
+                     "subtitle":  "Đầy đủ các loại sản phẩm dệt kim cho mọi nhu cầu thị trường",
+                     "viewAll":  "Xem Tất Cả",
+                     "categories":  [
+                                        {
+                                            "name":  "Áo Len Nữ",
+                                            "desc":  "Áo trộn, cardigan, váy, áo khoác dệt kim và hơn thế nữa",
+                                            "count":  "200+ Mẫu"
+                                        },
+                                        {
+                                            "name":  "Áo Len Trẻ Em",
+                                            "desc":  "Dễ thương, phong cách preppy, set gia đình đồng bộ",
+                                            "count":  "100+ Mẫu"
+                                        },
+                                        {
+                                            "name":  "Áo Len Nam",
+                                            "desc":  "Mẫu cơ bản, business casual, dệt kim trending",
+                                            "count":  "80+ Mẫu"
+                                        },
+                                        {
+                                            "name":  "Đồ Mặc Nhà",
+                                            "desc":  "Set đồ mặc nhà dệt kim thoải mái & thời trang",
+                                            "count":  "50+ Mẫu"
+                                        },
+                                        {
+                                            "name":  "Quần Áo Thú Cưng",
+                                            "desc":  "Áó cho chó mèo - phụ kiện dễ thương",
+                                            "count":  "30+ Mẫu"
+                                        },
+                                        {
+                                            "name":  "Phụ Kiện",
+                                            "desc":  "Khăn, mũ, găng tay, túi và phụ kiện dệt kim khác",
+                                            "count":  "40+ Mẫu"
+                                        }
+                                    ]
+                 },
+    "factory":  {
+                    "title":  "Năng Lực Nhà Máy",
+                    "subtitle":  "20 năm thủ công sau mỗi chiếc áo len chúng tôi làm ra",
+                    "learnMore":  "Tìm Hiểu Thêm",
+                    "features":  [
+                                     {
+                                         "title":  "Cơ Sở Sản Xuất Hiện Đại",
+                                         "desc":  "Tọa lạc tại Chenghai, Shantou - thị trấn dệt kim nổi tiếng của Trung Quốc. 30 xưởng sản xuất với máy dệt kim phẳng vi tính tiên tiến."
+                                     },
+                                     {
+                                         "title":  "Đội Ngũ Kỹ Thuật Chuyên Gia",
+                                         "desc":  "20 kỹ thuật viên cốt lõi với hơn 20 năm kinh nghiệm. Kiểm soát chuyên nghiệp xuyên suốt thiết kế, rập và sản xuất."
+                                     },
+                                     {
+                                         "title":  "Kiểm Soát Chất Lượng Nghiêm Ngặt",
+                                         "desc":  "Ba giai đoạn kiểm tra chất lượng: nguyên liệu, bán thành phẩm, thành phẩm. Đảm bảo chất lượng từng chiếc."
+                                     },
+                                     {
+                                         "title":  "Dịch Vụ Phản Hồi Nhanh",
+                                         "desc":  "Đội ngũ sales chuyên nghiệp phản hồi trong 24 giờ. Làm mẫu 3-5 ngày, sản xuất hàng loạt 7-15 ngày."
+                                     }
+                                 ]
+                },
+    "services":  {
+                     "title":  "Dịch Vụ Của Chúng Tôi",
+                     "subtitle":  "Giải pháp dệt kim trọn gói từ thiết kế đến giao hàng",
+                     "items":  [
+                                   {
+                                       "title":  "Phát Triển ODM",
+                                       "desc":  "Chúng tôi cung cấp thiết kế gốc để bạn lựa chọn. 100+ mẫu mới mỗi tháng, luôn bắt kịp xu hướng thị trường.",
+                                       "features":  [
+                                                        "Thiết Kế Gốc",
+                                                        "Mẫu Mới Mỗi Tháng",
+                                                        "Mua Độc Quyền",
+                                                        "Bản Quyền Duy Nhất"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Sản Xuất OEM",
+                                       "desc":  "Cung cấp cho chúng tôi thiết kế hoặc mẫu, chúng tôi sản xuất theo yêu cầu. Dịch vụ thương hiệu đầy đủ bao gồm nhãn và tag.",
+                                       "features":  [
+                                                        "Theo Thiết Kế",
+                                                        "Theo Mẫu",
+                                                        "Nhãn Riêng",
+                                                        "Đóng Gói Tùy Chỉnh"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Lô Nhỏ Giao Nhanh",
+                                       "desc":  "MOQ từ 50 chiếc, giao 7 ngày. Hoàn hảo cho seller thương mại điện tử, khách livestream, thương hiệu mới.",
+                                       "features":  [
+                                                        "MOQ 50 Chiếc",
+                                                        "Giao 7 Ngày",
+                                                        "Đặt Lại Nhanh",
+                                                        "Điều Chỉnh Linh Hoạt"
+                                                    ]
+                                   },
+                                   {
+                                       "title":  "Đơn Hàng Số Lượng Lớn",
+                                       "desc":  "Năng lực 30.000 chiếc/ngày. Xử lý đơn hàng lớn thương hiệu và đơn xuất khẩu với thanh toán trả góp và hỗ trợ kiểm tra.",
+                                       "features":  [
+                                                        "Năng Lực Dồi Dào",
+                                                        "Giao Hàng Đáng Tin Cậy",
+                                                        "Chất Lượng Ổn Định",
+                                                        "Sẵn Sàng Audit"
+                                                    ]
+                                   }
+                               ]
+                 },
+    "process":  {
+                    "title":  "Cách Chúng Tôi Làm Việc",
+                    "subtitle":  "6 bước đơn giản để bắt đầu hợp tác",
+                    "steps":  [
+                                  {
+                                      "title":  "Tư Vấn",
+                                      "desc":  "Liên hệ với chúng tôi về nhu cầu và ngân sách"
+                                  },
+                                  {
+                                      "title":  "Báo Giá",
+                                      "desc":  "Chúng tôi cung cấp tùy chọn mẫu và báo giá chi tiết"
+                                  },
+                                  {
+                                      "title":  "Làm Mẫu",
+                                      "desc":  "Làm mẫu 3-5 ngày để xác nhận chất lượng"
+                                  },
+                                  {
+                                      "title":  "Hợp Đồng",
+                                      "desc":  "Xác nhận chi tiết đơn và ký thỏa thuận"
+                                  },
+                                  {
+                                      "title":  "Sản Xuất",
+                                      "desc":  "Sản xuất 7-15 ngày với kiểm soát chất lượng"
+                                  },
+                                  {
+                                      "title":  "Giao Hàng",
+                                      "desc":  "Giao hàng đã kiểm tra với hỗ trợ hậu mãi"
+                                  }
+                              ]
+                },
+    "cta":  {
+                "title":  "Sẵn Sàng Bắt Đầu Dự Án Của Bạn?",
+                "subtitle":  "Liên hệ ngay hôm nay để nhận báo giá tùy chỉnh và tư vấn mẫu miễn phí",
+                "primaryBtn":  "Liên Hệ Ngay",
+                "secondaryBtn":  "Xem Sản Phẩm"
+            },
+    "contact":  {
+                    "title":  "Liên Hệ Chúng Tôi",
+                    "subtitle":  "Chúng tôi mong được xây dựng quan hệ đối tác lâu dài với bạn",
+                    "form":  {
+                                 "name":  "Tên Của Bạn",
+                                 "company":  "Tên Công Ty",
+                                 "email":  "Địa Chỉ Email",
+                                 "phone":  "Số Điện Thoại",
+                                 "product":  "Sản Phẩm Quan Tâm",
+                                 "quantity":  "Số Lượng Ước Tính",
+                                 "message":  "Yêu Cầu Của Bạn",
+                                 "submit":  "Gửi Yêu Cầu",
+                                 "submitting":  "Đang Gửi...",
+                                 "success":  "Gửi thành công! Chúng tôi sẽ liên hệ trong 24 giờ."
+                             },
+                    "info":  {
+                                 "factoryName":  "Nhà Máy Dệt Kim Chenghai Yayuhong",
+                                 "companyName":  "Công Ty TNHH Mạng Lưới Xiuyu Thâm Quyến",
+                                 "address":  "Số 30, Đường Guanshan Nanxiang, Phố Chenghua, Quận Chenghai, Thành Phố Shantou, Quảng Đông, Trung Quốc",
+                                 "phone":  "+86 13715967918",
+                                 "email":  "info@xiuyuknit.com",
+                                 "wechat": "美好明天",
+                                 "whatsapp":  "+86 13829659110",
+                                 "workTime":  "Dịch Vụ 7×24 Giờ"
+                             }
+                },
+    "faq":  {
+                "subtitle":  "Hỏi Đáp",
+                "title":  "Câu Hỏi Thường Gặp",
+                "description":  "Tìm câu trả lời về hợp tác, sản xuất, giao hàng và hơn thế nữa",
+                "empty":  "Chưa có FAQ. Liên hệ chúng tôi nếu có câu hỏi."
+            },
+    "process":  {
+                    "badge":  "Quy Trình Sản Xuất",
+                    "title":  "Quy Trình Sản Xuất Áo Len Toàn Diện",
+                    "subtitle":  "Từ thiết kế đến giao hàng — 7 công đoạn cốt lõi, 20 năm thủ công đảm bảo chất lượng mỗi chiếc áo len",
+                    "steps":  [
+                                  {
+                                      "num":  "01",
+                                      "title":  "Thiết Kế, Làm Mẫu & Lập Rập",
+                                      "desc":  "Đội ngũ thiết kế chuyên nghiệp tạo mẫu, phát triển họa tiết và chuẩn bị bảng màu theo yêu cầu hoặc tham chiếu của bạn. Kỹ thuật viên rập giỏi tính toán chính xác số mũi, đường giảm và số hàng cho lưng, trước, tay và viền — tạo bảng spec kỹ thuật chi tiết. Mẫu đầu tiên xác nhận form, số đo và tay nghề trước sản xuất hàng loạt."
+                                  },
+                                  {
+                                      "num":  "02",
+                                      "title":  "Mua Sợi & Kiểm Tra",
+                                      "desc":  "Chọn sợi cao cấp: len, cashmere, cotton, acrylic và phối trộn. Sợi nhập kiểm tra chất lượng nghiêm ngặt: số sợi, độ đều, độ bền màu, chống pilling và lực kéo — tất cả phải đạt trước sản xuất. Sợi cuộn được quấn thành cone phù hợp máy dệt kim phẳng."
+                                  },
+                                  {
+                                      "num":  "03",
+                                      "title":  "Dệt Kim Phẳng Vi Tính",
+                                      "desc":  "Máy dệt kim phẳng tự động (Stoll, Shima Seiki, Cixing) dệt tấm chính xác theo spec — trước, lưng, tay, cổ và viên rib. Dàn máy bao phủ các gauge 3G, 5G, 7G và 12G, từ áo khoác thô đến mẫu nhẹ gauge mịn. Hỗ trợ đầy đủ cấu trúc mũi: jersey, rib 1×1 / 2×2, jacquard, cáp, waffle, drop needle và pique. Tấm được kiểm tra mũi rơi, lỗ và độ đều trước lắp ráp."
+                                  },
+                                  {
+                                      "num":  "04",
+                                      "title":  "Móc Nối & Hoàn Thiện Tay",
+                                      "desc":  "Thợ móc nối giàu kinh nghiệm dùng máy móc nối ghép tấm chính xác — lên tay, may sườn, cổ và tay áo với số mũi khớp và đường may sạch. Thợ hoàn thiện tay xử lý chi tiết máy không thể: giấu chỉ, ghép mũi V, nhặt mũi và cắt chỉ lỏng. Thợ học việc móc nối mất khoảng hai năm để thành nghề."
+                                  },
+                                  {
+                                      "num":  "05",
+                                      "title":  "Giặt & Căng Định Hình",
+                                      "desc":  "Quy trình giặt chuyên nghiệp mang lại cảm giác mềm và form ổn định: milling tạo lớp lông bề mặt mịn, mềm cải thiện cảm giác, và ép hơi / căng định hình cuối. Công thức giặt, nhiệt độ và thời gian kiểm soát nghiêm ngặt đảm bảo dung sai kích thước trong ±1–1,5cm, không co rút hay biến dạng."
+                                  },
+                                  {
+                                      "num":  "06",
+                                      "title":  "Kiểm Soát Chất Lượng & Sửa Chửa",
+                                      "desc":  "Ba giai đoạn QC đảm bảo chất lượng từng bước: ① Kiểm tấm — mũi rơi, lỗ, độ căng mũi, số đo; ② Kiểm đường may — độ căng, mũi sót, cân vai, canh sườn; ③ Kiểm cuối / audit AQL — ngoại hình, lỗi, size, lệch màu. Thợ sửa chửa sửa lỗi nhỏ tại chỗ. Tỷ lệ đạt 99%+ cho đơn lớn."
+                                  },
+                                  {
+                                      "num":  "07",
+                                      "title":  "Ép Hơi, Đóng Gói & Giao Hàng",
+                                      "desc":  "Sau ép hơi cuối, sản phẩm vào đóng gói: nhặt lông cắt chỉ, gắn nhãn chính / chăm sóc, tag treo và tem giá, sau đó gấp hoặc treo theo spec khách. Phân loại theo màu và size, đóng thùng xuất khẩu với mark đúng. Điều kiện FOB, CIF và DDP — giao toàn cầu bằng biển, hàng không hoặc express đúng hạn."
+                                  }
+                              ]
+                },
+    "gaugeGuide":  {
+                       "badge":  "Hướng Dẫn Chuyên Gia",
+                       "title":  "Cách Chọn Gauge Phù Hợp",
+                       "subtitle":  "Gauge (G) là số kim trên một inch trên giường kim. Số càng cao, mũi càng mịn và vải càng dày đặc. Chọn đúng gauge là chìa khóa xác định phong cách và trọng lượng áo len.",
+                       "items":  [
+                                     {
+                                         "gauge":  "3G",
+                                         "name":  "Thô",
+                                         "thickness":  "Dày & Ấm",
+                                         "usage":  "Áo khoác nặng, cardigan dài, váy đông — hoa văn nổi bật, ấm tối đa cho khí hậu lạnh"
+                                     },
+                                     {
+                                         "gauge":  "5G",
+                                         "name":  "Trung Bình",
+                                         "thickness":  "Trọng Lượng Vừa",
+                                         "usage":  "Áo trộn thu đông, cardigan cổ điển, lớp cổ cao — gauge dệt kim đa năng nhất"
+                                     },
+                                     {
+                                         "gauge":  "7G",
+                                         "name":  "Mịn",
+                                         "thickness":  "Nhẹ & Cân Bằng",
+                                         "usage":  "Mẫu xuân thu, lớp base, polo dệt kim, smart-casual — phạm vi mùa rộng nhất"
+                                     },
+                                     {
+                                         "gauge":  "12G",
+                                         "name":  "Cực Mịn",
+                                         "thickness":  "Nhẹ & Mượt",
+                                         "usage":  "Áo thun mùa hè, dệt kim sát da, mẫu mịn nhẹ, lớp trang trọng — bề mặt vải mịn, thanh lịch — phù hợp khí hậu nhiệt đới Việt Nam"
+                                     }
+                                 ]
+                   },
+    "heritage":  {
+                     "badge":  "Chenghai · Thủ Phủ Dệt Kim Trung Quốc",
+                     "title":  "40 Năm Di Sản Dệt Kim",
+                     "subtitle":  "Từ xưởng thủ công nhỏ đến cụm công nghiệp dệt kim đẳng cấp thế giới — bốn thập kỷ thủ công và đổi mới của Chenghai",
+                     "timeline":  [
+                                      {
+                                          "era":  "1980s",
+                                          "title":  "Khởi Đầu — Kỷ Nguyên Xưởng Gia Đình",
+                                          "desc":  "Đầu thập niên 1980, ngành dệt kim Chenghai bắt rễ với xưởng gia đình và máy dệt tay. Thợ thủ công địa phương, kế thừa truyền thống dệt nhiều thế hệ, bắt đầu sản xuất áo len cho thị trường nội địa, đặt nền móng cho thị trấn dệt kim nổi tiếng nhất Trung Quốc sau này."
+                                      },
+                                      {
+                                          "era":  "1990s",
+                                          "title":  "Kỷ Nguyên Vàng Thương Mại Quốc Tế",
+                                          "desc":  "Nắm bắt làn sóng mở cửa của Trung Quốc, dệt kim Chenghai tiến ra thị trường toàn cầu thập niên 1990. Nhà máy mở rộng nhanh, nhập máy dệt kim phẳng vi tính tiên tiến từ Nhật và Đức. Đơn xuất khẩu từ Âu, Mỹ và Đông Nam Á đổ về,确立 danh tiếng chất lượng cho Chenghai."
+                                      },
+                                      {
+                                          "era":  "2000s",
+                                          "title":  "Hình Thành Cụm Công Nghiệp",
+                                          "desc":  "Đến thập niên 2000, Chenghai đã phát triển hệ sinh thái công nghiệp hoàn chỉnh — từ nhuộm sợi, dệt vải, thiết kế họa tiết đến hoàn thiện, đóng gói và logistics. Hàng nghìn nhà máy và doanh nghiệp phụ trợ tập trung, tạo hiệu quả và lợi thế chi phí vô song, thu hút người mua toàn cầu."
+                                      },
+                                      {
+                                          "era":  "2010s",
+                                          "title":  "Chuyển Đổi & Nâng Cấp",
+                                          "desc":  "Thập niên 2010 đánh dấu chuyển từ OEM sang ODM và phát triển thương hiệu. Các nhà máy Chenghai đầu tư mạnh R&D thiết kế, xây đội ngũ thiết kế chuyên nghiệp, bắt đầu ra mắt bộ sưu tập gốc. Ngành đón nhận số hóa, tự động hóa và sản xuất bền vững."
+                                      },
+                                      {
+                                          "era":  "Hôm Nay",
+                                          "title":  "Sản Xuất Thông Minh Số",
+                                          "desc":  "Hôm nay, Chenghai dẫn đầu ngành dệt kim Trung Quốc với dây chuyền tự động hoàn toàn, hệ thống thiết kế số và quản lý chuỗi cung ứng thông minh. Là 'Thành Phố Dệt Kim Thủ Công Nổi Tiếng Trung Quốc', tiếp tục cung cấp cho các thương hiệu thời trang hàng đầu thế giới, tiên phong tương lai dệt kim bền vững."
+                                      }
+                                  ],
+                     "stats":  [
+                                   {
+                                       "value":  "40+",
+                                       "label":  "Năm Lịch Sử"
+                                   },
+                                   {
+                                       "value":  "3.000+",
+                                       "label":  "Doanh Nghiệp"
+                                   },
+                                   {
+                                       "value":  "100K+",
+                                       "label":  "Công Nhân Ngành"
+                                   },
+                                   {
+                                       "value":  "Thành Phố Nổi Tiếng",
+                                       "label":  "Thủ Phủ Dệt Kim Trung Quốc"
+                                   }
+                               ],
+                     "quote":  "Sợi Chenghai không chỉ dệt nên áo len, mà cả ước mơ và sinh kế của nhiều thế hệ — mỗi mũi khâu minh chứng cho tinh thần thủ công bền bỉ.",
+                     "quoteSource":  "Hội Dệt Kim Chenghai"
+                 },
+    "footer":  {
+                   "about":  "Về Chúng Tôi",
+                   "aboutDesc":  "Nhà Máy Dệt Kim Yayuhong - 20 năm sản xuất áo len chuyên nghiệp, nhà máy gốc thời trang nhanh dệt kim của bạn.",
+                   "quickLinks":  "Liên Kết Nhanh",
+                   "contactUs":  "Liên Hệ",
+                   "followUs":  "Theo Dõi",
+                   "copyright":  "© 2024 Nhà Máy Dệt Kim Yayuhong. Mọi quyền sở hữu.",
+                   "icp":  ""
+               },
+    "wechatGuide":  {
+                        "title":  "Cách Sử Dụng WeChat",
+                        "subtitle":  "WeChat là ứng dụng nhắn tin phổ biến nhất tại Trung Quốc. Làm theo các bước để kết nối với chúng tôi và nhận báo giá nhanh.",
+                        "qrTitle":  "Mã QR WeChat Của Chúng Tôi",
+                        "qrDesc":  "Quét mã QR này bằng WeChat để thêm liên hệ",
+                        "step1":  {
+                                      "title":  "Tải WeChat",
+                                      "desc":  "WeChat miễn phí trên iOS và Android. Tải từ App Store hoặc Google Play."
+                                  },
+                        "step2":  {
+                                      "title":  "Đăng Ký Tài Khoản",
+                                      "desc":  "Mở WeChat và đăng ký với số điện thoại. Cần xác minh.",
+                                      "tip1":  "Dùng số điện thoại thật để xác minh",
+                                      "tip2":  "Đặt WeChat ID dễ nhớ"
+                                  },
+                        "step3":  {
+                                      "title":  "Quét Mã QR",
+                                      "desc":  "Mở WeChat, nhấn '+', chọn 'Scan', hướng camera vào mã QR trên."
+                                  },
+                        "step4":  {
+                                      "title":  "Gửi Tin Nhắn",
+                                      "desc":  "Sau khi thêm, gửi tin nhắn yêu cầu sản phẩm. Đội ngũ phản hồi trong 12 giờ.",
+                                      "tip":  "Mẹo: Gửi chi tiết nhu cầu (mẫu, số lượng, giá mục tiêu) để nhận báo giá nhanh và chính xác hơn."
+                                  },
+                        "whatsappTitle":  "Thích WhatsApp Hơn?",
+                        "whatsappDesc":  "Chúng tôi cũng phản hồi trên WhatsApp",
+                        "whatsappBtn":  "Trò Chuyện WhatsApp",
+                        "contactPrompt":  "Hoặc gửi yêu cầu trực tiếp qua website",
+                        "contactBtn":  "Gửi Yêu Cầu"
+                    },
+    "readyStock":  {
+                       "badge":  "Có Sẵn Ngay",
+                       "title":  "Bộ Sưu Tập Sẵn Giao",
+                       "subtitle":  "Đồ mặc nhà cao cấp có sẵn — giao 3 ngày, không chờ đợi",
+                       "inStock":  "Có Sẵn",
+                       "collectionTitle":  "Bộ Sưu Tập Đồ Mặc Nhà",
+                       "cta":  "Nhận Catalog & Bảng Giá",
+                       "points":  {
+                                      "stock":  "Tồn Kho Thật",
+                                      "stockDesc":  "Tất cả mẫu đều có sẵn thực tế",
+                                      "shipping":  "Giao 3 Ngày",
+                                      "shippingDesc":  "Phát hàng trong 3 ngày làm việc",
+                                      "mix":  "Mix & Match",
+                                      "mixDesc":  "Kết hợp mẫu, màu và size",
+                                      "moq":  "MOQ Thấp",
+                                      "moqDesc":  "Từ 15 chiếc/mẫu"
+                                  },
+                       "info":  {
+                                    "styles":  "Tổng Mẫu",
+                                    "stylesUnit":  "mẫu",
+                                    "sizes":  "Size Có Sẵn",
+                                    "colors":  "Màu",
+                                    "colorsUnit":  "màu",
+                                    "category":  "Danh Mục",
+                                    "categoryValue":  "Đồ Mặc Nhà Dệt Kim",
+                                    "shipping":  "Thời Gian Giao",
+                                    "shippingUnit":  "Ngày"
+                                }
+                   }
+}

@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 
-export type SiteKey = 'overseas' | 'china';
+export type SiteKey = 'overseas' | 'china' | 'vietnam';
 
 export interface SiteInfo {
   key: SiteKey;
@@ -55,6 +55,7 @@ export function siteFilterSql(siteKey: SiteKey): string {
  */
 export function getDefaultLocale(siteKey: SiteKey): string {
   if (siteKey === 'china') return 'zh';
+  if (siteKey === 'vietnam') return 'vn';
   return 'en';
 }
 

@@ -49,7 +49,7 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/(zh-TW|zh|en|ru|es|de|fr|pt|ja|ar)/:path*',
+    '/(zh-TW|zh|en|ru|es|de|fr|pt|ja|ar|vn)/:path*',
     '/((?!_next|_vercel|admin|api|llms\\.txt|sitemap\\.xml|robots\\.txt|.*\\..*).*)',
   ],
 };
