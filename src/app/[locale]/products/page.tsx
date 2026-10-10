@@ -229,26 +229,51 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { title: t('title') + ' - Yayuhong Knitwear', description: t('subtitle') };
 }
 
-async function fetchProductsFromDB(siteKey: string) {
+async function fetchProductsFromDB(siteKey: string, locale: string) {
   try {
-    const [products, categories] = await Promise.all([
-      sql`
-        select
-          p.id, p.slug, p.name, p.summary, p.cover_url, p.gallery_urls,
-          p.model, p.is_active, p.sort,
-          c.slug as category_slug
-        from content_products p
-        left join content_categories c on p.category_id = c.id
-        where p.is_active = true
-          and p.sites && array['global', ${siteKey}]::text[]
-        order by p.sort, p.created_at
-      `,
-      sql`
-        select id, slug, name, sort
-        from content_categories
-        order by sort, created_at
-      `,
-    ]);
+    // 越南语版本额外包含越南专属产品（sites 含 'vn'）
+    const isVn = locale === 'vn';
+
+    const productsQuery = isVn
+      ? sql`
+          select
+            p.id, p.slug, p.name, p.summary, p.cover_url, p.gallery_urls,
+            p.model, p.is_active, p.sort,
+            c.slug as category_slug
+          from content_products p
+          left join content_categories c on p.category_id = c.id
+          where p.is_active = true
+            and (p.sites && array['global', ${siteKey}]::text[]
+                 or p.sites && array['vn']::text[])
+          order by p.sort, p.created_at
+        `
+      : sql`
+          select
+            p.id, p.slug, p.name, p.summary, p.cover_url, p.gallery_urls,
+            p.model, p.is_active, p.sort,
+            c.slug as category_slug
+          from content_products p
+          left join content_categories c on p.category_id = c.id
+          where p.is_active = true
+            and p.sites && array['global', ${siteKey}]::text[]
+          order by p.sort, p.created_at
+        `;
+
+    const categoriesQuery = isVn
+      ? sql`
+          select id, slug, name, sort
+          from content_categories
+          where sites && array['global', ${siteKey}]::text[]
+             or slug like 'vn-%'
+          order by sort, created_at
+        `
+      : sql`
+          select id, slug, name, sort
+          from content_categories
+          order by sort, created_at
+        `;
+
+    const [products, categories] = await Promise.all([productsQuery, categoriesQuery]);
 
     if (products.length === 0) return null;
 
@@ -293,8 +318,20 @@ async function fetchProductsFromDB(siteKey: string) {
     for (const cat of parsedCategories) {
       const key = slugToKeyMap[cat.slug || ''];
       if (key && grouped[key]) {
-        grouped[key].categoryName = cat.name;
-        grouped[key].categorySlug = cat.slug;
+        // 越南语版本：优先使用有 vi 字段的分类名称
+        const existingName = grouped[key].categoryName;
+        const catName = cat.name as Record<string, string>;
+        if (locale === 'vn' && existingName) {
+          const existingHasVi = existingName.vi || existingName.vn;
+          const newHasVi = catName.vi || catName.vn;
+          if (newHasVi && !existingHasVi) {
+            grouped[key].categoryName = catName;
+            grouped[key].categorySlug = cat.slug;
+          }
+        } else {
+          grouped[key].categoryName = catName;
+          grouped[key].categorySlug = cat.slug;
+        }
       }
     }
 
@@ -332,7 +369,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
   const t = await getTranslations({ locale, namespace: 'products' });
   const siteKey = await getCurrentSiteKey();
 
-  const dbData = await fetchProductsFromDB(siteKey);
+  const dbData = await fetchProductsFromDB(siteKey, locale);
   const categories = dbData ? dbData.categories : (fallbackProducts as any);
   const activeCategoryKeys = dbData ? dbData.categoryKeys : (categoryKeys as unknown as string[]);
 
