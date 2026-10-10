@@ -54,7 +54,7 @@ export async function generateMetadata({
       openGraph: {
         title: `${productName} - ${categoryName}`,
         description,
-        type: 'product',
+        type: 'website',
         url: productUrl,
         siteName: 'Yayuhong Knitwear',
       },
