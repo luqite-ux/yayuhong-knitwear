@@ -32,7 +32,7 @@ export async function generateMetadata({
         from content_products p
         left join content_categories c on p.category_id = c.id
         where p.slug = ${slug} and p.is_active = true
-          and p.sites && array['global', ${siteKey}, 'vn']::text[]
+          and (p.slug like 'vn-%' or p.sites && array['global', ${siteKey}]::text[])
         limit 1
       `
     : await sql`
@@ -123,7 +123,7 @@ async function getProduct(slug: string, siteKey: string, locale: string) {
         from content_products p
         left join content_categories c on p.category_id = c.id
         where p.slug = ${slug} and p.is_active = true
-          and p.sites && array['global', ${siteKey}, 'vn']::text[]
+          and (p.slug like 'vn-%' or p.sites && array['global', ${siteKey}]::text[])
         limit 1
       `
     : await sql`
@@ -170,7 +170,7 @@ async function getRelatedProducts(categoryId: string, excludeId: string, siteKey
         where p.category_id = ${categoryId}
           and p.id != ${excludeId}
           and p.is_active = true
-          and p.sites && array['global', ${siteKey}, 'vn']::text[]
+          and p.slug like 'vn-%'
         order by p.sort, p.created_at
         limit ${limit}
       `

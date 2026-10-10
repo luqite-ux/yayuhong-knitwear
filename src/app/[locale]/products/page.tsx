@@ -231,7 +231,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 async function fetchProductsFromDB(siteKey: string, locale: string) {
   try {
-    // 越南语版本额外包含越南专属产品（sites 含 'vn'）
+    // 越南语版本：只显示越南专属产品（slug 以 vn- 开头）
     const isVn = locale === 'vn';
 
     const productsQuery = isVn
@@ -243,7 +243,7 @@ async function fetchProductsFromDB(siteKey: string, locale: string) {
           from content_products p
           left join content_categories c on p.category_id = c.id
           where p.is_active = true
-            and p.sites && array['vn']::text[]
+            and p.slug like 'vn-%'
           order by p.sort, p.created_at
         `
       : sql`
@@ -262,7 +262,7 @@ async function fetchProductsFromDB(siteKey: string, locale: string) {
       ? sql`
           select id, slug, name, sort
           from content_categories
-          where sites && array['vn']::text[]
+          where slug like 'vn-%'
           order by sort, created_at
         `
       : sql`
@@ -292,6 +292,61 @@ async function fetchProductsFromDB(siteKey: string, locale: string) {
       sort: c.sort,
       name: deepParseJson(c.name) as Record<string, string>,
     }));
+
+    // 越南版：按越南分类 slug 直接分组，封面用该分类第一款产品图
+    if (isVn) {
+      const vnGrouped: Record<string, {
+        nameKey: string;
+        descKey: string;
+        countKey: string;
+        cover: string;
+        items: ProductItem[];
+        categoryName?: Record<string, string>;
+        categorySlug?: string;
+      }> = {};
+
+      // 先建分类
+      for (const cat of parsedCategories) {
+        vnGrouped[cat.slug] = {
+          nameKey: '',
+          descKey: '',
+          countKey: '',
+          cover: '',
+          items: [],
+          categoryName: cat.name as Record<string, string>,
+          categorySlug: cat.slug,
+        };
+      }
+
+      // 再塞产品，封面用第一款
+      for (const p of parsedProducts) {
+        const catSlug = p.category_slug;
+        if (catSlug && vnGrouped[catSlug]) {
+          const item: ProductItem = {
+            img: p.cover_url || '',
+            name: p.name || { en: p.model || 'Product', zh: p.model || '产品' },
+            slug: p.slug,
+            material: p.summary || undefined,
+          };
+          vnGrouped[catSlug].items.push(item);
+          if (!vnGrouped[catSlug].cover && p.cover_url) {
+            vnGrouped[catSlug].cover = p.cover_url;
+          }
+        }
+      }
+
+      // 过滤空分类，按 sort 排序
+      const vnFiltered: Record<string, typeof vnGrouped[string]> = {};
+      const vnActiveKeys: string[] = [];
+      for (const cat of parsedCategories) {
+        if (vnGrouped[cat.slug]?.items.length > 0) {
+          vnFiltered[cat.slug] = vnGrouped[cat.slug];
+          vnActiveKeys.push(cat.slug);
+        }
+      }
+
+      return { categories: vnFiltered, categoryKeys: vnActiveKeys };
+    }
 
     const grouped: Record<string, {
       nameKey: string;
