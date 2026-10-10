@@ -51,15 +51,7 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await sql.begin(async (tx: any) => {
-      // 1. 插入站点记录
-      await tx`
-        insert into sites (key, domain, name, default_locale)
-        values
-          ('vietnam', 'xiuyuknit.com', '{"zh":"亚裕鸿毛织（越南）","en":"Yayuhong Knitwear Vietnam","vn":"Yayuhong Dệt Kim Việt Nam"}', 'vn')
-        on conflict (key) do nothing
-      `;
-
-      // 2. 插入产品分类
+      // 1. 插入产品分类
       await tx`
         insert into content_categories (slug, name, sort, sites)
         values
@@ -74,7 +66,7 @@ export async function POST(req: NextRequest) {
           sites = excluded.sites
       `;
 
-      // 3. 插入产品 (使用子查询获取 category_id)
+      // 2. 插入产品 (使用子查询获取 category_id)
       const products = [
         {
           slug: 'vn-tencel-sun-protection-cardigan',
@@ -216,7 +208,7 @@ export async function POST(req: NextRequest) {
         `;
       }
 
-      // 4. 记录迁移
+      // 3. 记录迁移
       await tx`insert into schema_migrations (name) values (${migrationName}) on conflict do nothing`;
 
       return { success: true, migration: migrationName, productsCount: products.length };
