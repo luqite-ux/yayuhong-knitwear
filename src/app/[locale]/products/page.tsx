@@ -243,8 +243,7 @@ async function fetchProductsFromDB(siteKey: string, locale: string) {
           from content_products p
           left join content_categories c on p.category_id = c.id
           where p.is_active = true
-            and (p.sites && array['global', ${siteKey}]::text[]
-                 or p.sites && array['vn']::text[])
+            and p.sites && array['vn']::text[]
           order by p.sort, p.created_at
         `
       : sql`
@@ -263,8 +262,7 @@ async function fetchProductsFromDB(siteKey: string, locale: string) {
       ? sql`
           select id, slug, name, sort
           from content_categories
-          where sites && array['global', ${siteKey}]::text[]
-             or slug like 'vn-%'
+          where sites && array['vn']::text[]
           order by sort, created_at
         `
       : sql`

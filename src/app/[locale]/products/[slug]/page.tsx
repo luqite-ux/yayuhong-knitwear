@@ -24,15 +24,26 @@ export async function generateMetadata({
   const siteKey = await getCurrentSiteKey();
   const t = await getTranslations({ locale, namespace: 'products' });
 
-  const rows = await sql`
-    select p.name, p.summary, p.cover_url, p.detail_html,
-           p.model, c.slug as category_slug, c.name as category_name
-    from content_products p
-    left join content_categories c on p.category_id = c.id
-    where p.slug = ${slug} and p.is_active = true
-      and p.sites && array['global', ${siteKey}]::text[]
-    limit 1
-  `;
+  const isVn = locale === 'vn';
+  const rows = isVn
+    ? await sql`
+        select p.name, p.summary, p.cover_url, p.detail_html,
+               p.model, c.slug as category_slug, c.name as category_name
+        from content_products p
+        left join content_categories c on p.category_id = c.id
+        where p.slug = ${slug} and p.is_active = true
+          and p.sites && array['global', ${siteKey}, 'vn']::text[]
+        limit 1
+      `
+    : await sql`
+        select p.name, p.summary, p.cover_url, p.detail_html,
+               p.model, c.slug as category_slug, c.name as category_name
+        from content_products p
+        left join content_categories c on p.category_id = c.id
+        where p.slug = ${slug} and p.is_active = true
+          and p.sites && array['global', ${siteKey}]::text[]
+        limit 1
+      `;
 
   if (rows.length === 0) return {};
 
@@ -101,18 +112,31 @@ export async function generateMetadata({
   };
 }
 
-async function getProduct(slug: string, siteKey: string) {
-  const rows = await sql`
-    select p.id, p.slug, p.name, p.summary, p.detail_html, p.features,
-           p.applications, p.advantages, p.specs, p.model, p.cover_url,
-           p.gallery_urls, p.sort, p.updated_at,
-           c.id as category_id, c.slug as category_slug, c.name as category_name
-    from content_products p
-    left join content_categories c on p.category_id = c.id
-    where p.slug = ${slug} and p.is_active = true
-      and p.sites && array['global', ${siteKey}]::text[]
-    limit 1
-  `;
+async function getProduct(slug: string, siteKey: string, locale: string) {
+  const isVn = locale === 'vn';
+  const rows = isVn
+    ? await sql`
+        select p.id, p.slug, p.name, p.summary, p.detail_html, p.features,
+               p.applications, p.advantages, p.specs, p.model, p.cover_url,
+               p.gallery_urls, p.sort, p.updated_at,
+               c.id as category_id, c.slug as category_slug, c.name as category_name
+        from content_products p
+        left join content_categories c on p.category_id = c.id
+        where p.slug = ${slug} and p.is_active = true
+          and p.sites && array['global', ${siteKey}, 'vn']::text[]
+        limit 1
+      `
+    : await sql`
+        select p.id, p.slug, p.name, p.summary, p.detail_html, p.features,
+               p.applications, p.advantages, p.specs, p.model, p.cover_url,
+               p.gallery_urls, p.sort, p.updated_at,
+               c.id as category_id, c.slug as category_slug, c.name as category_name
+        from content_products p
+        left join content_categories c on p.category_id = c.id
+        where p.slug = ${slug} and p.is_active = true
+          and p.sites && array['global', ${siteKey}]::text[]
+        limit 1
+      `;
 
   if (rows.length === 0) return null;
 
@@ -137,17 +161,29 @@ async function getProduct(slug: string, siteKey: string) {
   };
 }
 
-async function getRelatedProducts(categoryId: string, excludeId: string, siteKey: string, limit = 6) {
-  const rows = await sql`
-    select p.slug, p.name, p.cover_url, p.model
-    from content_products p
-    where p.category_id = ${categoryId}
-      and p.id != ${excludeId}
-      and p.is_active = true
-      and p.sites && array['global', ${siteKey}]::text[]
-    order by p.sort, p.created_at
-    limit ${limit}
-  `;
+async function getRelatedProducts(categoryId: string, excludeId: string, siteKey: string, locale: string, limit = 6) {
+  const isVn = locale === 'vn';
+  const rows = isVn
+    ? await sql`
+        select p.slug, p.name, p.cover_url, p.model
+        from content_products p
+        where p.category_id = ${categoryId}
+          and p.id != ${excludeId}
+          and p.is_active = true
+          and p.sites && array['global', ${siteKey}, 'vn']::text[]
+        order by p.sort, p.created_at
+        limit ${limit}
+      `
+    : await sql`
+        select p.slug, p.name, p.cover_url, p.model
+        from content_products p
+        where p.category_id = ${categoryId}
+          and p.id != ${excludeId}
+          and p.is_active = true
+          and p.sites && array['global', ${siteKey}]::text[]
+        order by p.sort, p.created_at
+        limit ${limit}
+      `;
 
   return (rows as any[]).map((r) => ({
     slug: r.slug,
@@ -167,7 +203,7 @@ export default async function ProductDetailPage({
   const t = await getTranslations({ locale, namespace: 'products' });
   const siteKey = await getCurrentSiteKey();
 
-  const product = await getProduct(slug, siteKey);
+  const product = await getProduct(slug, siteKey, locale);
   if (!product) notFound();
 
   const productName = localizeText(product.name, locale);
@@ -182,7 +218,7 @@ export default async function ProductDetailPage({
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
   const productUrl = `${baseUrl}/${locale}/products/${slug}`;
 
-  const relatedProducts = await getRelatedProducts(product.category_id, product.id, siteKey, 6);
+  const relatedProducts = await getRelatedProducts(product.category_id, product.id, siteKey, locale, 6);
 
   // Product Schema
   const productSchema = {
