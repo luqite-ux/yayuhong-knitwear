@@ -7,9 +7,9 @@ import { Link } from '@/i18n/navigation';
 
 export interface ProductItem {
   img: string;
-  name: { en: string; zh: string };
+  name: Record<string, string>;
   slug?: string;
-  material?: { en: string; zh: string };
+  material?: Record<string, string>;
 }
 
 interface Props {

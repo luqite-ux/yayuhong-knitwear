@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { zhText } from '@/lib/zh-hant';
+import { zhText, localizeText } from '@/lib/zh-hant';
 import { Link } from '@/i18n/navigation';
 import { type ProductItem } from '@/components/ProductDetailModal';
 
@@ -75,7 +75,7 @@ export default function ProductGrid({ categories, categoryKeys }: Props) {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {cat.items.map((item, i) => {
-                  const productName = zhText(locale, item.name.zh, item.name.en);
+                  const productName = localizeText(item.name, locale);
                   return (
                     <Link
                       key={i}

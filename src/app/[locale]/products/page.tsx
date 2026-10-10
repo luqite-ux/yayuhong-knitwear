@@ -2,7 +2,7 @@
 import { Link } from '@/i18n/navigation';
 import FloatingContact from '@/components/FloatingContact';
 import ProductGrid from '@/components/ProductGrid';
-import { zhText } from '@/lib/zh-hant';
+import { zhText, localizeText } from '@/lib/zh-hant';
 import { type ProductItem } from '@/components/ProductDetailModal';
 import { sql, deepParseJson } from '@/lib/db';
 import { getCurrentSiteKey } from '@/lib/site';
@@ -206,6 +206,12 @@ const slugToKeyMap: Record<string, string> = {
   'pet-knitwear': 'pet',
   'knit-accessories': 'accessories',
   'accessories': 'accessories',
+  // 越南站点分类
+  'vn-cardigans': 'womens',
+  'vn-knit-tops': 'womens',
+  'vn-polo-shirts': 'mens',
+  'vn-basics': 'womens',
+  'vn-loungewear': 'loungewear',
 };
 
 const categoryCovers: Record<string, string> = {
@@ -297,15 +303,9 @@ async function fetchProductsFromDB(siteKey: string) {
       if (key && grouped[key]) {
         const item: ProductItem = {
           img: p.cover_url || '',
-          name: {
-            en: p.name?.en || p.model || 'Product',
-            zh: p.name?.zh || p.name?.en || p.model || '产品',
-          },
+          name: p.name || { en: p.model || 'Product', zh: p.model || '产品' },
           slug: p.slug,
-          material: p.summary ? {
-            en: p.summary.en || '',
-            zh: p.summary.zh || '',
-          } : undefined,
+          material: p.summary || undefined,
         };
         grouped[key].items.push(item);
       }
@@ -356,7 +356,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
             {activeCategoryKeys.map((key, index) => {
               const cat = categories[key];
               const name = cat.categoryName
-                ? (locale === 'zh' ? cat.categoryName.zh : cat.categoryName.en || cat.categoryName.zh || key)
+                ? localizeText(cat.categoryName, locale) || key
                 : t(cat.nameKey || `categories.${index}.name`);
               const count = `${cat.items.length} ${zhText(locale, '款', 'SKUs')}`;
               const linkHref = cat.categorySlug
