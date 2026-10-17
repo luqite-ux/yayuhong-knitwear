@@ -231,6 +231,24 @@ export async function runGeneration(
 
       const promptHash = crypto.createHash('sha256').update(JSON.stringify({ keyword: topic.keyword, style: topic.style })).digest('hex');
 
+      // 记录生成运行详情（必须先于草稿写入：seo_article_drafts.run_id 外键引用本表）
+      await sql`
+        insert into seo_generation_runs (id, trigger, triggered_by, model, prompt_hash,
+          requested, succeeded, failed, prompt_tokens, completion_tokens, cost_usd,
+          started_at, finished_at)
+        values (
+          ${runId}, ${trigger}, ${triggeredBy}, ${llm.model}, ${promptHash},
+          1, 1, 0, ${promptTokens}, ${completionTokens}, ${cost},
+          now(), now()
+        )
+        on conflict (id) do update set
+          succeeded = seo_generation_runs.succeeded + 1,
+          prompt_tokens = seo_generation_runs.prompt_tokens + ${promptTokens},
+          completion_tokens = seo_generation_runs.completion_tokens + ${completionTokens},
+          cost_usd = seo_generation_runs.cost_usd + ${cost},
+          finished_at = now()
+      `;
+
       // 写入草稿
       const draftRows = await sql`
         insert into seo_article_drafts (
@@ -255,24 +273,6 @@ export async function runGeneration(
           'pending_review'
         )
         returning id
-      `;
-
-      // 记录生成运行详情
-      await sql`
-        insert into seo_generation_runs (id, trigger, triggered_by, model, prompt_hash,
-          requested, succeeded, failed, prompt_tokens, completion_tokens, cost_usd,
-          started_at, finished_at)
-        values (
-          ${runId}, ${trigger}, ${triggeredBy}, ${llm.model}, ${promptHash},
-          1, 1, 0, ${promptTokens}, ${completionTokens}, ${cost},
-          now(), now()
-        )
-        on conflict (id) do update set
-          succeeded = seo_generation_runs.succeeded + 1,
-          prompt_tokens = seo_generation_runs.prompt_tokens + ${promptTokens},
-          completion_tokens = seo_generation_runs.completion_tokens + ${completionTokens},
-          cost_usd = seo_generation_runs.cost_usd + ${cost},
-          finished_at = now()
       `;
 
       totalCost += cost;
