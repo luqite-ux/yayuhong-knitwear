@@ -24,7 +24,7 @@ interface SeoConfig {
   indexing_enabled: boolean;
 }
 
-async function getSeoConfig(): Promise<SeoConfig | null> {
+export async function getSeoConfig(): Promise<SeoConfig | null> {
   const rows = await sql<SeoConfig[]>`select * from seo_config order by created_at limit 1`;
   return rows.length > 0 ? rows[0] : null;
 }
@@ -54,7 +54,7 @@ async function isTopicUsed(keyword: string, style: string): Promise<boolean> {
 /**
  * 从关键词库选一个未使用的关键词 + 风格
  */
-async function pickTopic(config: SeoConfig): Promise<{ keyword: string; style: Style } | null> {
+export async function pickTopic(config: SeoConfig): Promise<{ keyword: string; style: Style } | null> {
   const keywords = config.keyword_seeds?.length > 0
     ? config.keyword_seeds
     : (await sql`select keyword from seo_keywords where is_tracked = true order by random() limit 20`).map((r: any) => r.keyword);

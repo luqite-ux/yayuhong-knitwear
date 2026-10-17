@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { setSecret, updateSecretStatus } from '@/lib/secrets';
 import { testLLMConnection, getLLMConfig } from '@/lib/llm';
-import { runBootstrap, runGeneration } from '@/lib/seo-pipeline';
+import { runBootstrap, runGeneration, getSeoConfig, pickTopic } from '@/lib/seo-pipeline';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -54,6 +54,24 @@ export async function POST(req: NextRequest) {
         llm: llm
           ? { configured: true, baseUrl: llm.baseUrl, model: llm.model, apiKeyTail: llm.apiKey?.slice(-4) }
           : { configured: false },
+      });
+    }
+
+    if (action === 'diag') {
+      const { sql } = await import('@/lib/db');
+      const cfg = await getSeoConfig();
+      const topic = cfg ? await pickTopic(cfg) : null;
+      const drafts = await sql`select count(*)::int as n from seo_article_drafts`;
+      const articles = await sql`select count(*)::int as n from content_articles`;
+      return NextResponse.json({
+        keywordSeedsType: Array.isArray(cfg?.keyword_seeds) ? 'array' : typeof cfg?.keyword_seeds,
+        keywordSeedsLen: (cfg?.keyword_seeds as unknown[] | undefined)?.length,
+        keywordSeedsSample: (cfg?.keyword_seeds as unknown[] | undefined)?.slice(0, 3),
+        styleQuota: cfg?.style_quota,
+        styleQuotaType: typeof cfg?.style_quota,
+        pickedTopic: topic,
+        drafts: drafts[0].n,
+        articles: articles[0].n,
       });
     }
 
