@@ -26,7 +26,17 @@ interface SeoConfig {
 
 export async function getSeoConfig(): Promise<SeoConfig | null> {
   const rows = await sql<SeoConfig[]>`select * from seo_config order by created_at limit 1`;
-  return rows.length > 0 ? rows[0] : null;
+  if (rows.length === 0) return null;
+  const cfg = rows[0] as SeoConfig & { style_quota: Record<string, number> | string };
+  // 该项目中 jsonb 列可能以字符串返回，统一解析 style_quota
+  if (typeof cfg.style_quota === 'string') {
+    try {
+      cfg.style_quota = JSON.parse(cfg.style_quota) as Record<string, number>;
+    } catch {
+      cfg.style_quota = { technical: 1, buying_guide: 1, application: 1, trend: 1 };
+    }
+  }
+  return cfg;
 }
 
 const STYLE_PROMPTS: Record<Style, string> = {
