@@ -64,6 +64,30 @@ export async function GET(req: NextRequest) {
       started: j.started_at, finished: j.finished_at,
     }));
 
+    // 4b. All bootstrap / generation-related jobs ever
+    const bootJobs = await sql`
+      select job, trigger, triggered_by, status, success_count, failure_count,
+             cost_usd, summary, error, started_at, finished_at
+      from job_runs
+      where job in ('bootstrap', 'generation', 'article_generation') or trigger = 'bootstrap'
+      order by started_at desc limit 20
+    `;
+    out.bootstrapJobs = bootJobs.map((j: any) => ({
+      job: j.job, trigger: j.trigger, by: j.triggered_by, status: j.status,
+      ok: j.success_count, fail: j.failure_count, cost: j.cost_usd,
+      summary: j.summary,
+      error: j.error ? String(j.error).slice(0, 800) : null,
+      started: j.started_at, finished: j.finished_at,
+    }));
+
+    // 4c. Test LLM live
+    try {
+      const { testLLMConnection } = await import('@/lib/llm');
+      out.llmTest = await testLLMConnection();
+    } catch (e: any) {
+      out.llmTest = { ok: false, error: e.message };
+    }
+
     // 5. Drafts by status
     const drafts = await sql`
       select status, count(*)::int as n from seo_article_drafts group by status
@@ -77,8 +101,9 @@ export async function GET(req: NextRequest) {
     // 7. Generation runs
     try {
       const gen = await sql`
-        select status, count(*)::int as n, sum(success_count)::int as ok, sum(failure_count)::int as fail
-        from seo_generation_runs group by status
+        select trigger, requested, succeeded, failed,
+               left(error, 400) as error, started_at, finished_at
+        from seo_generation_runs order by started_at desc limit 10
       `;
       out.generationRuns = gen;
     } catch (e: any) {
