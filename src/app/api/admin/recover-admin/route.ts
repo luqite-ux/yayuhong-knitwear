@@ -26,8 +26,18 @@ export async function POST(req: NextRequest) {
 
   const out: Record<string, unknown> = { loginActors: rows };
 
+  // 一次性维护动作：删除当前仍有效的全部会话（清理验证登录时产生的测试会话）
+  const body0 = await req.json().catch(() => ({}));
+  if (body0.wipeRecentSessions === true) {
+    const del = await sql`
+      delete from admin_sessions where expires_at > now()
+    `;
+    out.wiped = del.count;
+    return NextResponse.json(out);
+  }
+
   // 分步诊断登录 500（仅返回布尔/长度，不回显敏感值）
-  const body = await req.json().catch(() => ({}));
+  const body = body0;
   if (body.diag === true) {
     const crypto = await import('node:crypto');
     const { verify } = await import('@node-rs/argon2');
