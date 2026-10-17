@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { setSecret, updateSecretStatus } from '@/lib/secrets';
 import { testLLMConnection, getLLMConfig } from '@/lib/llm';
-import { runBootstrap, runGeneration, getSeoConfig, pickTopic } from '@/lib/seo-pipeline';
+import { runBootstrap, runGeneration, getSeoConfig, pickTopic, generateDraft } from '@/lib/seo-pipeline';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -63,6 +63,10 @@ export async function POST(req: NextRequest) {
       const topic = cfg ? await pickTopic(cfg) : null;
       const drafts = await sql`select count(*)::int as n from seo_article_drafts`;
       const articles = await sql`select count(*)::int as n from content_articles`;
+      const genErrors = await sql`
+        select action, target, detail, created_at from audit_logs
+        where action like 'seo_generate%' order by created_at desc limit 3
+      `;
       return NextResponse.json({
         keywordSeedsType: Array.isArray(cfg?.keyword_seeds) ? 'array' : typeof cfg?.keyword_seeds,
         keywordSeedsLen: (cfg?.keyword_seeds as unknown[] | undefined)?.length,
@@ -72,7 +76,31 @@ export async function POST(req: NextRequest) {
         pickedTopic: topic,
         drafts: drafts[0].n,
         articles: articles[0].n,
+        genErrors,
       });
+    }
+
+    if (action === 'draft-test') {
+      const cfg = await getSeoConfig();
+      if (!cfg) return NextResponse.json({ error: 'no seo config' }, { status: 500 });
+      const topic = await pickTopic(cfg);
+      if (!topic) return NextResponse.json({ error: 'no topic' }, { status: 500 });
+      try {
+        const r = await generateDraft(topic.keyword, topic.style as any, cfg);
+        return NextResponse.json({
+          ok: true,
+          topic,
+          title: r.draft.title,
+          slug: r.draft.slug,
+          contentLen: r.draft.content_html?.length,
+          supporting: r.draft.supporting_keywords?.length,
+          flags: r.draft.human_review_flags,
+          promptTokens: r.promptTokens,
+          completionTokens: r.completionTokens,
+        });
+      } catch (e: any) {
+        return NextResponse.json({ ok: false, topic, error: e.message?.slice(0, 1500) }, { status: 500 });
+      }
     }
 
     if (action === 'bootstrap') {

@@ -100,7 +100,7 @@ interface ArticleDraft {
 /**
  * 生成单篇文章草稿
  */
-async function generateDraft(
+export async function generateDraft(
   keyword: string,
   style: Style,
   config: SeoConfig,
