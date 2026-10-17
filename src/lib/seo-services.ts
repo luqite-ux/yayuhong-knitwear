@@ -257,7 +257,7 @@ export async function runGeoMonitor(triggeredBy: string): Promise<void> {
   let totalCost = 0;
 
   try {
-    const projects = await sql`select * from geo_projects where is_active = true`;
+    const projects = await sql`select * from geo_projects where enabled = true`;
     if (projects.length === 0) {
       await finishJobRun(runId, 'skipped', { reason: 'no_projects' });
       return;
@@ -271,7 +271,7 @@ export async function runGeoMonitor(triggeredBy: string): Promise<void> {
     const geoCfg = JSON.parse(geoRaw);
 
     for (const project of projects) {
-      const queries = await sql`select * from geo_queries where project_id = ${project.id} and is_active = true limit 10`;
+      const queries = await sql`select * from geo_queries where project_id = ${project.id} and enabled = true limit 10`;
       if (queries.length === 0) continue;
 
       const runRows = await sql`
