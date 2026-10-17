@@ -300,6 +300,14 @@ export async function runGeneration(
 }
 
 /**
+ * jsonb 列经驱动读回可能已经是 JSON 字符串，写入 ::jsonb 时不能再 stringify，否则双重编码
+ */
+function jsonbText(v: unknown): string {
+  if (typeof v === 'string') return v;
+  return JSON.stringify(v ?? {});
+}
+
+/**
  * 发布到期的草稿
  */
 export async function publishDueDrafts(): Promise<{ published: number }> {
@@ -329,15 +337,15 @@ export async function publishDueDrafts(): Promise<{ published: number }> {
           cover_url, supporting_keywords, faq_schema, article_schema,
           locale, status, published_at, source, draft_id
         ) values (
-          ${JSON.stringify(d.title)}::jsonb,
-          ${JSON.stringify(d.excerpt)}::jsonb,
-          ${JSON.stringify(d.content_html)}::jsonb,
-          ${JSON.stringify(d.meta_description)}::jsonb,
+          ${jsonbText(d.title)}::jsonb,
+          ${jsonbText(d.excerpt)}::jsonb,
+          ${jsonbText(d.content_html)}::jsonb,
+          ${jsonbText(d.meta_description)}::jsonb,
           ${d.slug},
           ${d.cover_url},
-          ${d.supporting_keywords},
-          ${JSON.stringify(d.faq_schema)}::jsonb,
-          ${JSON.stringify(d.article_schema)}::jsonb,
+          ${d.supporting_keywords}::text[],
+          ${jsonbText(d.faq_schema)}::jsonb,
+          ${jsonbText(d.article_schema)}::jsonb,
           ${locale},
           'published',
           now(),

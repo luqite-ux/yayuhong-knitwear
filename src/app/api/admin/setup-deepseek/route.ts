@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { setSecret, updateSecretStatus } from '@/lib/secrets';
 import { testLLMConnection, getLLMConfig } from '@/lib/llm';
-import { runBootstrap, runGeneration, getSeoConfig, pickTopic, generateDraft } from '@/lib/seo-pipeline';
+import { runBootstrap, runGeneration, getSeoConfig, pickTopic, generateDraft, publishDueDrafts } from '@/lib/seo-pipeline';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -106,6 +106,29 @@ export async function POST(req: NextRequest) {
     if (action === 'bootstrap') {
       const result = await runBootstrap('deepseek-setup');
       return NextResponse.json({ ok: result.ok, result });
+    }
+
+    if (action === 'repair-publish') {
+      const { sql } = await import('@/lib/db');
+      // 把流水线已发布的文章退回定时队列并删除，修复早期双重 JSON 编码的数据
+      const reset = await sql`
+        update seo_article_drafts
+        set status = 'scheduled', scheduled_at = now(), article_id = null, published_at = null
+        where id in (
+          select draft_id from content_articles
+          where source = 'seo_pipeline' and draft_id is not null
+        )
+        returning id
+      `;
+      const del = await sql`
+        delete from content_articles where source = 'seo_pipeline'
+      `;
+      return NextResponse.json({ ok: true, reset: reset.count, deleted: del.count });
+    }
+
+    if (action === 'publish-now') {
+      const result = await publishDueDrafts();
+      return NextResponse.json({ ok: true, result });
     }
 
     if (action === 'generate') {
