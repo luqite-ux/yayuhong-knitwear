@@ -13,6 +13,7 @@ interface DashboardStats {
     started_at: Date;
     success_count: number | null;
     failure_count: number | null;
+    error: string | null;
   }>;
   secrets: Array<{
     key: string;
@@ -35,7 +36,7 @@ export default async function AdminDashboard() {
   `;
 
   const lastJobs = await sql`
-    select job, status, started_at, success_count, failure_count
+    select job, status, started_at, success_count, failure_count, error
     from job_runs
     order by started_at desc
     limit 10
@@ -143,6 +144,9 @@ export default async function AdminDashboard() {
                   <span className="text-xs text-gray-400 ml-2">
                     {new Date(job.started_at).toLocaleString('zh-CN')}
                   </span>
+                  {job.error && (
+                    <p className="text-xs text-red-400 mt-0.5 max-w-md truncate" title={job.error}>{job.error}</p>
+                  )}
                 </div>
                 <span className={`admin-badge ${
                   job.status === 'success' ? 'admin-badge-green' :
