@@ -198,7 +198,9 @@ export async function runGeneration(
   const llm = await getLLMConfig();
   if (!llm) throw new Error('LLM 未配置');
 
-  const runId = await startJobRun('seo_generate', trigger, triggeredBy);
+  // job_runs.trigger 约束仅允许 cron/manual，bootstrap 属于人工发起
+  const jobTrigger: 'cron' | 'manual' = trigger === 'cron' ? 'cron' : 'manual';
+  const runId = await startJobRun('seo_generate', jobTrigger, triggeredBy);
   let success = 0;
   let failed = 0;
   let totalCost = 0;
@@ -232,7 +234,7 @@ export async function runGeneration(
           ${JSON.stringify({ [locale]: draft.content_html })}::jsonb,
           ${JSON.stringify({ [locale]: draft.meta_description })}::jsonb,
           ${draft.slug},
-          ${draft.supporting_keywords},
+          ${draft.supporting_keywords}::text[],
           ${JSON.stringify(draft.faq_schema)}::jsonb,
           ${JSON.stringify(draft.article_schema)}::jsonb,
           ${JSON.stringify(draft.human_review_flags)}::jsonb,
