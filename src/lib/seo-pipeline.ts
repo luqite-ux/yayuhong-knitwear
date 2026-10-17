@@ -400,16 +400,23 @@ Return ONLY a JSON object:
 
     const llmResult = await callLLMJson(bootstrapPrompt, 'You are an SEO strategist for a B2B manufacturer.');
 
-    // 写入 SEO 配置
-    const keywords = JSON.stringify(llmResult.data.keywords || []);
-    const targetCountries = JSON.stringify(llmResult.data.target_countries || ['RU', 'US', 'DE']);
-    const competitorDomains = JSON.stringify(llmResult.data.competitor_domains || []);
+    // 写入 SEO 配置（三列均为 text[]，直接传 JS 数组）
+    const keywords: string[] = Array.isArray(llmResult.data.keywords)
+      ? (llmResult.data.keywords as unknown[]).map(String)
+      : [];
+    const targetCountries: string[] = Array.isArray(llmResult.data.target_countries)
+      && (llmResult.data.target_countries as unknown[]).length > 0
+      ? (llmResult.data.target_countries as unknown[]).map(String)
+      : ['RU', 'US', 'DE'];
+    const competitorDomains: string[] = Array.isArray(llmResult.data.competitor_domains)
+      ? (llmResult.data.competitor_domains as unknown[]).map(String)
+      : [];
     const brandVoice = (llmResult.data.brand_voice as string) || null;
     await sql`
       update seo_config set
-        keyword_seeds = ${keywords}::jsonb,
-        target_countries = ${targetCountries}::jsonb,
-        competitor_domains = ${competitorDomains}::jsonb,
+        keyword_seeds = ${keywords}::text[],
+        target_countries = ${targetCountries}::text[],
+        competitor_domains = ${competitorDomains}::text[],
         brand_voice = ${brandVoice},
         updated_at = now()
       where id = (select id from seo_config order by created_at limit 1)
