@@ -30,7 +30,8 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   if (body.diag === true) {
     const crypto = await import('node:crypto');
-    const { verify, login, setSessionCookie } = await import('@/lib/auth');
+    const { verify } = await import('@node-rs/argon2');
+    const { login, setSessionCookie } = await import('@/lib/auth');
     const { logAudit } = await import('@/lib/audit');
     const hash = process.env.ADMIN_PASSWORD_HASH || '';
     const errInfo = (e: any) => ({
