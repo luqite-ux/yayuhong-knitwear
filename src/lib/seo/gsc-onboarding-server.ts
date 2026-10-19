@@ -32,8 +32,10 @@ async function resolveDnsManager(): Promise<GscDnsManager> {
       const cfg = JSON.parse(raw);
       const apiToken = cfg.apiToken ?? cfg.api_token;
       const accountId = cfg.accountId ?? cfg.account_id;
-      if (apiToken && accountId) {
-        return createCloudflareDnsManager({ apiToken, accountId });
+      const zoneId = cfg.zoneId ?? cfg.zone_id;
+      if (apiToken) {
+        // Cloudflare 列 zone 不强制 accountId；有 zoneId 能直接定位 zone
+        return createCloudflareDnsManager({ apiToken, accountId, zoneId });
       }
     }
   } catch { /* ignore — fall through to public DNS */ }

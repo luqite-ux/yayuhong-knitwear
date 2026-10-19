@@ -55,7 +55,10 @@ const CLOUDFLARE_REQUEST_TIMEOUT_MS = 15_000;
 
 export interface CloudflareDnsManagerOptions {
   apiToken: string;
-  accountId: string;
+  /** 可选：若提供则只在该账号下找 zone */
+  accountId?: string;
+  /** 可选：若提供则直接用这个 zone，跳过逐级查找 */
+  zoneId?: string;
   fetch?: typeof globalThis.fetch;
   resolveTxt?: ResolveTxt;
   detectProvider?: DetectDnsProvider;
@@ -177,12 +180,21 @@ export function createCloudflareDnsManager(options: CloudflareDnsManagerOptions)
   }
 
   async function findZone(domain: string): Promise<CloudflareZone | null> {
+    // 1) 若直接给了 zoneId，走单 zone 直取
+    if (options.zoneId) {
+      try {
+        return await request<CloudflareZone>(
+          `https://api.cloudflare.com/client/v4/zones/${encodeURIComponent(options.zoneId)}`,
+        );
+      } catch { /* fall through to search */ }
+    }
+    // 2) 逐级向上搜索
     const labels = domain.toLowerCase().split('.').filter(Boolean);
     for (let i = 0; i <= labels.length - 2; i++) {
       const candidate = labels.slice(i).join('.');
       const url = new URL('https://api.cloudflare.com/client/v4/zones');
       url.searchParams.set('name', candidate);
-      url.searchParams.set('account.id', options.accountId);
+      if (options.accountId) url.searchParams.set('account.id', options.accountId);
       const zones = await request<CloudflareZone[]>(url.toString());
       const zone = zones.find((z) => z.name.toLowerCase() === candidate);
       if (zone) return zone;
