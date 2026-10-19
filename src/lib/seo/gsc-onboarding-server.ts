@@ -102,8 +102,10 @@ export async function runGscOnboarding(): Promise<GscOnboardingResult> {
     mergeVerifiedOwners: (input) => verification.mergeVerifiedOwners(input),
     addGscProperty: addScProperty,
     getGscProperty: getScProperty,
-    // 额外 owner：管理员邮箱（GSC 界面登录用）
-    extraOwnerEmail: process.env.ADMIN_EMAIL || null,
+    // extraOwnerEmail：只有真实 Google 账号才能作为 verified owner 加进 Site Verification
+    // ADMIN_EMAIL（如 admin@xiuyuknit.com）通常只是站点邮箱，不是 Google 账号，会被 API 拒绝
+    // 有独立 GOOGLE_OWNER_EMAIL 环境变量才用；否则加 null，后续可在 GSC 界面手动加
+    extraOwnerEmail: process.env.GOOGLE_OWNER_EMAIL || null,
     async saveState(state: GscOnboardingState) {
       try {
         await sql`
