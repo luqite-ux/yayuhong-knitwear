@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireCronSecret } from '@/lib/guard';
 import { syncGsc, syncGa4, runIndexing, runGeoMonitor } from '@/lib/seo-services';
-import { runSiteScan, ensureFaqs } from '@/lib/seo-pipeline';
+import { runSiteScan, ensureFaqs, runMonthlyQuota } from '@/lib/seo-pipeline';
 import { sql } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
@@ -36,6 +36,8 @@ export async function GET(req: NextRequest) {
     { name: 'site_scan', fn: () => runSiteScan('cron') },
     { name: 'geo_monitor', fn: () => runGeoMonitor('cron') },
     { name: 'faq_seed', fn: () => ensureFaqs() },
+    // 本月文章配额补齐（每轮最多 2 篇，防止函数超时）
+    { name: 'monthly_quota', fn: () => runMonthlyQuota('cron_monthly_quota', 2) },
   ];
 
   for (const task of tasks) {

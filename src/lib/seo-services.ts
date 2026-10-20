@@ -5,6 +5,7 @@ import { logAudit } from './audit';
 import { uploadToR2 } from './r2';
 import { getSecret } from './secrets';
 import { pick } from './i18n';
+import { submitIndexNow } from './indexnow';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
@@ -255,6 +256,15 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
       `;
     }
 
+    // === 2.5 IndexNow 推送（Bing / Yandex 秒级收录，单次最多 500 条） ===
+    let indexNowResult: { ok: boolean; submitted: number; error?: string } = { ok: false, submitted: 0 };
+    try {
+      indexNowResult = await submitIndexNow(urls);
+    } catch (err: any) {
+      indexNowResult = { ok: false, submitted: 0, error: err?.message || String(err) };
+      console.warn('[runIndexing] IndexNow 推送失败但继续:', err?.message);
+    }
+
     // === 3. Indexing API 提交（先用，避免 URL Inspection 太慢占了配额） ===
     const { getIndexingClient } = await import('./google');
     const indexingClient = await getIndexingClient();
@@ -356,7 +366,11 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
     }
 
     await recordJobStats(runId, success, failed, 0);
-    await finishJobRun(runId, failed > 0 ? 'partial' : 'success', { success, failed });
+    await finishJobRun(runId, failed > 0 ? 'partial' : 'success', {
+      success,
+      failed,
+      indexnow: indexNowResult,
+    });
   } catch (err: any) {
     await finishJobRun(runId, 'failed', undefined, err.message);
   }

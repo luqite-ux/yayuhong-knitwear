@@ -3,8 +3,11 @@ import { callLLMJson, callLLM, getLLMConfig } from './llm';
 import { pick, WRITING_LOCALE, type Locale } from './i18n';
 import { startJobRun, finishJobRun, recordJobStats } from './jobs';
 import { logAudit } from './audit';
+import { submitIndexNow } from './indexnow';
 import slugify from 'slugify';
 import crypto from 'node:crypto';
+
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com').replace(/\/$/, '');
 
 const STYLES = ['technical', 'buying_guide', 'application', 'trend'] as const;
 type Style = (typeof STYLES)[number];
@@ -300,6 +303,32 @@ export async function runGeneration(
 }
 
 /**
+ * 月度配额补齐：本月草稿数未达 monthly_articles 时补生成（每轮限量，避免函数超时）
+ */
+export async function runMonthlyQuota(
+  triggeredBy: string,
+  maxPerRun = 2,
+): Promise<{ target: number; doneThisMonth: number; generated: number }> {
+  const config = await getSeoConfig();
+  if (!config?.enabled) return { target: 0, doneThisMonth: 0, generated: 0 };
+
+  const target = config.monthly_articles || 0;
+  const [row] = await sql`
+    select count(*)::int as c
+    from seo_article_drafts
+    where created_at >= date_trunc('month', now())
+  `;
+  const doneThisMonth = Number((row as any)?.c || 0);
+  if (target === 0 || doneThisMonth >= target) {
+    return { target, doneThisMonth, generated: 0 };
+  }
+
+  const remaining = Math.min(target - doneThisMonth, Math.max(1, maxPerRun));
+  const result = await runGeneration('cron', triggeredBy, remaining);
+  return { target, doneThisMonth, generated: result.success };
+}
+
+/**
  * jsonb 列经驱动读回可能已经是 JSON 字符串，写入 ::jsonb 时不能再 stringify，否则双重编码
  */
 function jsonbText(v: unknown): string {
@@ -384,6 +413,9 @@ export async function publishDueDrafts(): Promise<{ published: number; promoted:
           on conflict (keyword, country) do nothing
         `;
       }
+
+      // 新文章立即推送 IndexNow（Bing / Yandex 秒级发现）
+      await submitIndexNow([`${SITE_URL}/${locale}/articles/${d.slug}`]);
 
       published++;
     } catch (err: any) {
