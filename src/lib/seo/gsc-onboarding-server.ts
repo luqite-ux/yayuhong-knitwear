@@ -107,60 +107,28 @@ export async function runGscOnboarding(): Promise<GscOnboardingResult> {
     // 有独立 GOOGLE_OWNER_EMAIL 环境变量才用；否则加 null，后续可在 GSC 界面手动加
     extraOwnerEmail: process.env.GOOGLE_OWNER_EMAIL || null,
     async saveState(state: GscOnboardingState) {
-      // 同时写旧列 status/txt_name/txt_value/cloudflare_record_id（被 gsc_sync cron 和 gsc 页面依赖），
-      // 以及新列（如果 schema 里已经补了的话）。新列缺失不会抛错。
+      // status/txt_name/txt_value/verified_at 是 seo_gsc_properties 的既有列，
+      // 被 gsc_sync cron 和 /admin/gsc 页面依赖。
       const legacyStatus =
         state.status === 'verified' ? 'verified' :
         state.status === 'failed' ? 'failed' :
         state.status === 'pending_verification' ? 'pending_verification' : 'pending_dns';
-      try {
-        await sql`
-          insert into seo_gsc_properties (
-            property, status, txt_name, txt_value, verified_at, created_at, updated_at
-          ) values (
-            ${state.propertyUrl}, ${legacyStatus}, 'google-site-verification',
-            ${state.verificationToken ?? null},
-            ${state.status === 'verified' ? new Date() : null},
-            now(), now()
-          )
-          on conflict (property) do update set
-            status = excluded.status,
-            txt_name = excluded.txt_name,
-            txt_value = excluded.txt_value,
-            verified_at = coalesce(excluded.verified_at, seo_gsc_properties.verified_at),
-            updated_at = now()
-        `;
-      } catch (err) {
-        console.error('[gsc-onboarding] saveState legacy 列失败:', err);
-      }
-      // 新列（需要 ALTER TABLE 先补；否则静默跳过）
-      try {
-        await sql`
-          insert into seo_gsc_properties (
-            property, property_type, verification_token, onboarding_status,
-            dns_provider, verified_at, last_onboarding_attempt_at, onboarding_error,
-            permission_level, permission_error, permission_checked_at
-          ) values (
-            ${state.propertyUrl}, 'domain', ${state.verificationToken ?? null}, ${state.status},
-            ${state.dnsProvider ?? null}, ${state.status === 'verified' ? new Date() : null},
-            now(), ${state.error ?? null},
-            ${state.permissionLevel ?? null}, ${state.permissionError ?? null},
-            ${state.permissionLevel !== undefined ? new Date() : null}
-          )
-          on conflict (property) do update set
-            verification_token = excluded.verification_token,
-            onboarding_status = excluded.onboarding_status,
-            dns_provider = excluded.dns_provider,
-            verified_at = coalesce(excluded.verified_at, seo_gsc_properties.verified_at),
-            last_onboarding_attempt_at = excluded.last_onboarding_attempt_at,
-            onboarding_error = excluded.onboarding_error,
-            permission_level = excluded.permission_level,
-            permission_error = excluded.permission_error,
-            permission_checked_at = excluded.permission_checked_at
-        `;
-      } catch (err) {
-        console.error('[gsc-onboarding] saveState 新列失败（schema 未补）:', err);
-      }
+      await sql`
+        insert into seo_gsc_properties (
+          property, status, txt_name, txt_value, verified_at, created_at, updated_at
+        ) values (
+          ${state.propertyUrl}, ${legacyStatus}, 'google-site-verification',
+          ${state.verificationToken ?? null},
+          ${state.status === 'verified' ? new Date() : null},
+          now(), now()
+        )
+        on conflict (property) do update set
+          status = excluded.status,
+          txt_name = excluded.txt_name,
+          txt_value = excluded.txt_value,
+          verified_at = coalesce(excluded.verified_at, seo_gsc_properties.verified_at),
+          updated_at = now()
+      `;
     },
   });
 
