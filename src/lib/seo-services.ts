@@ -214,7 +214,7 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
       const toSubmit = await sql`
         select url from seo_indexed_urls
         where in_sitemap = true
-          and (request_count < 50)
+          and coalesce(request_count, 0) < 50
           and (last_index_request_at is null or last_index_request_at < now() - interval '24 hours')
         limit 10
       `;
