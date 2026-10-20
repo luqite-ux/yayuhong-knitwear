@@ -174,6 +174,26 @@ Return ONLY a JSON object (no markdown, no code blocks) with these exact keys:
 }
 
 /**
+ * 保证 slug 唯一：LLM 生成的是标题 slug，可能与已有文章/草稿撞车，
+ * 撞车后发布阶段会被 rejected，这里提前加序号后缀避免浪费一次生成。
+ */
+async function ensureUniqueSlug(base: string): Promise<string> {
+  const root = slugify(base, { lower: true, strict: true }) || `article-${Date.now()}`;
+  let candidate = root;
+  for (let n = 2; n <= 30; n++) {
+    const [row] = await sql`
+      select
+        (select count(*)::int from content_articles where slug = ${candidate}) +
+        (select count(*)::int from seo_article_drafts
+           where slug = ${candidate} and status <> 'rejected') as c
+    `;
+    if (Number((row as any).c) === 0) return candidate;
+    candidate = `${root}-${n}`;
+  }
+  return `${root}-${Date.now()}`;
+}
+
+/**
  * 为草稿选择封面（真实产品图）
  */
 async function pickCover(draft: ArticleDraft): Promise<{ coverUrl: string | null; productId: string | null; missing: boolean }> {
@@ -252,7 +272,8 @@ export async function runGeneration(
           finished_at = now()
       `;
 
-      // 写入草稿
+      // 写入草稿（slug 去重，避免发布阶段撞车被 rejected）
+      const slug = await ensureUniqueSlug(draft.slug || draft.title);
       const draftRows = await sql`
         insert into seo_article_drafts (
           run_id, style, title, excerpt, content_html, meta_description,
@@ -264,7 +285,7 @@ export async function runGeneration(
           ${JSON.stringify({ [locale]: draft.excerpt })}::jsonb,
           ${JSON.stringify({ [locale]: draft.content_html })}::jsonb,
           ${JSON.stringify({ [locale]: draft.meta_description })}::jsonb,
-          ${draft.slug},
+          ${slug},
           ${draft.supporting_keywords}::text[],
           ${JSON.stringify(draft.faq_schema)}::jsonb,
           ${JSON.stringify(draft.article_schema)}::jsonb,
@@ -313,10 +334,11 @@ export async function runMonthlyQuota(
   if (!config?.enabled) return { target: 0, doneThisMonth: 0, generated: 0 };
 
   const target = config.monthly_articles || 0;
+  // 只统计有效草稿（rejected 不计入配额，否则被拒的文章会永久拉低本月产量）
   const [row] = await sql`
     select count(*)::int as c
     from seo_article_drafts
-    where created_at >= date_trunc('month', now())
+    where created_at >= date_trunc('month', now()) and status <> 'rejected'
   `;
   const doneThisMonth = Number((row as any)?.c || 0);
   if (target === 0 || doneThisMonth >= target) {
