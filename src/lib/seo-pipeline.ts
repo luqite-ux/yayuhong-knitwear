@@ -278,8 +278,8 @@ export async function runGeneration(
       totalCost += cost;
       success++;
 
-      // 如果自动模式 + 无待审标记 + 有封面 → 安排发布
-      if (config.publish_mode === 'auto' && draft.human_review_flags.length === 0 && !cover.missing) {
+      // 自动模式：一律安排发布（人工复核标记只记录，不阻塞）
+      if (config.publish_mode === 'auto') {
         await sql`
           update seo_article_drafts
           set status = 'scheduled', scheduled_at = ${new Date(Date.now() + 5 * 60 * 1000)}
@@ -310,7 +310,23 @@ function jsonbText(v: unknown): string {
 /**
  * 发布到期的草稿
  */
-export async function publishDueDrafts(): Promise<{ published: number }> {
+export async function publishDueDrafts(): Promise<{ published: number; promoted: number }> {
+  // 自动模式下，先把存量 pending_review 草稿转为待发布（幂等）
+  const config = await getSeoConfig();
+  let promoted = 0;
+  if (config?.publish_mode === 'auto') {
+    const rows = await sql`
+      update seo_article_drafts
+      set status = 'scheduled', scheduled_at = now()
+      where status = 'pending_review'
+      returning id
+    `;
+    promoted = rows.length;
+    if (promoted > 0) {
+      await logAudit('cron', 'drafts_auto_promoted', 'seo_article_drafts', { promoted });
+    }
+  }
+
   const due = await sql`
     select d.id, d.slug, d.title, d.excerpt, d.content_html, d.meta_description,
            d.supporting_keywords, d.faq_schema, d.article_schema, d.cover_url,
@@ -375,7 +391,7 @@ export async function publishDueDrafts(): Promise<{ published: number }> {
     }
   }
 
-  return { published };
+  return { published, promoted };
 }
 
 /**
@@ -527,4 +543,55 @@ export async function runSiteScan(triggeredBy: string): Promise<void> {
   } catch (err: any) {
     await finishJobRun(runId, 'failed', undefined, err.message);
   }
+}
+
+/**
+ * 取 jsonb 文本字段的英文值（驱动可能返回字符串或对象）
+ */
+function jsonbEn(v: unknown): string {
+  let parsed: unknown = v;
+  if (typeof parsed === 'string') {
+    try {
+      parsed = JSON.parse(parsed);
+    } catch {
+      return String(parsed).toLowerCase();
+    }
+  }
+  if (parsed && typeof parsed === 'object') {
+    return String((parsed as Record<string, string>).en || '').toLowerCase();
+  }
+  return '';
+}
+
+/**
+ * 自动补齐站点 FAQ 内容（幂等：按英文问题去重）
+ */
+export async function ensureFaqs(): Promise<{ created: number; total: number }> {
+  const { faqSeed } = await import('./cms-seed');
+  const existing = await sql`select question from content_faqs`;
+  const seen = new Set(existing.map((r: any) => jsonbEn(r.question)).filter(Boolean));
+
+  let created = 0;
+  for (const faq of faqSeed) {
+    const key = faq.question.en.toLowerCase();
+    if (seen.has(key)) continue;
+    await sql`
+      insert into content_faqs (question, answer, category, sort, is_active, sites)
+      values (
+        ${JSON.stringify(faq.question)}::jsonb,
+        ${JSON.stringify(faq.answer)}::jsonb,
+        ${faq.category},
+        ${faq.sort},
+        true,
+        ${['global']}::text[]
+      )
+    `;
+    seen.add(key);
+    created++;
+  }
+
+  if (created > 0) {
+    await logAudit('cron', 'faqs_auto_seeded', 'content_faqs', { created, total: faqSeed.length });
+  }
+  return { created, total: faqSeed.length };
 }

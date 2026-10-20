@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireCronSecret } from '@/lib/guard';
 import { syncGsc, syncGa4, runIndexing, runGeoMonitor } from '@/lib/seo-services';
-import { runSiteScan } from '@/lib/seo-pipeline';
+import { runSiteScan, ensureFaqs } from '@/lib/seo-pipeline';
 import { sql } from '@/lib/db';
+
+export const dynamic = 'force-dynamic';
+export const maxDuration = 300;
 
 export async function GET(req: NextRequest) {
   if (!requireCronSecret(req)) {
@@ -32,6 +35,7 @@ export async function GET(req: NextRequest) {
     { name: 'indexing', fn: () => runIndexing('cron') },
     { name: 'site_scan', fn: () => runSiteScan('cron') },
     { name: 'geo_monitor', fn: () => runGeoMonitor('cron') },
+    { name: 'faq_seed', fn: () => ensureFaqs() },
   ];
 
   for (const task of tasks) {

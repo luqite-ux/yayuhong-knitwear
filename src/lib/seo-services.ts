@@ -4,11 +4,67 @@ import { startJobRun, finishJobRun, recordJobStats } from './jobs';
 import { logAudit } from './audit';
 import { uploadToR2 } from './r2';
 import { getSecret } from './secrets';
+import { pick } from './i18n';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
 /**
- * GSC 同步：过去 3 天的搜索分析数据
+ * 自动向 GSC 提交 sitemap（幂等：7 天内不重复提交）
+ */
+export async function ensureSitemapSubmitted(
+  property: string,
+): Promise<{ submitted: boolean; status: string; error?: string }> {
+  const sitemapUrl = `${SITE_URL.replace(/\/$/, '')}/sitemap.xml`;
+
+  const props = await sql`
+    select status, sitemap_submitted_at from seo_gsc_properties where property = ${property} limit 1
+  `;
+  const prop = props[0] as { status?: string; sitemap_submitted_at?: string | null } | undefined;
+  if (!prop || prop.status !== 'verified') return { submitted: false, status: 'not_verified' };
+
+  if (prop.sitemap_submitted_at) {
+    const age = Date.now() - new Date(prop.sitemap_submitted_at).getTime();
+    if (age < 7 * 24 * 60 * 60 * 1000) return { submitted: false, status: 'already_submitted' };
+  }
+
+  const token = await getGoogleAccessToken();
+  const endpoint =
+    `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(property)}` +
+    `/sitemaps/${encodeURIComponent(sitemapUrl)}`;
+
+  const res = await fetch(endpoint, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}` },
+    signal: AbortSignal.timeout(30000),
+  });
+  const body = await res.text().catch(() => '');
+
+  if (!res.ok) {
+    const error = `HTTP ${res.status}: ${body.slice(0, 300)}`;
+    await sql`
+      insert into seo_sitemap_submissions (sitemap_url, status, response)
+      values (${sitemapUrl}, 'failed', ${error})
+    `;
+    await sql`
+      update seo_gsc_properties set last_error = ${error}, updated_at = now() where property = ${property}
+    `;
+    return { submitted: false, status: 'failed', error };
+  }
+
+  await sql`
+    insert into seo_sitemap_submissions (sitemap_url, status, response)
+    values (${sitemapUrl}, 'submitted', ${body.slice(0, 500) || 'OK'})
+  `;
+  await sql`
+    update seo_gsc_properties
+    set sitemap_submitted_at = now(), last_error = null, updated_at = now()
+    where property = ${property}
+  `;
+  return { submitted: true, status: 'submitted' };
+}
+
+/**
+ * GSC 同步：sitemap 自动提交 + 过去 3 天的搜索分析数据
  */
 export async function syncGsc(triggeredBy: string): Promise<void> {
   const runId = await startJobRun('gsc_sync', 'cron', triggeredBy);
@@ -23,6 +79,17 @@ export async function syncGsc(triggeredBy: string): Promise<void> {
     }
 
     const property = `sc-domain:${new URL(SITE_URL).hostname}`;
+
+    // === 1. 自动提交 sitemap（先做，避免搜索数据为空时提前抛错阻断） ===
+    let sitemapStatus = 'skipped';
+    try {
+      const sitemapResult = await ensureSitemapSubmitted(property);
+      sitemapStatus = sitemapResult.status;
+    } catch (err: any) {
+      sitemapStatus = `error: ${err.message || String(err)}`;
+      console.warn('[syncGsc] sitemap 提交失败但继续同步数据:', err?.message);
+    }
+
     const endDate = new Date();
     const startDate = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
 
@@ -88,7 +155,7 @@ export async function syncGsc(triggeredBy: string): Promise<void> {
 
     await sql`update seo_gsc_properties set last_sync_at = now() where property = ${property}`;
     await recordJobStats(runId, success, failed, 0);
-    await finishJobRun(runId, 'success', { synced: success });
+    await finishJobRun(runId, 'success', { synced: success, sitemap: sitemapStatus });
   } catch (err: any) {
     await sql`update seo_gsc_properties set last_error = ${err.message} where property = ${`sc-domain:${new URL(SITE_URL).hostname}`}`;
     await finishJobRun(runId, 'failed', undefined, err.message);
@@ -298,6 +365,85 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
 /**
  * GEO 监测
  */
+
+/** 按产品词生成 AI 引擎提问的模板 */
+const GEO_QUERY_TEMPLATES: Array<(product: string) => string> = [
+  (p) => `best ${p} manufacturer in China`,
+  (p) => `top ${p} suppliers for wholesale orders`,
+  (p) => `which factory makes the best custom ${p}`,
+  (p) => `${p} manufacturer with low MOQ and fast sampling`,
+  (p) => `where to buy ${p} in bulk from a verified factory`,
+];
+
+/** GEO 问题总量上限（避免每日成本失控） */
+const GEO_MAX_TOTAL_QUERIES = 40;
+/** 每轮最多检查的问题数（轮换取样） */
+const GEO_QUERIES_PER_RUN = 10;
+
+/**
+ * 自动创建 GEO 项目 + 按产品词生成监测问题（幂等，可重复调用）
+ */
+export async function ensureGeoSetup(): Promise<{ projectId: string; createdQueries: number; totalQueries: number }> {
+  const host = new URL(SITE_URL).hostname;
+
+  let project = (
+    await sql`select id, brand_name, domain from geo_projects where domain = ${host} order by created_at limit 1`
+  )[0] as { id: string; brand_name: string; domain: string } | undefined;
+
+  if (!project) {
+    const profile = await sql`select company_name from site_profile order by created_at limit 1`;
+    const brandName = (profile[0]?.company_name as string) || 'Yayuhong Knitwear';
+    project = (
+      await sql`
+        insert into geo_projects (brand_name, domain, engines, monthly_budget_usd, enabled)
+        values (${brandName}, ${host}, ${['openai']}::text[], ${10}, true)
+        returning id, brand_name, domain
+      `
+    )[0] as { id: string; brand_name: string; domain: string };
+  }
+
+  const existing = await sql`select question from geo_queries where project_id = ${project.id}`;
+  const seen = new Set(existing.map((r: any) => String(r.question).toLowerCase()));
+
+  // 从在用产品提取产品词（按名称去重）
+  const products = await sql`select name from content_products where is_active = true order by sort, created_at`;
+  const productWords: string[] = [];
+  for (const p of products) {
+    const name = pick(p.name as Record<string, string>, 'en').trim();
+    if (name && !productWords.includes(name)) productWords.push(name);
+  }
+
+  const candidates: string[] = productWords.map((word, i) =>
+    GEO_QUERY_TEMPLATES[i % GEO_QUERY_TEMPLATES.length](word),
+  );
+  candidates.push(
+    `${project.brand_name} knitwear factory review`,
+    `is ${host} a reliable knitwear supplier`,
+    `best OEM knitwear manufacturer in China with low MOQ`,
+    `custom sweater manufacturer for small brands`,
+  );
+
+  let total = existing.length;
+  let created = 0;
+  for (const question of candidates) {
+    if (total >= GEO_MAX_TOTAL_QUERIES) break;
+    const key = question.toLowerCase();
+    if (seen.has(key)) continue;
+    await sql`
+      insert into geo_queries (project_id, question, enabled)
+      select ${project.id}, ${question}, true
+      where not exists (
+        select 1 from geo_queries where project_id = ${project.id} and lower(question) = ${key}
+      )
+    `;
+    seen.add(key);
+    total++;
+    created++;
+  }
+
+  return { projectId: project.id, createdQueries: created, totalQueries: total };
+}
+
 export async function runGeoMonitor(triggeredBy: string): Promise<void> {
   const runId = await startJobRun('geo_monitor', 'cron', triggeredBy);
   let success = 0;
@@ -305,38 +451,48 @@ export async function runGeoMonitor(triggeredBy: string): Promise<void> {
   let totalCost = 0;
 
   try {
-    const projects = await sql`select * from geo_projects where enabled = true`;
-    if (projects.length === 0) {
-      await finishJobRun(runId, 'skipped', { reason: 'no_projects' });
-      return;
-    }
+    // === 自动建项目 + 按产品词生成问题 ===
+    const setup = await ensureGeoSetup();
 
+    const projects = await sql`select id, brand_name, domain from geo_projects where enabled = true`;
+
+    // === 引擎配置：优先 geo_engine，缺失时复用已配置的 LLM（全自动，无需额外密钥） ===
+    let geoCfg: { engine: string; apiKey?: string } = { engine: 'openai' };
     const geoRaw = await getSecret('geo_engine');
-    if (!geoRaw) {
-      await finishJobRun(runId, 'skipped', { reason: 'geo_engine_not_configured' });
-      return;
+    if (geoRaw) {
+      try {
+        geoCfg = { ...geoCfg, ...(JSON.parse(geoRaw) as Record<string, string>) };
+      } catch {
+        geoCfg = { engine: 'openai' };
+      }
     }
-    const geoCfg = JSON.parse(geoRaw);
 
     for (const project of projects) {
-      const queries = await sql`select * from geo_queries where project_id = ${project.id} and enabled = true limit 10`;
+      const queries = await sql`
+        select id, question from geo_queries
+        where project_id = ${project.id} and enabled = true
+        order by random() limit ${GEO_QUERIES_PER_RUN}
+      `;
       if (queries.length === 0) continue;
 
       const runRows = await sql`
-        insert into geo_monitor_runs (project_id, total_queries, started_at)
-        values (${project.id}, ${queries.length}, now())
+        insert into geo_monitor_runs (project_id, trigger, engine_count, query_count, status, started_at)
+        values (${project.id}, 'cron', 1, ${queries.length}, 'running', now())
         returning id
       `;
       const monitorRunId = runRows[0].id;
 
+      let projectSuccess = 0;
+      let projectFailed = 0;
+      let projectCost = 0;
+
       for (const query of queries) {
+        const question = String((query as any).question);
         try {
           let answer = '';
-          let mentioned = false;
-          let position: number | null = null;
           let cost = 0;
 
-          if (geoCfg.engine === 'perplexity') {
+          if (geoCfg.engine === 'perplexity' && geoCfg.apiKey) {
             const res = await fetch('https://api.perplexity.ai/chat/completions', {
               method: 'POST',
               headers: {
@@ -345,42 +501,65 @@ export async function runGeoMonitor(triggeredBy: string): Promise<void> {
               },
               body: JSON.stringify({
                 model: 'sonar',
-                messages: [{ role: 'user', content: query.query_text }],
+                messages: [{ role: 'user', content: question }],
                 max_tokens: 500,
               }),
               signal: AbortSignal.timeout(30000),
             });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const data = await res.json();
+            const data: any = await res.json();
             answer = data.choices?.[0]?.message?.content || '';
             cost = 0.005; // 估算
-            mentioned = answer.toLowerCase().includes(project.domain?.toLowerCase() || new URL(SITE_URL).hostname);
-          } else if (geoCfg.engine === 'openai') {
+          } else {
             const { getLLMConfig, callLLM } = await import('./llm');
             const llmCfg = await getLLMConfig();
-            if (!llmCfg) continue;
-            const res = await callLLM(query.query_text);
+            if (!llmCfg) throw new Error('LLM 未配置');
+            const res = await callLLM(question);
             answer = res.content;
             cost = (res.promptTokens * 2.5 + res.completionTokens * 10) / 1_000_000;
-            mentioned = answer.toLowerCase().includes(project.domain?.toLowerCase() || new URL(SITE_URL).hostname);
           }
 
+          const brand = String(project.brand_name || '').toLowerCase();
+          const domain = String(project.domain || '').toLowerCase();
+          const lower = answer.toLowerCase();
+          const mentioned = (!!domain && lower.includes(domain)) || (!!brand && lower.includes(brand));
+
           await sql`
-            insert into geo_monitor_results (run_id, query_id, engine, mentioned, position, answer_excerpt, cost_usd)
-            values (${monitorRunId}, ${query.id}, ${geoCfg.engine}, ${mentioned}, ${position}, ${answer.slice(0, 500)}, ${cost})
+            insert into geo_monitor_results (run_id, query_id, engine, mentioned, position, answer_excerpt, cost_usd, raw)
+            values (${monitorRunId}, ${query.id}, ${geoCfg.engine}, ${mentioned}, null,
+                    ${answer.slice(0, 500)}, ${cost}, ${JSON.stringify({ question })}::jsonb)
           `;
-          totalCost += cost;
-          success++;
+          projectCost += cost;
+          projectSuccess++;
         } catch (err: any) {
-          failed++;
+          projectFailed++;
+          await sql`
+            update geo_monitor_runs set error = ${err?.message || String(err)} where id = ${monitorRunId}
+          `;
         }
       }
 
-      await sql`update geo_monitor_runs set finished_at = now(), succeeded = ${success}, failed = ${failed} where id = ${monitorRunId}`;
+      await sql`
+        update geo_monitor_runs
+        set finished_at = now(),
+            status = ${projectFailed > 0 ? (projectSuccess > 0 ? 'partial' : 'failed') : 'success'},
+            cost_usd = ${projectCost}
+        where id = ${monitorRunId}
+      `;
+
+      totalCost += projectCost;
+      success += projectSuccess;
+      failed += projectFailed;
     }
 
     await recordJobStats(runId, success, failed, totalCost);
-    await finishJobRun(runId, failed > 0 ? 'partial' : 'success', { checked: success, cost: totalCost });
+    await finishJobRun(runId, failed > 0 ? 'partial' : 'success', {
+      checked: success,
+      failed,
+      cost: totalCost,
+      queries_total: setup.totalQueries,
+      queries_created: setup.createdQueries,
+    });
   } catch (err: any) {
     await finishJobRun(runId, 'failed', undefined, err.message);
   }
