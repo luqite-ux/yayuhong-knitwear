@@ -11,9 +11,9 @@ export function getIndexNowKey(): string {
   return crypto.createHash('sha256').update(`indexnow:${SITE_URL}`).digest('hex').slice(0, 32);
 }
 
-/** 让搜索引擎校验收 key 文件的位置（由 /api/indexnow/key 提供） */
+/** 让搜索引擎校验收 key 文件的位置（根目录静态文件，兼容 Bing/Yandex 严格校验） */
 export function getIndexNowKeyLocation(): string {
-  return `${SITE_URL}/api/indexnow/key`;
+  return `${SITE_URL}/${getIndexNowKey()}.txt`;
 }
 
 /**
