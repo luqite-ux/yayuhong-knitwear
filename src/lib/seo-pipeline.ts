@@ -272,8 +272,9 @@ export async function runGeneration(
           finished_at = now()
       `;
 
-      // 写入草稿（slug 去重，避免发布阶段撞车被 rejected）
-      const slug = await ensureUniqueSlug(draft.slug || draft.title);
+      // 写入草稿：slug 由「关键词 + 风格」推导，与 isTopicUsed 的去重键完全一致，
+      // 避免选题重复（同一关键词反复出同风格文章）和发布阶段撞车被 rejected
+      const slug = await ensureUniqueSlug(`${topic.keyword}-${topic.style}`);
       const draftRows = await sql`
         insert into seo_article_drafts (
           run_id, style, title, excerpt, content_html, meta_description,
