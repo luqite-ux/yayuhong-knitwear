@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
 
     const lastRuns = await sql`
       select job, status, trigger, success_count, failure_count, error,
-             started_at, finished_at
+             summary, started_at, finished_at
       from job_runs order by started_at desc limit 20
     `;
 

@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireCronSecret } from '@/lib/guard';
 import { runGeneration } from '@/lib/seo-pipeline';
 
+export const dynamic = 'force-dynamic';
+export const maxDuration = 300;
+
 export async function GET(req: NextRequest) {
   if (!requireCronSecret(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
