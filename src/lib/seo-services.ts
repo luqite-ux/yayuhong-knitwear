@@ -1,5 +1,5 @@
 import { sql } from './db';
-import { getSearchConsoleClient, getGa4PropertyId, getGa4MeasurementId } from './google';
+import { getSearchConsoleClient, getGa4PropertyId, getGa4MeasurementId, getGoogleAccessToken, enableGoogleService } from './google';
 import { startJobRun, finishJobRun, recordJobStats } from './jobs';
 import { logAudit } from './audit';
 import { uploadToR2 } from './r2';
@@ -154,6 +154,7 @@ export async function syncGa4(triggeredBy: string): Promise<void> {
 
 /**
  * 收录管理：sitemap 抓取 + URL Inspection + Indexing API
+ * 自修复：开头先确保 Indexing API 已启用
  */
 export async function runIndexing(triggeredBy: string): Promise<void> {
   const runId = await startJobRun('indexing', 'cron', triggeredBy);
@@ -161,13 +162,23 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
   let failed = 0;
 
   try {
-    // 1. 抓取 sitemap 获取 URL
+    // === 自修复：确保 Indexing API 已启用（被禁用了就自动重开） ===
+    try {
+      const { enabled } = await enableGoogleService('indexing.googleapis.com');
+      if (!enabled) {
+        console.error('[runIndexing] Indexing API 无法启用，跳过');
+      }
+    } catch (err: any) {
+      console.warn('[runIndexing] enableGoogleService 调用失败但继续尝试:', err?.message);
+    }
+
+    // === 1. 抓取 sitemap 获取 URL ===
     const res = await fetch(`${SITE_URL}/sitemap.xml`, { signal: AbortSignal.timeout(15000) });
     if (!res.ok) throw new Error(`Sitemap fetch failed: ${res.status}`);
     const xml = await res.text();
     const urls = xml.match(/<loc>(.*?)<\/loc>/g)?.map((m) => m.replace(/<\/?loc>/g, '')) || [];
 
-    // 2. 更新 URL 表
+    // === 2. 更新 URL 表 ===
     for (const url of urls) {
       const urlType = url.includes('/products') ? 'product' : url.includes('/articles') ? 'article' : url.endsWith('/sitemap.xml') ? 'other' : 'home';
       await sql`
@@ -177,40 +188,18 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
       `;
     }
 
-    // 3. URL Inspection（抽样 10 个未检测的）
+    // === 3. Indexing API 提交（先用，避免 URL Inspection 太慢占了配额） ===
     const { getIndexingClient } = await import('./google');
     const indexingClient = await getIndexingClient();
+
+    // 先清掉上次 cron 留下的"not been used"错误（API 已启用后需要重试）
+    await sql`
+      update seo_indexed_urls
+      set last_index_request_at = null, request_count = 0, last_error = null
+      where last_error like '%not been used%' or last_error like '%is disabled%'
+    `;
+
     if (indexingClient) {
-      const toInspect = await sql`
-        select url from seo_indexed_urls
-        where last_inspected_at is null and url_type != 'other'
-        limit 10
-      `;
-
-      for (const { url } of toInspect) {
-        try {
-          const inspectRes: any = await (indexingClient as any).urlInspection.index.inspect({
-            requestBody: {
-              inspectionUrl: url,
-              siteUrl: `sc-domain:${new URL(SITE_URL).hostname}`,
-            },
-          });
-          const result = inspectRes.data.inspectionResult;
-          const indexStatus = result?.indexStatusResult;
-          await sql`
-            update seo_indexed_urls set
-              inspection_status = ${indexStatus?.coverageState || 'UNKNOWN'},
-              coverage_state = ${indexStatus?.coverageState || null},
-              last_inspected_at = now()
-            where url = ${url}
-          `;
-          success++;
-        } catch {
-          failed++;
-        }
-      }
-
-      // 4. Indexing API 提交（限额 50/站/天）
       const toSubmit = await sql`
         select url from seo_indexed_urls
         where in_sitemap = true
@@ -227,21 +216,80 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
           await sql`
             update seo_indexed_urls set
               last_index_request_at = now(),
-              request_count = coalesce(request_count, 0) + 1
+              request_count = coalesce(request_count, 0) + 1,
+              last_error = null
             where url = ${url}
           `;
           success++;
         } catch (err: any) {
           await sql`
-            update seo_indexed_urls set last_error = ${err.message} where url = ${url}
+            update seo_indexed_urls set last_error = ${err.message || String(err)} where url = ${url}
           `;
           failed++;
+        }
+      }
+
+      // === 4. URL Inspection（独立 REST API，用 webmasters scope token） ===
+      const toInspect = await sql`
+        select url from seo_indexed_urls
+        where last_inspected_at is null and url_type != 'other'
+        order by url limit 10
+      `;
+
+      if (toInspect.length > 0) {
+        const token = await getGoogleAccessToken();
+        const domain = new URL(SITE_URL).hostname;
+
+        for (const { url } of toInspect) {
+          try {
+            const inspectRes = await fetch(
+              `https://searchconsole.googleapis.com/v1/urlInspection/index:inspect`,
+              {
+                method: 'POST',
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  inspectionUrl: url,
+                  siteUrl: `sc-domain:${domain}`,
+                }),
+                signal: AbortSignal.timeout(30000),
+              },
+            );
+
+            if (!inspectRes.ok) {
+              const body = await inspectRes.text().catch(() => '');
+              throw new Error(`HTTP ${inspectRes.status}: ${body.slice(0, 200)}`);
+            }
+
+            const data: any = await inspectRes.json();
+            const coverageState = data.inspectionResult?.indexStatusResult?.coverageState || null;
+            const verdict = data.inspectionResult?.indexStatusResult?.verdict || null;
+
+            await sql`
+              update seo_indexed_urls set
+                inspection_status = ${verdict || coverageState || 'UNKNOWN'},
+                coverage_state = ${coverageState},
+                last_inspected_at = now()
+              where url = ${url}
+            `;
+            success++;
+          } catch (err: any) {
+            await sql`
+              update seo_indexed_urls set
+                last_error = ${err.message || String(err)},
+                last_inspected_at = now()
+              where url = ${url}
+            `;
+            failed++;
+          }
         }
       }
     }
 
     await recordJobStats(runId, success, failed, 0);
-    await finishJobRun(runId, failed > 0 ? 'partial' : 'success', { inspected: success });
+    await finishJobRun(runId, failed > 0 ? 'partial' : 'success', { success, failed });
   } catch (err: any) {
     await finishJobRun(runId, 'failed', undefined, err.message);
   }
