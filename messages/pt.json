@@ -9,7 +9,14 @@
                 "factory":  "Fábrica",
                 "services":  "Serviços",
                 "contact":  "Contato",
-                "getQuote":  "Solicitar Orçamento"
+                "getQuote":  "Solicitar Orçamento",
+                "faq":  "FAQ"
+            },
+    "faq":  {
+                "subtitle":  "FAQ",
+                "title":  "Perguntas frequentes",
+                "description":  "Encontre respostas sobre cooperação, produção, entrega e muito mais",
+                "empty":  "Ainda não há FAQs. Entre em contato se tiver dúvidas."
             },
     "hero":  {
                  "badge":  "20 Anos · Fábrica Direta · Pequenas quantidades, entrega rápida",

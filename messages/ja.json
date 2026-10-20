@@ -9,7 +9,14 @@
                 "factory":  "工場",
                 "services":  "サービス",
                 "contact":  "お問合せ",
-                "getQuote":  "見積依頼"
+                "getQuote":  "見積依頼",
+                "faq":  "FAQ"
+            },
+    "faq":  {
+                "subtitle":  "FAQ",
+                "title":  "よくあるご質問",
+                "description":  "提携、生産、納品などに関する回答をご覧いただけます",
+                "empty":  "FAQはまだありません。ご質問があればお問い合わせください。"
             },
     "hero":  {
                  "badge":  "20年 · 直営工場 · 小ロット・短納期",

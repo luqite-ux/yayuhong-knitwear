@@ -9,7 +9,14 @@
                 "factory":  "Usine",
                 "services":  "Services",
                 "contact":  "Contact",
-                "getQuote":  "Demander un devis"
+                "getQuote":  "Demander un devis",
+                "faq":  "FAQ"
+            },
+    "faq":  {
+                "subtitle":  "FAQ",
+                "title":  "Questions fréquentes",
+                "description":  "Trouvez des réponses sur la coopération, la production, la livraison et plus encore",
+                "empty":  "Aucune FAQ pour le moment. Contactez-nous si vous avez des questions."
             },
     "hero":  {
                  "badge":  "20 Ans · Usine Directe · Petites quantités, livraison rapide",

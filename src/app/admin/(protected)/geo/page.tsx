@@ -6,13 +6,13 @@ export default async function GeoPage() {
   const [projects, results, keywords] = await Promise.all([
     sql`select * from geo_projects order by created_at`,
     sql`
-      select r.query_id, q.query_text, r.engine, r.mentioned, r.position,
-             r.answer_excerpt, r.cost_usd, r.checked_at, r.cited_urls
+      select r.query_id, q.question as query_text, r.engine, r.mentioned, r.position,
+             r.answer_excerpt, r.cost_usd, r.created_at as checked_at, r.cited_urls
       from geo_monitor_results r
       join geo_queries q on r.query_id = q.id
-      order by r.checked_at desc limit 30
+      order by r.created_at desc limit 30
     `,
-    sql`select count(*)::text as total, count(*) filter (where is_active)::text as active from geo_queries`,
+    sql`select count(*)::text as total, count(*) filter (where enabled)::text as active from geo_queries`,
   ]);
 
   return (
@@ -42,7 +42,7 @@ export default async function GeoPage() {
         ) : projects.map((p) => (
           <div key={p.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
             <div>
-              <span className="text-sm font-medium text-gray-700">{p.name}</span>
+              <span className="text-sm font-medium text-gray-700">{p.brand_name}</span>
               <span className="text-xs text-gray-400 ml-2">{p.domain}</span>
             </div>
             <span className="admin-badge admin-badge-blue">月预算 ${p.monthly_budget_usd || 0}</span>

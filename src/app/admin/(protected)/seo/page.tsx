@@ -12,7 +12,8 @@ export default async function SeoPage() {
       order by d.created_at desc limit 20
     `,
     sql`
-      select id, job, trigger, status, started_at, success_count, failure_count, cost_usd
+      select id, trigger, triggered_by, model, requested, succeeded, failed, cost_usd, error,
+             started_at, finished_at
       from seo_generation_runs
       order by started_at desc limit 10
     `,
@@ -101,7 +102,7 @@ export default async function SeoPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left text-gray-500">
-                <th className="py-2 px-3">任务</th>
+                <th className="py-2 px-3">模型</th>
                 <th className="py-2 px-3">触发</th>
                 <th className="py-2 px-3">状态</th>
                 <th className="py-2 px-3">成功/失败</th>
@@ -114,15 +115,17 @@ export default async function SeoPage() {
                 <tr><td colSpan={6} className="py-4 text-center text-gray-400">暂无任务。</td></tr>
               ) : runs.map((r) => (
                 <tr key={r.id} className="border-b border-gray-100">
-                  <td className="py-2 px-3 text-gray-700">{r.job}</td>
+                  <td className="py-2 px-3 text-gray-700">{r.model || '—'}</td>
                   <td className="py-2 px-3 text-gray-600">{r.trigger}</td>
                   <td className="py-2 px-3">
                     <span className={`admin-badge ${
-                      r.status === 'success' ? 'admin-badge-green' :
-                      r.status === 'failed' ? 'admin-badge-red' : 'admin-badge-yellow'
-                    }`}>{r.status}</span>
+                      r.error ? 'admin-badge-red' :
+                      r.failed > 0 ? 'admin-badge-yellow' : 'admin-badge-green'
+                    }`}>
+                      {r.error ? '失败' : r.failed > 0 ? '部分' : '成功'}
+                    </span>
                   </td>
-                  <td className="py-2 px-3 text-gray-600">{r.success_count}/{r.failure_count}</td>
+                  <td className="py-2 px-3 text-gray-600">{r.succeeded}/{r.failed}</td>
                   <td className="py-2 px-3 text-gray-600">${r.cost_usd || '0'}</td>
                   <td className="py-2 px-3 text-gray-400 text-xs">
                     {r.started_at ? new Date(r.started_at).toLocaleString('zh-CN') : '—'}

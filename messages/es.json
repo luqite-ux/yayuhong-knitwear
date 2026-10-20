@@ -9,7 +9,14 @@
                 "factory":  "Fábrica",
                 "services":  "Servicios",
                 "contact":  "Contacto",
-                "getQuote":  "Solicitar Cotización"
+                "getQuote":  "Solicitar Cotización",
+                "faq":  "FAQ"
+            },
+    "faq":  {
+                "subtitle":  "FAQ",
+                "title":  "Preguntas frecuentes",
+                "description":  "Encuentra respuestas sobre cooperación, producción, entrega y más",
+                "empty":  "Aún no hay preguntas frecuentes. Contáctanos si tienes dudas."
             },
     "hero":  {
                  "badge":  "20 Años · Fábrica Directa · Pedidos Pequeños, Entrega Rápida",

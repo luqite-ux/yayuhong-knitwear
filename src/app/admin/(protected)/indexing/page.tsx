@@ -9,7 +9,7 @@ export default async function IndexingPage() {
         from seo_indexed_urls
         order by last_inspected_at desc nulls last
         limit 50`,
-    sql`select * from seo_sitemap_submissions order by submitted_at desc limit 10`,
+    sql`select * from seo_sitemap_submissions order by created_at desc limit 10`,
   ]);
 
   const indexed = urls.filter((u) => u.inspection_status === 'INDEXED').length;
@@ -77,7 +77,7 @@ export default async function IndexingPage() {
                 <tr key={s.id} className="border-b border-gray-50">
                   <td className="py-1 px-3 text-gray-700">{s.sitemap_url}</td>
                   <td className="py-1 px-3"><span className="admin-badge admin-badge-blue">{s.status}</span></td>
-                  <td className="py-1 px-3 text-gray-400 text-xs">{new Date(s.submitted_at).toLocaleString('zh-CN')}</td>
+                  <td className="py-1 px-3 text-gray-400 text-xs">{new Date(s.created_at).toLocaleString('zh-CN')}</td>
                 </tr>
               ))}
             </tbody>

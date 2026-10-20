@@ -9,7 +9,14 @@
                 "factory":  "Fabrik",
                 "services":  "Leistungen",
                 "contact":  "Kontakt",
-                "getQuote":  "Angebot anfragen"
+                "getQuote":  "Angebot anfragen",
+                "faq":  "FAQ"
+            },
+    "faq":  {
+                "subtitle":  "FAQ",
+                "title":  "Häufig gestellte Fragen",
+                "description":  "Antworten zu Zusammenarbeit, Produktion, Lieferung und mehr",
+                "empty":  "Noch keine FAQs. Kontaktieren Sie uns bei Fragen."
             },
     "hero":  {
                  "badge":  "20 Jahre · Direktfabrik · Kleine Mengen, schnelle Lieferung",

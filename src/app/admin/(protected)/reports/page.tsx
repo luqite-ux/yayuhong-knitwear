@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function ReportsPage() {
   const reports = await sql`
-    select month, html_url, summary, status, error, notified_at, created_at
+    select id, month, html_url, summary, status, error, notified_at, created_at
     from seo_monthly_reports
     order by month desc limit 12
   `;
@@ -22,7 +22,9 @@ export default async function ReportsPage() {
           {reports.map((r) => (
             <div key={r.id} className="admin-card">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold text-gray-900">{r.month}</h3>
+                <h3 className="font-semibold text-gray-900">
+                  {new Date(r.month as unknown as string).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long' })}
+                </h3>
                 <span className={`admin-badge ${
                   r.status === 'success' ? 'admin-badge-green' :
                   r.status === 'failed' ? 'admin-badge-red' : 'admin-badge-yellow'
