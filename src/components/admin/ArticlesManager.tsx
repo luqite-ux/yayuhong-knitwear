@@ -17,6 +17,8 @@ interface Article {
   content_html?: Record<string, string>;
   meta_description?: Record<string, string>;
   supporting_keywords?: string[];
+  faq_schema?: Record<string, unknown>;
+  article_schema?: Record<string, unknown>;
   sites?: string[];
 }
 
@@ -30,7 +32,15 @@ export default function ArticlesManager({ articles: initial }: { articles: Artic
     setSaving(true);
     try {
       const method = editing ? 'PUT' : 'POST';
-      const body = editing ? { ...data, id: editing.id } : data;
+      // 编辑时带回表单未展示的字段，避免被 PUT 整体覆盖清空
+      const body = editing
+        ? {
+            ...data, id: editing.id,
+            supporting_keywords: editing.supporting_keywords ?? null,
+            faq_schema: editing.faq_schema ?? {},
+            article_schema: editing.article_schema ?? {},
+          }
+        : data;
       const res = await fetch('/api/admin/articles', {
         method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
       });
@@ -113,12 +123,12 @@ function ArticleForm({ article, onSave, onCancel, saving }: {
   onCancel: () => void;
   saving: boolean;
 }) {
-  const [tab, setTab] = useState<'zh' | 'en'>('zh');
+  const [tab, setTab] = useState<'zh' | 'en' | 'vn'>('zh');
   const [data, setData] = useState({
-    title: article?.title || { zh: '', en: '' },
-    excerpt: article?.excerpt || { zh: '', en: '' },
-    content_html: article?.content_html || { zh: '', en: '' },
-    meta_description: article?.meta_description || { zh: '', en: '' },
+    title: article?.title || { zh: '', en: '', vn: '' },
+    excerpt: article?.excerpt || { zh: '', en: '', vn: '' },
+    content_html: article?.content_html || { zh: '', en: '', vn: '' },
+    meta_description: article?.meta_description || { zh: '', en: '', vn: '' },
     slug: article?.slug || '',
     cover_url: article?.cover_url || '',
     status: article?.status || 'draft',
@@ -149,10 +159,10 @@ function ArticleForm({ article, onSave, onCancel, saving }: {
       </div>
 
       <div className="flex gap-1 mb-4 border-b border-gray-200">
-        {['zh', 'en'].map((l) => (
-          <button key={l} onClick={() => setTab(l as 'zh' | 'en')}
+        {(['zh', 'en', 'vn'] as const).map((l) => (
+          <button key={l} onClick={() => setTab(l)}
             className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
-            {l === 'zh' ? '中文' : '英文'}
+            {l === 'zh' ? '中文' : l === 'en' ? '英文' : '越南语'}
           </button>
         ))}
       </div>
@@ -205,6 +215,7 @@ function ArticleForm({ article, onSave, onCancel, saving }: {
             <select className="admin-input" value={data.locale} onChange={(e) => set('locale', e.target.value)}>
               <option value="zh">中文</option>
               <option value="en">英文</option>
+              <option value="vn">越南语</option>
               <option value="ru">俄文</option>
             </select>
           </div>

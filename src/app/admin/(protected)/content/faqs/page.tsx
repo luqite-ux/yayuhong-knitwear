@@ -1,15 +1,17 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { pick } from '@/lib/i18n';
 import FaqsManager from '@/components/admin/FaqsManager';
 
 export const dynamic = 'force-dynamic';
 
 export default async function FaqsPage() {
-  const faqs = await sql`
-    select id, category, question, answer, sort, is_active, created_at
+  const rows = await sql`
+    select id, category, question, answer, sort, is_active, sites, created_at
     from content_faqs
     order by sort, created_at desc
   `;
+
+  const faqs = deepParseJson(rows) as any[];
 
   const list = faqs.map((f) => ({
     ...f,

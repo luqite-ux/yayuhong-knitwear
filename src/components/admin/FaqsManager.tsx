@@ -33,9 +33,11 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
     question_zh: '',
     question_en: '',
     question_ru: '',
+    question_vn: '',
     answer_zh: '',
     answer_en: '',
     answer_ru: '',
+    answer_vn: '',
     sort: 0,
     is_active: true,
     sites: ['global'],
@@ -45,8 +47,8 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
     setEditing(null);
     setForm({
       category: '',
-      question_zh: '', question_en: '', question_ru: '',
-      answer_zh: '', answer_en: '', answer_ru: '',
+      question_zh: '', question_en: '', question_ru: '', question_vn: '',
+      answer_zh: '', answer_en: '', answer_ru: '', answer_vn: '',
       sort: 0, is_active: true, sites: ['global'],
     });
     setShowForm(true);
@@ -59,9 +61,11 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
       question_zh: faq.question?.zh || '',
       question_en: faq.question?.en || '',
       question_ru: faq.question?.ru || '',
+      question_vn: faq.question?.vn || '',
       answer_zh: faq.answer?.zh || '',
       answer_en: faq.answer?.en || '',
       answer_ru: faq.answer?.ru || '',
+      answer_vn: faq.answer?.vn || '',
       sort: faq.sort,
       is_active: faq.is_active,
       sites: faq.sites || ['global'],
@@ -72,8 +76,9 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
-    const question = { zh: form.question_zh, en: form.question_en, ru: form.question_ru };
-    const answer = { zh: form.answer_zh, en: form.answer_en, ru: form.answer_ru };
+    // 合并已有语言，避免覆盖丢失未在表单中展示的语言
+    const question = { ...(editing?.question || {}), zh: form.question_zh, en: form.question_en, ru: form.question_ru, vn: form.question_vn };
+    const answer = { ...(editing?.answer || {}), zh: form.answer_zh, en: form.answer_en, ru: form.answer_ru, vn: form.answer_vn };
     const payload = { ...form, question, answer };
 
     const method = editing ? 'PUT' : 'POST';
@@ -227,6 +232,15 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
                   onChange={(e) => setForm({ ...form, question_ru: e.target.value })}
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">问题（越南语）</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={form.question_vn}
+                  onChange={(e) => setForm({ ...form, question_vn: e.target.value })}
+                />
+              </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">答案（中文）*</label>
@@ -254,6 +268,15 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
                   className="form-input"
                   value={form.answer_ru}
                   onChange={(e) => setForm({ ...form, answer_ru: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">答案（越南语）</label>
+                <textarea
+                  rows={4}
+                  className="form-input"
+                  value={form.answer_vn}
+                  onChange={(e) => setForm({ ...form, answer_vn: e.target.value })}
                 />
               </div>
 

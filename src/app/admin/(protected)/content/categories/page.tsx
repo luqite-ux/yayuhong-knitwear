@@ -1,16 +1,18 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { pick } from '@/lib/i18n';
 import CategoriesManager from '@/components/admin/CategoriesManager';
 
 export const dynamic = 'force-dynamic';
 
 export default async function CategoriesPage() {
-  const categories = await sql`
+  const rows = await sql`
     select c.*, p.name as parent_name
     from content_categories c
     left join content_categories p on c.parent_id = p.id
     order by c.sort, c.created_at
   `;
+
+  const categories = deepParseJson(rows) as any[];
 
   const list = categories.map((c) => ({
     ...c,

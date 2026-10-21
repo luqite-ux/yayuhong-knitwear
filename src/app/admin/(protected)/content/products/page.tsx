@@ -1,11 +1,11 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { pick } from '@/lib/i18n';
 import ProductsManager from '@/components/admin/ProductsManager';
 
 export const dynamic = 'force-dynamic';
 
 export default async function ProductsPage() {
-  const [products, categories] = await Promise.all([
+  const [productRows, categoryRows] = await Promise.all([
     sql`
       select p.*, c.name as category_name
       from content_products p
@@ -14,6 +14,9 @@ export default async function ProductsPage() {
     `,
     sql`select id, name, slug from content_categories order by sort`,
   ]);
+
+  const products = deepParseJson(productRows) as any[];
+  const categories = deepParseJson(categoryRows) as any[];
 
   const productList = products.map((p) => ({
     ...p,

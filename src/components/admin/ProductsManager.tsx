@@ -58,7 +58,16 @@ export default function ProductsManager({
     setSaving(true);
     try {
       const method = editing ? 'PUT' : 'POST';
-      const body = editing ? { ...data, id: editing.id } : data;
+      // 编辑时带回表单未展示的字段，避免被 PUT 整体覆盖清空
+      const body = editing
+        ? {
+            ...data, id: editing.id,
+            features: editing.features ?? {},
+            applications: editing.applications ?? {},
+            advantages: editing.advantages ?? {},
+            specs: editing.specs ?? {},
+          }
+        : data;
       const res = await fetch('/api/admin/products', {
         method,
         headers: { 'Content-Type': 'application/json' },
@@ -166,11 +175,11 @@ function ProductForm({
   onCancel: () => void;
   saving: boolean;
 }) {
-  const [tab, setTab] = useState<'zh' | 'en' | 'ru'>('zh');
+  const [tab, setTab] = useState<'zh' | 'en' | 'ru' | 'vn'>('zh');
   const [formData, setFormData] = useState({
-    name: product?.name || { zh: '', en: '' },
-    summary: product?.summary || { zh: '', en: '' },
-    detail_html: product?.detail_html || { zh: '', en: '' },
+    name: product?.name || { zh: '', en: '', vn: '' },
+    summary: product?.summary || { zh: '', en: '', vn: '' },
+    detail_html: product?.detail_html || { zh: '', en: '', vn: '' },
     model: product?.model || '',
     slug: product?.slug || '',
     category_id: product?.category_id || '',
@@ -210,10 +219,10 @@ function ProductForm({
       </div>
 
       <div className="flex gap-1 mb-4 border-b border-gray-200">
-        {['zh', 'en', 'ru'].map((l) => (
-          <button key={l} onClick={() => setTab(l as 'zh' | 'en' | 'ru')}
+        {(['zh', 'en', 'ru', 'vn'] as const).map((l) => (
+          <button key={l} onClick={() => setTab(l)}
             className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
-            {l === 'zh' ? '中文' : l === 'en' ? '英文' : '俄文'}
+            {l === 'zh' ? '中文' : l === 'en' ? '英文' : l === 'ru' ? '俄文' : '越南语'}
           </button>
         ))}
       </div>

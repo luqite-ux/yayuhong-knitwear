@@ -105,6 +105,7 @@ function CategoryForm({ category, categories, onSave, onCancel, saving }: {
   const [data, setData] = useState({
     name_zh: category?.name?.zh || '',
     name_en: category?.name?.en || '',
+    name_vn: category?.name?.vn || '',
     slug: category?.slug || '',
     parent_id: category?.parent_id || '',
     sort: category?.sort || 0,
@@ -124,6 +125,10 @@ function CategoryForm({ category, categories, onSave, onCancel, saving }: {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">名称（英文）</label>
           <input className="admin-input" value={data.name_en} onChange={(e) => set('name_en', e.target.value)} />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">名称（越南语）</label>
+          <input className="admin-input" value={data.name_vn} onChange={(e) => set('name_vn', e.target.value)} />
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
@@ -147,7 +152,8 @@ function CategoryForm({ category, categories, onSave, onCancel, saving }: {
       </div>
       <div className="flex gap-2 pt-4">
         <button onClick={() => onSave({
-          name: { zh: data.name_zh, en: data.name_en },
+          // 合并已有语言，避免覆盖丢失未在表单中展示的语言
+          name: { ...(category?.name || {}), zh: data.name_zh, en: data.name_en, vn: data.name_vn },
           slug: data.slug, parent_id: data.parent_id || null, sort: data.sort,
         })} disabled={saving} className="admin-btn admin-btn-primary flex-1">
           {saving ? '保存中...' : '保存'}
