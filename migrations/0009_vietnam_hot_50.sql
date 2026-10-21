@@ -2,9 +2,9 @@
 -- 越南市场热卖 50 款针织毛衫（参照 Shopee/Lazada 热卖特征）
 -- 新增分类：vn-knit-dress, vn-mens-knit
 
-insert into content_categories (slug, name, sort, is_active) values
-  ('vn-knit-dress', '{"zh":"针织连衣裙","en":"Knit Dresses","vn":"Đầm Len"}', 6, true),
-  ('vn-mens-knit', '{"zh":"男士针织","en":"Mens Knitwear","vn":"Áo Len Nam"}', 7, true)
+insert into content_categories (slug, name, sort, sites) values
+  ('vn-knit-dress', '{"zh":"针织连衣裙","en":"Knit Dresses","vn":"Đầm Len"}', 6, '{"overseas"}'),
+  ('vn-mens-knit', '{"zh":"男士针织","en":"Mens Knitwear","vn":"Áo Len Nam"}', 7, '{"overseas"}')
 on conflict (slug) do nothing;
 
 -- 1: 粉色泡泡袖短款针织开衫
