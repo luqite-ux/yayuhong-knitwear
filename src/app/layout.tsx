@@ -57,6 +57,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  // Bing Webmaster Tools 站点认领（IndexNow 推送生效前提）
+  other: {
+    'msvalidate.01': '0C1803ABC154A9F2B2CF845A2E9F2DDC',
+  },
 };
 
 export default function RootLayout({
