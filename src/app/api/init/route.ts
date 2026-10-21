@@ -1,8 +1,15 @@
 import { NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
+import fs from 'fs';
+import path from 'path';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 120;
+
+let hot50Sql = '';
+try {
+  hot50Sql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0009_vietnam_hot_50.sql'), 'utf8');
+} catch {}
 
 const MIGRATIONS: { name: string; sql: string }[] = [
   {
@@ -642,6 +649,10 @@ create table if not exists admin_api_keys (
 create index if not exists idx_api_keys_hash on admin_api_keys(key_hash);
 create index if not exists idx_api_keys_active on admin_api_keys(is_active);
 `,
+  },
+  {
+    name: '0009_vietnam_hot_50.sql',
+    sql: hot50Sql,
   },
 ];
 
