@@ -1,6 +1,7 @@
 ﻿import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getCurrentSiteKey } from '@/lib/site';
 import { zhText } from '@/lib/zh-hant';
+import { sql, deepParseJson } from '@/lib/db';
 
 // 海外站组件
 import Hero from '@/components/Hero';
@@ -71,13 +72,71 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     );
   }
 
+  // 越南站：拉取越南专属产品（与内页 /products 一致），首页展示越南本土产品图
+  const isVn = locale === 'vn';
+  let vnFeaturedProducts: Array<{
+    slug: string;
+    name: Record<string, string>;
+    model: string;
+    cover_url: string;
+  }> = [];
+  let vnCategories: Array<{
+    slug: string;
+    name: Record<string, string>;
+    cover: string;
+    count: number;
+  }> = [];
+
+  if (isVn) {
+    try {
+      const [prodRows, catRows] = await Promise.all([
+        sql`
+          select slug, name, model, cover_url
+          from content_products
+          where is_active = true and slug like 'vn-%'
+          order by sort, created_at
+          limit 6
+        `,
+        sql`
+          select c.slug, c.name,
+                 (select cover_url from content_products p
+                  where p.category_id = c.id and p.is_active = true and p.slug like 'vn-%'
+                  order by p.sort, p.created_at limit 1) as cover,
+                 (select count(*)::int from content_products p
+                  where p.category_id = c.id and p.is_active = true and p.slug like 'vn-%') as count
+          from content_categories c
+          where c.slug like 'vn-%'
+          order by c.sort, c.created_at
+        `,
+      ]);
+
+      vnFeaturedProducts = (prodRows as any[]).map((p) => ({
+        slug: p.slug,
+        model: p.model,
+        cover_url: p.cover_url,
+        name: deepParseJson(p.name) as Record<string, string>,
+      }));
+
+      vnCategories = (catRows as any[])
+        .filter((c) => c.count > 0 && c.cover)
+        .map((c) => ({
+          slug: c.slug,
+          cover: c.cover,
+          count: Number(c.count),
+          name: deepParseJson(c.name) as Record<string, string>,
+        }));
+    } catch (err) {
+      console.error('Failed to load Vietnam homepage products:', err);
+    }
+  }
+
   // 海外站：原版式
   return (
     <>
       <Hero />
       <Advantages />
-      <ProductShowcase />
-      {locale !== 'zh' && <ReadyStock />}
+      <ProductShowcase vnCategories={isVn ? vnCategories : undefined} />
+      {locale !== 'zh' && <ReadyStock vnProducts={isVn ? vnFeaturedProducts : undefined} />}
       <FactorySection />
       <ChenghaiHeritage />
       <Services />

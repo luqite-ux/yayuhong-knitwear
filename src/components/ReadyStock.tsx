@@ -13,9 +13,30 @@ const products = [
   { src: '/images/ready-stock/style-06.jpg', code: '63037', label: { zh: '白粉套装', hant: '白粉套裝', en: 'White/Pink Set' } },
 ];
 
-export default function ReadyStock() {
+export interface VnReadyProduct {
+  slug: string;
+  name: Record<string, string>;
+  model: string;
+  cover_url: string;
+}
+
+interface ReadyStockProps {
+  vnProducts?: VnReadyProduct[];
+}
+
+function pickName(name: Record<string, string> | undefined, locale: string): string {
+  if (!name) return '';
+  if (locale === 'vn') return name.vi || name.vn || name.en || name.zh || '';
+  return name[locale] || name.en || name.zh || '';
+}
+
+export default function ReadyStock({ vnProducts }: ReadyStockProps) {
   const t = useTranslations('readyStock');
   const locale = useLocale();
+
+  // 越南站：用越南专属产品替换通用现货套装（图与内页 /products/vn 一致）
+  const isVn = !!vnProducts && vnProducts.length > 0;
+  const isVnLocale = locale === 'vn';
 
   return (
     <section className="section-padding bg-gradient-to-b from-[var(--color-warm-gray)] to-white knit-texture relative overflow-hidden">
@@ -30,10 +51,14 @@ export default function ReadyStock() {
             {t('badge')}
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-4">
-            {t('title')}
+            {isVn
+              ? zhOrEn(locale, '越南精选款式', '越南精選款式', 'Vietnam Featured Styles')
+              : t('title')}
           </h2>
           <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-lg">
-            {t('subtitle')}
+            {isVn
+              ? zhOrEn(locale, '专为越南市场甄选的轻薄针织款式，本土热销，支持小单快反', '專為越南市場甄選的輕薄針織款式，本土熱銷，支持小單快反', 'Curated lightweight knitwear for the Vietnam market, local bestsellers, small-batch fast turnaround')
+              : t('subtitle')}
           </p>
         </div>
 
@@ -55,50 +80,93 @@ export default function ReadyStock() {
 
         {/* Product grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product, index) => (
-            <div
-              key={index}
-              className="group bg-white rounded-2xl overflow-hidden card-hover cursor-pointer"
-            >
-              {/* Image area */}
-              <div className="aspect-[4/3] bg-[var(--color-warm-gray)] relative overflow-hidden">
-                <img
-                  src={product.src}
-                  alt={zhOrEn(locale, product.label.zh, product.label.hant, product.label.en)}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-[var(--color-primary)] shadow-sm">
-                  {zhOrEn(locale, `款号 ${product.code}`, `款號 ${product.code}`, `Style ${product.code}`)}
+          {isVn
+            ? vnProducts!.map((product) => {
+                const name = pickName(product.name, locale);
+                return (
+                  <Link
+                    key={product.slug}
+                    href={`/products/${product.slug}`}
+                    className="group bg-white rounded-2xl overflow-hidden card-hover block"
+                  >
+                    <div className="aspect-[4/3] bg-[var(--color-warm-gray)] relative overflow-hidden">
+                      <img
+                        src={product.cover_url}
+                        alt={name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-[var(--color-primary)] shadow-sm">
+                        {zhOrEn(locale, `款号 ${product.model}`, `款號 ${product.model}`, `Style ${product.model}`)}
+                      </div>
+                      <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--color-accent)] text-white text-xs font-bold shadow-sm">
+                        {isVnLocale
+                          ? zhOrEn(locale, '热卖', '熱賣', 'Hot')
+                          : t('inStock')}
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold text-[var(--color-primary)] mb-2 group-hover:text-[var(--color-accent)] transition-colors line-clamp-2">
+                        {name}
+                      </h3>
+                      <p className="text-[var(--color-text-muted)] text-sm mb-4">
+                        {zhOrEn(locale, '越南本土热销款式', '越南本土熱銷款式', 'Vietnam local bestseller')}
+                      </p>
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] group-hover:gap-2 transition-all">
+                        {zhOrEn(locale, '查看详情', '查看詳情', 'Learn more')}
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })
+            : products.map((product, index) => (
+              <div
+                key={index}
+                className="group bg-white rounded-2xl overflow-hidden card-hover cursor-pointer"
+              >
+                {/* Image area */}
+                <div className="aspect-[4/3] bg-[var(--color-warm-gray)] relative overflow-hidden">
+                  <img
+                    src={product.src}
+                    alt={zhOrEn(locale, product.label.zh, product.label.hant, product.label.en)}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-[var(--color-primary)] shadow-sm">
+                    {zhOrEn(locale, `款号 ${product.code}`, `款號 ${product.code}`, `Style ${product.code}`)}
+                  </div>
+                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--color-accent)] text-white text-xs font-bold shadow-sm">
+                    {t('inStock')}
+                  </div>
                 </div>
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--color-accent)] text-white text-xs font-bold shadow-sm">
-                  {t('inStock')}
-                </div>
-              </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-[var(--color-primary)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
-                  {zhOrEn(locale, product.label.zh, product.label.hant, product.label.en)}
-                </h3>
-                <p className="text-[var(--color-text-muted)] text-sm mb-4">
-                  {t('collectionTitle')}
-                </p>
-                <div className="flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:gap-2 transition-all">
-                  {zhOrEn(locale, '查看详情', '查看詳情', 'Learn more')}
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-[var(--color-primary)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
+                    {zhOrEn(locale, product.label.zh, product.label.hant, product.label.en)}
+                  </h3>
+                  <p className="text-[var(--color-text-muted)] text-sm mb-4">
+                    {t('collectionTitle')}
+                  </p>
+                  <div className="flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:gap-2 transition-all">
+                    {zhOrEn(locale, '查看详情', '查看詳情', 'Learn more')}
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Link href="/contact" className="btn-outline">
-            {t('cta')}
+          <Link href={isVn ? '/products' : '/contact'} className="btn-outline">
+            {isVn ? zhOrEn(locale, '查看全部款式', '查看全部款式', 'View All Styles') : t('cta')}
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
