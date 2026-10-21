@@ -11,6 +11,11 @@ try {
   hot50Sql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0009_vietnam_hot_50.sql'), 'utf8');
 } catch {}
 
+let sortFixSql = '';
+try {
+  sortFixSql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0010_vietnam_sort_fix.sql'), 'utf8');
+} catch {}
+
 const MIGRATIONS: { name: string; sql: string }[] = [
   {
     name: '0001_init.sql',
@@ -654,6 +659,10 @@ create index if not exists idx_api_keys_active on admin_api_keys(is_active);
     name: '0009_vietnam_hot_50.sql',
     sql: hot50Sql,
   },
+  {
+    name: '0010_vietnam_sort_fix.sql',
+    sql: sortFixSql,
+  },
 ];
 
 export async function GET() {
@@ -693,9 +702,9 @@ export async function POST() {
       )
     `;
     
-    // Clean up: remove any previously-failed 0009 record so it can be retried
+    // Clean up: remove any previously-failed 0009/0010 records so they can be retried
     try {
-      await sql`delete from schema_migrations where name = '0009_vietnam_hot_50.sql'`;
+      await sql`delete from schema_migrations where name in ('0009_vietnam_hot_50.sql', '0010_vietnam_sort_fix.sql')`;
     } catch {}
     
     const applied: string[] = [];

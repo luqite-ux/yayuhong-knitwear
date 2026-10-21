@@ -7,6 +7,8 @@ import { zhOrEn } from '@/lib/locale-text';
 export default function Hero() {
   const t = useTranslations('hero');
   const locale = useLocale();
+  const isVn = locale === 'vn';
+  const heroImage = isVn ? '/images/hero-vn-knitwear.jpg' : '/images/hero-shein-style.jpg';
 
   return (
     <section className="hero-gradient min-h-screen flex items-center pt-20 knit-texture relative overflow-hidden">
@@ -80,7 +82,7 @@ export default function Hero() {
               {/* Main product showcase */}
               <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                 <img 
-                  src="/images/hero-shein-style.jpg" 
+                  src={heroImage} 
                   alt="Premium knitwear product showcase"
                   className="w-full h-full object-cover"
                 />
