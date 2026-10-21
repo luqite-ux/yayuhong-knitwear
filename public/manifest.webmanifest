@@ -1,0 +1,17 @@
+{
+  "name": "Yayuhong Knitwear",
+  "short_name": "YYH",
+  "description": "Professional knitwear manufacturer with 20 years experience. 30,000 pcs daily capacity, 50 pcs MOQ, 7-day delivery.",
+  "start_url": "/zh",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0F2A44",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
