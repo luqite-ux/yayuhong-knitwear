@@ -1,4 +1,4 @@
-﻿-- 0009_vietnam_hot_50.sql
+-- 0009_vietnam_hot_50.sql
 -- 越南市场热卖 50 款针织毛衫（参照 Shopee/Lazada 热卖特征）
 -- 新增分类：vn-knit-dress, vn-mens-knit
 

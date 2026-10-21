@@ -693,6 +693,11 @@ export async function POST() {
       )
     `;
     
+    // Clean up: remove any previously-failed 0009 record so it can be retried
+    try {
+      await sql`delete from schema_migrations where name = '0009_vietnam_hot_50.sql'`;
+    } catch {}
+    
     const applied: string[] = [];
     const skipped: string[] = [];
     const errors: string[] = [];
@@ -717,14 +722,7 @@ export async function POST() {
         applied.push(migration.name);
       } catch (err: any) {
         errors.push(`${migration.name}: ${err.message}`);
-        try {
-          await sql`
-            insert into schema_migrations (name) values (${migration.name})
-            on conflict (name) do nothing
-          `;
-        } catch {
-          // ignore
-        }
+        // Do not mark failed migrations as applied, so they can be retried
       }
     }
     
