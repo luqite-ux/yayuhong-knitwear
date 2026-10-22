@@ -1,13 +1,13 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
 export default async function ReportsPage() {
-  const reports = await sql`
+  const reports = deepParseJson(await sql`
     select id, month, html_url, summary, status, error, notified_at, created_at
     from seo_monthly_reports
     order by month desc limit 12
-  `;
+  `) as any[];
 
   return (
     <div>

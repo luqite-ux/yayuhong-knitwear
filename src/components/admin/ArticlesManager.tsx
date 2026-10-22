@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
+import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual, SITE_OPTIONS } from '@/lib/i18n';
 
 interface Article {
   id: string;
@@ -225,11 +225,7 @@ function ArticleForm({ article, onSave, onCancel, saving }: {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">可见站点</label>
           <div className="flex flex-wrap gap-3">
-            {[
-              { value: 'global', label: '全部站点' },
-              { value: 'overseas', label: '海外站 (xiuyuknit.com)' },
-              { value: 'china', label: '国内站 (xiuyumaoshan.cn)' },
-            ].map((opt) => (
+            {SITE_OPTIONS.map((opt) => (
               <label key={opt.value} className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"

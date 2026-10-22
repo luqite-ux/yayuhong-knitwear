@@ -1,5 +1,5 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
 
@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
     order by status
   `;
 
-  return NextResponse.json({ inquiries, stats });
+  return NextResponse.json({ inquiries: deepParseJson(inquiries), stats });
 }
 
 // 状态变更

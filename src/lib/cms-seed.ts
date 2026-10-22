@@ -1,33 +1,35 @@
 // 全站种子数据 - FAQ / 工厂设备 / 生产流程 / 服务 / 首页内容 / ReadyStock
 // 全部中英俄三语，导入后可在后台管理修改
 
+import type { Locale } from '@/lib/i18n';
+
 export interface SeedFaq {
   category: string;
-  question: { zh: string; en: string; ru: string };
-  answer: { zh: string; en: string; ru: string };
+  question: Record<Locale, string>;
+  answer: Record<Locale, string>;
   sort: number;
 }
 
 export interface SeedEquipment {
-  name: { zh: string; en: string; ru: string };
+  name: Record<Locale, string>;
   quantity: number;
   icon_key: string;
   sort: number;
 }
 
 export interface SeedProcess {
-  title: { zh: string; en: string; ru: string };
-  description: { zh: string; en: string; ru: string };
+  title: Record<Locale, string>;
+  description: Record<Locale, string>;
   step_number: number;
   icon_key: string;
   sort: number;
 }
 
 export interface SeedService {
-  title: { zh: string; en: string; ru: string };
-  summary: { zh: string; en: string; ru: string };
-  description: { zh: string; en: string; ru: string };
-  highlights: { zh: string[]; en: string[]; ru: string[] };
+  title: Record<Locale, string>;
+  summary: Record<Locale, string>;
+  description: Record<Locale, string>;
+  highlights: Record<Locale, string[]>;
   icon_key: string;
   gradient_from: string;
   gradient_to: string;
@@ -36,14 +38,14 @@ export interface SeedService {
 
 export interface SeedFeature {
   category: string;
-  title: { zh: string; en: string; ru: string };
-  description: { zh: string; en: string; ru: string };
+  title: Record<Locale, string>;
+  description: Record<Locale, string>;
   icon_key: string;
   sort: number;
 }
 
 export interface SeedReadyStock {
-  name: { zh: string; en: string; ru: string };
+  name: Record<Locale, string>;
   model: string;
   cover_url: string;
   price_range: string;
@@ -51,7 +53,7 @@ export interface SeedReadyStock {
 }
 
 // ========== FAQ 数据 ==========
-export const faqSeed: SeedFaq[] = [
+export const faqSeed = [
   {
     category: 'general',
     question: {
@@ -220,10 +222,10 @@ export const faqSeed: SeedFaq[] = [
     },
     sort: 12,
   },
-];
+] as unknown as SeedFaq[];
 
 // ========== 工厂设备数据 ==========
-export const equipmentSeed: SeedEquipment[] = [
+export const equipmentSeed = [
   { name: { zh: '电脑横机', en: 'Computerized Flat Knitting Machines', ru: 'Компьютерные плосковязальные машины' }, quantity: 80, icon_key: 'knitting-machine', sort: 1 },
   { name: { zh: '半自动横机', en: 'Semi-automatic Flat Knitting Machines', ru: 'Полуавтоматические плосковязальные машины' }, quantity: 50, icon_key: 'semi-auto-machine', sort: 2 },
   { name: { zh: '无缝内衣机', en: 'Seamless Underwear Machines', ru: 'Машины для бесшовного белья' }, quantity: 30, icon_key: 'seamless-machine', sort: 3 },
@@ -234,10 +236,10 @@ export const equipmentSeed: SeedEquipment[] = [
   { name: { zh: '整烫设备', en: 'Ironing & Pressing Equipment', ru: 'Оборудование для глажки и прессования' }, quantity: 15, icon_key: 'ironing', sort: 8 },
   { name: { zh: '绣花机', en: 'Embroidery Machines', ru: 'Вышивальные машины' }, quantity: 8, icon_key: 'embroidery', sort: 9 },
   { name: { zh: '检针机/验布机', en: 'Needle Detector & Fabric Inspection', ru: 'Детектор игл и инспекция ткани' }, quantity: 6, icon_key: 'inspection', sort: 10 },
-];
+] as unknown as SeedEquipment[];
 
 // ========== 生产流程数据 ==========
-export const processSeed: SeedProcess[] = [
+export const processSeed = [
   {
     step_number: 1,
     title: { zh: '需求沟通 & 设计确认', en: 'Requirement Discussion & Design Confirmation', ru: 'Обсуждение требований и утверждение дизайна' },
@@ -315,10 +317,10 @@ export const processSeed: SeedProcess[] = [
     icon_key: 'shipping',
     sort: 7,
   },
-];
+] as unknown as SeedProcess[];
 
 // ========== 服务内容数据 ==========
-export const serviceSeed: SeedService[] = [
+export const serviceSeed = [
   {
     title: { zh: 'OEM 贴牌生产', en: 'OEM Manufacturing', ru: 'OEM-производство' },
     summary: { zh: '按照您的设计或样衣进行生产，贴您的品牌', en: 'Produce according to your designs or samples with your brand', ru: 'Производство по вашим дизайнам или образцам с вашим брендом' },
@@ -427,10 +429,10 @@ export const serviceSeed: SeedService[] = [
     gradient_to: '#fed6e3',
     sort: 6,
   },
-];
+] as unknown as SeedService[];
 
 // ========== 首页优势数据 ==========
-export const featureSeed: SeedFeature[] = [
+export const featureSeed = [
   {
     category: 'home',
     title: { zh: '20年工厂经验', en: '20 Years Factory Experience', ru: '20 лет опыта фабрики' },
@@ -497,10 +499,10 @@ export const featureSeed: SeedFeature[] = [
     icon_key: 'service',
     sort: 6,
   },
-];
+] as unknown as SeedFeature[];
 
 // ========== Ready Stock 数据 ==========
-export const readyStockSeed: SeedReadyStock[] = [
+export const readyStockSeed = [
   { name: { zh: '经典圆领毛衣', en: 'Classic Crewneck Sweater', ru: 'Классический свитер с круглым вырезом' }, model: 'RS-001', cover_url: '/images/ready-stock/style-01.jpg', price_range: '$8.5 - $12.0', sort: 1 },
   { name: { zh: 'V领针织开衫', en: 'V-Neck Knit Cardigan', ru: 'Вязаный кардиган с V-образным вырезом' }, model: 'RS-002', cover_url: '/images/ready-stock/style-02.jpg', price_range: '$10.0 - $15.0', sort: 2 },
   { name: { zh: '高领保暖毛衣', en: 'Turtleneck Thermal Sweater', ru: 'Теплый свитер с высоким воротом' }, model: 'RS-003', cover_url: '/images/ready-stock/style-03.jpg', price_range: '$9.5 - $14.0', sort: 3 },
@@ -509,4 +511,4 @@ export const readyStockSeed: SeedReadyStock[] = [
   { name: { zh: '短款针织上衣', en: 'Cropped Knit Top', ru: 'Укороченный вязаный топ' }, model: 'RS-006', cover_url: '/images/ready-stock/style-06.jpg', price_range: '$6.5 - $9.0', sort: 6 },
   { name: { zh: '家居服套装 款A', en: 'Loungewear Set Style A', ru: 'Комплект домашней одежды, стиль А' }, model: 'RS-007', cover_url: '/images/products/loungewear/loungewear00.jpg', price_range: '$12.0 - $18.0', sort: 7 },
   { name: { zh: '宠物毛衣 经典款', en: 'Classic Pet Sweater', ru: 'Классический свитер для питомца' }, model: 'RS-008', cover_url: '/images/products/pet/pet01.jpg', price_range: '$3.5 - $6.0', sort: 8 },
-];
+] as unknown as SeedReadyStock[];

@@ -1,11 +1,12 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import SettingsForm from '@/components/admin/SettingsForm';
 
 export const dynamic = 'force-dynamic';
 
 export default async function SettingsPage() {
-  const profile = await sql`select * from site_profile order by created_at limit 1`;
-  const p = profile[0];
+  const rows = await sql`select * from site_profile order by created_at limit 1`;
+  const parsed = deepParseJson(rows) as any[];
+  const p = parsed[0];
 
   return (
     <div>

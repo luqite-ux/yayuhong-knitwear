@@ -1,5 +1,5 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
 import slugify from 'slugify';
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   const limit = 20;
   const offset = (page - 1) * limit;
 
-  const [products, countRes] = await Promise.all([
+  const [productRaw, countRes] = await Promise.all([
     sql`
       select p.*, c.name as category_name, c.slug as category_slug
       from content_products p
@@ -26,6 +26,7 @@ export async function GET(req: NextRequest) {
     sql`select count(*)::text as total from content_products`,
   ]);
 
+  const products = deepParseJson(productRaw);
   return NextResponse.json({
     products,
     total: Number(countRes[0].total),

@@ -1,5 +1,5 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
 import slugify from 'slugify';
@@ -10,13 +10,13 @@ export async function GET(req: NextRequest) {
   const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
-  const categories = await sql`
+  const raw = await sql`
     select c.*, p.name as parent_name
     from content_categories c
     left join content_categories p on c.parent_id = p.id
     order by c.sort, c.created_at
   `;
-  return NextResponse.json({ categories });
+  return NextResponse.json({ categories: deepParseJson(raw) });
 }
 
 export async function POST(req: NextRequest) {

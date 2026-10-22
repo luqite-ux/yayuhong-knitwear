@@ -1,4 +1,4 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,13 +48,13 @@ export default async function AdminDashboard() {
     order by key
   `;
 
-  const seoConfig = await sql<{ enabled: boolean; onboarding_steps: unknown }[]>`
+  const seoConfig = deepParseJson(await sql<{ enabled: boolean; onboarding_steps: unknown }[]>`
     select enabled, onboarding_steps from seo_config limit 1
-  `;
+  `) as Array<{ enabled: boolean; onboarding_steps: Record<string, boolean> | null }>;
 
   const s = stats[0];
   const cfg = seoConfig[0];
-  const onboarding = cfg?.onboarding_steps as Record<string, boolean> | null;
+  const onboarding = cfg?.onboarding_steps ?? null;
   const onboardingDone = onboarding ? Object.values(onboarding).filter(Boolean).length : 0;
   const onboardingTotal = onboarding ? Object.keys(onboarding).length : 0;
 

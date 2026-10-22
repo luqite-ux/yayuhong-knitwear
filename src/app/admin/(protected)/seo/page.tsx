@@ -1,10 +1,10 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { pick } from '@/lib/i18n';
 
 export const dynamic = 'force-dynamic';
 
 export default async function SeoPage() {
-  const [drafts, runs, keywords] = await Promise.all([
+  const [draftsRaw, runs, keywords] = await Promise.all([
     sql`
       select d.id, d.style, d.slug, d.title, d.status, d.scheduled_at, d.published_at,
              d.cover_missing, d.human_review_flags, d.locale
@@ -20,6 +20,7 @@ export default async function SeoPage() {
     sql`select count(*)::text as total, count(*) filter (where is_tracked)::text as tracked from seo_keywords`,
   ]);
 
+  const drafts = deepParseJson(draftsRaw) as any[];
   const draftList = drafts.map((d) => ({
     ...d,
     title_text: pick(d.title as Record<string, string>, 'zh'),

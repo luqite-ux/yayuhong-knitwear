@@ -20,6 +20,13 @@ export const LOCALE_LABELS: Record<Locale, string> = {
 
 export const RTL_LOCALES: Locale[] = ['ar'];
 
+export const SITE_OPTIONS: { value: string; label: string }[] = [
+  { value: 'global', label: '全部站点' },
+  { value: 'overseas', label: '海外站 (xiuyuknit.com)' },
+  { value: 'china',   label: '国内站 (xiuyumaoshan.cn)' },
+  { value: 'vn',      label: '越南站 (/vn)' },
+];
+
 export function isRTL(locale: string): boolean {
   return (RTL_LOCALES as string[]).includes(locale);
 }

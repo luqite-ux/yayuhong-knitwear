@@ -1,10 +1,10 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import InquiriesManager from '@/components/admin/InquiriesManager';
 
 export const dynamic = 'force-dynamic';
 
 export default async function InquiriesPage() {
-  const inquiries = await sql`
+  const inquiryRows = await sql`
     select id, name, email, phone, whatsapp, company, subject, message, locale, ip,
            status, source, admin_note, country, created_at
     from inquiries
@@ -19,10 +19,12 @@ export default async function InquiriesPage() {
     order by status
   `;
 
+  const inquiries = deepParseJson(inquiryRows) as any[];
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">询盘管理</h1>
-      <InquiriesManager initialInquiries={inquiries as any[]} initialStats={stats as any[]} />
+      <InquiriesManager initialInquiries={inquiries} initialStats={stats as any[]} />
     </div>
   );
 }

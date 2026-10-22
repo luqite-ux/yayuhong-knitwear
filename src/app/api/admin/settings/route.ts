@@ -1,5 +1,5 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
 
@@ -9,8 +9,9 @@ export async function GET(req: NextRequest) {
   const ok = await requireAdmin(req);
   if (!ok) return NextResponse.json({ error: '未登录' }, { status: 401 });
 
-  const profile = await sql`select * from site_profile order by created_at limit 1`;
-  return NextResponse.json({ profile: profile[0] });
+  const rows = await sql`select * from site_profile order by created_at limit 1`;
+  const parsed = deepParseJson(rows) as any[];
+  return NextResponse.json({ profile: parsed[0] });
 }
 
 export async function PUT(req: NextRequest) {

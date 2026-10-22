@@ -1,13 +1,13 @@
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AuditPage() {
-  const logs = await sql`
+  const logs = deepParseJson(await sql`
     select id, actor, action, target, detail, created_at
     from audit_logs
     order by created_at desc limit 100
-  `;
+  `) as any[];
 
   return (
     <div>

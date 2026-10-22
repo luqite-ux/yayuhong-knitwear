@@ -1,5 +1,5 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { sql, deepParseJson } from '@/lib/db';
 import { requireAdmin } from '@/lib/guard';
 import { logAudit } from '@/lib/audit';
 import slugify from 'slugify';
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
 
   const where = status ? sql`where a.status = ${status}` : sql``;
 
-  const [articles, countRes] = await Promise.all([
+  const [articleRaw, countRes] = await Promise.all([
     sql`
       select a.id, a.slug, a.title, a.excerpt, a.cover_url, a.status, a.locale,
              a.published_at, a.source, a.created_at
@@ -30,6 +30,7 @@ export async function GET(req: NextRequest) {
     sql`select count(*)::text as total from content_articles ${where}`,
   ]);
 
+  const articles = deepParseJson(articleRaw);
   return NextResponse.json({
     articles,
     total: Number(countRes[0].total),
