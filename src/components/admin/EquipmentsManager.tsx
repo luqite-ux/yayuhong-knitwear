@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
 
 interface Equipment {
   id: string;
@@ -12,8 +13,6 @@ interface Equipment {
   sites: string[];
   is_active: boolean;
 }
-
-const LOCALES = ['zh', 'en', 'ru'] as const;
 
 export default function EquipmentsManager() {
   const [equipments, setEquipments] = useState<Equipment[]>([]);
@@ -172,9 +171,9 @@ function EquipmentForm({
   onCancel: () => void;
   saving: boolean;
 }) {
-  const [tab, setTab] = useState<'zh' | 'en' | 'ru'>('zh');
+  const [tab, setTab] = useState<Locale>('zh');
   const [formData, setFormData] = useState({
-    name: equipment?.name || { zh: '', en: '', ru: '' },
+    name: equipment?.name || emptyMultilingual(),
     quantity: equipment?.quantity || 1,
     icon_key: equipment?.icon_key || '',
     is_active: equipment?.is_active !== false,
@@ -200,11 +199,11 @@ function EquipmentForm({
         <button onClick={onCancel} className="text-gray-400 hover:text-gray-600">✕</button>
       </div>
 
-      <div className="flex gap-1 mb-4 border-b border-gray-200">
+      <div className="flex gap-1 mb-4 border-b border-gray-200 flex-wrap">
         {LOCALES.map((l) => (
           <button key={l} onClick={() => setTab(l)}
             className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
-            {l === 'zh' ? '中文' : l === 'en' ? '英文' : '俄文'}
+            {LOCALE_LABELS[l]}
           </button>
         ))}
       </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { pick } from '@/lib/i18n';
+import { pick, LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
 
 interface Faq {
   id: string;
@@ -27,17 +27,12 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
   const [editing, setEditing] = useState<Faq | null>(null);
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [tab, setTab] = useState<Locale>('zh');
 
   const [form, setForm] = useState({
     category: '',
-    question_zh: '',
-    question_en: '',
-    question_ru: '',
-    question_vn: '',
-    answer_zh: '',
-    answer_en: '',
-    answer_ru: '',
-    answer_vn: '',
+    question: emptyMultilingual() as Record<Locale, string>,
+    answer: emptyMultilingual() as Record<Locale, string>,
     sort: 0,
     is_active: true,
     sites: ['global'],
@@ -45,10 +40,11 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
 
   function openCreate() {
     setEditing(null);
+    setTab('zh');
     setForm({
       category: '',
-      question_zh: '', question_en: '', question_ru: '', question_vn: '',
-      answer_zh: '', answer_en: '', answer_ru: '', answer_vn: '',
+      question: emptyMultilingual(),
+      answer: emptyMultilingual(),
       sort: 0, is_active: true, sites: ['global'],
     });
     setShowForm(true);
@@ -56,16 +52,11 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
 
   function openEdit(faq: Faq) {
     setEditing(faq);
+    setTab('zh');
     setForm({
       category: faq.category || '',
-      question_zh: faq.question?.zh || '',
-      question_en: faq.question?.en || '',
-      question_ru: faq.question?.ru || '',
-      question_vn: faq.question?.vn || '',
-      answer_zh: faq.answer?.zh || '',
-      answer_en: faq.answer?.en || '',
-      answer_ru: faq.answer?.ru || '',
-      answer_vn: faq.answer?.vn || '',
+      question: { ...emptyMultilingual(), ...(faq.question || {}) } as Record<Locale, string>,
+      answer: { ...emptyMultilingual(), ...(faq.answer || {}) } as Record<Locale, string>,
       sort: faq.sort,
       is_active: faq.is_active,
       sites: faq.sites || ['global'],
@@ -77,8 +68,8 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
     e.preventDefault();
     setSaving(true);
     // 合并已有语言，避免覆盖丢失未在表单中展示的语言
-    const question = { ...(editing?.question || {}), zh: form.question_zh, en: form.question_en, ru: form.question_ru, vn: form.question_vn };
-    const answer = { ...(editing?.answer || {}), zh: form.answer_zh, en: form.answer_en, ru: form.answer_ru, vn: form.answer_vn };
+    const question = { ...(editing?.question || {}), ...form.question };
+    const answer = { ...(editing?.answer || {}), ...form.answer };
     const payload = { ...form, question, answer };
 
     const method = editing ? 'PUT' : 'POST';
@@ -204,79 +195,34 @@ export default function FaqsManager({ faqs: initial }: { faqs: Faq[] }) {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">问题（中文）*</label>
-                <input
-                  type="text"
-                  required
-                  className="form-input"
-                  value={form.question_zh}
-                  onChange={(e) => setForm({ ...form, question_zh: e.target.value })}
-                />
+              <div className="flex gap-1 mb-2 border-b border-gray-200 flex-wrap">
+                {LOCALES.map((l) => (
+                  <button key={l} type="button" onClick={() => setTab(l)}
+                    className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
+                    {LOCALE_LABELS[l]}
+                  </button>
+                ))}
               </div>
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">问题（英文）</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">问题 ({LOCALE_LABELS[tab]}){tab === 'zh' ? '*' : ''}</label>
                 <input
                   type="text"
+                  required={tab === 'zh'}
                   className="form-input"
-                  value={form.question_en}
-                  onChange={(e) => setForm({ ...form, question_en: e.target.value })}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">问题（俄文）</label>
-                <input
-                  type="text"
-                  className="form-input"
-                  value={form.question_ru}
-                  onChange={(e) => setForm({ ...form, question_ru: e.target.value })}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">问题（越南语）</label>
-                <input
-                  type="text"
-                  className="form-input"
-                  value={form.question_vn}
-                  onChange={(e) => setForm({ ...form, question_vn: e.target.value })}
+                  value={form.question[tab] || ''}
+                  onChange={(e) => setForm(prev => ({ ...prev, question: { ...prev.question, [tab]: e.target.value } }))}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">答案（中文）*</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">答案 ({LOCALE_LABELS[tab]}){tab === 'zh' ? '*' : ''}</label>
                 <textarea
-                  required
+                  required={tab === 'zh'}
                   rows={4}
                   className="form-input"
-                  value={form.answer_zh}
-                  onChange={(e) => setForm({ ...form, answer_zh: e.target.value })}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">答案（英文）</label>
-                <textarea
-                  rows={4}
-                  className="form-input"
-                  value={form.answer_en}
-                  onChange={(e) => setForm({ ...form, answer_en: e.target.value })}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">答案（俄文）</label>
-                <textarea
-                  rows={4}
-                  className="form-input"
-                  value={form.answer_ru}
-                  onChange={(e) => setForm({ ...form, answer_ru: e.target.value })}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">答案（越南语）</label>
-                <textarea
-                  rows={4}
-                  className="form-input"
-                  value={form.answer_vn}
-                  onChange={(e) => setForm({ ...form, answer_vn: e.target.value })}
+                  value={form.answer[tab] || ''}
+                  onChange={(e) => setForm(prev => ({ ...prev, answer: { ...prev.answer, [tab]: e.target.value } }))}
                 />
               </div>
 

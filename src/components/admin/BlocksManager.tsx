@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
 
 interface Block {
   id: string;
@@ -16,8 +17,6 @@ interface Block {
   sites: string[];
   is_active: boolean;
 }
-
-const LOCALES = ['zh', 'en', 'ru'] as const;
 
 export default function BlocksManager() {
   const [blocks, setBlocks] = useState<Block[]>([]);
@@ -168,12 +167,12 @@ function BlockForm({
   onCancel: () => void;
   saving: boolean;
 }) {
-  const [tab, setTab] = useState<'zh' | 'en' | 'ru'>('zh');
+  const [tab, setTab] = useState<Locale>('zh');
   const [formData, setFormData] = useState({
     block_key: block?.block_key || '',
-    title: block?.title || { zh: '', en: '', ru: '' },
-    subtitle: block?.subtitle || { zh: '', en: '', ru: '' },
-    content: block?.content || { zh: '', en: '', ru: '' },
+    title: block?.title || emptyMultilingual(),
+    subtitle: block?.subtitle || emptyMultilingual(),
+    content: block?.content || emptyMultilingual(),
     image_url: block?.image_url || '',
     items: block?.items ? JSON.stringify(block.items, null, 2) : '[]',
     config: block?.config ? JSON.stringify(block.config, null, 2) : '{}',
@@ -247,11 +246,11 @@ function BlockForm({
           {block && <p className="text-xs text-gray-400 mt-1">已有记录的 block_key 不可修改</p>}
         </div>
 
-        <div className="flex gap-1 mb-2 border-b border-gray-200">
+        <div className="flex gap-1 mb-2 border-b border-gray-200 flex-wrap">
           {LOCALES.map((l) => (
             <button key={l} onClick={() => setTab(l)}
               className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
-              {l === 'zh' ? '中文' : l === 'en' ? '英文' : '俄文'}
+              {LOCALE_LABELS[l]}
             </button>
           ))}
         </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
 
 interface Process {
   id: string;
@@ -13,8 +14,6 @@ interface Process {
   sites: string[];
   is_active: boolean;
 }
-
-const LOCALES = ['zh', 'en', 'ru'] as const;
 
 export default function ProcessesManager() {
   const [processes, setProcesses] = useState<Process[]>([]);
@@ -173,10 +172,10 @@ function ProcessForm({
   onCancel: () => void;
   saving: boolean;
 }) {
-  const [tab, setTab] = useState<'zh' | 'en' | 'ru'>('zh');
+  const [tab, setTab] = useState<Locale>('zh');
   const [formData, setFormData] = useState({
-    title: process?.title || { zh: '', en: '', ru: '' },
-    description: process?.description || { zh: '', en: '', ru: '' },
+    title: process?.title || emptyMultilingual(),
+    description: process?.description || emptyMultilingual(),
     step_number: process?.step_number || 1,
     icon_key: process?.icon_key || '',
     is_active: process?.is_active !== false,
@@ -202,11 +201,11 @@ function ProcessForm({
         <button onClick={onCancel} className="text-gray-400 hover:text-gray-600">✕</button>
       </div>
 
-      <div className="flex gap-1 mb-4 border-b border-gray-200">
+      <div className="flex gap-1 mb-4 border-b border-gray-200 flex-wrap">
         {LOCALES.map((l) => (
           <button key={l} onClick={() => setTab(l)}
             className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
-            {l === 'zh' ? '中文' : l === 'en' ? '英文' : '俄文'}
+            {LOCALE_LABELS[l]}
           </button>
         ))}
       </div>

@@ -48,3 +48,10 @@ export function pick(text: JsonbText, locale: string): string {
 export function toMultilingual(text: string, locale: string): Record<string, string> {
   return { [locale]: text };
 }
+
+/**
+ * 生成一个覆盖全部 LOCALES 的空 Record<string, string>
+ */
+export function emptyMultilingual(): Record<Locale, string> {
+  return Object.fromEntries(LOCALES.map((l) => [l, ''])) as Record<Locale, string>;
+}

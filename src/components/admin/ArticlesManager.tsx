@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
 
 interface Article {
   id: string;
@@ -123,12 +124,12 @@ function ArticleForm({ article, onSave, onCancel, saving }: {
   onCancel: () => void;
   saving: boolean;
 }) {
-  const [tab, setTab] = useState<'zh' | 'en' | 'vn'>('zh');
+  const [tab, setTab] = useState<Locale>('zh');
   const [data, setData] = useState({
-    title: article?.title || { zh: '', en: '', vn: '' },
-    excerpt: article?.excerpt || { zh: '', en: '', vn: '' },
-    content_html: article?.content_html || { zh: '', en: '', vn: '' },
-    meta_description: article?.meta_description || { zh: '', en: '', vn: '' },
+    title: article?.title || emptyMultilingual(),
+    excerpt: article?.excerpt || emptyMultilingual(),
+    content_html: article?.content_html || emptyMultilingual(),
+    meta_description: article?.meta_description || emptyMultilingual(),
     slug: article?.slug || '',
     cover_url: article?.cover_url || '',
     status: article?.status || 'draft',
@@ -158,11 +159,11 @@ function ArticleForm({ article, onSave, onCancel, saving }: {
         <button onClick={onCancel} className="text-gray-400 hover:text-gray-600">✕</button>
       </div>
 
-      <div className="flex gap-1 mb-4 border-b border-gray-200">
-        {(['zh', 'en', 'vn'] as const).map((l) => (
+      <div className="flex gap-1 mb-4 border-b border-gray-200 flex-wrap">
+        {LOCALES.map((l) => (
           <button key={l} onClick={() => setTab(l)}
             className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
-            {l === 'zh' ? '中文' : l === 'en' ? '英文' : '越南语'}
+            {LOCALE_LABELS[l]}
           </button>
         ))}
       </div>

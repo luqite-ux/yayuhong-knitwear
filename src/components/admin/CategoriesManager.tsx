@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
 
 interface Category {
   id: string;
@@ -102,10 +103,9 @@ function CategoryForm({ category, categories, onSave, onCancel, saving }: {
   onCancel: () => void;
   saving: boolean;
 }) {
+  const [tab, setTab] = useState<Locale>('zh');
   const [data, setData] = useState({
-    name_zh: category?.name?.zh || '',
-    name_en: category?.name?.en || '',
-    name_vn: category?.name?.vn || '',
+    name: { ...emptyMultilingual(), ...(category?.name || {}) } as Record<Locale, string>,
     slug: category?.slug || '',
     parent_id: category?.parent_id || '',
     sort: category?.sort || 0,
@@ -117,19 +117,18 @@ function CategoryForm({ category, categories, onSave, onCancel, saving }: {
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">名称（中文）</label>
-          <input className="admin-input" value={data.name_zh} onChange={(e) => set('name_zh', e.target.value)} />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">名称（英文）</label>
-          <input className="admin-input" value={data.name_en} onChange={(e) => set('name_en', e.target.value)} />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">名称（越南语）</label>
-          <input className="admin-input" value={data.name_vn} onChange={(e) => set('name_vn', e.target.value)} />
-        </div>
+      <div className="flex gap-1 mb-2 border-b border-gray-200 flex-wrap">
+        {LOCALES.map((l) => (
+          <button key={l} type="button" onClick={() => setTab(l)}
+            className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
+            {LOCALE_LABELS[l]}
+          </button>
+        ))}
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">名称 ({LOCALE_LABELS[tab]})</label>
+        <input className="admin-input" value={data.name[tab] || ''}
+          onChange={(e) => setData(prev => ({ ...prev, name: { ...prev.name, [tab]: e.target.value } }))} />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -153,7 +152,7 @@ function CategoryForm({ category, categories, onSave, onCancel, saving }: {
       <div className="flex gap-2 pt-4">
         <button onClick={() => onSave({
           // 合并已有语言，避免覆盖丢失未在表单中展示的语言
-          name: { ...(category?.name || {}), zh: data.name_zh, en: data.name_en, vn: data.name_vn },
+          name: { ...(category?.name || {}), ...data.name },
           slug: data.slug, parent_id: data.parent_id || null, sort: data.sort,
         })} disabled={saving} className="admin-btn admin-btn-primary flex-1">
           {saving ? '保存中...' : '保存'}

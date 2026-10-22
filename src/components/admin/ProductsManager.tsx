@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
 
 interface Product {
   id: string;
@@ -29,8 +30,6 @@ interface Category {
   name_text: string;
   slug: string;
 }
-
-const LOCALES = ['zh', 'en', 'ru', 'es', 'de', 'fr', 'pt', 'ja', 'ar'];
 
 export default function ProductsManager({
   products: initialProducts,
@@ -175,11 +174,11 @@ function ProductForm({
   onCancel: () => void;
   saving: boolean;
 }) {
-  const [tab, setTab] = useState<'zh' | 'en' | 'ru' | 'vn'>('zh');
+  const [tab, setTab] = useState<Locale>('zh');
   const [formData, setFormData] = useState({
-    name: product?.name || { zh: '', en: '', vn: '' },
-    summary: product?.summary || { zh: '', en: '', vn: '' },
-    detail_html: product?.detail_html || { zh: '', en: '', vn: '' },
+    name: product?.name || emptyMultilingual(),
+    summary: product?.summary || emptyMultilingual(),
+    detail_html: product?.detail_html || emptyMultilingual(),
     model: product?.model || '',
     slug: product?.slug || '',
     category_id: product?.category_id || '',
@@ -218,11 +217,11 @@ function ProductForm({
         <button onClick={onCancel} className="text-gray-400 hover:text-gray-600">✕</button>
       </div>
 
-      <div className="flex gap-1 mb-4 border-b border-gray-200">
-        {(['zh', 'en', 'ru', 'vn'] as const).map((l) => (
+      <div className="flex gap-1 mb-4 border-b border-gray-200 flex-wrap">
+        {LOCALES.map((l) => (
           <button key={l} onClick={() => setTab(l)}
             className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
-            {l === 'zh' ? '中文' : l === 'en' ? '英文' : l === 'ru' ? '俄文' : '越南语'}
+            {LOCALE_LABELS[l]}
           </button>
         ))}
       </div>

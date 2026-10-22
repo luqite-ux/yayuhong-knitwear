@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { LOCALES, LOCALE_LABELS, type Locale, emptyMultilingual } from '@/lib/i18n';
 
 interface Service {
   id: string;
@@ -16,8 +17,6 @@ interface Service {
   sites: string[];
   is_active: boolean;
 }
-
-const LOCALES = ['zh', 'en', 'ru'] as const;
 
 export default function ServicesManager() {
   const [services, setServices] = useState<Service[]>([]);
@@ -174,12 +173,12 @@ function ServiceForm({
   onCancel: () => void;
   saving: boolean;
 }) {
-  const [tab, setTab] = useState<'zh' | 'en' | 'ru'>('zh');
+  const [tab, setTab] = useState<Locale>('zh');
   const [formData, setFormData] = useState({
-    title: service?.title || { zh: '', en: '', ru: '' },
-    summary: service?.summary || { zh: '', en: '', ru: '' },
-    description: service?.description || { zh: '', en: '', ru: '' },
-    highlights: service?.highlights || { zh: [], en: [], ru: [] },
+    title: service?.title || emptyMultilingual(),
+    summary: service?.summary || emptyMultilingual(),
+    description: service?.description || emptyMultilingual(),
+    highlights: service?.highlights || Object.fromEntries(LOCALES.map((l) => [l, []])) as unknown as Record<Locale, string[]>,
     icon_key: service?.icon_key || '',
     gradient_from: service?.gradient_from || '',
     gradient_to: service?.gradient_to || '',
@@ -203,7 +202,7 @@ function ServiceForm({
     const lines = value.split('\n').filter((l) => l.trim() !== '');
     setFormData((prev) => ({
       ...prev,
-      highlights: { ...(prev.highlights as Record<string, string[]>), [locale]: lines },
+      highlights: { ...(prev.highlights), [locale]: lines } as Record<Locale, string[]>,
     }));
   }
 
@@ -214,11 +213,11 @@ function ServiceForm({
         <button onClick={onCancel} className="text-gray-400 hover:text-gray-600">✕</button>
       </div>
 
-      <div className="flex gap-1 mb-4 border-b border-gray-200">
+      <div className="flex gap-1 mb-4 border-b border-gray-200 flex-wrap">
         {LOCALES.map((l) => (
           <button key={l} onClick={() => setTab(l)}
             className={`px-3 py-1.5 text-sm border-b-2 ${tab === l ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}>
-            {l === 'zh' ? '中文' : l === 'en' ? '英文' : '俄文'}
+            {LOCALE_LABELS[l]}
           </button>
         ))}
       </div>
