@@ -21,6 +21,11 @@ try {
   inquiryAttributionSql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0011_inquiry_attribution.sql'), 'utf8');
 } catch {}
 
+let captchaChallengesSql = '';
+try {
+  captchaChallengesSql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0012_captcha_challenges.sql'), 'utf8');
+} catch {}
+
 const MIGRATIONS: { name: string; sql: string }[] = [
   {
     name: '0001_init.sql',
@@ -671,6 +676,10 @@ create index if not exists idx_api_keys_active on admin_api_keys(is_active);
   {
     name: '0011_inquiry_attribution.sql',
     sql: inquiryAttributionSql,
+  },
+  {
+    name: '0012_captcha_challenges.sql',
+    sql: captchaChallengesSql,
   },
 ];
 

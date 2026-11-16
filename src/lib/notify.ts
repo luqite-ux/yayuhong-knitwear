@@ -158,11 +158,11 @@ async function notifyEmail(inquiry: Inquiry) {
     },
   });
 
-  // 支持多个收件人：to 字段可用逗号/分号/空格分隔
-  const recipients = cfg.to
-    .split(/[,;\s]+/)
-    .map((s) => s.trim())
-    .filter(Boolean);
+  // 保留原收件人，并始终抄送到业务邮箱
+  const recipients = [...new Set([
+    ...cfg.to.split(/[,;\s]+/).map((s) => s.trim()).filter(Boolean),
+    'info@xiuyuknit.com',
+  ])];
 
   if (recipients.length === 0) return;
 

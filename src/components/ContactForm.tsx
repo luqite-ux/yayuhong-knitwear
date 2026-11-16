@@ -11,6 +11,8 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [captcha, setCaptcha] = useState('');
+  const [captchaUrl, setCaptchaUrl] = useState('/api/public/captcha');
 
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
@@ -18,6 +20,11 @@ export default function ContactForm() {
   });
 
   const set = (field: string, value: string) => setForm((p) => ({ ...p, [field]: value }));
+
+  const refreshCaptcha = () => {
+    setCaptcha('');
+    setCaptchaUrl(`/api/public/captcha?ts=${Date.now()}`);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +37,7 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
+          captcha,
           locale,
           // 归因信息
           referrer: attr.referrer || null,
@@ -47,11 +55,13 @@ export default function ContactForm() {
         const data = await res.json();
         setError(data.error || 'Submission failed');
         setIsSubmitting(false);
+        refreshCaptcha();
         return;
       }
       setIsSubmitted(true);
     } catch {
       setError('Network error');
+      refreshCaptcha();
     }
     setIsSubmitting(false);
   };
@@ -168,6 +178,46 @@ export default function ContactForm() {
               'Please describe your requirements, e.g. styles, materials, target price, etc. We will get back to you soon...',
             )}
           />
+        </div>
+
+        <div className="md:col-span-2">
+          <label htmlFor="captcha" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            {zhOrEn(locale, '验证码', '驗證碼', 'Captcha')} *
+          </label>
+          <div className="flex flex-wrap items-center gap-3">
+            <input
+              id="captcha"
+              type="text"
+              inputMode="numeric"
+              autoComplete="off"
+              pattern="[0-9]{5}"
+              maxLength={5}
+              required
+              className="form-input w-36 text-center text-lg tracking-[0.25em]"
+              value={captcha}
+              onChange={(e) => setCaptcha(e.target.value.replace(/\D/g, '').slice(0, 5))}
+              placeholder={zhOrEn(locale, '5位数字', '5位數字', '5 digits')}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element -- The SVG response sets the captcha cookie. */}
+            <img
+              key={captchaUrl}
+              src={captchaUrl}
+              width={150}
+              height={52}
+              className="h-[52px] w-[150px] shrink-0 rounded-lg border border-[var(--color-border)]"
+              alt={zhOrEn(locale, '数字验证码图片', '數字驗證碼圖片', 'Numeric captcha image')}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                setError('');
+                refreshCaptcha();
+              }}
+              className="text-sm font-medium text-[var(--color-primary)] hover:underline disabled:opacity-50"
+            >
+              {zhOrEn(locale, '刷新验证码', '刷新驗證碼', 'Refresh captcha')}
+            </button>
+          </div>
         </div>
       </div>
 

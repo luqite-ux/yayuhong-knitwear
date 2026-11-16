@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { notifyInquiry } from '@/lib/notify';
+import { CAPTCHA_COOKIE_NAME, consumeCaptchaChallenge } from '@/lib/captcha';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -14,6 +15,11 @@ export async function POST(req: NextRequest) {
 
   if (!name || !email || !message) {
     return NextResponse.json({ error: '请填写姓名、邮箱和留言' }, { status: 400 });
+  }
+
+  const captchaId = req.cookies.get(CAPTCHA_COOKIE_NAME)?.value;
+  if (!(await consumeCaptchaChallenge(captchaId, body.captcha))) {
+    return NextResponse.json({ error: '验证码错误或已过期，请刷新后重试' }, { status: 400 });
   }
 
   const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || '';
@@ -47,5 +53,7 @@ export async function POST(req: NextRequest) {
     utm_source, utm_medium, utm_campaign, utm_term, utm_content,
   });
 
-  return NextResponse.json({ ok: true });
+  const response = NextResponse.json({ ok: true });
+  response.cookies.delete(CAPTCHA_COOKIE_NAME);
+  return response;
 }
