@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { zhOrEn } from '@/lib/locale-text';
+import { getAttribution } from '@/lib/attribution';
 
 export default function ContactForm() {
   const t = useTranslations('contact.form');
@@ -23,10 +24,24 @@ export default function ContactForm() {
     setError('');
     setIsSubmitting(true);
     try {
+      const attr = getAttribution();
       const res = await fetch('/api/public/inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, locale }),
+        body: JSON.stringify({
+          ...form,
+          locale,
+          // 归因信息
+          referrer: attr.referrer || null,
+          landing_page: attr.landing_page || null,
+          submit_page: typeof window !== 'undefined' ? window.location.href : null,
+          utm_source: attr.utm_source || null,
+          utm_medium: attr.utm_medium || null,
+          utm_campaign: attr.utm_campaign || null,
+          utm_term: attr.utm_term || null,
+          utm_content: attr.utm_content || null,
+          first_touch_at: attr.first_touch_at || null,
+        }),
       });
       if (!res.ok) {
         const data = await res.json();

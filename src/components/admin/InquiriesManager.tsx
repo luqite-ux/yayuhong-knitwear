@@ -17,6 +17,25 @@ interface Inquiry {
   admin_note: string | null;
   country: string | null;
   created_at: string;
+  // 归因字段
+  referrer?: string | null;
+  landing_page?: string | null;
+  submit_page?: string | null;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
+  utm_term?: string | null;
+  utm_content?: string | null;
+  user_agent?: string | null;
+  first_touch_at?: string | null;
+}
+
+// 安全的日期格式化：无效/空值显示「—」而不是 "Invalid Date"
+function fmtDate(v: unknown): string {
+  if (!v) return '—';
+  const d = v instanceof Date ? v : new Date(String(v));
+  if (Number.isNaN(d.getTime())) return '—';
+  return d.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
 }
 
 interface StatItem {
@@ -210,7 +229,7 @@ Yayuhong Knitwear`;
                   <td className="py-2 px-3 text-gray-600">{i.company || '—'}</td>
                   <td className="py-2 px-3 text-gray-600 max-w-xs truncate">{i.subject || '—'}</td>
                   <td className="py-2 px-3 text-gray-400 text-xs">
-                    {new Date(i.created_at).toLocaleString('zh-CN')}
+                    {fmtDate(i.created_at)}
                   </td>
                   <td className="py-2 px-3">
                     <span className={`admin-badge ${STATUS_MAP[i.status]?.cls || ''}`}>
@@ -268,7 +287,7 @@ Yayuhong Knitwear`;
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-1">{selected.name}</h3>
                 <p className="text-sm text-gray-500 mb-4">
-                  {new Date(selected.created_at).toLocaleString('zh-CN')} · 来源：{selected.source}
+                  {fmtDate(selected.created_at)} · 来源：{selected.source}
                   {selected.country && ` · ${selected.country}`}
                 </p>
               </div>
@@ -312,6 +331,73 @@ Yayuhong Knitwear`;
                   {selected.message || '（无）'}
                 </div>
               </div>
+
+              {/* 归因信息 */}
+              {(selected.referrer || selected.landing_page || selected.submit_page ||
+                selected.utm_source || selected.utm_medium || selected.utm_campaign ||
+                selected.utm_term || selected.utm_content || selected.first_touch_at) && (
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">来源归因</h4>
+                  <div className="bg-blue-50/50 rounded-lg p-4 space-y-2 text-sm border border-blue-100">
+                    {selected.utm_source && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">UTM 来源</span>
+                        <span className="text-gray-900 break-all">{selected.utm_source}</span>
+                      </div>
+                    )}
+                    {selected.utm_medium && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">UTM 媒介</span>
+                        <span className="text-gray-900 break-all">{selected.utm_medium}</span>
+                      </div>
+                    )}
+                    {selected.utm_campaign && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">UTM 活动</span>
+                        <span className="text-gray-900 break-all">{selected.utm_campaign}</span>
+                      </div>
+                    )}
+                    {selected.utm_term && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">UTM 关键词</span>
+                        <span className="text-gray-900 break-all">{selected.utm_term}</span>
+                      </div>
+                    )}
+                    {selected.utm_content && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">UTM 内容</span>
+                        <span className="text-gray-900 break-all">{selected.utm_content}</span>
+                      </div>
+                    )}
+                    {selected.referrer && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">引荐来源</span>
+                        <a href={selected.referrer} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all">
+                          {selected.referrer}
+                        </a>
+                      </div>
+                    )}
+                    {selected.landing_page && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">首次落地页</span>
+                        <span className="text-gray-700 break-all">{selected.landing_page}</span>
+                      </div>
+                    )}
+                    {selected.submit_page && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">提交页面</span>
+                        <span className="text-gray-700 break-all">{selected.submit_page}</span>
+                      </div>
+                    )}
+                    {selected.first_touch_at && (
+                      <div className="flex gap-2">
+                        <span className="text-gray-500 w-24 flex-shrink-0">首次触点</span>
+                        <span className="text-gray-700">{fmtDate(selected.first_touch_at)}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* 状态流转 */}
               {nextStatuses.length > 0 && (
@@ -405,7 +491,7 @@ Yayuhong Knitwear`;
                                 {STATUS_MAP[fu.status_before]?.label} → {STATUS_MAP[fu.status_after]?.label}
                               </span>
                             )}
-                            <span>{new Date(fu.created_at).toLocaleString('zh-CN')}</span>
+                            <span>{fmtDate(fu.created_at)}</span>
                           </div>
                           {fu.content && (
                             <p className="text-gray-600 mt-1">{fu.content}</p>

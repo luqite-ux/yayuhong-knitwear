@@ -6,7 +6,10 @@ export const dynamic = 'force-dynamic';
 export default async function InquiriesPage() {
   const inquiryRows = await sql`
     select id, name, email, phone, whatsapp, company, subject, message, locale, ip,
-           status, source, admin_note, country, created_at
+           status, source, admin_note, country, created_at,
+           referrer, landing_page, submit_page,
+           utm_source, utm_medium, utm_campaign, utm_term, utm_content,
+           user_agent, first_touch_at
     from inquiries
     order by created_at desc
     limit 200

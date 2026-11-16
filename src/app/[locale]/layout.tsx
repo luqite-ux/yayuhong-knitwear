@@ -14,6 +14,7 @@ import ChinaSeoHead from '@/components/china/ChinaSeoHead';
 import ChinaGeoFooter from '@/components/china/ChinaGeoFooter';
 import Ga4Script from '@/components/Ga4Script';
 import SiteUrlNormalizer from '@/components/SiteUrlNormalizer';
+import AttributionCapture from '@/components/AttributionCapture';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -140,6 +141,7 @@ export default async function LocaleLayout({
       <body className={`min-h-screen flex flex-col ${isChina ? 'bg-white' : 'bg-[var(--color-cream)]'}`}>
         <NextIntlClientProvider messages={messages}>
           <SiteUrlNormalizer />
+          <AttributionCapture />
           {isChina && <ChinaSeoHead />}
           {!isChina && <Ga4Script />}
           {isChina ? <ChinaHeader /> : <Header />}

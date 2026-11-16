@@ -16,6 +16,11 @@ try {
   sortFixSql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0010_vietnam_sort_fix.sql'), 'utf8');
 } catch {}
 
+let inquiryAttributionSql = '';
+try {
+  inquiryAttributionSql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0011_inquiry_attribution.sql'), 'utf8');
+} catch {}
+
 const MIGRATIONS: { name: string; sql: string }[] = [
   {
     name: '0001_init.sql',
@@ -662,6 +667,10 @@ create index if not exists idx_api_keys_active on admin_api_keys(is_active);
   {
     name: '0010_vietnam_sort_fix.sql',
     sql: sortFixSql,
+  },
+  {
+    name: '0011_inquiry_attribution.sql',
+    sql: inquiryAttributionSql,
   },
 ];
 

@@ -9,6 +9,15 @@ type Inquiry = {
   subject?: string;
   message: string;
   locale: string;
+  // 归因字段（可选）
+  referrer?: string;
+  landing_page?: string;
+  submit_page?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
 };
 
 async function getFeishuWebhook(): Promise<string | null> {
@@ -72,7 +81,7 @@ async function getEmailConfig(): Promise<EmailConfig | null> {
 }
 
 function buildFields(inquiry: Inquiry) {
-  return [
+  const fields: Array<[string, string]> = [
     ['姓名', inquiry.name],
     ['邮箱', inquiry.email],
     ['电话', inquiry.phone || '未提供'],
@@ -82,6 +91,18 @@ function buildFields(inquiry: Inquiry) {
     ['语言', inquiry.locale],
     ['时间', new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })],
   ];
+
+  // 归因信息（仅在有时显示，保持通知简洁）
+  const attr: Array<[string, string]> = [];
+  if (inquiry.utm_source) attr.push(['UTM 来源', inquiry.utm_source]);
+  if (inquiry.utm_medium) attr.push(['UTM 媒介', inquiry.utm_medium]);
+  if (inquiry.utm_campaign) attr.push(['UTM 活动', inquiry.utm_campaign]);
+  if (inquiry.utm_term) attr.push(['UTM 关键词', inquiry.utm_term]);
+  if (inquiry.referrer) attr.push(['引荐来源', inquiry.referrer]);
+  if (inquiry.landing_page) attr.push(['首次落地页', inquiry.landing_page]);
+  if (inquiry.submit_page) attr.push(['提交页面', inquiry.submit_page]);
+
+  return [...fields, ...attr];
 }
 
 async function notifyFeishu(inquiry: Inquiry) {
@@ -137,9 +158,17 @@ async function notifyEmail(inquiry: Inquiry) {
     },
   });
 
+  // 支持多个收件人：to 字段可用逗号/分号/空格分隔
+  const recipients = cfg.to
+    .split(/[,;\s]+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  if (recipients.length === 0) return;
+
   await transporter.sendMail({
     from: `${cfg.fromName} <${cfg.user}>`,
-    to: cfg.to,
+    to: recipients.join(', '),
     subject: `[询盘] ${inquiry.name} - ${inquiry.subject || inquiry.message.slice(0, 20)}`,
     html,
   });
