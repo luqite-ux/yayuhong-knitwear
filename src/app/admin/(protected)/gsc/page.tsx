@@ -2,16 +2,43 @@ import { sql } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
+function fmtDate(v: unknown): string {
+  if (!v) return '-';
+  const d = v instanceof Date ? v : new Date(String(v));
+  if (Number.isNaN(d.getTime())) return String(v);
+  return d.toISOString().slice(0, 10);
+}
+
 export default async function GscPage() {
-  const [properties, metrics, keywords] = await Promise.all([
-    sql`select * from seo_gsc_properties order by created_at`,
-    sql`select * from seo_daily_metrics order by date desc limit 30`,
-    sql`select keyword, locale, source, is_tracked from seo_keywords where source = 'gsc' order by created_at desc limit 20`,
-  ]);
+  let properties: any[] = [];
+  let metrics: any[] = [];
+  let keywords: any[] = [];
+  let dbError: string | null = null;
+
+  try {
+    const res = await Promise.all([
+      sql`select * from seo_gsc_properties order by created_at`,
+      sql`select * from seo_daily_metrics order by date desc limit 30`,
+      sql`select keyword, locale, source, is_tracked from seo_keywords where source = 'gsc' order by created_at desc limit 20`,
+    ]);
+    properties = res[0] as any[];
+    metrics = res[1] as any[];
+    keywords = res[2] as any[];
+  } catch (err: any) {
+    dbError = err?.message || String(err);
+    console.error('[admin/gsc] 数据读取失败:', dbError);
+  }
 
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Google Search Console</h1>
+
+      {dbError && (
+        <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          <p className="font-semibold mb-1">数据读取失败</p>
+          <p className="break-all">{dbError}</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div className="admin-card">
@@ -50,11 +77,11 @@ export default async function GscPage() {
               <tbody>
                 {metrics.map((m) => (
                   <tr key={m.id} className="border-b border-gray-50">
-                    <td className="py-1 px-2 text-gray-600">{m.date}</td>
-                    <td className="py-1 px-2 text-gray-600">{m.impressions}</td>
-                    <td className="py-1 px-2 text-gray-600">{m.clicks}</td>
-                    <td className="py-1 px-2 text-gray-600">{(m.ctr * 100).toFixed(1)}%</td>
-                    <td className="py-1 px-2 text-gray-600">{Number(m.avg_position).toFixed(1)}</td>
+                    <td className="py-1 px-2 text-gray-600">{fmtDate(m.date)}</td>
+                    <td className="py-1 px-2 text-gray-600">{Number(m.impressions ?? 0)}</td>
+                    <td className="py-1 px-2 text-gray-600">{Number(m.clicks ?? 0)}</td>
+                    <td className="py-1 px-2 text-gray-600">{(Number(m.ctr ?? 0) * 100).toFixed(1)}%</td>
+                    <td className="py-1 px-2 text-gray-600">{Number(m.avg_position ?? 0).toFixed(1)}</td>
                   </tr>
                 ))}
               </tbody>
