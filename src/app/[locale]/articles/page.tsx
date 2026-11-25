@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sql, deepParseJson } from '@/lib/db';
 import { localizeText, zhText } from '@/lib/zh-hant';
 import { getCurrentSiteKey } from '@/lib/site';
+import { buildAlternates } from '@/lib/seo';
 import Link from 'next/link';
 
 function ArrowRight({ className }: { className?: string }) {
@@ -13,6 +14,17 @@ function ArrowRight({ className }: { className?: string }) {
 }
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const siteKey = await getCurrentSiteKey();
+  return {
+    title: 'Knitwear Sourcing Guides & OEM/ODM Insights | Xiuyu Knitwear',
+    description:
+      'Practical guides on custom knitwear manufacturing: MOQ, sampling, yarn selection, quality control and lead times for global brands.',
+    alternates: buildAlternates({ locale, path: '/articles', siteKey }),
+  };
+}
 
 export default async function ArticlesPage({
   params,

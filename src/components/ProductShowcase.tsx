@@ -13,6 +13,16 @@ const productImages = [
   '/images/products/accessories-1.jpg',
 ];
 
+// 与 messages 中 products.categories 的顺序对应
+const categoryHrefs = [
+  '/products/category/womens-sweater',
+  '/products/category/kids-sweater',
+  '/products/category/mens-sweater',
+  '/products/category/loungewear-set',
+  '/products/category/pet-clothes',
+  '/products/category/knit-accessories',
+];
+
 export interface VnCategoryCard {
   slug: string;
   name: Record<string, string>;
@@ -125,9 +135,10 @@ export default function ProductShowcase({ vnCategories }: ProductShowcaseProps) 
         {/* Product grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((cat: { name: string; desc: string; count: string }, index: number) => (
-            <div
+            <Link
               key={index}
-              className="group bg-white rounded-2xl overflow-hidden card-hover cursor-pointer"
+              href={categoryHrefs[index] || '/products'}
+              className="group bg-white rounded-2xl overflow-hidden card-hover block"
             >
               {/* Image area */}
               <div className="aspect-[4/3] bg-[var(--color-warm-gray)] relative overflow-hidden">
@@ -150,14 +161,14 @@ export default function ProductShowcase({ vnCategories }: ProductShowcaseProps) 
                 <p className="text-[var(--color-text-muted)] text-sm mb-4">
                   {cat.desc}
                 </p>
-                <Link href="/products" className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] group-hover:gap-2 transition-all">
                   {zhOrEn(locale, '查看详情', '查看詳情', 'Learn more')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         

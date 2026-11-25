@@ -3,6 +3,8 @@ import { Link } from '@/i18n/navigation';
 import FloatingContact from '@/components/FloatingContact';
 import ProcessTimeline from '@/components/ProcessTimeline';
 import { zhText } from '@/lib/zh-hant';
+import { getCurrentSiteKey } from '@/lib/site';
+import { buildAlternates } from '@/lib/seo';
 
 const servicesData = [
   {
@@ -91,10 +93,12 @@ const faqData = [
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'services' });
+  const siteKey = await getCurrentSiteKey();
   
   return {
-    title: t('title') + ' - Yayuhong Knitwear',
+    title: t('title') + ' - OEM/ODM Knitwear Services | Xiuyu Knitwear',
     description: t('subtitle'),
+    alternates: buildAlternates({ locale, path: '/services', siteKey }),
   };
 }
 

@@ -4,6 +4,7 @@ import { localizeText } from '@/lib/zh-hant';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getCurrentSiteKey } from '@/lib/site';
+import { buildAlternates } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,7 +37,7 @@ export async function generateMetadata({
   return {
     title,
     description: desc,
-    alternates: { canonical: `${baseUrl}/${locale}/articles/${slug}` },
+    alternates: buildAlternates({ locale, path: `/articles/${slug}`, siteKey }),
     openGraph: {
       title,
       description: desc,

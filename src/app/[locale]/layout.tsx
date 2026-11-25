@@ -2,7 +2,7 @@
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { isRTL, LOCALES } from '@/lib/i18n';
+import { isRTL } from '@/lib/i18n';
 import { zhText, localizedKeywords } from '@/lib/zh-hant';
 import { getCurrentSiteKey } from '@/lib/site';
 import { getChinaSeoConfig, getChinaSeoMetas } from '@/lib/china-seo';
@@ -34,12 +34,6 @@ const OG_LOCALES: Record<string, string> = {
   vn: 'vi_VN',
 };
 
-function hreflang(locale: string) {
-  if (locale === 'zh') return 'zh-CN';
-  if (locale === 'zh-TW') return 'zh-Hant';
-  return locale;
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const siteKey = await getCurrentSiteKey();
@@ -62,9 +56,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
       description: '亚裕鸿毛织厂，20年毛织经验，专业提供毛衣OEM贴牌、ODM设计开发、来图来样定制服务。300+台电脑横机，月产能100万件，MOQ 50件起订，7天快速打样。',
       keywords: '毛衫厂,毛衣定制,毛织厂,澄海毛织厂,汕头毛织厂,毛衣OEM,毛衣ODM,来样加工,小单快反,毛衫加工厂',
-      alternates: {
-        canonical: 'https://xiuyumaoshan.cn',
-      },
       openGraph: {
         title: '亚裕鸿毛织厂 - 专业毛衣OEM/ODM定制',
         description: '20年毛织经验，源头工厂直供，OEM/ODM/来图来样一站式服务',
@@ -93,19 +84,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'knitwear manufacturer, sweater factory, custom knitwear, China sweater supplier, OEM knitwear, ODM sweater, fast fashion, small MOQ',
       'nhà máy dệt kim, áo len, áo cardigan mỏng, áo thun dệt kim, OEM dệt kim, ODM áo len, xưởng dệt kim Trung Quốc, áo len mùa hè, áo khoác chống nắng, thời trang nhanh, MOQ thấp',
     ),
-    alternates: {
-      canonical: `${baseUrl}/${locale}`,
-      languages: Object.fromEntries(
-        LOCALES.map((l) => [hreflang(l), `${baseUrl}/${l}`]),
-      ),
-    },
     openGraph: {
       title,
       description,
       type: 'website',
       locale: ogLocale,
       url: `${baseUrl}/${locale}`,
-      siteName: 'Yayuhong Knitwear',
+      siteName: 'Xiuyu Knitwear',
     },
     twitter: {
       card: 'summary_large_image',
@@ -114,6 +99,40 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
   };
 }
+
+const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Xiuyu Knitwear',
+  alternateName: ['裕鸿毛衫', '亚裕鸿毛织厂', 'Shenzhen Xiuyu Network Technology Co., Ltd.'],
+  url: 'https://xiuyuknit.com/en',
+  logo: 'https://xiuyuknit.com/images/logo/logo-new.jpg',
+  description:
+    'Knitwear OEM/ODM manufacturer in Chenghai, Shantou, China. 20 years of sweater manufacturing for global brands, MOQ 50 pcs, 7-day sampling.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'No.30, Guanshan Nanxiang Road, Chenghua, Chenghai',
+    addressLocality: 'Shantou',
+    addressRegion: 'Guangdong',
+    addressCountry: 'CN',
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+86-138-2965-9110',
+      contactType: 'sales',
+      availableLanguage: ['en', 'zh', 'vi'],
+    },
+  ],
+};
+
+const WEBSITE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Xiuyu Knitwear',
+  url: 'https://xiuyuknit.com/en',
+  inLanguage: ['en', 'zh', 'vi'],
+};
 
 export default async function LocaleLayout({
   children,
@@ -139,6 +158,18 @@ export default async function LocaleLayout({
   return (
     <html lang={htmlLang} dir={dir} suppressHydrationWarning>
       <body className={`min-h-screen flex flex-col ${isChina ? 'bg-white' : 'bg-[var(--color-cream)]'}`}>
+        {!isChina && (
+          <>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}
+            />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
+            />
+          </>
+        )}
         <NextIntlClientProvider messages={messages}>
           <SiteUrlNormalizer />
           <AttributionCapture />

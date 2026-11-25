@@ -4,16 +4,10 @@ import { localizeText, zhText } from '@/lib/zh-hant';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
 import { getCurrentSiteKey } from '@/lib/site';
-import { LOCALES } from '@/lib/i18n';
+import { buildAlternates } from '@/lib/seo';
 import FloatingContact from '@/components/FloatingContact';
 
 export const dynamic = 'force-dynamic';
-
-function hreflang(locale: string) {
-  if (locale === 'zh') return 'zh-CN';
-  if (locale === 'zh-TW') return 'zh-Hant';
-  return locale;
-}
 
 export async function generateMetadata({
   params,
@@ -24,10 +18,12 @@ export async function generateMetadata({
   const siteKey = await getCurrentSiteKey();
   const t = await getTranslations({ locale, namespace: 'products' });
 
+  const isVn = locale === 'vn';
   const rows = await sql`
     select slug, name
     from content_categories
     where slug = ${slug}
+      and ${isVn ? sql`slug like 'vn-%'` : sql`slug not like 'vn-%'`}
     limit 1
   `;
 
@@ -42,17 +38,16 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
   const categoryUrl = `${baseUrl}/${locale}/products/category/${slug}`;
 
-  const isChina = siteKey === 'china';
-  const locales = isChina ? [] : [...LOCALES];
+
 
   const description = zhText(
     locale,
     `${categoryName}批发定制 - 秀裕毛衫20年专业针织毛衣工厂，提供${categoryName}OEM/ODM定制服务，50件起订，7天交货，支持来图来样定制。`,
-    `Wholesale ${categoryName.toLowerCase()} - Yayuhong Knitwear, a professional sweater manufacturer with 20 years of experience. OEM/ODM custom ${categoryName.toLowerCase()} service, MOQ 50 pcs, 7-day delivery.`,
+    `Wholesale ${categoryName.toLowerCase()} - Xiuyu Knitwear, a professional sweater manufacturer with 20 years of experience. OEM/ODM custom ${categoryName.toLowerCase()} service, MOQ 50 pcs, 7-day delivery.`,
   );
 
   return {
-    title: `${categoryName} Wholesale - Custom ${categoryName} Factory | Yayuhong Knitwear`,
+    title: `${categoryName} Wholesale - Custom ${categoryName} Factory | Xiuyu Knitwear`,
     description,
     keywords: [
       categoryName,
@@ -63,18 +58,19 @@ export async function generateMetadata({
       'knitwear supplier',
       'OEM sweater',
     ],
-    alternates: {
-      canonical: categoryUrl,
-      languages: isChina ? undefined : Object.fromEntries(
-        locales.map((l) => [hreflang(l), `${baseUrl}/${l}/products/category/${slug}`]),
-      ),
-    },
+    alternates: buildAlternates({
+      locale,
+      path: `/products/category/${slug}`,
+      siteKey,
+      includeVn: false,
+      localized: !isVn,
+    }),
     openGraph: {
       title: `${categoryName} Wholesale - ${categoryName} Factory`,
       description,
       type: 'website',
       url: categoryUrl,
-      siteName: 'Yayuhong Knitwear',
+      siteName: 'Xiuyu Knitwear',
     },
     twitter: {
       card: 'summary_large_image',
@@ -92,11 +88,13 @@ export async function generateMetadata({
   };
 }
 
-async function getCategoryWithProducts(slug: string, siteKey: string) {
+async function getCategoryWithProducts(slug: string, siteKey: string, locale: string) {
+  const isVn = locale === 'vn';
   const catRows = await sql`
     select id, slug, name, sort
     from content_categories
     where slug = ${slug}
+      and ${isVn ? sql`slug like 'vn-%'` : sql`slug not like 'vn-%'`}
     limit 1
   `;
 
@@ -114,7 +112,9 @@ async function getCategoryWithProducts(slug: string, siteKey: string) {
     from content_products
     where category_id = ${category.id}
       and is_active = true
-      and sites && array['global', ${siteKey}]::text[]
+      and ${isVn
+        ? sql`slug like 'vn-%'`
+        : sql`slug not like 'vn-%' and sites && array['global', ${siteKey}]::text[]`}
     order by sort, created_at
   `;
 
@@ -139,7 +139,7 @@ export default async function CategoryPage({
   const t = await getTranslations({ locale, namespace: 'products' });
   const siteKey = await getCurrentSiteKey();
 
-  const data = await getCategoryWithProducts(slug, siteKey);
+  const data = await getCategoryWithProducts(slug, siteKey, locale);
   if (!data) notFound();
 
   const { category, products } = data;
@@ -151,7 +151,7 @@ export default async function CategoryPage({
   const collectionSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: `${categoryName} - Yayuhong Knitwear`,
+    name: `${categoryName} - Xiuyu Knitwear`,
     description: zhText(
       locale,
       `${categoryName}批发定制，${products.length}款可选，MOQ 50件`,
@@ -205,11 +205,11 @@ export default async function CategoryPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <nav className="text-sm text-white/60 mb-6">
-            <Link href={`/${locale}`} className="hover:text-white">
+            <Link href="/" className="hover:text-white">
               {zhText(locale, '首页', 'Home')}
             </Link>
             {' / '}
-            <Link href={`/${locale}/products`} className="hover:text-white">
+            <Link href="/products" className="hover:text-white">
               {zhText(locale, '产品中心', 'Products')}
             </Link>
             {' / '}
@@ -315,7 +315,7 @@ export default async function CategoryPage({
                 {zhText(
                   locale,
                   `秀裕毛衫拥有20年${categoryName}生产经验，是一家集设计、生产、销售于一体的专业针织服装工厂。我们支持OEM、ODM、OBM等多种合作模式，从样品开发到大货生产，全程质量把控。`,
-                  `Yayuhong Knitwear has 20 years of experience in ${categoryName.toLowerCase()} manufacturing. We are a professional knitwear factory integrating design, production and sales. We support OEM, ODM and ODM cooperation models.`,
+                  `Xiuyu Knitwear has 20 years of experience in ${categoryName.toLowerCase()} manufacturing. We are a professional knitwear factory integrating design, production and sales. We support OEM, ODM and ODM cooperation models.`,
                 )}
               </p>
               <ul className="space-y-3 mb-6">

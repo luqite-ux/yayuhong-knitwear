@@ -2,6 +2,8 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 
 export const dynamic = 'force-dynamic';
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default async function TestPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

@@ -18,14 +18,14 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/_next/', '/api/', '/admin'],
+        disallow: ['/api/', '/admin'],
       },
       // 国内站额外针对百度蜘蛛
       ...(siteKey === 'china' ? [
         {
           userAgent: 'Baiduspider',
           allow: '/',
-          disallow: ['/_next/', '/api/', '/admin'],
+          disallow: ['/api/', '/admin'],
         },
       ] : []),
     ],

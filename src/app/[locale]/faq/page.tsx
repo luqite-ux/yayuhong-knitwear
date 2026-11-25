@@ -3,8 +3,21 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import FaqAccordion from '@/components/FaqAccordion';
 import { getCurrentSiteKey } from '@/lib/site';
 import { localizeText, toTraditional } from '@/lib/zh-hant';
+import { buildAlternates } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'faq' });
+  const siteKey = await getCurrentSiteKey();
+  return {
+    title: t('title') + ' - Knitwear OEM/ODM FAQ | Xiuyu Knitwear',
+    description:
+      'Answers about MOQ, sampling, lead time, fabric and pricing for custom knitwear manufacturing in China.',
+    alternates: buildAlternates({ locale, path: '/faq', siteKey }),
+  };
+}
 
 export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

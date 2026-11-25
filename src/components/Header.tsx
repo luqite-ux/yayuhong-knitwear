@@ -53,12 +53,12 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-2">
             <img 
               src="/images/logo/logo-new.jpg" 
-              alt="Yayuhong Knitwear Logo" 
+              alt="Xiuyu Knitwear Logo" 
               className="w-10 h-10 rounded-lg object-cover shadow-sm"
             />
             <div className="hidden sm:block">
               <div className={`font-bold text-base leading-tight ${showTransparent ? 'text-white' : 'text-[var(--color-primary)]'}`}>
-                {zhOrEn(locale, '亚裕鸿毛织', '亞裕鴻毛織', 'Yayuhong Knit')}
+                {zhOrEn(locale, '亚裕鸿毛织', '亞裕鴻毛織', 'Xiuyu Knit')}
               </div>
               <div className={`text-xs ${showTransparent ? 'text-white/60' : 'text-[var(--color-text-muted)]'}`}>
                 {zhOrEn(locale, '快时尚源头工厂', '快時尚源頭工廠', 'Fast Fashion Factory')}

@@ -2,6 +2,7 @@
 import { getCurrentSiteKey } from '@/lib/site';
 import { zhText } from '@/lib/zh-hant';
 import { sql, deepParseJson } from '@/lib/db';
+import { buildAlternates } from '@/lib/seo';
 
 // 海外站组件
 import Hero from '@/components/Hero';
@@ -34,20 +35,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   if (siteKey === 'china') {
     return {
-      title: '亚裕鸿毛织厂 - 专业毛衣OEM/ODM定制 | 汕头澄海源头工厂',
+      title: { absolute: '亚裕鸿毛织厂 - 专业毛衣OEM/ODM定制 | 汕头澄海源头工厂' },
       description: '亚裕鸿毛织厂，20年毛织经验，专业提供毛衣OEM贴牌、ODM设计开发、来图来样定制服务。300+台电脑横机，月产能100万件，MOQ 50件起订，7天快速打样。',
       keywords: '毛衫厂,毛衣定制,毛织厂,澄海毛织厂,汕头毛织厂,毛衣OEM,毛衣ODM,来样加工,小单快反,毛衫加工厂',
+      alternates: buildAlternates({ locale, path: '', siteKey }),
     };
   }
   
   return {
-    title: t('title'),
+    title: { absolute: t('title') },
     description: t('description'),
     keywords: zhText(
       locale,
       '毛织厂,针织厂,毛衣定制,快时尚毛衫,汕头毛织厂,澄海毛织厂,女装毛衫,童装毛衣,男装毛衣',
       'knitwear manufacturer, sweater factory, custom knitwear, fast fashion sweaters, womens sweaters, kids sweaters, mens sweaters, China knitwear factory',
     ),
+    alternates: buildAlternates({ locale, path: '', siteKey }),
   };
 }
 

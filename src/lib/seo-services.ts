@@ -4,8 +4,13 @@ import { startJobRun, finishJobRun, recordJobStats } from './jobs';
 import { logAudit } from './audit';
 import { uploadToR2 } from './r2';
 import { getSecret } from './secrets';
-import { pick } from './i18n';
 import { submitIndexNow } from './indexnow';
+import {
+  GEO_BRAND_NAME,
+  GEO_BUYER_QUESTIONS,
+  GEO_MAX_TOTAL_QUERIES,
+  isValidGeoQuery,
+} from './geo-queries';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
@@ -265,56 +270,26 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
       console.warn('[runIndexing] IndexNow 推送失败但继续:', err?.message);
     }
 
-    // === 3. Indexing API 提交（先用，避免 URL Inspection 太慢占了配额） ===
-    const { getIndexingClient } = await import('./google');
-    const indexingClient = await getIndexingClient();
-
-    // 先清掉上次 cron 留下的"not been used"错误（API 已启用后需要重试）
-    await sql`
-      update seo_indexed_urls
-      set last_index_request_at = null, request_count = 0, last_error = null
-      where last_error like '%not been used%' or last_error like '%is disabled%'
-    `;
-
-    if (indexingClient) {
-      const toSubmit = await sql`
-        select url from seo_indexed_urls
-        where in_sitemap = true
-          and coalesce(request_count, 0) < 50
-          and (last_index_request_at is null or last_index_request_at < now() - interval '24 hours')
-        limit 10
-      `;
-
-      for (const { url } of toSubmit) {
-        try {
-          await indexingClient.urlNotifications.publish({
-            requestBody: { url, type: 'URL_UPDATED' },
-          });
-          await sql`
-            update seo_indexed_urls set
-              last_index_request_at = now(),
-              request_count = coalesce(request_count, 0) + 1,
-              last_error = null
-            where url = ${url}
-          `;
-          success++;
-        } catch (err: any) {
-          await sql`
-            update seo_indexed_urls set last_error = ${err.message || String(err)} where url = ${url}
-          `;
-          failed++;
-        }
-      }
-
-      // === 4. URL Inspection（独立 REST API，用 webmasters scope token） ===
-      const toInspect = await sql`
-        select url from seo_indexed_urls
-        where last_inspected_at is null and url_type != 'other'
-        order by url limit 10
-      `;
-
-      if (toInspect.length > 0) {
-        const token = await getGoogleAccessToken();
+    // === 3. URL Inspection（Google Indexing API 不支持普通页面，不再提交，只巡检真实收录状态） ===
+    try {
+      const token = await getGoogleAccessToken();
+      if (token) {
+        const toInspect = await sql`
+          select url from seo_indexed_urls
+          where in_sitemap = true
+            and url_type != 'other'
+            and (last_inspected_at is null or last_inspected_at < now() - interval '14 days')
+          order by
+            (last_inspected_at is null) desc,
+            case
+              when url ~ '^https?://[^/]+/(en|zh)/?$' then 0
+              when url like '%/products/category/%' then 1
+              else 2
+            end,
+            last_inspected_at nulls first,
+            url
+          limit 20
+        `;
         const domain = new URL(SITE_URL).hostname;
 
         for (const { url } of toInspect) {
@@ -354,15 +329,15 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
             success++;
           } catch (err: any) {
             await sql`
-              update seo_indexed_urls set
-                last_error = ${err.message || String(err)},
-                last_inspected_at = now()
+              update seo_indexed_urls set last_error = ${err.message || String(err)}
               where url = ${url}
             `;
             failed++;
           }
         }
       }
+    } catch (err: any) {
+      console.warn('[runIndexing] URL Inspection 失败但继续:', err?.message);
     }
 
     await recordJobStats(runId, success, failed, 0);
@@ -380,24 +355,19 @@ export async function runIndexing(triggeredBy: string): Promise<void> {
  * GEO 监测
  */
 
-/** 按产品词生成 AI 引擎提问的模板 */
-const GEO_QUERY_TEMPLATES: Array<(product: string) => string> = [
-  (p) => `best ${p} manufacturer in China`,
-  (p) => `top ${p} suppliers for wholesale orders`,
-  (p) => `which factory makes the best custom ${p}`,
-  (p) => `${p} manufacturer with low MOQ and fast sampling`,
-  (p) => `where to buy ${p} in bulk from a verified factory`,
-];
-
-/** GEO 问题总量上限（避免每日成本失控） */
-const GEO_MAX_TOTAL_QUERIES = 40;
-/** 每轮最多检查的问题数（轮换取样） */
+/** 每轮最多检查的问题数 */
 const GEO_QUERIES_PER_RUN = 10;
 
 /**
- * 自动创建 GEO 项目 + 按产品词生成监测问题（幂等，可重复调用）
+ * 自动创建 GEO 项目并维护稳定的英文买家问题。
+ * 无效旧问题按原 ID 更新，保留历史监测结果的关联。
  */
-export async function ensureGeoSetup(): Promise<{ projectId: string; createdQueries: number; totalQueries: number }> {
+export async function ensureGeoSetup(): Promise<{
+  projectId: string;
+  createdQueries: number;
+  repairedQueries: number;
+  totalQueries: number;
+}> {
   const host = new URL(SITE_URL).hostname;
 
   let project = (
@@ -405,57 +375,76 @@ export async function ensureGeoSetup(): Promise<{ projectId: string; createdQuer
   )[0] as { id: string; brand_name: string; domain: string } | undefined;
 
   if (!project) {
-    const profile = await sql`select company_name from site_profile order by created_at limit 1`;
-    const brandName = (profile[0]?.company_name as string) || 'Yayuhong Knitwear';
     project = (
       await sql`
         insert into geo_projects (brand_name, domain, engines, monthly_budget_usd, enabled)
-        values (${brandName}, ${host}, ${['openai']}::text[], ${10}, true)
+        values (${GEO_BRAND_NAME}, ${host}, ${['openai']}::text[], ${10}, true)
         returning id, brand_name, domain
       `
     )[0] as { id: string; brand_name: string; domain: string };
-  }
-
-  const existing = await sql`select question from geo_queries where project_id = ${project.id}`;
-  const seen = new Set(existing.map((r: any) => String(r.question).toLowerCase()));
-
-  // 从在用产品提取产品词（按名称去重）
-  const products = await sql`select name from content_products where is_active = true order by sort, created_at`;
-  const productWords: string[] = [];
-  for (const p of products) {
-    const name = pick(p.name as Record<string, string>, 'en').trim();
-    if (name && !productWords.includes(name)) productWords.push(name);
-  }
-
-  const candidates: string[] = productWords.map((word, i) =>
-    GEO_QUERY_TEMPLATES[i % GEO_QUERY_TEMPLATES.length](word),
-  );
-  candidates.push(
-    `${project.brand_name} knitwear factory review`,
-    `is ${host} a reliable knitwear supplier`,
-    `best OEM knitwear manufacturer in China with low MOQ`,
-    `custom sweater manufacturer for small brands`,
-  );
-
-  let total = existing.length;
-  let created = 0;
-  for (const question of candidates) {
-    if (total >= GEO_MAX_TOTAL_QUERIES) break;
-    const key = question.toLowerCase();
-    if (seen.has(key)) continue;
+  } else if (project.brand_name !== GEO_BRAND_NAME) {
     await sql`
+      update geo_projects set brand_name = ${GEO_BRAND_NAME}, updated_at = now()
+      where id = ${project.id}
+    `;
+    project.brand_name = GEO_BRAND_NAME;
+  }
+
+  const existing = await sql`
+    select id, question from geo_queries
+    where project_id = ${project.id}
+    order by created_at, id
+  ` as { id: string; question: string }[];
+  const candidates = [...GEO_BUYER_QUESTIONS];
+  const seen = new Set(existing.map((row) => row.question.trim().toLowerCase()));
+  let candidateIndex = 0;
+
+  const takeNextCandidate = (): string | undefined => {
+    while (candidateIndex < candidates.length) {
+      const question = candidates[candidateIndex++];
+      const key = question.toLowerCase();
+      if (!seen.has(key)) {
+        seen.add(key);
+        return question;
+      }
+    }
+    return undefined;
+  };
+
+  let repaired = 0;
+  for (const row of existing) {
+    if (isValidGeoQuery(row.question)) continue;
+    const question = takeNextCandidate();
+    if (!question) break;
+    await sql`
+      update geo_queries set question = ${question}, enabled = true
+      where id = ${row.id}
+    `;
+    repaired++;
+  }
+
+  let created = 0;
+  while (existing.length + created < GEO_MAX_TOTAL_QUERIES) {
+    const question = takeNextCandidate();
+    if (!question) break;
+    const inserted = await sql`
       insert into geo_queries (project_id, question, enabled)
       select ${project.id}, ${question}, true
       where not exists (
-        select 1 from geo_queries where project_id = ${project.id} and lower(question) = ${key}
+        select 1 from geo_queries
+        where project_id = ${project.id} and lower(question) = ${question.toLowerCase()}
       )
+      returning id
     `;
-    seen.add(key);
-    total++;
-    created++;
+    if (inserted.length > 0) created++;
   }
 
-  return { projectId: project.id, createdQueries: created, totalQueries: total };
+  return {
+    projectId: project.id,
+    createdQueries: created,
+    repairedQueries: repaired,
+    totalQueries: existing.length + created,
+  };
 }
 
 export async function runGeoMonitor(triggeredBy: string): Promise<void> {
@@ -483,9 +472,13 @@ export async function runGeoMonitor(triggeredBy: string): Promise<void> {
 
     for (const project of projects) {
       const queries = await sql`
-        select id, question from geo_queries
-        where project_id = ${project.id} and enabled = true
-        order by random() limit ${GEO_QUERIES_PER_RUN}
+        select q.id, q.question
+        from geo_queries q
+        left join geo_monitor_results r on r.query_id = q.id
+        where q.project_id = ${project.id} and q.enabled = true
+        group by q.id, q.question, q.created_at
+        order by max(r.created_at) asc nulls first, q.created_at asc, q.id asc
+        limit ${GEO_QUERIES_PER_RUN}
       `;
       if (queries.length === 0) continue;
 
@@ -573,6 +566,7 @@ export async function runGeoMonitor(triggeredBy: string): Promise<void> {
       cost: totalCost,
       queries_total: setup.totalQueries,
       queries_created: setup.createdQueries,
+      queries_repaired: setup.repairedQueries,
     });
   } catch (err: any) {
     await finishJobRun(runId, 'failed', undefined, err.message);

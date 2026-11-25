@@ -11,6 +11,7 @@ export async function GET() {
     select name, slug, summary
     from content_products
     where is_active = true
+      and slug not like 'vn-%'
     order by sort, created_at
   `;
 
@@ -26,7 +27,7 @@ export async function GET() {
   `;
 
   const p = profile[0];
-  const siteName = p ? pick(p.site_name, 'en') : 'Yayuhong Knitwear';
+  const siteName = p ? pick(p.site_name, 'en') : 'Xiuyu Knitwear';
   const intro = p?.intro ? pick(p.intro, 'en') : 'OEM/ODM knitwear manufacturer specializing in sweaters, loungewear, and accessories.';
 
   let txt = `# ${siteName}\n\n`;
@@ -38,7 +39,7 @@ export async function GET() {
     for (const prod of products) {
       const name = pick(prod.name, 'en');
       const summary = pick(prod.summary, 'en');
-      txt += `- [${name}](${baseUrl}/en/products): ${summary}\n`;
+      txt += `- [${name}](${baseUrl}/en/products/${prod.slug}): ${summary}\n`;
     }
     txt += `\n`;
   }

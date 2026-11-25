@@ -2,6 +2,8 @@ import { sql, deepParseJson } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default async function DbTestPage() {
   try {
     const result = await sql`select count(*)::int as total from content_products`;

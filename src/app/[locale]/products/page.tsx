@@ -6,6 +6,7 @@ import { zhText, localizeText } from '@/lib/zh-hant';
 import { type ProductItem } from '@/components/ProductDetailModal';
 import { sql, deepParseJson } from '@/lib/db';
 import { getCurrentSiteKey } from '@/lib/site';
+import { buildAlternates } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -206,12 +207,6 @@ const slugToKeyMap: Record<string, string> = {
   'pet-knitwear': 'pet',
   'knit-accessories': 'accessories',
   'accessories': 'accessories',
-  // 越南站点分类
-  'vn-sun-protection': 'womens',
-  'vn-cardigan': 'womens',
-  'vn-knit-tee': 'womens',
-  'vn-polo-knit': 'mens',
-  'vn-loungewear': 'loungewear',
 };
 
 const categoryCovers: Record<string, string> = {
@@ -226,7 +221,12 @@ const categoryCovers: Record<string, string> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'products' });
-  return { title: t('title') + ' - Yayuhong Knitwear', description: t('subtitle') };
+  const siteKey = await getCurrentSiteKey();
+  return {
+    title: t('title') + ' - Sweater & Knitwear Manufacturer | Xiuyu Knitwear',
+    description: t('subtitle'),
+    alternates: buildAlternates({ locale, path: '/products', siteKey }),
+  };
 }
 
 async function fetchProductsFromDB(siteKey: string, locale: string) {
@@ -254,6 +254,7 @@ async function fetchProductsFromDB(siteKey: string, locale: string) {
           from content_products p
           left join content_categories c on p.category_id = c.id
           where p.is_active = true
+            and p.slug not like 'vn-%'
             and p.sites && array['global', ${siteKey}]::text[]
           order by p.sort, p.created_at
         `;
@@ -268,6 +269,7 @@ async function fetchProductsFromDB(siteKey: string, locale: string) {
       : sql`
           select id, slug, name, sort
           from content_categories
+          where slug not like 'vn-%'
           order by sort, created_at
         `;
 
@@ -371,20 +373,8 @@ async function fetchProductsFromDB(siteKey: string, locale: string) {
     for (const cat of parsedCategories) {
       const key = slugToKeyMap[cat.slug || ''];
       if (key && grouped[key]) {
-        // 越南语版本：优先使用有 vi 字段的分类名称
-        const existingName = grouped[key].categoryName;
-        const catName = cat.name as Record<string, string>;
-        if (locale === 'vn' && existingName) {
-          const existingHasVi = existingName.vi || existingName.vn;
-          const newHasVi = catName.vi || catName.vn;
-          if (newHasVi && !existingHasVi) {
-            grouped[key].categoryName = catName;
-            grouped[key].categorySlug = cat.slug;
-          }
-        } else {
-          grouped[key].categoryName = catName;
-          grouped[key].categorySlug = cat.slug;
-        }
+        grouped[key].categoryName = cat.name as Record<string, string>;
+        grouped[key].categorySlug = cat.slug;
       }
     }
 

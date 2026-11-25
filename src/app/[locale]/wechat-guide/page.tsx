@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getCurrentSiteKey } from '@/lib/site';
 import { Link } from '@/i18n/navigation';
 import { zhText } from '@/lib/zh-hant';
+import { buildAlternates } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -11,20 +12,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     return {
       title: '如何使用微信 - 亚裕鸿毛织厂',
       description: '微信安装使用指南',
+      alternates: buildAlternates({ locale, path: '/wechat-guide', siteKey }),
     };
   }
 
   const titles: Record<string, string> = {
-    en: 'How to Use WeChat - Yayuhong Knitwear',
+    en: 'How to Use WeChat - Xiuyu Knitwear',
     zh: '如何使用微信 - 亚裕鸿毛织厂',
     'zh-TW': '如何使用微信 - 亞裕鴻毛織廠',
-    ru: 'Как использовать WeChat - Yayuhong Knitwear',
-    ar: 'كيفية استخدام WeChat - Yayuhong Knitwear',
-    de: 'So verwenden Sie WeChat - Yayuhong Knitwear',
-    es: 'Cómo usar WeChat - Yayuhong Knitwear',
-    fr: 'Comment utiliser WeChat - Yayuhong Knitwear',
-    ja: 'WeChatの使い方 - Yayuhong Knitwear',
-    pt: 'Como usar o WeChat - Yayuhong Knitwear',
+    ru: 'Как использовать WeChat - Xiuyu Knitwear',
+    ar: 'كيفية استخدام WeChat - Xiuyu Knitwear',
+    de: 'So verwenden Sie WeChat - Xiuyu Knitwear',
+    es: 'Cómo usar WeChat - Xiuyu Knitwear',
+    fr: 'Comment utiliser WeChat - Xiuyu Knitwear',
+    ja: 'WeChatの使い方 - Xiuyu Knitwear',
+    pt: 'Como usar o WeChat - Xiuyu Knitwear',
   };
 
   return {
@@ -34,6 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       '微信安装使用指南 - 下载微信、注册账号、扫描二维码添加联系人',
       'WeChat guide - Download, register, and scan QR code to connect with us',
     ),
+    alternates: buildAlternates({ locale, path: '/wechat-guide', siteKey }),
   };
 }
 

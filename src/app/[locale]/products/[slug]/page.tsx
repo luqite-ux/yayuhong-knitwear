@@ -4,16 +4,10 @@ import { localizeText, zhText } from '@/lib/zh-hant';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
 import { getCurrentSiteKey } from '@/lib/site';
-import { LOCALES } from '@/lib/i18n';
+import { buildAlternates } from '@/lib/seo';
 import FloatingContact from '@/components/FloatingContact';
 
 export const dynamic = 'force-dynamic';
-
-function hreflang(locale: string) {
-  if (locale === 'zh') return 'zh-CN';
-  if (locale === 'zh-TW') return 'zh-Hant';
-  return locale;
-}
 
 export async function generateMetadata({
   params,
@@ -32,7 +26,7 @@ export async function generateMetadata({
         from content_products p
         left join content_categories c on p.category_id = c.id
         where p.slug = ${slug} and p.is_active = true
-          and (p.slug like 'vn-%' or p.sites && array['global', ${siteKey}]::text[])
+          and p.slug like 'vn-%'
         limit 1
       `
     : await sql`
@@ -41,6 +35,7 @@ export async function generateMetadata({
         from content_products p
         left join content_categories c on p.category_id = c.id
         where p.slug = ${slug} and p.is_active = true
+          and p.slug not like 'vn-%'
           and p.sites && array['global', ${siteKey}]::text[]
         limit 1
       `;
@@ -65,11 +60,8 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
   const productUrl = `${baseUrl}/${locale}/products/${slug}`;
 
-  const isChina = siteKey === 'china';
-  const locales = isChina ? [] : [...LOCALES];
-
   return {
-    title: `${productName} - ${categoryName} | Yayuhong Knitwear`,
+    title: `${productName} - ${categoryName} | Xiuyu Knitwear`,
     description,
     keywords: [
       productName,
@@ -80,19 +72,20 @@ export async function generateMetadata({
       'OEM sweater',
       'wholesale sweater',
     ],
-    alternates: {
-      canonical: productUrl,
-      languages: isChina ? undefined : Object.fromEntries(
-        locales.map((l) => [hreflang(l), `${baseUrl}/${l}/products/${slug}`]),
-      ),
-    },
+    alternates: buildAlternates({
+      locale,
+      path: `/products/${slug}`,
+      siteKey,
+      includeVn: false,
+      localized: !isVn,
+    }),
     openGraph: {
       title: `${productName} - ${categoryName}`,
       description,
       type: 'website',
       url: productUrl,
       images: p.cover_url ? [{ url: p.cover_url, width: 1200, height: 630, alt: productName }] : undefined,
-      siteName: 'Yayuhong Knitwear',
+      siteName: 'Xiuyu Knitwear',
     },
     twitter: {
       card: 'summary_large_image',
@@ -123,7 +116,7 @@ async function getProduct(slug: string, siteKey: string, locale: string) {
         from content_products p
         left join content_categories c on p.category_id = c.id
         where p.slug = ${slug} and p.is_active = true
-          and (p.slug like 'vn-%' or p.sites && array['global', ${siteKey}]::text[])
+          and p.slug like 'vn-%'
         limit 1
       `
     : await sql`
@@ -134,6 +127,7 @@ async function getProduct(slug: string, siteKey: string, locale: string) {
         from content_products p
         left join content_categories c on p.category_id = c.id
         where p.slug = ${slug} and p.is_active = true
+          and p.slug not like 'vn-%'
           and p.sites && array['global', ${siteKey}]::text[]
         limit 1
       `;
@@ -180,6 +174,7 @@ async function getRelatedProducts(categoryId: string, excludeId: string, siteKey
         where p.category_id = ${categoryId}
           and p.id != ${excludeId}
           and p.is_active = true
+          and p.slug not like 'vn-%'
           and p.sites && array['global', ${siteKey}]::text[]
         order by p.sort, p.created_at
         limit ${limit}
@@ -226,24 +221,31 @@ export default async function ProductDetailPage({
     '@type': 'Product',
     name: productName,
     image: product.cover_url ? [product.cover_url] : undefined,
-    description: summary || `${productName} - ${categoryName} from Yayuhong Knitwear factory.`,
+    description: summary || `${productName} - ${categoryName} from Xiuyu Knitwear factory.`,
     sku: product.model || product.slug,
     brand: {
       '@type': 'Brand',
-      name: 'Yayuhong Knitwear',
+      name: 'Xiuyu Knitwear',
     },
     manufacturer: {
       '@type': 'Organization',
-      name: 'Yayuhong Knitwear',
+      name: 'Xiuyu Knitwear',
     },
     offers: {
       '@type': 'Offer',
       url: productUrl,
       priceCurrency: 'USD',
-      price: '0',
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
-      description: zhText(locale, '支持定制，MOQ 50件，7天交货', 'Customizable, MOQ 50 pcs, 7-day delivery'),
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: 'USD',
+        description: zhText(
+          locale,
+          '按订单数量与工艺报价，MOQ 50件，7天交货',
+          'Quoted per order quantity and construction. MOQ 50 pcs, 7-day delivery.',
+        ),
+      },
     },
     additionalProperty: [
       { '@type': 'PropertyValue', name: zhText(locale, '最小起订量', 'MOQ'), value: '50 pcs' },
@@ -295,15 +297,15 @@ export default async function ProductDetailPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <nav className="text-sm text-gray-500 mb-6">
-            <Link href={`/${locale}`} className="hover:text-[var(--color-primary)]">
+            <Link href="/" className="hover:text-[var(--color-primary)]">
               {zhText(locale, '首页', 'Home')}
             </Link>
             {' / '}
-            <Link href={`/${locale}/products`} className="hover:text-[var(--color-primary)]">
+            <Link href="/products" className="hover:text-[var(--color-primary)]">
               {zhText(locale, '产品中心', 'Products')}
             </Link>
             {' / '}
-            <Link href={`/${locale}/products/category/${product.category_slug}`} className="hover:text-[var(--color-primary)]">
+            <Link href={`/products/category/${product.category_slug}`} className="hover:text-[var(--color-primary)]">
               {categoryName}
             </Link>
             {' / '}
@@ -316,7 +318,7 @@ export default async function ProductDetailPage({
               <div className="aspect-square bg-white rounded-2xl overflow-hidden border border-[var(--color-border)]">
                 <img
                   src={product.cover_url}
-                  alt={`${productName} - ${categoryName} - Yayuhong Knitwear Factory`}
+                  alt={`${productName} - ${categoryName} - Xiuyu Knitwear Factory`}
                   className="w-full h-full object-cover"
                 />
               </div>

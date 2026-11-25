@@ -3,14 +3,18 @@ import ContactForm from '@/components/ContactForm';
 import FloatingContact from '@/components/FloatingContact';
 import { zhText } from '@/lib/zh-hant';
 import { Link } from '@/i18n/navigation';
+import { getCurrentSiteKey } from '@/lib/site';
+import { buildAlternates } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'contact' });
+  const siteKey = await getCurrentSiteKey();
   
   return {
-    title: t('title') + ' - Yayuhong Knitwear',
+    title: t('title') + ' - Xiuyu Knitwear',
     description: t('subtitle'),
+    alternates: buildAlternates({ locale, path: '/contact', siteKey }),
   };
 }
 
@@ -239,7 +243,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
-              title="Yayuhong Knitwear Factory - Shantou, Guangdong"
+              title="Xiuyu Knitwear Factory - Shantou, Guangdong"
               className="w-full"
             />
           </div>

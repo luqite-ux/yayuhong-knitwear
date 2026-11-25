@@ -2,6 +2,8 @@
 import { Link } from '@/i18n/navigation';
 import FloatingContact from '@/components/FloatingContact';
 import { zhText } from '@/lib/zh-hant';
+import { getCurrentSiteKey } from '@/lib/site';
+import { buildAlternates } from '@/lib/seo';
 
 const features = [
   { icon: '🏭', key: 'features.0' },
@@ -31,10 +33,12 @@ const processSteps = [
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'factory' });
+  const siteKey = await getCurrentSiteKey();
   
   return {
-    title: t('title') + ' - Yayuhong Knitwear',
+    title: t('title') + ' - Sweater Factory in Shantou, China | Xiuyu Knitwear',
     description: t('subtitle'),
+    alternates: buildAlternates({ locale, path: '/factory', siteKey }),
   };
 }
 
@@ -85,7 +89,7 @@ export default async function FactoryPage({ params }: { params: Promise<{ locale
                   {zhText(
                     locale,
                     '亚裕鸿毛织厂坐落于中国毛织名镇——广东省汕头市澄海区，这里拥有近40年的工艺毛衫生产历史，是全国重要的毛衫生产基地。',
-                    'Yayuhong Knitwear Factory is located in Chenghai District, Shantou City, Guangdong Province - a famous knitwear town in China with nearly 40 years of craftsmanship sweater production history.',
+                    'Xiuyu Knitwear Factory is located in Chenghai District, Shantou City, Guangdong Province - a famous knitwear town in China with nearly 40 years of craftsmanship sweater production history.',
                   )}
                 </p>
                 <p>

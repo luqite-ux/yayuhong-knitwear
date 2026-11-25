@@ -43,6 +43,13 @@ export default function middleware(request: NextRequest) {
     return NextResponse.rewrite(newUrl);
   }
 
+  // 海外站：根路径永久跳转到英文主版本
+  if (pathname === '/') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/en';
+    return NextResponse.redirect(url, 308);
+  }
+
   // 海外站：正常多语言 middleware
   return intlMiddleware(request);
 }

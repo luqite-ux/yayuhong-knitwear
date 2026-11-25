@@ -148,12 +148,12 @@ Thank you for your inquiry about ${inq.subject || 'our knitwear products'}.
 
 ${inq.message ? `Your message: "${inq.message.substring(0, 100)}..."` : ''}
 
-We are Yayuhong Knitwear Factory with 20 years of experience in sweater manufacturing. MOQ 50 pcs, 7-day sample delivery, 30,000 pcs daily capacity.
+We are Xiuyu Knitwear Factory with 20 years of experience in sweater manufacturing. MOQ 50 pcs, 7-day sample delivery, 30,000 pcs daily capacity.
 
 How can we help you?
 
 Best regards,
-Yayuhong Knitwear`;
+Xiuyu Knitwear`;
 
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
   }
