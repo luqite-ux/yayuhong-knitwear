@@ -6,6 +6,7 @@ import { isRTL } from '@/lib/i18n';
 import { zhText, localizedKeywords } from '@/lib/zh-hant';
 import { getCurrentSiteKey } from '@/lib/site';
 import { getChinaSeoConfig, getChinaSeoMetas } from '@/lib/china-seo';
+import { robotsForLocale } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChinaHeader from '@/components/china/ChinaHeader';
@@ -78,6 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
+    robots: robotsForLocale(locale),
     keywords: localizedKeywords(
       locale,
       '毛织厂,毛衫加工,毛衣定制,澄海毛织,快时尚毛衫,源头工厂,ODM,OEM,小单快反',
