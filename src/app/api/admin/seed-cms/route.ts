@@ -284,8 +284,8 @@ export async function POST(req: NextRequest) {
       const footerConfig = {
         copyright: {
           zh: '© 2024 澄海雅育鸿针织厂. 保留所有权利.',
-          en: '© 2024 Yayuhong Knitwear. All rights reserved.',
-          ru: '© 2024 Yayuhong Knitwear. Все права защищены.',
+          en: '© 2024 Xiuyu Knitwear. All rights reserved.',
+          ru: '© 2024 Xiuyu Knitwear. Все права защищены.',
         },
         quick_links: [
           { label: { zh: '产品中心', en: 'Products', ru: 'Продукция' }, href: '/products' },

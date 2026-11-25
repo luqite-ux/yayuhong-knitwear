@@ -38,7 +38,20 @@ type JsonbText = Record<string, string> | string | null | undefined;
  */
 export function pick(text: JsonbText, locale: string): string {
   if (text == null) return '';
-  if (typeof text === 'string') return text;
+  if (typeof text === 'string') {
+    const trimmed = text.trim();
+    if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+      try {
+        const parsed: unknown = JSON.parse(trimmed);
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+          return pick(parsed as Record<string, string>, locale);
+        }
+      } catch {
+        // 普通文本即使形似 JSON，也按原文返回。
+      }
+    }
+    return text;
+  }
   const order = [locale, 'en', 'zh'];
   for (const l of order) {
     if (text[l] && typeof text[l] === 'string') return text[l]!;

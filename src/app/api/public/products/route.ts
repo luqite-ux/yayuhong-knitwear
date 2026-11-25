@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
   const siteKey = detectSiteKey(host);
   const siteParam = searchParams.get('site');
   const effectiveSite = siteParam || siteKey;
+  const isVn = locale === 'vn';
 
   const [products, categories] = await Promise.all([
     sql`
@@ -22,12 +23,15 @@ export async function GET(req: NextRequest) {
       from content_products p
       left join content_categories c on p.category_id = c.id
       where p.is_active = true
-        and p.sites && array['global', ${effectiveSite}]::text[]
+        and ${isVn
+          ? sql`p.slug like 'vn-%'`
+          : sql`p.slug not like 'vn-%' and p.sites && array['global', ${effectiveSite}]::text[]`}
       order by p.sort, p.created_at
     `,
     sql`
       select id, slug, name, sort
       from content_categories
+      where ${isVn ? sql`slug like 'vn-%'` : sql`slug not like 'vn-%'`}
       order by sort, created_at
     `,
   ]);

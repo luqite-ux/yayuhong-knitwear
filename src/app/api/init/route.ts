@@ -26,6 +26,16 @@ try {
   captchaChallengesSql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0012_captcha_challenges.sql'), 'utf8');
 } catch {}
 
+let geoBuyerQueriesSql = '';
+try {
+  geoBuyerQueriesSql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0013_geo_buyer_queries.sql'), 'utf8');
+} catch {}
+
+let customKnitwearBuyerGuideSql = '';
+try {
+  customKnitwearBuyerGuideSql = fs.readFileSync(path.join(process.cwd(), 'migrations', '0014_custom_knitwear_buyer_guide.sql'), 'utf8');
+} catch {}
+
 const MIGRATIONS: { name: string; sql: string }[] = [
   {
     name: '0001_init.sql',
@@ -394,7 +404,7 @@ create index if not exists idx_audit_logs_created on audit_logs(created_at desc)
 
 insert into site_profile (site_name, company_name, domain, default_locale, contact, intro)
 select
-  '{"zh":"澄海雅育鸿针织厂","en":"Yayuhong Knitwear","ru":"Yayuhong Knitwear"}'::jsonb,
+  '{"zh":"澄海雅育鸿针织厂","en":"Xiuyu Knitwear","ru":"Xiuyu Knitwear"}'::jsonb,
   '澄海雅育鸿针织厂（Yayuhong Knitwear）',
   'yayuhong-knitwear.vercel.app',
   'en',
@@ -468,7 +478,7 @@ create table if not exists sites (
 
 insert into sites (key, domain, name, default_locale)
 values
-  ('overseas', 'yayuhong-knitwear.vercel.app', '{"zh":"亚裕鸿毛织（海外）","en":"Yayuhong Knitwear"}', 'en'),
+  ('overseas', 'yayuhong-knitwear.vercel.app', '{"zh":"亚裕鸿毛织（海外）","en":"Xiuyu Knitwear"}', 'en'),
   ('china', 'xiuyumaoshan.cn', '{"zh":"修育毛衫厂"}', 'zh')
 on conflict (key) do nothing;
 
@@ -680,6 +690,14 @@ create index if not exists idx_api_keys_active on admin_api_keys(is_active);
   {
     name: '0012_captcha_challenges.sql',
     sql: captchaChallengesSql,
+  },
+  {
+    name: '0013_geo_buyer_queries.sql',
+    sql: geoBuyerQueriesSql,
+  },
+  {
+    name: '0014_custom_knitwear_buyer_guide.sql',
+    sql: customKnitwearBuyerGuideSql,
   },
 ];
 
