@@ -15,10 +15,12 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://xiuyuknit.com';
 
 /**
- * 自动向 GSC 提交 sitemap（幂等：7 天内不重复提交）
+ * 自动向 GSC 提交 sitemap
+ * 默认幂等：7 天内不重复提交；force=true 时强制重提（用于部署后立即生效）
  */
 export async function ensureSitemapSubmitted(
   property: string,
+  opts: { force?: boolean } = {},
 ): Promise<{ submitted: boolean; status: string; error?: string }> {
   const sitemapUrl = `${SITE_URL.replace(/\/$/, '')}/sitemap.xml`;
 
@@ -28,7 +30,7 @@ export async function ensureSitemapSubmitted(
   const prop = props[0] as { status?: string; sitemap_submitted_at?: string | null } | undefined;
   if (!prop || prop.status !== 'verified') return { submitted: false, status: 'not_verified' };
 
-  if (prop.sitemap_submitted_at) {
+  if (!opts.force && prop.sitemap_submitted_at) {
     const age = Date.now() - new Date(prop.sitemap_submitted_at).getTime();
     if (age < 7 * 24 * 60 * 60 * 1000) return { submitted: false, status: 'already_submitted' };
   }
